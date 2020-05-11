@@ -1,0 +1,41 @@
+{
+	"pages":[
+		{
+			"path":"pages/index/index",
+			"style":{
+				"navigationBarTitleText":"首页"
+			}	
+		}
+	   
+        ,{
+            "path" : "pages/category/category",
+            "style":{
+            	"navigationBarTitleText":"分类"
+            }	
+        }
+        ,{
+            "path" : "pages/publish/publish",
+            "style" : {
+				"navigationBarTitleText":"发布"
+			}
+        }
+        ,{
+            "path" : "pages/personalCenter/personalCenter",
+            "style" : {
+				"navigationBarTitleText":"个人中心"
+			}
+        }
+        ,{
+            "path" : "pages/distribution/distribution",
+            "style" : {
+				"navigationBarTitleText":"分类"
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		//"navigationBarTitleText": "米修在线",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "red"
+	}
+}

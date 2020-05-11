@@ -1,0 +1,9 @@
+$num:1.8115942028985;
+$ac:#44A78D;
+$bc:#4E5A65;
+@mixin wd($width){
+	width:(750*$width/414)rpx;
+}
+
+.commonweb{width:364*$num;}
+body{background:#F8F8F8;}
