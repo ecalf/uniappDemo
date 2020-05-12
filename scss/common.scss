@@ -4,6 +4,156 @@ $bc:#4E5A65;
 @mixin wd($width){
 	width:(750*$width/414)rpx;
 }
+body{background:#F8F8F8;font-size:25.36rpx;color:#4E5A65;}
+.m-flex{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	.item{
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
 
-.commonweb{width:364*$num;}
-body{background:#F8F8F8;}
+
+/*分类*/
+.good-products{
+	background:#ffffff;
+	padding:18.11rpx;
+	margin:23.55rpx 0 18.11rpx;
+	border-radius: 11px;
+	display:flex;
+	justify-content: space-between;
+	font-size: 21.73rpx;
+	
+}
+.goodpro-left,.goodpro-right{
+	display:flex;
+	justify-content: space-between;
+	width:49%;
+	flex-wrap: wrap;
+	
+}
+.pro-item{
+	display:flex;
+	justify-content: space-between;
+	width:49%;
+	flex-wrap: wrap;
+	border-radius: 11px;
+	text-align: center;
+	color: #ff9e50;
+	margin-bottom:3.62rpx;
+	padding:12.68rpx 0;
+	&.pro-item1{
+		background:#faf5f1;
+	}
+	&.pro-item2{
+		background:#faf9f4;
+	}
+	&.pro-item3{
+		background:#fdf7f9;
+	}
+	&.pro-item4{
+		background:#ecf5f8;
+	}
+	.protitle{
+		
+		margin-bottom:7.24rpx;
+	}
+	image{
+		width:81.52rpx;
+		height:70.65rpx;
+	}
+}
+.goodpro-box{
+	width:100%;
+}
+.m-good-title{
+	font-size:28.98rpx;
+	color:$bc;
+	margin-bottom:18.11rpx;
+	width:100%;
+	line-height:20px;
+}
+.goodpro-right{
+
+	.column{
+		padding:14.49rpx 19.92rpx;
+		display:flex;
+		flex-wrap: wrap;
+		background-color: #f6f6f6;
+		border-radius: 19.92rpx;
+		margin-bottom:3.62rpx;
+		align-items:flex-start;
+		.left,.right{
+			display:flex;
+			justify-content: space-between;
+			width:50%;
+			flex-wrap: wrap;
+			
+		}
+		.left{
+			padding-top:18.11rpx;
+			position: relative;
+			&:after{
+				content:"";
+				width:50.72rpx;
+				height:1px;
+				background:#707070;
+				display:block;
+				margin-top:7.24rpx;
+			}
+		}
+		.right{
+			image{
+				width:137.68rpx;
+				height:105.07rpx;
+			}
+		}
+	}
+}
+
+/*条件筛选*/
+.filter-condition{
+	background-color: #ffffff;
+		border-radius:19.92rpx;
+		display: flex;
+		flex-wrap:wrap;
+		justify-content:space-around;
+		margin-bottom:9.05rpx;
+	.text{
+		font-size:25.36rpx;
+		display: flex;
+		
+		text-align:center;
+		padding:28.98rpx 0;
+		color: #4e5a65;
+		text{
+			width:100%;
+			position: relative;
+			&:after{
+				content:"";
+				display: inline-block;
+				vertical-align:middle;
+				width:0;
+				height:0;
+				border-right:4px solid transparent;
+					border-left:4px solid transparent;
+					border-top:4px solid #4e5a65;
+					margin-left:5px;
+
+			}
+			
+		}
+		&.on{
+				
+					color:$ac;
+					text:after{
+						transform: rotate(180deg);
+						border-top:4px solid $ac;
+					}
+				
+			}
+		
+	}
+}

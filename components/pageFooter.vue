@@ -1,17 +1,18 @@
 <template>
-	<view class="footer-fixed">
-		<view class="footer">
-			<view class="item" :class="['item-'+index,currentTabIndex == index ? 'on' : '']" v-for="(item,index) in footerlist"
-			 :key="index" @tap="handleFooter(index,item)">
-				<view class="icon" v-if="currentTabIndex == index">
-					<image :src="item.activeicon" mode=""></image>
+	<view class="true-height">
+		<view class="footer-fixed">
+			<view class="footer">
+				<view class="item" :class="['item-'+index,currentTabIndex == index ? 'on' : '']" v-for="(item,index) in footerlist"
+				 :key="index" @tap="handleFooter(index,item)">
+					<view class="icon" v-if="currentTabIndex == index">
+						<image :src="item.activeicon" mode=""></image>
+					</view>
+					<view class="icon" v-else>
+						<image :src="item.beforeicon" mode=""></image>
+					</view>
+					<view class="text">{{item.name}}</view>
 				</view>
-				<view class="icon" v-else>
-					<image :src="item.beforeicon" mode=""></image>
-				</view>
-				<view class="text">{{item.name}}</view>
 			</view>
-
 		</view>
 	</view>
 </template>
@@ -25,7 +26,7 @@
 						beforeicon: "/static/images/home.png",
 						activeicon: "/static/images/home_a.png",
 						name: "首页",
-						url: "/",
+						url: "/pages/index/index",
 					},
 					{
 						beforeicon: "/static/images/classification.png",
@@ -64,12 +65,11 @@
 		methods: {
 			handleFooter(index, item) {
 				this.currentTabIndex = index,
-				this.$emit('click', index);
-				console.log(item.url);
+					this.$emit('click', index);
+				// console.log(item.url);				
 				uni.navigateTo({ //页面跳转
 					url: item.url
 				});
-
 			},
 		}
 	}
@@ -79,7 +79,7 @@
 	@import "../scss/common.scss";
 
 	.true-height {
-		height: 90.57rpx;
+		height:126.81rpx;
 	}
 
 	.footer-fixed {
@@ -107,7 +107,7 @@
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%);
-			top: 0;
+			top: 1.81rpx;
 			width: 251.81rpx;
 			height: 54.34rpx;
 			background: url(~@/static/images/footerbg.png) center center no-repeat;
