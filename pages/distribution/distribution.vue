@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<page-footer></page-footer>
+		<page-footer :current="3"></page-footer>
 	</view>
 </template>
 
@@ -10,13 +10,8 @@
 			return {
 				
 			}
-		},
-		onLoad:{
-			
-		},
-		methods: {
-			
 		}
+		
 	}
 </script>
 

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		个人中心
-		<page-footer></page-footer>
+		<page-footer :current="4"></page-footer>
 	</view>
 </template>
 
@@ -11,9 +11,6 @@
 			return {
 				
 			}
-		},
-		methods: {
-			
 		}
 	}
 </script>

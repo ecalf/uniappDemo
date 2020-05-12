@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<page-footer></page-footer>
+		<page-footer :current="2"></page-footer>
 	</view>
 </template>
 

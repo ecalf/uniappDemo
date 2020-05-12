@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style>
+
 /* 解决头条小程序组件内引入字体不生效的问题 */
 /* #ifdef MP-TOUTIAO */
 @font-face {
@@ -23,4 +24,5 @@ export default {
   page {
       background-color:#F8F8F8;
   }
+  .commonweb{width:642rpx;margin:0 auto;}
 </style>
