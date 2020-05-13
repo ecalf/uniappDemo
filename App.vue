@@ -24,5 +24,5 @@ export default {
   page {
       background-color:#F8F8F8;
   }
-  .commonweb{width:642rpx;margin:0 auto;}
+  .commonweb{width:659.42rpx;margin:0 auto;}
 </style>
