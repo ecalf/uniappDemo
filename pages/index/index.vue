@@ -121,26 +121,31 @@
 					}
 				], //发布
 				goodsList: [{
+					  id:1,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:2,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:3,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:4,
 						img: "",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:5,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
@@ -167,6 +172,13 @@
 					})
 				});
 			},
+			handleCategory(item) {
+				// 分类跳转
+				// console.log(item.text);
+				uni.navigateTo({
+					url:"../product/productList?name="+item.text
+				})
+			},
 			handleSelect(index){
 				this.filterByList[index].selected = true;
 				
@@ -177,6 +189,7 @@
 					}
 				}
 			}
+			
 		}
 	}
 </script>

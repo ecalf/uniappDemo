@@ -5,7 +5,7 @@
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
 				<view class='header-title'><text>比亚迪口罩</text></view>
-				<view class='headerImg2'><img src="~@/static/images/VIP@2x.png"></view>
+				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
 				<view class='usersname'><text>张某某</text></view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>
@@ -25,7 +25,7 @@
 				<view class='procurement-title'>
 					<p>我要采购</p>
 				</view>
-				<view class="procurement-content" v-for="(item,index) in procurementList" :key="index">
+				<view @click="gotopriceControl" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -81,15 +81,15 @@
 			return {
 				procurementList: [{
 						text: "发布采购",
-						img: "/static/images/Publish purchase icon@2x.png"
+						img: "/static/images/icon1.png"
 					},
 					{
 						text: "报价管理",
-						img: "/static/images/Quotation management-icon@2x.png"
+						img: "/static/images/icon2.png"
 					},
 					{
 						text: "采购订单",
-						img: "/static/images/Purchase order-icon@2x.png"
+						img: "/static/images/icon3.png"
 					},
 					{
 						text: "供应商库",
@@ -155,6 +155,13 @@
 						img: "/static/images/About us-icon@2x.png"
 					}
 				],
+			}
+		},
+		methods:{
+			gotopriceControl(){
+				 uni.navigateTo({
+				            url:"/pages/personalCenter/priceControl"
+				        })
 			}
 		}
 	}
@@ -245,7 +252,6 @@
 	}
 
 	.vip-title {
-
 		color: #17f2b9;
 		opacity: 0.9;
 		font-size: 21.73rpx;

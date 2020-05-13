@@ -152,7 +152,7 @@
 				width: 100%;
 				display: flex;
 				justify-content: center;
-				font-size: 16*1.8rpx;
+				font-size:21.73rpx;
 				color: $bc;
 			}
 

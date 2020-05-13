@@ -28,16 +28,44 @@
         ,{
             "path" : "pages/distribution/distribution",
             "style" : {
-				"navigationBarTitleText":"分类",
-				"backgroundColor": "pink"
+				"navigationBarTitleText":"分类"
 			}
+        }
+        ,{
+            "path" : "pages/personalCenter/priceControl",
+            "style" : {
+				"navigationBarTitleText":"报价管理"
+			}
+        }
+        ,{
+            "path" : "pages/product/productList",
+            "style" : {}
+        },
+		{
+		    "path" : "pages/product/productDetails",
+		  "style": {
+		  	"navigationBarTitleText": "商品详情",
+		  	"h5": {
+		  		"titleNView": false
+		  	},
+		  	"app-plus": {
+		  		"titleNView": false,
+		  		"bounce": "none"
+		  	}
+		  }
+		}
+        ,{
+            "path" : "pages/publish/publishBuy/publishBuy",
+            "style" : {
+            	"navigationBarTitleText":"发布页面"
+            }
         }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		//"navigationBarTitleText": "米修在线",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "red"
+		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
 		"color": "#333333",

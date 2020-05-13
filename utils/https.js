@@ -8,7 +8,7 @@ module.exports = (param) => {
 	if(method){
 		method = method.toUpperCase(); // 小写转成大写
 		if(method == "POST"){
-			header = {"content-type":"application/x-www-form-urlencoded"}
+			header = {"content-type":"application/json"}
 		}
 	}
 	
@@ -20,7 +20,7 @@ module.exports = (param) => {
 	// 发起网络请求
 	uni.request({
 		url: url,
-		method:method || "GET",
+		method:method || "POST",
 		header:header,
 		data: data,
 		success: res => {

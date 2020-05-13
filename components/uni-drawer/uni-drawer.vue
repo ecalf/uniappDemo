@@ -111,20 +111,21 @@
 		/* #endif */
 		position: absolute;
 		top: 0;
-		width: 220px;
+		width:536.23rpx;
 		bottom: 0;
 		background-color: #ffffff;
 		transition: transform 0.3s ease;
+		overflow-y: auto;
 	}
 
 	.uni-drawer--left {
 		left: 0;
-		transform: translateX(-220px);
+		transform: translateX(-536.23rpx);
 	}
 
 	.uni-drawer--right {
 		right: 0;
-		transform: translateX(220px);
+		transform: translateX(536.23rpx);
 	}
 
 	.uni-drawer__content--visible {
