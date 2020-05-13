@@ -25,7 +25,7 @@
 				<view class='procurement-title'>
 					<p>我要采购</p>
 				</view>
-				<view class="procurement-content" v-for="(item,index) in procurementList" :key="index">
+				<view @click="gotopriceControl" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -156,6 +156,13 @@
 					}
 				],
 			}
+		},
+		methods:{
+			gotopriceControl(){
+				 uni.navigateTo({
+				            url:"/pages/personalCenter/priceControl"
+				        })
+			}
 		}
 	}
 </script>
@@ -245,7 +252,6 @@
 	}
 
 	.vip-title {
-
 		color: #17f2b9;
 		opacity: 0.9;
 		font-size: 21.73rpx;

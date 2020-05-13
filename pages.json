@@ -28,8 +28,13 @@
         ,{
             "path" : "pages/distribution/distribution",
             "style" : {
-				"navigationBarTitleText":"分类",
-				"backgroundColor": "pink"
+				"navigationBarTitleText":"分类"
+			}
+        }
+        ,{
+            "path" : "pages/personalCenter/priceControl",
+            "style" : {
+				"navigationBarTitleText":"报价管理"
 			}
         }
     ],
