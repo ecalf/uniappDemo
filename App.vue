@@ -14,6 +14,8 @@ export default {
 </script>
 
 <style>
+	/*每个页面公共css */
+	@import "/static/font/iconfont.css";
   page { background-color:#F8F8F8;font-size:21.73rpx;color: #4e5a65;}
   .commonweb{width:659.42rpx;margin:0 auto;}
   *{box-sizing: border-box;margin:0;padding:0;}

@@ -216,3 +216,45 @@ $bc:#4E5A65;
 			}
 		}
 	}
+	
+	/*首页登录入口*/
+	.index-login{
+		position: fixed;
+		width:661.23rpx;
+		left:50%;
+		top:181.15rpx;
+		transform: translateX(-50%);
+		background-color:#fff;
+		z-index:999;
+		padding:54.34rpx 36.23rpx;
+		border-radius:19.92rpx;
+		text-align: center;
+		.logoimg{
+			width:271.73rpx;
+			height:57.97rpx;
+			margin:0 auto 36.23rpx;
+		}
+	}
+	
+	.loginenter{
+		border-top:1px dashed #E2E2E2;
+		padding-top:79.71rpx;
+		view{
+			color:#fff;
+			font-size:36.23rpx;
+			padding:23.55rpx 0;
+			border-radius:54.34rpx;
+			margin-bottom:32.6rpx;
+			.iconfont{
+				font-size:54.34rpx;
+				margin-right:14.49rpx;
+				vertical-align:middle;
+			}
+			&.weixin_loginbtn{
+				background:#44A78D;
+			}
+			&.weixin_registerbtn{
+				background:#05544A;
+			}
+		}
+	}
