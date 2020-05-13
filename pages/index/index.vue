@@ -35,52 +35,25 @@
 				</view>
 			</view>
 		</view>
-		
 		<!--列表推荐-->
-		
-			<view class="recommend-nav commonweb">
-				<view class="tab-item">				
-					<view class="cntitle">列表推荐</view>
-					<view class="entitle">Recommend</view>	
-				</view>
-				<view class="tab-item">
-					<view class="cntitle">采购订单</view>
-					<view class="entitle">Purchase</view>
-				</view>
-				<view class="tab-item">
-					<view class="cntitle">销售订单</view>
-					<view class="entitle">Sale</view>
-				</view>
-				<view class="tab-item">
-					<view class="cntitle">委托订单</view>
-					<view class="entitle">Entrust</view>
-				</view>
-			</view>	
-			
-			<view class="goods-list commonweb">
-				<view class="product-list">
-					<view class="product" @tap="handleGoods(goods)" v-for="goods in goodsList" :key="goods.goods_id">
-						<view class="image" v-if="goods.img"><image mode="widthFix" :src="goods.img"></image></view>
-						<view class="name">{{goods.name}}}</view>
-						<view class="info">
-							<view class="price">
-								<text>￥</text>
-								{{goods.price}}
-							</view>
-							
-						</view>
-					</view>
-				</view>
-				<view class="loading-text">加载中</view>
+		<view class="recommend-nav commonweb">
+			<view class="tab-item" v-for="(target,index) in filterByList"  @tap="handleSelect(index)" :class="{'on':target.selected}">
+				<view class="cntitle">{{target.cntitle}}</view>
+				<view class="entitle">{{target.entitle}}</view>
 			</view>
-
+		</view>
+		<productList :goodsList="goodsList" />
 		<page-footer :current="0"></page-footer>
 
 	</view>
 </template>
 
 <script>
+	import productList from '../../components/productList.vue'
 	export default {
+		components:{
+			productList
+		},
 		data() {
 			return {
 
@@ -147,32 +120,42 @@
 						icon: "/static/images/releaseicon03.png"
 					}
 				], //发布
-				goodsList:[
-					{
-						img:"/static/images/product.png",
-						name:"这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price:"2000",
+				goodsList: [{
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
 					},
 					{
-						img:"/static/images/product.png",
-						name:"这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price:"2000",
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
 					},
 					{
-						img:"/static/images/product.png",
-						name:"这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price:"2000",
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
 					},
 					{
-						img:"",
-						name:"这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price:"2000",
+						img: "",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
+					},
+					{
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
 					}
 				],
-			
+				filterByList:[
+					{cntitle:"列表推荐",entitle:"Recommend",selected: true},
+					{cntitle:"采购订单",entitle:"Purchase",selected: false,},
+					{cntitle:"销售订单",entitle:"Sale",selected: false,},
+					{cntitle:"委托订单",entitle:"Entrust",selected: false,},
+					]//列表tabbar
+
 			}
-			
-			
+
+
 		},
 		methods: {
 			initData() {
@@ -184,12 +167,23 @@
 					})
 				});
 			},
+			handleSelect(index){
+				this.filterByList[index].selected = true;
+				
+				// 其他的selected false
+				for (let i = 0; i < this.filterByList.length; i++) {
+					if (i != index) {
+						this.filterByList[i].selected = false;
+					}
+				}
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
 	@import "../../scss/common.scss";
+
 	.banner-swiper {
 		width: 100%;
 		display: flex;
@@ -239,7 +233,7 @@
 				width: 100%;
 				display: flex;
 				justify-content: center;
-
+			
 				image {
 					width: 90.57rpx;
 					height: 90.57rpx;
@@ -274,31 +268,37 @@
 			background-size: cover;
 			background-repeat: no-repeat;
 			height: 108.69rpx;
-			&.item-0{
+
+			&.item-0 {
 				.text {
 					color: #44A78D;
 				}
 			}
-			&.item-1{
+
+			&.item-1 {
 				.text {
 					color: #feb322;
 				}
 			}
-			&.item-2{
+
+			&.item-2 {
 				.text {
 					color: #7b79da;
 				}
 			}
+
 			.inpublish-box {
 				width: 100%;
 				padding: 25.36rpx 8% 0;
-				
+
 			}
-			.left{
+
+			.left {
 				width: 50%;
 				display: inline-block;
 				vertical-align: middle;
 			}
+
 			.text {
 				width: 57.97rpx;
 				font-size: 21.73rpx;
@@ -311,56 +311,82 @@
 				width: 50%;
 				display: inline-block;
 				vertical-align: middle;
-				text-align:right;
+				text-align: right;
+
 				image {
 					width: 45.28rpx;
 					height: 45.28rpx;
 				}
 			}
-		}	
+		}
 	}
-	
-	//列表推荐导航
-	.recommend-nav{
+
+/*列表推荐导航*/
+	.recommend-nav {
 		display: flex;
 		justify-content: space-between;
-		.tab-item{
+		.tab-item {
 			display: flex;
 			justify-content: space-between;
 			flex-wrap: wrap;
-			text-align:center;
-			margin-top:18.11rpx;
-			position:relative;
-			padding:0 2%;
-			&:before{
-				content:"";
+			text-align: center;
+			margin-top: 18.11rpx;
+			position: relative;
+			padding: 0 2%;
+			color: #4E5A65;
+			
+			&.on{
+				color:$ac;
+				&:after{
+					opacity:1;
+				}
+			}
+			&:before {
+				content: "";
 				display: block;
 				height: 20px;
 				position: absolute;
-				right:0;
-				top:18.11rpx;
-				border-right:1px solid #e2e2e2;
+				right: 0;
+				top:10.86rpx;
+				border-right: 1px solid #e2e2e2;
 			}
-			.cntitle{
-				font-size:25.36rpx;
-				font-weight:bold;
-				width:100%;
-				color:#4E5A65;
+			
+			&:after{
+				content:"";
+				display:block;
+				width:36.23rpx;
+				height:14.49rpx;
+				position:absolute;
+				left:50%;
+				top:-18.11rpx;
+				transform: translateX(-50%);
+				background:url(~@/static/images/listcur.png);
+				background-size:cover;
+				opacity:0;
 			}
-			.entitle{
-				font-size:21.73rpx;
-				width:100%;
+			.cntitle {
+				font-size: 25.36rpx;
+				font-weight: bold;
+				width: 100%;
+				
 			}
-			&:last-child{
-				&:before{
-					display:none;
+
+			.entitle {
+				font-size: 21.73rpx;
+				width: 100%;
+			}
+
+			&:last-child {
+				&:before {
+					display: none;
 				}
 			}
 		}
-	}	
+	}
+
 	//列表推荐
 	.goods-list {
-		padding:27.17rpx 0;
+		padding: 27.17rpx 0;
 		.loading-text {
 			width: 100%;
 			display: flex;
@@ -370,54 +396,7 @@
 			color: #979797;
 			font-size: 24upx;
 		}
-	
-		.product-list {
-			column-count: 2;
-			column-gap:9.05rpx;
-			.product {
-				break-inside: avoid;
-				background-color: #fff;
-				margin-bottom:9.05rpx;
-				border-radius:5px;
-				.image{
-					padding:27.17rpx 27.17rpx 0;
-				image {
-					width: 100%;		
-				}
-				}
-				.name {
-					
-					padding:0 5%;
-					display: -webkit-box;
-					-webkit-box-orient: vertical;
-					-webkit-line-clamp: 2;
-					text-align: justify;
-					overflow: hidden;
-					font-size:25.36rpx;
-					color: #000000;
-				}
-	
-				.info {
-					display: flex;
-					justify-content: space-between;
-					align-items: flex-end;
-					width: 92%;
-					padding: 10upx 4% 27.17rpx 4%;
-	
-					.price {
-						color:$ac;
-						font-size:32.6rpx;
-						font-weight: 600;
-						text{
-							font-size:21.73rpx;
-						}
-					}
-	
-					
-				}
-			}
-	
-		}
 	}
+
 	
 </style>
