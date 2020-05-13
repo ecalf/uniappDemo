@@ -3,7 +3,6 @@
 			<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
 			<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
 			<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
-		
 	</view>
 </template>
 
@@ -16,11 +15,19 @@
 				conversionPrice:[
 					{
 					  id:1,
-					  name:'已报价'
+					  name:'全部'
 					},
 					{
 					 id:2,
-					 name:'未报价'
+					 name:'上架'
+					},
+					{
+					  id:3,
+					  name:'下架'
+					},
+					{
+					 id:4,
+					 name:'已截止'
 					},
 					
 				],

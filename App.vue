@@ -13,16 +13,7 @@ export default {
 </script>
 
 <style>
-
-/* 解决头条小程序组件内引入字体不生效的问题 */
-/* #ifdef MP-TOUTIAO */
-@font-face {
-	font-family: uniicons;
-	src: url('/static/uni.ttf');
-}
-/* #endif */
-  page {
-      background-color:#F8F8F8;
-  }
+  page { background-color:#F8F8F8;}
   .commonweb{width:659.42rpx;margin:0 auto;}
+  *{box-sizing: border-box;margin:0;padding:0;}
 </style>

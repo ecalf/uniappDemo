@@ -25,7 +25,7 @@
 				<view class='procurement-title'>
 					<p>我要采购</p>
 				</view>
-				<view @click="gotopriceControl" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
+				<view @click="gotopriceControl(index)" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -38,12 +38,12 @@
 				<view class='sale-title '>
 					<p>我要销售</p>
 				</view>
-				<view class="sale-content" v-for="(item,index) in saleList" :key="index">
+				<view @click="gotoSale(index)" class="sale-content" v-for="(item,index) in saleList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
 					<view class="text">{{item.text}}</view>
-			</view>
+				</view>
 			</view>
 			<!-- 账户管理 -->
 			<view class="account">
@@ -51,10 +51,10 @@
 					<p>账户管理</p>
 				</view>
 				<view class="account-content" v-for="(item,index) in accountList" :key="index">
-						<view class="img">
-							<image :src="item.img"></image>
-						</view>
-						<view class="text">{{item.text}}</view>
+					<view class="img">
+						<image :src="item.img"></image>
+					</view>
+					<view class="text">{{item.text}}</view>
 				</view>
 			</view>
 			<!-- 功能服务 -->
@@ -63,10 +63,10 @@
 					<p>账户管理</p>
 				</view>
 				<view class="service-content" v-for="(item,index) in serviceList" :key="index">
-						<view class="img">
-							<image :src="item.img"></image>
-						</view>
-						<view class="text">{{item.text}}</view>
+					<view class="img">
+						<image :src="item.img"></image>
+					</view>
+					<view class="text">{{item.text}}</view>
 				</view>
 			</view>
 		</view>
@@ -81,87 +81,110 @@
 			return {
 				procurementList: [{
 						text: "发布采购",
-						img: "/static/images/icon1.png"
+						img: "/static/images/lgicon1.png"
 					},
 					{
 						text: "报价管理",
-						img: "/static/images/icon2.png"
+						img: "/static/images/lgicon2.png"
 					},
 					{
 						text: "采购订单",
-						img: "/static/images/icon3.png"
+						img: "/static/images/lgicon3.png"
 					},
 					{
 						text: "供应商库",
-						img: "/static/images/Supplier library-icon@2x.png"
+						img: "/static/images/lgicon4.png"
 					},
 					{
 						text: "委托采购",
-						img: "/static/images/Entrusted purchase-icon@2x.png"
+						img: "/static/images/lgicon5.png"
 					},
 					{
 						text: "合同管理",
-						img: "/static/images/contract management-icon@2x.png"
+						img: "/static/images/lgicon6.png"
 					},
 				],
 				saleList: [{
 						text: "发布销售",
-						img: "/static/images/Publish sales-icon@2x.png"
+						img: "/static/images/lgicon7.png"
 					},
 					{
 						text: "销售管理",
-						img: "/static/images/Sales management-icon@2x.png"
+						img: "/static/images/lgicon8.png"
 					},
 					{
 						text: "主页管理",
-						img: "/static/images/Home manager-icon@2x.png"
+						img: "/static/images/lgicon9.png"
 					},
 					{
 						text: "合同管理",
-						img: "/static/images/contract management-icon@2x.png"
+						img: "/static/images/lgicon6.png"
 					},
 					{
 						text: "委托销售",
-						img: "/static/images/Commissioned sales-icon@2x.png"
+						img: "/static/images/lgicon10.png"
 					},
 					{
 						text: "我的报价",
-						img: "/static/images/My offer-icon@2x.png"
+						img: "/static/images/lgicon11.png"
 					},
 				],
 				accountList: [{
 						text: "我的账户",
-						img: "/static/images/About us-icon@2x.png"
+						img: "/static/images/lgicon16.png"
 					},
 					{
 						text: "发票管理",
-						img: "/static/images/My offer-icon@2x.png"
+						img: "/static/images/lgicon6.png"
 					},
 					{
 						text: "认证中心",
-						img: "/static/images/Purchase order-icon@2x.png"
+						img: "/static/images/lgicon3.png"
 					}
 				],
 				serviceList: [{
 						text: "客服",
-						img: "/static/images/My account-icon@2x.png"
+						img: "/static/images/lgicon13.png"
 					},
 					{
 						text: "联系我们",
-						img: "/static/images/contact us-icon@2x.png"
+						img: "/static/images/lgicon15.png"
 					},
 					{
 						text: "关于我们",
-						img: "/static/images/About us-icon@2x.png"
+						img: "/static/images/lgicon12.png"
 					}
 				],
 			}
 		},
-		methods:{
-			gotopriceControl(){
-				 uni.navigateTo({
-				            url:"/pages/personalCenter/priceControl"
-				        })
+		methods: {
+			gotopriceControl(index) {
+				// console.log(index)
+				if (index == 1) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/priceControl"
+					})
+
+				};
+				if (index == 2) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/purchaseOrders"
+					})
+
+				};
+
+			},
+			gotoSale(index) {
+				if (index == 1) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/saleManagement"
+					})
+				};
+				if (index == 5) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/myQuotes"
+					})
+				};
 			}
 		}
 	}
@@ -177,7 +200,6 @@
 
 	.headerImg {
 		display: inline-block;
-
 		vertical-align: middle;
 
 		image {
@@ -223,7 +245,7 @@
 		width: 16.3rpx;
 		height: 28.98rpx;
 		position: relative;
-		left:188.4rpx;
+		left: 188.4rpx;
 		top: 0rpx;
 
 	}
@@ -271,10 +293,7 @@
 		font-size: 21.73rpx;
 	}
 
-	.vip-box {}
-
 	.vip-join {
-
 		font-size: 21.73rpx;
 		font-weight: bold;
 		line-height: 28.98rpx;
@@ -356,13 +375,15 @@
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
 	}
-	.sale-content{
+
+	.sale-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
 	}
-	.account{
+
+	.account {
 		background-color: #ffffff;
 		border-radius: 19.92rpx;
 		margin: 9.05rpx auto;
@@ -370,6 +391,7 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
+
 	.account-title {
 		width: 100%;
 		height: 34.42rpx;
@@ -381,14 +403,16 @@
 		letter-spacing: 0rpx;
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
-	}	
-	.account-content{
+	}
+
+	.account-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
 	}
-	.service{
+
+	.service {
 		background-color: #ffffff;
 		border-radius: 19.92rpx;
 		margin: 9.05rpx auto;
@@ -396,6 +420,7 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
+
 	.service-title {
 		width: 100%;
 		height: 34.42rpx;
@@ -407,8 +432,9 @@
 		letter-spacing: 0rpx;
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
-	}	
-	.service-content{
+	}
+
+	.service-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;

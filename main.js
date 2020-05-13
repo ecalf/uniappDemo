@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 
 import pageFooter from './components/pageFooter'
+import goodsPrice from './components/goodsPrice'
 
 Vue.config.productionTip = false
 

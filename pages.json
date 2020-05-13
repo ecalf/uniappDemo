@@ -37,6 +37,24 @@
 				"navigationBarTitleText":"报价管理"
 			}
         }
+        ,{
+            "path" : "pages/personalCenter/purchaseOrders",
+            "style" : {
+				"navigationBarTitleText":"采购订单"
+			}
+        }
+        ,{
+            "path" : "pages/personalCenter/saleManagement",
+            "style" : {
+				"navigationBarTitleText":"销售管理"
+			}
+        }
+        ,{
+            "path" : "pages/personalCenter/myQuotes",
+            "style" : {
+				"navigationBarTitleText":"我的报价"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
