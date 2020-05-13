@@ -4,7 +4,8 @@ export default {
 		console.log('App Launch');
 	},
 	onShow: function() {
-		console.log('App Show');
+		//console.log('App Show');
+		uni.hideTabBar();
 	},
 	onHide: function() {
 		console.log('App Hide');
@@ -24,5 +25,5 @@ export default {
   page {
       background-color:#F8F8F8;
   }
-  .commonweb{width:659.42rpx;margin:0 auto;}
+  
 </style>

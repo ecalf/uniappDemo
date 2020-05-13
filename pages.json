@@ -38,41 +38,41 @@
 		//"navigationBarTitleText": "米修在线",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "red"
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#3AB695",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home_a.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"iconPath": "static/images/classification.png",
+				"selectedIconPath": "static/images/classification_a.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/publish/publish",
+				"iconPath": "static/images/releaseicon.png",
+				"selectedIconPath": "static/images/releaseicon.png",
+				"text": "发布"
+			},
+			{
+				"pagePath": "pages/distribution/distribution",
+				"iconPath": "static/images/distribution.png",
+				"selectedIconPath": "static/images/distribution_a.png",
+				"text": "分销"
+			},
+			{
+				"pagePath": "pages/personalCenter/personalCenter",
+				"iconPath": "static/images/center.png",
+				"selectedIconPath": "static/images/center_a.png",
+				"text": "我的"
+			}
+		]
 	}
-	// "tabBar": {
-	// 	"color": "#333333",
-	// 	"selectedColor": "#3AB695",
-	// 	"backgroundColor": "#FFFFFF",
-	// 	"list": [{
-	// 			"pagePath": "pages/index/index",
-	// 			"iconPath": "static/images/home.png",
-	// 			"selectedIconPath": "static/images/home_a.png",
-	// 			"text": "首页"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/category/category",
-	// 			"iconPath": "static/images/classification.png",
-	// 			"selectedIconPath": "static/images/classification_a.png",
-	// 			"text": "分类"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/publish/publish",
-	// 			"iconPath": "static/images/releaseicon.png",
-	// 			"selectedIconPath": "static/images/releaseicon.png",
-	// 			"text": "发布"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/distribution/distribution",
-	// 			"iconPath": "static/images/distribution.png",
-	// 			"selectedIconPath": "static/images/distribution_a.png",
-	// 			"text": "分销"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/personalCenter/personalCenter",
-	// 			"iconPath": "static/images/center.png",
-	// 			"selectedIconPath": "static/images/center_a.png",
-	// 			"text": "我的"
-	// 		}
-	// 	]
-	// }
 }
