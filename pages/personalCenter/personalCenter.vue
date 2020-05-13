@@ -5,7 +5,7 @@
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
 				<view class='header-title'><text>比亚迪口罩</text></view>
-				<view class='headerImg2'><img src="~@/static/images/VIP@2x.png"></view>
+				<view class='headerImg2'><img src="~@/static/images/vip@2x.png"></view>
 				<view class='usersname'><text>张某某</text></view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>
@@ -81,15 +81,15 @@
 			return {
 				procurementList: [{
 						text: "发布采购",
-						img: "/static/images/Publish purchase icon@2x.png"
+						img: "/static/images/icon1.png"
 					},
 					{
 						text: "报价管理",
-						img: "/static/images/Quotation management-icon@2x.png"
+						img: "/static/images/icon2.png"
 					},
 					{
 						text: "采购订单",
-						img: "/static/images/Purchase order-icon@2x.png"
+						img: "/static/images/icon3.png"
 					},
 					{
 						text: "供应商库",
