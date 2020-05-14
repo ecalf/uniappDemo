@@ -1,0 +1,16 @@
+{
+  "id": "1817047",
+  "name": "whmobile",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14696573",
+      "name": "Resources-Search",
+      "font_class": "Resources-Search",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    }
+  ]
+}
