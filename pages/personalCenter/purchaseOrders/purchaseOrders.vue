@@ -7,8 +7,8 @@
 </template>
 
 <script>
-	import conversionPrice from '../../components/conversionPrice.vue'
-	import goodsPrice from '../../components/goodsPrice.vue'
+	import conversionPrice from '@/components/conversionPrice.vue'
+	import goodsPrice from '@/components/goodsPrice.vue'
 	export default {
 		data() {
 			return {

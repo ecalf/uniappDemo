@@ -2,7 +2,6 @@
 	<view>
 		<view class="input-view">
 			<view class="search-icon"></view>
-			
 			<input type="text" placeholder="搜索订单" />
 		</view>
 		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
@@ -11,8 +10,8 @@
 </template>
 
 <script>
-	import conversionPrice from '../../components/conversionPrice.vue'
-	import goodsPrice from '../../components/goodsPrice.vue'
+	import conversionPrice from '@/components/conversionPrice.vue'
+	import goodsPrice from '@/components/goodsPrice.vue'
 	
 	export default {
 		data() {

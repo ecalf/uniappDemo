@@ -46,12 +46,9 @@
 		border-radius: 11px;
 		box-sizing: border-box;
 		margin: 0 auto;
-		margin-top: 18.11rpx;
-		padding: 27.17rpx;
-
+		padding: 36.23rpx;
 		.goodslist-header {
 			margin-bottom: 18.11rpx;
-
 			.goodslist-icon {
 				width: 40rpx;
 				height: 36.23rpx;

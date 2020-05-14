@@ -162,27 +162,33 @@
 				// console.log(index)
 				if (index == 1) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/priceControl"
+						url: "/pages/personalCenter/priceControl/priceControl"
 					})
 
 				};
 				if (index == 2) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/purchaseOrders"
+						url: "/pages/personalCenter/priceControl/priceControl"
 					})
 
+				};
+				if (index == 3) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/SupplierPool/SupplierPool"
+					})
+				
 				};
 
 			},
 			gotoSale(index) {
 				if (index == 1) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/saleManagement"
+						url: "/pages/personalCenter/saleManagement/saleManagement"
 					})
 				};
 				if (index == 5) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/myQuote"
+						url: "/pages/personalCenter/myQuote/myQuote"
 					})
 				};
 			}
