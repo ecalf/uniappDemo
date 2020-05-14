@@ -182,7 +182,7 @@
 				};
 				if (index == 5) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/myQuotes"
+						url: "/pages/personalCenter/myQuote"
 					})
 				};
 			}

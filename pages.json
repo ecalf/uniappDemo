@@ -1,85 +1,72 @@
 {
-	"pages":[
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		}, {
+			"path": "pages/category/category",
+			"style": {
+				"navigationBarTitleText": "分类"
+			}
+		}, {
+			"path": "pages/publish/publish",
+			"style": {
+				"navigationBarTitleText": "发布"
+			}
+		}, {
+			"path": "pages/personalCenter/personalCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		}, {
+			"path": "pages/distribution/distribution",
+			"style": {
+				"navigationBarTitleText": "分类"
+			}
+		}, {
+			"path": "pages/personalCenter/priceControl",
+			"style": {
+				"navigationBarTitleText": "报价管理"
+			}
+		}, {
+			"path": "pages/personalCenter/purchaseOrders",
+			"style": {
+				"navigationBarTitleText": "采购订单"
+			}
+		}, {
+			"path": "pages/personalCenter/saleManagement",
+			"style": {
+				"navigationBarTitleText": "销售管理"
+			}
+		}, {
+			"path": "pages/personalCenter/myQuote",
+			"style": {
+				"navigationBarTitleText": "我的报价"
+			},
+			"path": "pages/product/productList",
+			"style": {}
+		},
 		{
-			"path":"pages/index/index",
-			"style":{
-				"navigationBarTitleText":"首页"
-			}	
-		}
-	   
-        ,{
-            "path" : "pages/category/category",
-            "style":{
-            	"navigationBarTitleText":"分类"
-            }	
-        }
-        ,{
-            "path" : "pages/publish/publish",
-            "style" : {
-				"navigationBarTitleText":"发布"
+			"path": "pages/product/productDetails",
+		"style": {
+			"navigationBarTitleText": "商品详情",
+				"h5": {
+					"titleNView": false
+				},
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
 			}
-        }
-        ,{
-            "path" : "pages/personalCenter/personalCenter",
-            "style" : {
-				"navigationBarTitleText":"个人中心"
-			}
-        }
-        ,{
-            "path" : "pages/distribution/distribution",
-            "style" : {
-				"navigationBarTitleText":"分类"
-			}
-        }
-        ,{
-            "path" : "pages/personalCenter/priceControl",
-            "style" : {
-				"navigationBarTitleText":"报价管理"
-			}
-        }
-        ,{
-<<<<<<< HEAD
-            "path" : "pages/personalCenter/purchaseOrders",
-            "style" : {
-				"navigationBarTitleText":"采购订单"
-			}
-        }
-        ,{
-            "path" : "pages/personalCenter/saleManagement",
-            "style" : {
-				"navigationBarTitleText":"销售管理"
-			}
-        }
-        ,{
-            "path" : "pages/personalCenter/myQuotes",
-            "style" : {
-				"navigationBarTitleText":"我的报价"
-			}
-=======
-            "path" : "pages/product/productList",
-            "style" : {}
-        },
+		},
 		{
-		    "path" : "pages/product/productDetails",
-		  "style": {
-		  	"navigationBarTitleText": "商品详情",
-		  	"h5": {
-		  		"titleNView": false
-		  	},
-		  	"app-plus": {
-		  		"titleNView": false,
-		  		"bounce": "none"
-		  	}
-		  }
+			"path": "pages/publish/publishBuy/publishBuy",
+			"style": {
+				"navigationBarTitleText": "发布页面"
+			}
 		}
-        ,{
-            "path" : "pages/publish/publishBuy/publishBuy",
-            "style" : {
-            	"navigationBarTitleText":"发布页面"
-            }
->>>>>>> 8a8f9163e0b7ae2612b8def3b211d16b37c95d31
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		//"navigationBarTitleText": "米修在线",
