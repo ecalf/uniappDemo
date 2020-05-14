@@ -43,20 +43,37 @@
 			</view>
 		</view>
 		<productList :goodsList="goodsList" />
+		<!--登录入口-->
+		<view class="index-login">
+			<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
+			<view class="loginenter">
+				<button type="primary" class="page-body-button" v-for="(value,key) in providerList" @click="tologin(value)"
+				    :key="key">
+				    登录
+				</button>
+				<view class="weixin_loginbtn"><text class="icon iconfont">&#xe611;</text>微信登录</view>
+				<view class="weixin_registerbtn"><text class="icon iconfont">&#xe612;</text>免费注册</view>
+			</view>
+		</view>
 		<page-footer :current="0"></page-footer>
 
 	</view>
 </template>
 
 <script>
-	import productList from '../../components/productList.vue'
+	import {
+	    mapState,
+	    mapMutations
+	} from 'vuex'
+	import productList from '@/components/productList.vue'
 	export default {
 		components:{
 			productList
 		},
 		data() {
 			return {
-
+  title: 'login',
+                providerList: [],
 				swiperList: [{
 						img: "/static/images/banner.jpg"
 					},
@@ -121,26 +138,31 @@
 					}
 				], //发布
 				goodsList: [{
+					  id:1,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:2,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:3,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:4,
 						img: "",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
+						 id:5,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
@@ -157,6 +179,53 @@
 
 
 		},
+		computed: {
+		    ...mapState(['hasLogin'])
+		},
+		onLoad() {
+		    uni.getProvider({
+		        service: 'oauth',
+		        success: (result) => {
+		            this.providerList = result.provider.map((value) => {
+		                let providerName = '';
+		                switch (value) {
+		                    case 'weixin':
+		                        providerName = '微信登录'
+		                        break;
+		                    case 'qq':
+		                        providerName = 'QQ登录'
+		                        break;
+		                    case 'sinaweibo':
+		                        providerName = '新浪微博登录'
+		                        break;
+		                    case 'xiaomi':
+		                        providerName = '小米登录'
+		                        break;
+		                    case 'alipay':
+		                        providerName = '支付宝登录'
+		                        break;
+		                    case 'baidu':
+		                        providerName = '百度登录'
+		                        break;
+		                    case 'toutiao':
+		                        providerName = '头条登录'
+		                        break;
+		                    case 'apple':
+		                        providerName = '苹果登录'
+		                        break;
+		                }
+		                return {
+		                    name: providerName,
+		                    id: value
+		                }
+		            });
+		
+		        },
+		        fail: (error) => {
+		            console.log('获取登录通道失败', error);
+		        }
+		    });
+		},
 		methods: {
 			initData() {
 				this.request({
@@ -167,6 +236,13 @@
 					})
 				});
 			},
+			handleCategory(item) {
+				// 分类跳转
+				// console.log(item.text);
+				uni.navigateTo({
+					url:"../product/productList?name="+item.text
+				})
+			},
 			handleSelect(index){
 				this.filterByList[index].selected = true;
 				
@@ -176,7 +252,25 @@
 						this.filterByList[i].selected = false;
 					}
 				}
+			},
+			...mapMutations(['login']),
+			tologin(provider) {
+			    uni.login({
+			        provider: provider.id,
+			        // #ifdef MP-ALIPAY
+			        scopes: 'auth_user', //支付宝小程序需设置授权类型
+			        // #endif
+			        success: (res) => {
+			            console.log('login success:', res);
+			            // 更新保存在 store 中的登录状态
+			            this.login(provider.id);
+			        },
+			        fail: (err) => {
+			            console.log('login fail:', err);
+			        }
+			    });
 			}
+			
 		}
 	}
 </script>

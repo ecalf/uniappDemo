@@ -5,7 +5,7 @@
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
 				<view class='header-title'><text>比亚迪口罩</text></view>
-				<view class='headerImg2'><img src="~@/static/images/vip@2x.png"></view>
+				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
 				<view class='usersname'><text>张某某</text></view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>

@@ -1,7 +1,7 @@
 <template>
 	<view class="goods-list commonweb">
 		<view class="product-list">
-			<view class="product" @tap="handleGoods(goods)" v-for="goods in goodsList" :key="goods.goods_id">
+			<view class="product" v-for="goods in goodsList" :key="goods.id" @tap="handleGoods(goods)">
 				<view class="image" v-if="goods.img">
 					<image mode="widthFix" :src="goods.img"></image>
 				</view>
@@ -27,6 +27,14 @@
 	export default {	
 		props:{
 			goodsList:Array
+		},
+		methods:{
+			handleGoods(goods){
+				// 页面跳转 商品详情
+				uni.navigateTo({
+					url:"/pages/product/productDetails?id="+goods.id
+				})
+			}
 		}
 	}
 </script>
@@ -65,16 +73,7 @@
 					margin-bottom: 9.05rpx;
 				}
 
-				.tui-icon {
-					width: 40rpx;
-					height: 36.23rpx;
-					background: #F23A3B;
-					color: #fff;
-					line-height: 36.23rpx;
-					text-align: center;
-					font-size: 21.73rpx;
-					margin-right: 5px
-				}
+				
 
 				.certificate {
 					margin-bottom: 9.05rpx;

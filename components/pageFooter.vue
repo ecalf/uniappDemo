@@ -66,8 +66,8 @@
 			handleFooter(index, item) {
 				this.currentTabIndex = index,
 					this.$emit('click', index);
-				// console.log(item.url);				
-				uni.navigateTo({ //页面跳转
+				console.log(index);				
+				uni.switchTab({ //页面跳转
 					url: item.url
 				});
 			},
@@ -152,7 +152,7 @@
 				width: 100%;
 				display: flex;
 				justify-content: center;
-				font-size: 16*1.8rpx;
+				font-size:21.73rpx;
 				color: $bc;
 			}
 

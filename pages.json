@@ -38,6 +38,7 @@
 			}
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/personalCenter/purchaseOrders",
             "style" : {
 				"navigationBarTitleText":"采购订单"
@@ -54,48 +55,71 @@
             "style" : {
 				"navigationBarTitleText":"我的报价"
 			}
+=======
+            "path" : "pages/product/productList",
+            "style" : {}
+        },
+		{
+		    "path" : "pages/product/productDetails",
+		  "style": {
+		  	"navigationBarTitleText": "商品详情",
+		  	"h5": {
+		  		"titleNView": false
+		  	},
+		  	"app-plus": {
+		  		"titleNView": false,
+		  		"bounce": "none"
+		  	}
+		  }
+		}
+        ,{
+            "path" : "pages/publish/publishBuy/publishBuy",
+            "style" : {
+            	"navigationBarTitleText":"发布页面"
+            }
+>>>>>>> 8a8f9163e0b7ae2612b8def3b211d16b37c95d31
         }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		//"navigationBarTitleText": "米修在线",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "red"
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#3AB695",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home_a.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"iconPath": "static/images/classification.png",
+				"selectedIconPath": "static/images/classification_a.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/publish/publish",
+				"iconPath": "static/images/releaseicon.png",
+				"selectedIconPath": "static/images/releaseicon.png",
+				"text": "发布"
+			},
+			{
+				"pagePath": "pages/distribution/distribution",
+				"iconPath": "static/images/distribution.png",
+				"selectedIconPath": "static/images/distribution_a.png",
+				"text": "分销"
+			},
+			{
+				"pagePath": "pages/personalCenter/personalCenter",
+				"iconPath": "static/images/center.png",
+				"selectedIconPath": "static/images/center_a.png",
+				"text": "我的"
+			}
+		]
 	}
-	// "tabBar": {
-	// 	"color": "#333333",
-	// 	"selectedColor": "#3AB695",
-	// 	"backgroundColor": "#FFFFFF",
-	// 	"list": [{
-	// 			"pagePath": "pages/index/index",
-	// 			"iconPath": "static/images/home.png",
-	// 			"selectedIconPath": "static/images/home_a.png",
-	// 			"text": "首页"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/category/category",
-	// 			"iconPath": "static/images/classification.png",
-	// 			"selectedIconPath": "static/images/classification_a.png",
-	// 			"text": "分类"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/publish/publish",
-	// 			"iconPath": "static/images/releaseicon.png",
-	// 			"selectedIconPath": "static/images/releaseicon.png",
-	// 			"text": "发布"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/distribution/distribution",
-	// 			"iconPath": "static/images/distribution.png",
-	// 			"selectedIconPath": "static/images/distribution_a.png",
-	// 			"text": "分销"
-	// 		},
-	// 		{
-	// 			"pagePath": "pages/personalCenter/personalCenter",
-	// 			"iconPath": "static/images/center.png",
-	// 			"selectedIconPath": "static/images/center_a.png",
-	// 			"text": "我的"
-	// 		}
-	// 	]
-	// }
 }

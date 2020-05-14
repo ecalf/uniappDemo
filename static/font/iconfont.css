@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1589360267203'); /* IE9 */
   src: url('iconfont.eot?t=1589360267203#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -5,6 +6,11 @@
   url('iconfont.woff?t=1589360267203') format('woff'),
   url('iconfont.ttf?t=1589360267203') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url('iconfont.svg?t=1589360267203#iconfont') format('svg'); /* iOS 4.1- */
+=======
+@font-face {
+  font-family: "iconfont";
+  src: url('~@/static/font/iconfont.ttf'); 
+>>>>>>> 8a8f9163e0b7ae2612b8def3b211d16b37c95d31
 }
 
 .iconfont {
@@ -15,6 +21,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+<<<<<<< HEAD
+=======
+.icon-Wechatlogin-icon:before {
+  content: "\e611";
+}
+
+.icon-Freeregistration-icon:before {
+  content: "\e612";
+}
+
+>>>>>>> 8a8f9163e0b7ae2612b8def3b211d16b37c95d31
 .icon-Resources-Search:before {
   content: "\e60f";
 }
