@@ -23,7 +23,7 @@
 		<!--发布入口-->
 		<view class="commonweb">
 			<view class="publish-list">
-				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index" :style="{backgroundImage: 'url('+item.bgimg+')'}">
+				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index">
 					<view class="inpublish-box">
 						<view class="left">
 							<view class="text">{{item.title}}</view>
@@ -37,24 +37,25 @@
 		</view>
 		<!--列表推荐-->
 		<view class="recommend-nav commonweb">
-			<view class="tab-item" v-for="(target,index) in filterByList"  @tap="handleSelect(index)" :class="{'on':target.selected}">
+			<view class="tab-item" v-for="(target,index) in filterByList" @tap="handleSelect(index)" :class="{'on':target.selected}">
 				<view class="cntitle">{{target.cntitle}}</view>
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
 		<productList :goodsList="goodsList" />
+
 		<!--登录入口-->
-		<view class="index-login">
+		<view class="index-login" v-if="isShow">
 			<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 			<view class="loginenter">
-				<button type="primary" class="page-body-button" v-for="(value,key) in providerList" @click="tologin(value)"
-				    :key="key">
-				    登录
-				</button>
-				<view class="weixin_loginbtn"><text class="icon iconfont">&#xe611;</text>微信登录</view>
-				<view class="weixin_registerbtn"><text class="icon iconfont">&#xe612;</text>免费注册</view>
+				<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
+
+				<button class="weixin_registerbtn"><text class="icon iconfont">&#xe612;</text>免费注册</button>
 			</view>
 		</view>
+		<view class="uni-popup__mask" v-if="isShow" @tap="closePopup()"></view>
+
+
 		<page-footer :current="0"></page-footer>
 
 	</view>
@@ -62,18 +63,22 @@
 
 <script>
 	import {
-	    mapState,
-	    mapMutations
+		mapState,
+		mapMutations
 	} from 'vuex'
 	import productList from '@/components/productList.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
-		components:{
-			productList
+		components: {
+			productList,
+			uniPopup
 		},
 		data() {
 			return {
-  title: 'login',
-                providerList: [],
+				title: 'getUserInfo',
+				hasUserInfo: false,
+				userInfo: {},
+				isShow: false,
 				swiperList: [{
 						img: "/static/images/banner.jpg"
 					},
@@ -138,94 +143,67 @@
 					}
 				], //发布
 				goodsList: [{
-					  id:1,
+						id: 1,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
-						 id:2,
+						id: 2,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
-						 id:3,
+						id: 3,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
-						 id:4,
+						id: 4,
 						img: "",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					},
 					{
-						 id:5,
+						id: 5,
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
 					}
 				],
-				filterByList:[
-					{cntitle:"列表推荐",entitle:"Recommend",selected: true},
-					{cntitle:"采购订单",entitle:"Purchase",selected: false,},
-					{cntitle:"销售订单",entitle:"Sale",selected: false,},
-					{cntitle:"委托订单",entitle:"Entrust",selected: false,},
-					]//列表tabbar
-
+				filterByList: [{
+						cntitle: "列表推荐",
+						entitle: "Recommend",
+						selected: true
+					},
+					{
+						cntitle: "采购订单",
+						entitle: "Purchase",
+						selected: false,
+					},
+					{
+						cntitle: "销售订单",
+						entitle: "Sale",
+						selected: false,
+					},
+					{
+						cntitle: "委托订单",
+						entitle: "Entrust",
+						selected: false,
+					},
+				] //列表tabbar
 			}
 
 
 		},
 		computed: {
-		    ...mapState(['hasLogin'])
+			...mapState({
+				loginProvider: state => state.loginProvider
+			})
 		},
-		onLoad() {
-		    uni.getProvider({
-		        service: 'oauth',
-		        success: (result) => {
-		            this.providerList = result.provider.map((value) => {
-		                let providerName = '';
-		                switch (value) {
-		                    case 'weixin':
-		                        providerName = '微信登录'
-		                        break;
-		                    case 'qq':
-		                        providerName = 'QQ登录'
-		                        break;
-		                    case 'sinaweibo':
-		                        providerName = '新浪微博登录'
-		                        break;
-		                    case 'xiaomi':
-		                        providerName = '小米登录'
-		                        break;
-		                    case 'alipay':
-		                        providerName = '支付宝登录'
-		                        break;
-		                    case 'baidu':
-		                        providerName = '百度登录'
-		                        break;
-		                    case 'toutiao':
-		                        providerName = '头条登录'
-		                        break;
-		                    case 'apple':
-		                        providerName = '苹果登录'
-		                        break;
-		                }
-		                return {
-		                    name: providerName,
-		                    id: value
-		                }
-		            });
-		
-		        },
-		        fail: (error) => {
-		            console.log('获取登录通道失败', error);
-		        }
-		    });
-		},
+
 		methods: {
 			initData() {
 				this.request({
@@ -240,12 +218,12 @@
 				// 分类跳转
 				// console.log(item.text);
 				uni.navigateTo({
-					url:"../product/productList?name="+item.text
+					url: "../product/productList?name=" + item.text
 				})
 			},
-			handleSelect(index){
+			handleSelect(index) {
 				this.filterByList[index].selected = true;
-				
+
 				// 其他的selected false
 				for (let i = 0; i < this.filterByList.length; i++) {
 					if (i != index) {
@@ -253,25 +231,80 @@
 					}
 				}
 			},
-			...mapMutations(['login']),
-			tologin(provider) {
-			    uni.login({
-			        provider: provider.id,
-			        // #ifdef MP-ALIPAY
-			        scopes: 'auth_user', //支付宝小程序需设置授权类型
-			        // #endif
-			        success: (res) => {
-			            console.log('login success:', res);
-			            // 更新保存在 store 中的登录状态
-			            this.login(provider.id);
-			        },
-			        fail: (err) => {
-			            console.log('login fail:', err);
-			        }
-			    });
+			closePopup() {
+				this.isShow = false;
+			},
+			// 获取用户信息 API 在小程序可直接使用，在 5+App 里面需要先登录才能调用
+			getUserInfo() {
+				that=this.isShow;
+				uni.getUserInfo({
+					provider: this.loginProvider,
+					success: (result) => {
+						console.log('getUserInfo success', result);
+						this.hasUserInfo = true;
+						this.userInfo = result.userInfo;
+						this.isShow = false;
+					},
+					fail: (error) => {
+						console.log('getUserInfo fail', error);
+						let content = error.errMsg;
+						if (~content.indexOf('uni.login')) {
+							content = '请在登录页面完成登录操作';
+						}
+						// #ifndef APP-PLUS
+						uni.getSetting({
+							success: (res) => {
+								let authStatus = res.authSetting['scope.userInfo'];
+								if (!authStatus) {
+									uni.showModal({
+										title: '授权失败',
+										content: 'Hello uni-app需要获取您的用户信息，请在设置界面打开相关权限',
+										success: (res) => {
+											if (res.confirm) {
+												uni.openSetting()
+											}
+										}
+									})
+								} else {
+									uni.showModal({
+										title: '获取用户信息失败',
+										content: '错误原因' + content,
+										showCancel: false
+									});
+								}
+							}
+						})
+						// #endif
+						// #ifdef APP-PLUS
+						uni.showModal({
+							title: '获取用户信息失败',
+							content: '错误原因' + content,
+							showCancel: false
+						});
+						// #endif
+					}
+				});
+			},
+			mpGetUserInfo(result) {
+				console.log('mpGetUserInfo', result);
+				if (result.detail.errMsg !== 'getUserInfo:ok') {
+					uni.showModal({
+						title: '获取用户信息失败',
+						content: '错误原因' + result.detail.errMsg,
+						showCancel: false
+					});
+					return;
+				}
+				this.hasUserInfo = true;
+				this.userInfo = result.detail.userInfo;
+				this.isShow = false;
+			},
+			clear() {
+				this.hasUserInfo = false;
+				this.userInfo = {};
 			}
-			
-		}
+		},
+
 	}
 </script>
 
@@ -327,7 +360,7 @@
 				width: 100%;
 				display: flex;
 				justify-content: center;
-			
+
 				image {
 					width: 90.57rpx;
 					height: 90.57rpx;
@@ -361,21 +394,28 @@
 			flex-wrap: wrap;
 			background-size: cover;
 			background-repeat: no-repeat;
+			background-position: center center;
 			height: 108.69rpx;
 
 			&.item-0 {
+				background-image: url(~@/static/images/release01.png);
+
 				.text {
 					color: #44A78D;
 				}
 			}
 
 			&.item-1 {
+				background-image: url(~@/static/images/release02.png);
+
 				.text {
 					color: #feb322;
 				}
 			}
 
 			&.item-2 {
+				background-image: url(~@/static/images/release03.png);
+
 				.text {
 					color: #7b79da;
 				}
@@ -415,10 +455,11 @@
 		}
 	}
 
-/*列表推荐导航*/
+	/*列表推荐导航*/
 	.recommend-nav {
 		display: flex;
 		justify-content: space-between;
+
 		.tab-item {
 			display: flex;
 			justify-content: space-between;
@@ -428,41 +469,44 @@
 			position: relative;
 			padding: 0 2%;
 			color: #4E5A65;
-			
-			&.on{
-				color:$ac;
-				&:after{
-					opacity:1;
+
+			&.on {
+				color: $ac;
+
+				&:after {
+					opacity: 1;
 				}
 			}
+
 			&:before {
 				content: "";
 				display: block;
 				height: 20px;
 				position: absolute;
 				right: 0;
-				top:10.86rpx;
+				top: 10.86rpx;
 				border-right: 1px solid #e2e2e2;
 			}
-			
-			&:after{
-				content:"";
-				display:block;
-				width:36.23rpx;
-				height:14.49rpx;
-				position:absolute;
-				left:50%;
-				top:-18.11rpx;
+
+			&:after {
+				content: "";
+				display: block;
+				width: 36.23rpx;
+				height: 14.49rpx;
+				position: absolute;
+				left: 50%;
+				top: -18.11rpx;
 				transform: translateX(-50%);
-				background:url(~@/static/images/listcur.png);
-				background-size:cover;
-				opacity:0;
+				background: url(~@/static/images/listcur.png);
+				background-size: cover;
+				opacity: 0;
 			}
+
 			.cntitle {
 				font-size: 25.36rpx;
 				font-weight: bold;
 				width: 100%;
-				
+
 			}
 
 			.entitle {
@@ -481,6 +525,7 @@
 	//列表推荐
 	.goods-list {
 		padding: 27.17rpx 0;
+
 		.loading-text {
 			width: 100%;
 			display: flex;
@@ -492,5 +537,79 @@
 		}
 	}
 
-	
+	/*首页登录入口*/
+	.index-login {
+		position: fixed;
+		width: 661.23rpx;
+		left: 50%;
+		top: 181.15rpx;
+		transform: translateX(-50%);
+		background-color: #fff;
+		z-index: 999;
+		padding: 54.34rpx 36.23rpx;
+		border-radius: 19.92rpx;
+		text-align: center;
+
+		.logoimg {
+			width: 271.73rpx;
+			height: 57.97rpx;
+			margin: 0 auto 36.23rpx;
+		}
+	}
+
+	.loginenter {
+		border-top: 1px dashed #E2E2E2;
+		padding-top: 79.71rpx;
+
+		button {
+			color: #fff;
+			font-size: 36.23rpx;
+			height: 108.69rpx;
+			line-height: 108.69rpx;
+			border-radius: 54.34rpx;
+			margin-bottom: 32.6rpx;
+
+			.iconfont {
+				font-size: 54.34rpx;
+				margin-right: 14.49rpx;
+				vertical-align: middle;
+			}
+
+			&.weixin_loginbtn {
+				background: #44A78D;
+			}
+
+			&.weixin_registerbtn {
+				background: #05544A;
+			}
+		}
+	}
+
+	.uni-popup {
+		position: fixed;
+		/* #ifdef H5 */
+		top: var(--window-top);
+		/* #endif */
+		/* #ifndef H5 */
+		top: 0;
+		/* #endif */
+		bottom: 0;
+		left: 0;
+		right: 0;
+		/* #ifndef APP-NVUE */
+		z-index: 99;
+		/* #endif */
+		transition: all .3s;
+	}
+
+	.uni-popup__mask {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.4);
+		z-index: 98;
+		transition: all .3s;
+	}
 </style>

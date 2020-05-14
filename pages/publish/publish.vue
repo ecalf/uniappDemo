@@ -2,17 +2,9 @@
 	<view>
 		<view class="publish-popup">
 			<view class="m-flex">
-				<view class="publish-item item">
-					<image src="../../static/images/purchase-icon.png"></image>
-					<view class="title">发布采购</view>
-				</view>
-				<view class="publish-item item">
-					<image src="../../static/images/sales-icon.png"></image>
-					<view class="title">发布销售</view>
-				</view>
-				<view class="publish-item item">
-					<image src="../../static/images/release-icon.png"></image>
-					<view class="title">发布委托</view>
+				<view class="publish-item item" v-for="(item,index) in lists" :key="index" @tap="handlePublish(item)">
+					<image :src="item.img"></image>
+					<view class="title">{{item.title}}</view>
 				</view>
 			</view>
 		</view>
@@ -24,11 +16,21 @@
 	export default {
 		data() {
 			return {
-
+			lists:[
+				{img:"/static/images/purchase-icon.png",title:"发布采购"},
+				{img:"/static/images/sales-icon.png",title:"发布销售"},
+				{img:"/static/images/release-icon.png",title:"发布委托"}
+			],
+			
 			}
 		},
 		methods: {
-
+			handlePublish(item){
+				// 页面跳转 商品详情
+				uni.navigateTo({
+					url:"/pages/publish/publishBuy/publishBuy?"+item.title
+				})
+			}
 		}
 	}
 </script>

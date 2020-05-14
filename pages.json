@@ -39,7 +39,9 @@
         }
         ,{
             "path" : "pages/product/productList",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "产品"
+			}
         },
 		{
 		    "path" : "pages/product/productDetails",
@@ -59,7 +61,7 @@
             "style" : {
             	"navigationBarTitleText":"发布页面"
             }
-        }
+        }	
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -71,6 +73,7 @@
 		"color": "#333333",
 		"selectedColor": "#3AB695",
 		"backgroundColor": "#FFFFFF",
+		"custom":true,
 		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/home.png",

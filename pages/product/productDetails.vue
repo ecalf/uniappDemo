@@ -47,8 +47,10 @@
 		<!--底部菜单-->
 		<view class="footer-wrap">
 		<view class="product-footer">
+			<view class="footerlist">
 			<view class="contact-btn m-btn">立即联系</view>
 			<view class="price-btn m-btn">立即报价</view>
+			</view>
 		</view>
 </view>
 	</view>
@@ -124,4 +126,154 @@
 			background-color: rgba(0, 0, 0, 0.2);
 		}
 	}
+	/*产品详情*/
+	.product-details-con{
+		background:#fff;
+		padding:27.17rpx 45.28rpx 18.11rpx;
+		border-top: solid 1px #e2e2e2;
+		margin-bottom:18.11rpx;
+		.top{
+			display: flex;
+			justify-content:space-between;
+			align-items:baseline;
+			view{
+				display: flex;
+				
+			}
+				.new-price{
+					font-size:54.34rpx;
+					color:$ac;
+					
+					text{
+						font-size:36.23rpx;
+						margin-top:18.11rpx;
+					}
+				}
+				.old-price{
+					color: #e2e2e2;
+					font-size:28.98rpx;
+					text-decoration:line-through;
+					margin-left:-18.11rpx;
+				}
+				.good-num{
+					
+					padding:3.62rpx 14.49rpx;
+						
+						background-color:#A1D3C6;
+						border-radius: 10px;
+						
+						font-size: 21.73rpx;
+						color: #44a78d;
+						
+				}
+		}
+		
+		.product-title{
+			margin-top:18.11rpx;
+			font-weight:bold;
+			font-size:28.98rpx;
+			@include  ml(22px,2);
+		}
+		.product-text{
+			margin-top:18.11rpx;
+			color: #8e8e93;
+			font-size:21.73rpx;
+		}
+	}
+	.product-info-wrap{
+		background:#fff;
+		padding:36.23rpx 45.28rpx 36.23rpx;
+		margin-bottom:18.11rpx;
+	}
+	.info-box{
+		display: flex;
+		justify-content:flex-start;
+		margin-bottom:27.17rpx;
+		margin-left:-36.23rpx;
+		.item{
+			display: flex;
+			position: relative;
+			text-align:center;
+			padding:0 36.23rpx;
+			&:after{
+				content:"";
+				display:block;
+				border-left:1px solid #e2e2e2;
+				height:25.36rpx;
+				position:absolute;
+				top:7.24rpx;
+				right:0;
+			}
+			&:last-child{
+				&:after{
+					display:none;
+				}
+			}
+		}
+	}
+	
+	.certi-img{
+		image{
+			width:36.23rpx;
+			height:36.23rpx;
+			margin:0 9.05rpx;
+			vertical-align:middle;
+		}
+	}
+	
+	.description {
+			.title {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size:25.36rpx;
+				color: #4e5a65;
+				padding:9.05rpx 0 18.11rpx;
+			}
+			
+		}
+		
+		.content{
+			img{
+				width:100%;
+			}
+		}
+		.footer-wrap{
+			height:101.44rpx;
+		}
+		.product-footer{
+			padding:18.11rpx 0;
+			background:#fff;
+			
+			position: fixed;
+			bottom:0;
+			left:0;
+			width:100%;
+			z-index:99;
+			.footerlist{
+				display: flex;
+				justify-content:space-around;
+			}
+			.m-btn{
+				display: flex;
+				justify-content:center;
+				width:289.85rpx;
+				height:65.21rpx;
+				border-radius:32.6rpx;
+				border: solid 1px #44a78d;
+				text-align: center;
+				line-height:61.59rpx;
+				font-size:25.36rpx;
+				margin:0 27.17rpx;
+				&.contact-btn{
+					background-color: #44a78d;
+					color: #fefefe;
+				}
+				&.price-btn{
+					color:$ac;
+					background:#D8ECE7;
+				}
+			}
+		}
 </style>

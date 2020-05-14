@@ -46,46 +46,38 @@
 					</view>
 				</view>
 			</view>
-			
-			<view class="filter-condition">	
+
+			<view class="filter-condition">
 				<view class="text" v-for="(navitem,index) in navlist" :key="index"><text>{{navitem.name}}</text></view>
-				<view class="text filter"  @tap="show('right')"><text>筛选</text></view>
+				<view class="text filter" @tap="show('right')"><text>筛选</text></view>
 			</view>
 			<productList :goodsList="goodsList" />
 		</view>
 		<!--弹窗-->
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
 			<view class="uni-drawer">
-				<view class="drawerlist">
-				<view class="uni-list-item" v-for="(category,index) in categoryList" :key="category.id" :class="index==showCategoryIndex?'on':''">
-					<view class="uni-list-item__content" @tap="handleCategory(index)">{{category.cn_name}}</view>
-					<view class="uni-list-item__subcon" v-if="index==showCategoryIndex">
-						<text v-for="(item,index) in category.child">{{item.cn_name}}</text>
-					</view>
-					<view class="uni-list-item__extra"></view>
-				</view>
-</view>
+				<product-category :categoryList="categoryList"></product-category>
 			</view>
 		</uni-drawer>
-
 		<page-footer :current="1"></page-footer>
 	</view>
 </template>
 
 <script>
-	import banner from '@/components/banner.vue'
-	import productList from '@/components/productList.vue'
-	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
-	import interfaces from '../../utils/interfaces.js'
+	import banner from '@/components/banner'
+	import productList from '@/components/productList'
+	import uniDrawer from '@/components/uni-drawer/uni-drawer'
+	import productCategory from '@/components/product-category/productCategory'
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		components: {
 			banner,
 			productList,
+			productCategory,
 			uniDrawer
 		},
 		data() {
 			return {
-				showCategoryIndex:0,
 				showRight: false,
 				info: [{
 						colorClass: 'uni-bg-red',
@@ -129,9 +121,14 @@
 						price: "2000",
 					}
 				],
-				navlist:[{name:"综合"},{name:"价格"},{name:"剩余时间"}],
-				categoryList:[],
-				categoryListChild:[]
+				navlist: [{
+					name: "综合"
+				}, {
+					name: "价格"
+				}, {
+					name: "剩余时间"
+				}],
+				categoryList: [],
 			}
 
 		},
@@ -141,12 +138,12 @@
 		methods: {
 			initData() {
 				uni.request({
-					 url: interfaces.getCategroyData,	
+					url: interfaces.getCategroyData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data:{
-						data:{
-							id:'',
+					data: {
+						data: {
+							id: '',
 						}
 					},
 					success: ((res) => {
@@ -176,9 +173,7 @@
 					this.showRight = false
 				}
 			},
-			handleCategory(index){
-				this.showCategoryIndex=index;
-			}
+			
 		},
 		onNavigationBarButtonTap(e) {
 			this.showRight = !this.showRight
@@ -347,17 +342,19 @@
 					border-top: 4px solid #4e5a65;
 					margin-left: 5px;
 				}
-				
+
 			}
-			&.filter{
+
+			&.filter {
 				text:after {
-					border:0;
-					width:25.36rpx;
-					height:25.36rpx;
+					border: 0;
+					width: 25.36rpx;
+					height: 25.36rpx;
 					background-image: url(~@/static/images/fillericon.png);
-					background-size:cover;
+					background-size: cover;
 				}
 			}
+
 			&.on {
 				color: $ac;
 
@@ -365,14 +362,66 @@
 					transform: rotate(180deg);
 					border-top: 4px solid $ac;
 				}
-				&.filter{
+
+				&.filter {
 					text:after {
 						background-image: url(~@/static/images/fillericona.png);
-						background-size:cover;
+						background-size: cover;
 					}
 				}
 			}
 
 		}
+	}
+
+	/*筛选弹窗*/
+	.uni-drawer {
+		padding-top: 79.71rpx;
+
+	}
+
+	.drawerlist {
+		border-top: 1px solid #eaeced;
+	}
+
+	.uni-list-item {
+		color: $bc;
+		position: relative;
+
+		&.on {
+			.uni-list-item__extra {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+
+	.uni-list-item__content {
+		padding: 36.23rpx;
+		border-bottom: solid 1px #eaeced;
+		font-size: 25.36rpx;
+	}
+
+	.uni-list-item__subcon {
+		padding: 27.17rpx 36.23rpx 18.11rpx;
+
+		text {
+			display: inline-block;
+			font-size: 21.73rpx;
+			background-color: #e2e2e2;
+			border-radius: 9.05rpx;
+			padding: 10.86rpx 19.92rpx;
+			margin: 0 9.05rpx 9.05rpx;
+		}
+	}
+
+	.uni-list-item__extra {
+		position: absolute;
+		right: 39.85rpx;
+		top: 54.34rpx;
+		width: 8px;
+		height: 8px;
+		border-top: 1px solid #707070;
+		border-right: 1px solid #707070;
+		transform: rotate(45deg);
 	}
 </style>
