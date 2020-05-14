@@ -23,4 +23,6 @@
 .icon-Resources-Search:before {
   content: "\e60f";
 }
-
+.icon-upload:before {
+  content: "\e613";
+}

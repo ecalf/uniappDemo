@@ -13,10 +13,11 @@
 	};
 </script>
 
-<style>
+<style lang="scss">
 	/*每个页面公共css */
 	@import "/static/font/iconfont.css";
-
+	@import "@/scss/common.scss";
+	@import "./cool/ui/static/css/index.scss";
 	page {
 		background-color: #F8F8F8;
 		font-size: 21.73rpx;

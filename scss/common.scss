@@ -23,9 +23,85 @@ $bc:#4E5A65;
 	    overflow: hidden;
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: $line;
-	}		
-				
-/*发布页面*/
+	}	
+		
+ // placeholder 
+ @mixin ph($color: #e2e2e2) {
+ 
+     // 使用webkit内核的浏览器
+     &::-webkit-input-placeholder {
+         color: $color;
+     }
+ 
+     // Firefox版本4-18
+     &:-moz-placeholder {
+         color: $color;
+     }
+ 
+     // Firefox版本19+
+     &::-moz-placeholder {
+         color: $color;
+     }
+ 
+     // IE浏览器
+     &:-ms-input-placeholder {
+         color: $color;
+     }
+ }
 
+.uni-form-item{
+	background:#fff;
+	margin-bottom:1px;
+	display: flex;
+	padding:36.23rpx 45.28rpx;
+	font-size:25.36rpx;
+	align-items: center;
+	.title{
+		color: #4e5a65;
+	}
 	
+}
+.uni-input{
+		font-size:25.36rpx;
+		flex: 1;
+		text-align:right;
+		
+	}
+.colorred{
+	color:#f30e0e;
+}
+.uni-tl-input{
+	text-align:left;
+}
+.uni-textarea{
+	line-height:43.47rpx;
+	height:173.91rpx;
+}
+
+/*发布页面*/	
+.pb60{
+	padding-bottom:108.69rpx;
+}
+.upload-images{
+	display:block;
+	text-align:center;
+}
+.m-cl-box{
+	display:block;
+	padding:18.11rpx 45.28rpx;
+}	
+.m-cl-pt15{
+	padding:0 27.17rpx 0 45.28rpx;
+}
+.brand-bg{
+	margin-bottom:0 !important;
+		.cl-card__container{
+			background-color: #f6f6f6;
+			border-radius: 3px;
+			border: solid 1px #e2e2e2;
+			height:72.46rpx;
+			line-height:72.46rpx;
+			padding:0 18.11rpx!important;
+		}
+}	
 	
