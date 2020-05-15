@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
@@ -27,6 +26,7 @@
 			}
 		},
 		{
+<<<<<<< HEAD
 		"path": "pages/distribution/distribution",
 		"style": {
 			"navigationBarTitleText": "分类"
@@ -118,31 +118,120 @@
 			"iconPath": "static/images/home.png",
 			"selectedIconPath": "static/images/home_a.png",
 			"text": "首页"
+=======
+			"path": "pages/distribution/distribution",
+			"style": {
+				"navigationBarTitleText": "分类"
+			}
 		},
 		{
-			"pagePath": "pages/category/category",
-			"iconPath": "static/images/classification.png",
-			"selectedIconPath": "static/images/classification_a.png",
-			"text": "分类"
+			"path": "pages/personalCenter/priceControl/priceControl",
+			"style": {
+				"navigationBarTitleText": "报价管理"
+			}
 		},
 		{
-			"pagePath": "pages/publish/publish",
-			"iconPath": "static/images/releaseicon.png",
-			"selectedIconPath": "static/images/releaseicon.png",
-			"text": "发布"
+			"path": "pages/personalCenter/purchaseOrders/purchaseOrders",
+			"style": {
+				"navigationBarTitleText": "采购订单"
+			}
+>>>>>>> f7f0e3c76dda2ba552801d39e5c9d0dd8302a486
 		},
 		{
-			"pagePath": "pages/distribution/distribution",
-			"iconPath": "static/images/distribution.png",
-			"selectedIconPath": "static/images/distribution_a.png",
-			"text": "分销"
+			"path": "pages/personalCenter/saleManagement/saleManagement",
+			"style": {
+				"navigationBarTitleText": "销售管理"
+			}
 		},
 		{
-			"pagePath": "pages/personalCenter/personalCenter",
-			"iconPath": "static/images/center.png",
-			"selectedIconPath": "static/images/center_a.png",
-			"text": "我的"
+			"path": "pages/personalCenter/myQuote/myQuote",
+			"style": {
+				"navigationBarTitleText": "我的报价"
+			}
+		},
+		{
+			"path": "pages/product/productList",
+			"style": {}
+		},
+		{
+			"path": "pages/product/productDetails",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"h5": {
+					"titleNView": false
+				},
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/publish/publishBuy/publishBuy",
+			"style": {
+				"navigationBarTitleText": "发布页面"
+			}
+		},
+		{
+			"path": "pages/personalCenter/SupplierPool/SupplierPool",
+			"style": {
+
+				"navigationBarTitleText": "供应商库"
+			}
 		}
-	]
-}
+
+		, {
+			"path": "components/uploadFile/uploadFile",
+			"style": {}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#3AB695",
+		"backgroundColor": "#F8F8F8",
+		"custom": true,
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home_a.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"iconPath": "static/images/classification.png",
+				"selectedIconPath": "static/images/classification_a.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/publish/publish",
+				"iconPath": "static/images/releaseicon.png",
+				"selectedIconPath": "static/images/releaseicon.png",
+				"text": "发布"
+			},
+			{
+				"pagePath": "pages/distribution/distribution",
+				"iconPath": "static/images/distribution.png",
+				"selectedIconPath": "static/images/distribution_a.png",
+				"text": "分销"
+			},
+			{
+				"pagePath": "pages/personalCenter/personalCenter",
+				"iconPath": "static/images/center.png",
+				"selectedIconPath": "static/images/center_a.png",
+				"text": "我的"
+			}
+		]
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
+		}
+	}
+
 }
