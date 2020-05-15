@@ -2,9 +2,9 @@
 	<view class="true-height">
 		<view class="footer-fixed">
 			<view class="footer">
-				<view class="item" :class="['item-'+index,currentTabIndex == index ? 'on' : '']" v-for="(item,index) in footerlist"
+				<view class="item" :class="['item-'+index,item.url==currentPage ? 'on' : '']" v-for="(item,index) in footerlist"
 				 :key="index" @tap="handleFooter(index,item)">
-					<view class="icon" v-if="currentTabIndex == index">
+					<view class="icon" v-if="item.url == currentPage">
 						<image :src="item.activeicon" mode=""></image>
 					</view>
 					<view class="icon" v-else>
@@ -21,7 +21,7 @@
 	export default {
 		data() {
 			return {
-				currentTabIndex: this.current,
+				//currentTabIndex: this.current,
 				footerlist: [{
 						beforeicon: "/static/images/home.png",
 						activeicon: "/static/images/home_a.png",
@@ -57,10 +57,13 @@
 			}
 		},
 		props: {
-			current: {
-				type: Number,
-				default: 0
+			currentPage: {
+				type: String,
+				default: '/pages/index/index'
 			}
+		},
+		onLoad:{
+			
 		},
 		methods: {
 			handleFooter(index, item) {

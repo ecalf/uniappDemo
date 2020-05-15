@@ -56,7 +56,7 @@
 		<view class="uni-popup__mask" v-if="isShow" @tap="closePopup()"></view>
 
 
-		<page-footer :current="0"></page-footer>
+		<page-footer :currentPage="currentPage"></page-footer>
 
 	</view>
 </template>
@@ -79,6 +79,7 @@
 				hasUserInfo: false,
 				userInfo: {},
 				isShow: false,
+				currentPage:'/pages/index/index',
 				swiperList: [{
 						img: "/static/images/banner.jpg"
 					},

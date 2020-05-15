@@ -59,7 +59,7 @@
 				<product-category :categoryList="categoryList"></product-category>
 			</view>
 		</uni-drawer>
-		<page-footer :current="1"></page-footer>
+		<page-footer :currentPage="currentPage"></page-footer>
 	</view>
 </template>
 
@@ -79,6 +79,7 @@
 		data() {
 			return {
 				showRight: false,
+				currentPage:'/pages/category/category',
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',

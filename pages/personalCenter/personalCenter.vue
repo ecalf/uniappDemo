@@ -70,7 +70,7 @@
 				</view>
 			</view>
 		</view>
-		<page-footer :current="4"></page-footer>
+		<page-footer :currentPage="currentPage"></page-footer>
 
 	</view>
 </template>
@@ -79,6 +79,7 @@
 	export default {
 		data() {
 			return {
+				currentPage:"/pages/personalCenter/personalCenter",
 				procurementList: [{
 						text: "发布采购",
 						img: "/static/images/lgicon1.png"

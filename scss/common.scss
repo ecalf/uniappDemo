@@ -23,6 +23,7 @@ $bc:#4E5A65;
 	    overflow: hidden;
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: $line;
+<<<<<<< HEAD
 	}		
 				
 
@@ -74,6 +75,13 @@ $bc:#4E5A65;
 	
 		
  // placeholder 
+=======
+
+	}		
+				
+
+ /*placeholder */
+>>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
  @mixin ph($color: #e2e2e2) {
  
      // 使用webkit内核的浏览器
@@ -96,7 +104,10 @@ $bc:#4E5A65;
          color: $color;
      }
  }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
 .uni-form-item{
 	background:#fff;
 	margin-bottom:1px;
@@ -106,8 +117,7 @@ $bc:#4E5A65;
 	align-items: center;
 	.title{
 		color: #4e5a65;
-	}
-	
+	}	
 }
 .uni-input{
 		font-size:25.36rpx;
@@ -126,30 +136,40 @@ $bc:#4E5A65;
 	height:173.91rpx;
 }
 
-/*发布页面*/	
-.pb60{
-	padding-bottom:108.69rpx;
-}
-.upload-images{
-	display:block;
-	text-align:center;
-}
-.m-cl-box{
-	display:block;
-	padding:18.11rpx 45.28rpx;
-}	
-.m-cl-pt15{
-	padding:0 27.17rpx 0 45.28rpx;
-}
-.brand-bg{
-	margin-bottom:0 !important;
-		.cl-card__container{
-			background-color: #f6f6f6;
-			border-radius: 3px;
-			border: solid 1px #e2e2e2;
-			height:72.46rpx;
-			line-height:72.46rpx;
-			padding:0 18.11rpx!important;
-		}
-}	
+.cl-form {
+	.radio-box .cl-form-item__content{
+		justify-content: flex-end;
+	}
+	.cl-form-item{padding:0 !important;min-height:none !important;}
+.m-from-item{
+	background:#fff;
+	margin-bottom:1px;
+	padding:27.17rpx 18.11rpx;
 	
+}
+.cl-card__header{
+	padding:0 10px;
+	span{
+	color: #4e5a65;
+	font-size:25.36rpx;
+	}
+	&:before{
+		display:none;
+	}
+}
+.cl-input{border:0;padding:0;}
+.cl-form-item__container{padding-left:0 !important;}
+}
+
+.size-text{
+	text{
+		color:#ff2323;
+	}
+}
+.cl-upload-list .cl-upload{
+	border-style:solid;
+	border-radius: 11px;
+}
+.m-form-item{
+	padding:27.17rpx 36.23rpx;
+}
