@@ -33,7 +33,7 @@
 		margin: 0 auto;
 		align-items: center;
 		box-sizing: border-box;
-		padding: 27.17rpx 54.34rpx;
+		padding: 27.17rpx 0rpx;
 		.quotedPrice {
 			display: block;
 			display: flex;

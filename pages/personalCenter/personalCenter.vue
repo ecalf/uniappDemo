@@ -50,7 +50,7 @@
 				<view class='account-title '>
 					<p>账户管理</p>
 				</view>
-				<view class="account-content" v-for="(item,index) in accountList" :key="index">
+				<view @click='gotoAccount(index)' class="account-content" v-for="(item,index) in accountList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -60,9 +60,9 @@
 			<!-- 功能服务 -->
 			<view class="service">
 				<view class='service-title '>
-					<p>账户管理</p>
+					<p>功能服务</p>
 				</view>
-				<view class="service-content" v-for="(item,index) in serviceList" :key="index">
+				<view  class="service-content" v-for="(item,index) in serviceList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -162,19 +162,19 @@
 				// console.log(index)
 				if (index == 1) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/priceControl/priceControl"
+						url: "/pages/personalCenter/purchaseCenter/priceControl"
 					})
 
 				};
 				if (index == 2) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/priceControl/priceControl"
+						url: "/pages/personalCenter/purchaseCenter/purchaseOrders"
 					})
 
 				};
 				if (index == 3) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/SupplierPool/SupplierPool"
+						url: "/pages/personalCenter/purchaseCenter/SupplierPool"
 					})
 				
 				};
@@ -183,15 +183,27 @@
 			gotoSale(index) {
 				if (index == 1) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/saleManagement/saleManagement"
+						url: "/pages/personalCenter/saleCenter/saleManagement"
 					})
 				};
 				if (index == 5) {
 					uni.navigateTo({
-						url: "/pages/personalCenter/myQuote/myQuote"
+						url: "/pages/personalCenter/saleCenter/myQuote"
 					})
 				};
-			}
+			},
+			gotoAccount(index){
+				if (index == 0) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/accountCenter/myAccount"
+					})
+				};
+				if (index == 2) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/accountCenter/CertificateAuthority"
+					})
+				};
+			},
 		}
 	}
 </script>

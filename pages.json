@@ -33,25 +33,25 @@
 		}
 	},
 	{
-		"path": "pages/personalCenter/priceControl/priceControl",
+		"path": "pages/personalCenter/purchaseCenter/priceControl",
 		"style": {
 			"navigationBarTitleText": "报价管理"
 		}
 	},
 	{
-		"path": "pages/personalCenter/purchaseOrders/purchaseOrders",
+		"path": "pages/personalCenter/purchaseCenter/purchaseOrders",
 		"style": {
 			"navigationBarTitleText": "采购订单"
 		}
 	},
 	{
-		"path": "pages/personalCenter/saleManagement/saleManagement",
+		"path": "pages/personalCenter/saleCenter/saleManagement",
 		"style": {
 			"navigationBarTitleText": "销售管理"
 		}
 	},
 	{
-		"path": "pages/personalCenter/myQuote/myQuote",
+		"path": "pages/personalCenter/saleCenter/myQuote",
 		"style": {
 			"navigationBarTitleText": "我的报价"
 		}
@@ -80,14 +80,28 @@
 		}
 	},
 	{
-		"path": "pages/personalCenter/SupplierPool/SupplierPool",
+		"path": "pages/personalCenter/purchaseCenter/SupplierPool",
 		"style": {
 
 			"navigationBarTitleText": "供应商库"
 		}
 	}
 
-],
+    ,{
+            "path" : "pages/personalCenter/accountCenter/myAccount",
+            "style" : {
+				"navigationBarTitleText": "我的账户"
+			}
+        },
+		{
+		        "path" : "pages/personalCenter/accountCenter/CertificateAuthority",
+		        "style" : {
+					"navigationBarTitleText": "认证中心"
+				}
+		    }
+
+    
+    ],
 "globalStyle": {
 	"navigationBarTextStyle": "black",
 	//"navigationBarTitleText": "米修在线",

@@ -25,7 +25,52 @@ $bc:#4E5A65;
 	    -webkit-line-clamp: $line;
 	}		
 				
-/*发布页面*/
+
+	// placeholder 
+	@mixin ph($color: #e2e2e2) {
+
+		// 使用webkit内核的浏览器
+		&::-webkit-input-placeholder {
+			color: $color;
+		}
+
+		// Firefox版本4-18
+		&:-moz-placeholder {
+			color: $color;
+		}
+
+		// Firefox版本19+
+		&::-moz-placeholder {
+			color: $color;
+		}
+
+		// IE浏览器
+		&:-ms-input-placeholder {
+			color: $color;
+		}
+	}
+
+
+	.uni-form-item {
+		background: #fff;
+		margin-bottom: 1px;
+		display: flex;
+		padding: 36.23rpx 45.28rpx;
+		font-size: 25.36rpx;
+		align-items: center;
+
+		.title {
+			color: #4e5a65;
+		}
+
+		
+	}
+	.uni-input {
+		font-size: 25.36rpx;
+		flex: 1;
+		text-align: right;
+		@include ph();
+	}
 
 	
 	

@@ -16,7 +16,7 @@
 <style>
 	/*每个页面公共css */
 	@import "/static/font/iconfont.css";
-
+	@import "@/scss/common.scss";
 	page {
 		background-color: #F8F8F8;
 		font-size: 21.73rpx;
