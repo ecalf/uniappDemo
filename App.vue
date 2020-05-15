@@ -16,11 +16,8 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import "/static/font/iconfont.css";
-	@import "@/scss/common.scss";
-<<<<<<< HEAD
-=======
 	@import "./cool/ui/static/css/index.scss";
->>>>>>> f7f0e3c76dda2ba552801d39e5c9d0dd8302a486
+	@import "/scss/common.scss";
 	page {
 		background-color: #F8F8F8;
 		font-size: 21.73rpx;

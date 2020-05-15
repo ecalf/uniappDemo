@@ -26,127 +26,9 @@
 			}
 		},
 		{
-<<<<<<< HEAD
-		"path": "pages/distribution/distribution",
-		"style": {
-			"navigationBarTitleText": "分类"
-		}
-	},
-	{
-		"path": "pages/personalCenter/purchaseCenter/priceControl",
-		"style": {
-			"navigationBarTitleText": "报价管理"
-		}
-	},
-	{
-		"path": "pages/personalCenter/purchaseCenter/purchaseOrders",
-		"style": {
-			"navigationBarTitleText": "采购订单"
-		}
-	},
-	{
-		"path": "pages/personalCenter/saleCenter/saleManagement",
-		"style": {
-			"navigationBarTitleText": "销售管理"
-		}
-	},
-	{
-		"path": "pages/personalCenter/saleCenter/myQuote",
-		"style": {
-			"navigationBarTitleText": "我的报价"
-		}
-	},
-	{
-		"path": "pages/product/productList",
-		"style": {}
-	},
-	{
-		"path": "pages/product/productDetails",
-		"style": {
-			"navigationBarTitleText": "商品详情",
-			"h5": {
-				"titleNView": false
-			},
-			"app-plus": {
-				"titleNView": false,
-				"bounce": "none"
-			}
-		}
-	},
-	{
-		"path": "pages/publish/publishBuy/publishBuy",
-		"style": {
-			"navigationBarTitleText": "发布页面"
-		}
-	},
-	{
-		"path": "pages/personalCenter/purchaseCenter/SupplierPool",
-		"style": {
-
-			"navigationBarTitleText": "供应商库"
-		}
-	}
-
-    ,{
-            "path" : "pages/personalCenter/accountCenter/myAccount",
-            "style" : {
-				"navigationBarTitleText": "我的账户"
-			}
-        },
-		{
-		        "path" : "pages/personalCenter/accountCenter/CertificateAuthority",
-		        "style" : {
-					"navigationBarTitleText": "认证中心"
-				}
-		    }
-
-    
-    ],
-"globalStyle": {
-	"navigationBarTextStyle": "black",
-	//"navigationBarTitleText": "米修在线",
-	"navigationBarBackgroundColor": "#F8F8F8",
-	"backgroundColor": "#F8F8F8"
-},
-"tabBar": {
-	"color": "#333333",
-	"selectedColor": "#3AB695",
-	"backgroundColor": "#F8F8F8",
-	"custom": true,
-	"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/images/home.png",
-			"selectedIconPath": "static/images/home_a.png",
-			"text": "首页"
-=======
 			"path": "pages/distribution/distribution",
 			"style": {
 				"navigationBarTitleText": "分类"
-			}
-		},
-		{
-			"path": "pages/personalCenter/priceControl/priceControl",
-			"style": {
-				"navigationBarTitleText": "报价管理"
-			}
-		},
-		{
-			"path": "pages/personalCenter/purchaseOrders/purchaseOrders",
-			"style": {
-				"navigationBarTitleText": "采购订单"
-			}
->>>>>>> f7f0e3c76dda2ba552801d39e5c9d0dd8302a486
-		},
-		{
-			"path": "pages/personalCenter/saleManagement/saleManagement",
-			"style": {
-				"navigationBarTitleText": "销售管理"
-			}
-		},
-		{
-			"path": "pages/personalCenter/myQuote/myQuote",
-			"style": {
-				"navigationBarTitleText": "我的报价"
 			}
 		},
 		{
@@ -167,23 +49,85 @@
 			}
 		},
 		{
-			"path": "pages/publish/publishBuy/publishBuy",
+			"path": "pages/publish/publishBuy/publishOne",
 			"style": {
 				"navigationBarTitleText": "发布页面"
 			}
 		},
 		{
-			"path": "pages/personalCenter/SupplierPool/SupplierPool",
+			"path": "pages/publish/publishBuy/publishTwo",
 			"style": {
-
-				"navigationBarTitleText": "供应商库"
+				"navigationBarTitleText": "发布页面"
 			}
-		}
-
-		, {
+		},
+		{
 			"path": "components/uploadFile/uploadFile",
 			"style": {}
-		}
+		},
+		{
+		   "path": "pages/personalCenter/purchaseCenter/priceControl",
+		   "style": {
+		    "navigationBarTitleText": "报价管理"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/purchaseCenter/purchaseOrders",
+		   "style": {
+		    "navigationBarTitleText": "采购订单"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/saleCenter/saleManagement",
+		   "style": {
+		    "navigationBarTitleText": "销售管理"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/saleCenter/myQuote",
+		   "style": {
+		    "navigationBarTitleText": "我的报价"
+		   }
+		  },
+		
+		  {
+		   "path": "pages/personalCenter/purchaseCenter/SupplierPool",
+		   "style": {
+		
+		    "navigationBarTitleText": "供应商库"
+		   }
+		  }
+		
+		  , {
+		   "path": "pages/personalCenter/accountCenter/myAccount",
+		   "style": {
+		    "navigationBarTitleText": "我的账户"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/accountCenter/CertificateAuthority",
+		   "style": {
+		    "navigationBarTitleText": "认证中心"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/accountCenter/PersonalAuthentication",
+		   "style": {
+		    "navigationBarTitleText": "个人认证"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/accountCenter/CorporateCertification",
+		   "style": {
+		    "navigationBarTitleText": "企业认证"
+		   }
+		  },
+		  {
+		   "path": "pages/personalCenter/saleCenter/homeManager",
+		   "style": {
+		    "navigationBarTitleText": "主页管理"
+		   }
+		  }
+		
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -8,7 +8,7 @@
 				</view>
 			</view>
 		</view>
-		<page-footer :current="2"></page-footer>
+		<page-footer :currentPage="currentPage"></page-footer>
 	</view>
 </template>
 
@@ -16,6 +16,7 @@
 	export default {
 		data() {
 			return {
+				currentPage:'/pages/publish/publish',
 			lists:[
 				{img:"/static/images/purchase-icon.png",title:"发布采购"},
 				{img:"/static/images/sales-icon.png",title:"发布销售"},
@@ -28,7 +29,7 @@
 			handlePublish(item){
 				// 页面跳转 商品详情
 				uni.navigateTo({
-					url:"/pages/publish/publishBuy/publishBuy?"+item.title
+					url:"/pages/publish/publishBuy/publishOne?"+item.title
 				})
 			}
 		}

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<page-footer :current="3"></page-footer>
+		<page-footer :currentPage="currentPage"></page-footer>
 	</view>
 </template>
 
@@ -8,7 +8,7 @@
 	export default {
 		data() {
 			return {
-				
+				currentPage:'/pages/distribution/distribution',
 			}
 		}
 		
