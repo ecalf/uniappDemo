@@ -166,13 +166,13 @@
 					})
 
 				};
-				if (index == 2) {
+				 if (index == 2) {
 					uni.navigateTo({
 						url: "/pages/personalCenter/purchaseCenter/purchaseOrders"
 					})
 
 				};
-				if (index == 3) {
+				 if (index == 3) {
 					uni.navigateTo({
 						url: "/pages/personalCenter/purchaseCenter/SupplierPool"
 					})
@@ -186,11 +186,17 @@
 						url: "/pages/personalCenter/saleCenter/saleManagement"
 					})
 				};
-				if (index == 5) {
+				if (index == 2) {
+					uni.navigateTo({
+						url: "/pages/personalCenter/saleCenter/homeManager"
+					})
+				};
+				 if (index == 5) {
 					uni.navigateTo({
 						url: "/pages/personalCenter/saleCenter/myQuote"
 					})
 				};
+				
 			},
 			gotoAccount(index){
 				if (index == 0) {
@@ -198,7 +204,7 @@
 						url: "/pages/personalCenter/accountCenter/myAccount"
 					})
 				};
-				if (index == 2) {
+				 if (index == 2) {
 					uni.navigateTo({
 						url: "/pages/personalCenter/accountCenter/CertificateAuthority"
 					})

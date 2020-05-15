@@ -23,7 +23,6 @@ $bc:#4E5A65;
 	    overflow: hidden;
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: $line;
-<<<<<<< HEAD
 	}		
 				
 
@@ -72,8 +71,7 @@ $bc:#4E5A65;
 		text-align: right;
 		@include ph();
 	}
-=======
-	}	
+	
 		
  // placeholder 
  @mixin ph($color: #e2e2e2) {
@@ -98,7 +96,6 @@ $bc:#4E5A65;
          color: $color;
      }
  }
->>>>>>> f7f0e3c76dda2ba552801d39e5c9d0dd8302a486
 
 .uni-form-item{
 	background:#fff;

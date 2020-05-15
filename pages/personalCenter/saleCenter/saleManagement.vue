@@ -37,8 +37,8 @@
 		height:65.21rpx;
 		line-height:65.21rpx;
 		background-color: rgba(142, 142, 147, 0.12);
-		border-radius: 199.27rpx;
-		margin: 0 auto;
+		border-radius: 18.11rpx;
+		margin: 18.11rpx auto 36.23rpx;
 		position:relative;
 		input{
 			display:block;

@@ -11,7 +11,7 @@
 				<view class="goodslist-price">
 					<text>￥</text>
 					{{item.price}}
-				</view>	
+				</view>
 				<view class="goodslist-number">
 					{{item.number}}
 					<text>个</text>
@@ -20,7 +20,7 @@
 			<view class="goods-operate">
 				<view class="goodsDelete"><text class="deleteText">删除</text></view>
 				<view class="goodsDelete"><text class="updataText">修改</text></view>
-				<view class="goodsDelete"><text class="pullText">下架</text></view>
+				<view class="goodsDelete"><text class="pullText">上架</text></view>
 			</view>
 		</view>
 	</view>
@@ -28,12 +28,12 @@
 
 <script>
 	export default {
-	props:{
-		goodsPrice:Array
-	},
+		props: {
+			goodsPrice: Array
+		},
 		data() {
 			return {
-				
+
 			};
 		}
 	}
@@ -47,8 +47,10 @@
 		box-sizing: border-box;
 		margin: 0 auto;
 		padding: 36.23rpx;
+
 		.goodslist-header {
 			margin-bottom: 18.11rpx;
+
 			.goodslist-icon {
 				width: 40rpx;
 				height: 36.23rpx;
@@ -113,14 +115,15 @@
 		.goods-operate {
 			display: flex;
 			justify-content: space-around;
-
+			align-items: center;
 			.goodsDelete {
 				width: 181.15rpx;
 				height: 45.28rpx;
 				border-radius: 23.55rpx;
 				border: solid 1.81rpx #8e8e93;
-				text-align: center;
-				line-height: 34.42rpx;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
 
 				.deleteText {
 					font-size: 25.36rpx;
