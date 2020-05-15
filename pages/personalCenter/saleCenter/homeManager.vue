@@ -1,13 +1,13 @@
 <template>
 	<view>
 		<view class="uni-form-item uni-column">
-			<view class="title">姓名</view>
-			<input class="uni-input" text name="nickname" placeholder="张小姐" />
+			<view class="title">企业名称</view>
+			<input class="uni-input" text name="nickname" placeholder="请输入公司名称" />
 		</view>
 		<textarea value="" placeholder="请输入公司介绍" maxlength="200"/>
 		<view class="uni-form-item uni-column">
 			<view class="title">邮箱地址</view>
-			<input class="uni-input" text name="nickname" placeholder="11059845575@qq.com" />
+			<input class="uni-input" text name="nickname" value="11059845575@qq.com" />
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">联系人</view>
@@ -27,7 +27,7 @@
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">QQ</view>
-			<input class="uni-input" number name="nickname" value="请输入QQ" />
+			<input class="uni-input" number name="nickname" placeholder="请输入QQ" />
 		</view>
 	</view>
 </template>

@@ -32,79 +32,29 @@
 			}
 		},
 		{
-<<<<<<< HEAD
-			"path": "pages/personalCenter/purchaseCenter/priceControl",
-			"style": {
-				"navigationBarTitleText": "报价管理"
-			}
-		},
-		{
-			"path": "pages/personalCenter/purchaseCenter/purchaseOrders",
-			"style": {
-				"navigationBarTitleText": "采购订单"
-			}
-		},
-		{
-			"path": "pages/personalCenter/saleCenter/saleManagement",
-			"style": {
-				"navigationBarTitleText": "销售管理"
-			}
-		},
-		{
-			"path": "pages/personalCenter/saleCenter/myQuote",
-			"style": {
-				"navigationBarTitleText": "我的报价"
-			}
-		},
-
-		{
-			"path": "pages/personalCenter/purchaseCenter/SupplierPool",
-			"style": {
-
-				"navigationBarTitleText": "供应商库"
-			}
-		}
-
-		, {
-			"path": "pages/personalCenter/accountCenter/myAccount",
-			"style": {
-				"navigationBarTitleText": "我的账户"
-			}
-=======
 			"path": "pages/product/productList",
 			"style": {}
->>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
 		},
 		{
-			"path": "pages/personalCenter/accountCenter/CertificateAuthority",
+			"path": "pages/product/productDetails",
 			"style": {
-				"navigationBarTitleText": "认证中心"
+				"navigationBarTitleText": "商品详情",
+				"h5": {
+					"titleNView": false
+				},
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
 			}
 		},
 		{
-<<<<<<< HEAD
-			"path": "pages/personalCenter/accountCenter/PersonalAuthentication",
-=======
 			"path": "pages/publish/publishBuy/publishOne",
->>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
 			"style": {
-				"navigationBarTitleText": "个人认证"
+				"navigationBarTitleText": "发布页面"
 			}
 		},
 		{
-<<<<<<< HEAD
-			"path": "pages/personalCenter/accountCenter/CorporateCertification",
-			"style": {
-				"navigationBarTitleText": "企业认证"
-			}
-		},
-		{
-			"path": "pages/personalCenter/saleCenter/homeManager",
-			"style": {
-				"navigationBarTitleText": "主页管理"
-			}
-		}
-=======
 			"path": "pages/publish/publishBuy/publishTwo",
 			"style": {
 				"navigationBarTitleText": "发布页面"
@@ -178,11 +128,15 @@
 		   }
 		  }
 		
->>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
-	],
+	    ,{
+            "path" : "pages/changePhone/changePhone",
+            "style" : {
+				"navigationBarTitleText": "更改手机号"
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		//"navigationBarTitleText": "米修在线",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
@@ -222,5 +176,12 @@
 				"text": "我的"
 			}
 		]
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
+		}
 	}
+
 }
