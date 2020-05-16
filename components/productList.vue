@@ -1,7 +1,7 @@
 <template>
 	<view class="goods-list commonweb">
 		<view class="product-list">
-			<view class="product" v-for="goods in goodsList" :key="goods.id" @tap="handleGoods(goods)">
+			<view class="product" v-for="(goods,index) in goodsList" :key="index" @tap="handleGoods(goods)">
 				<view class="image" v-if="goods.img">
 					<image mode="widthFix" :src="goods.img"></image>
 				</view>

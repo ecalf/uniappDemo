@@ -77,7 +77,7 @@
 		width: 100%;
 		bottom: 0;
 		z-index: 99;
-		padding: 16.3rpx 72.46rpx;
+		padding: 16.3rpx 0;
 
 		button {
 

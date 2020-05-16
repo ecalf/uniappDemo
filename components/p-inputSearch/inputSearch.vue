@@ -1,23 +1,4 @@
 <template>
-	<!--
-	<inputSearch :dataSource="dataSource" @select="handleChange" placeholder="请输入商品名称" />
-	//数据源
-	dataSource: [{
-			id: 1,
-			name: '耐克1'
-		},
-		{
-			id: 2,
-			name: '耐克2'
-		}
-	],
-	 
-	 //用户点击获取的数据
-	 handleChange(data) {
-	 	console.log(data)
-	 }
-	 
-	 -->
 	<view class="input-group">
 		<input :placeholder="placeholder" @input="search" @blur="hideList" v-model="name" />
 		<view class="ul">
@@ -51,32 +32,30 @@
 		methods: {
 			search(e) {
 				let val = e.detail.value;
-				let {
-					dataSource
-				} = this;
+				let {dataSource} = this;
 				let arr = [];
 				for (let i = 0; i < dataSource.length; i++) {
 					if (dataSource[i].name.indexOf(val) !== -1) {
 						arr.push(dataSource[i]);
 					}
 				}
-				// console.log(arr)
+				
 				if (!val) {
 					this.list = [];
 				} else {
 					this.list = arr;
 				}
-
 			},
 			select(item) {
+				//console.log(item.name);
 				this.backName = item.name;
 				this.list = [];
-				this.$emit('select', item);
+				this.$emit('select', item.name);	
 			},
 			hideList() {
-				this.list = [];
 				this.t = setTimeout(() => {
 					this.name = this.backName;
+					
 				}, 0);
 			}
 		}
@@ -86,27 +65,24 @@
 
 <style lang="scss">
 	.input-group {
-		position: relative;
-
-
 		input {
-			border: 1upx solid gray;
-			height: 90upx;
-			padding-left: 10upx;
-			font-size: 30upx;
-			box-sizing: border-box;
+			font-size:25.36rpx;
 		}
 
 		.ul {
 			position: absolute;
-			left: 0;
-			top: 100%;
-			width: 100%;
-			background: #eaeaea;
-
+			left: 3%;
+			top:108.69rpx;
+			width:94%;
+			background:#ffffff;
+			z-index:99;
+			box-shadow:0 5px 5px rgba(0,0,0,.2);
 			.li {
-				border-bottom: 1upx solid gray;
-				line-height: 60upx;
+				height:72.46rpx;
+				line-height:72.46rpx;
+				text-align:left;
+				padding:0 18.11rpx;
+				border-bottom:1px solid #f2f2f2;
 			}
 		}
 	}

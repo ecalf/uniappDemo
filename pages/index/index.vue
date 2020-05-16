@@ -3,7 +3,7 @@
 		<view class="banner-swiper">
 			<view class="swiper-box">
 				<swiper circular="true" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-					<swiper-item v-for="swiper in swiperList" :key="swiper.id">
+					<swiper-item v-for="(swiper,index) in swiperList" :key="index">
 						<image :src="swiper.img"></image>
 					</swiper-item>
 				</swiper>
@@ -37,7 +37,7 @@
 		</view>
 		<!--列表推荐-->
 		<view class="recommend-nav commonweb">
-			<view class="tab-item" v-for="(target,index) in filterByList" @tap="handleSelect(index)" :class="{'on':target.selected}">
+			<view class="tab-item" v-for="(target,index) in filterByList" :key="index" @tap="handleSelect(index)" :class="{'on':target.selected}">
 				<view class="cntitle">{{target.cntitle}}</view>
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
@@ -81,12 +81,14 @@
 				isShow: false,
 				currentPage:'/pages/index/index',
 				swiperList: [{
+					id:1,
+						img: "/static/images/banner.jpg"
+					},
+					{id:2,
 						img: "/static/images/banner.jpg"
 					},
 					{
-						img: "/static/images/banner.jpg"
-					},
-					{
+						id:3,
 						img: "/static/images/banner.jpg"
 					}
 				], //轮播图片

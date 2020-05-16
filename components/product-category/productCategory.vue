@@ -4,7 +4,7 @@
 			<view class="uni-list-item" v-for="(category,index) in categoryList" :key="category.id" :class="index==showCategoryIndex?'on':''">
 				<view class="uni-list-item__content" :style="{backgroundColor:backgroundColor}" @tap="handleCategory(index)">{{category.cn_name}}</view>
 				<view class="uni-list-item__subcon"  v-if="index==showCategoryIndex">
-					<text v-for="(item,index) in category.child">{{item.cn_name}}</text>
+					<text v-for="(item,index) in category.child" :key="index">{{item.cn_name}}</text>
 				</view>
 				<view class="uni-list-item__extra"></view>
 			</view>

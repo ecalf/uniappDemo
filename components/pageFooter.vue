@@ -68,8 +68,7 @@
 		methods: {
 			handleFooter(index, item) {
 				this.currentTabIndex = index,
-					this.$emit('click', index);
-				console.log(index);				
+					this.$emit('click', index);		
 				uni.switchTab({ //页面跳转
 					url: item.url
 				});

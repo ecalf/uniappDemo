@@ -23,65 +23,11 @@ $bc:#4E5A65;
 	    overflow: hidden;
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: $line;
-<<<<<<< HEAD
-	}		
-				
-
-	// placeholder 
-	@mixin ph($color: #e2e2e2) {
-
-		// 使用webkit内核的浏览器
-		&::-webkit-input-placeholder {
-			color: $color;
-		}
-
-		// Firefox版本4-18
-		&:-moz-placeholder {
-			color: $color;
-		}
-
-		// Firefox版本19+
-		&::-moz-placeholder {
-			color: $color;
-		}
-
-		// IE浏览器
-		&:-ms-input-placeholder {
-			color: $color;
-		}
-	}
-
-
-	.uni-form-item {
-		background: #fff;
-		margin-bottom: 1px;
-		display: flex;
-		padding: 36.23rpx 45.28rpx;
-		font-size: 25.36rpx;
-		align-items: center;
-
-		.title {
-			color: #4e5a65;
-		}
-
-		
-	}
-	.uni-input {
-		font-size: 25.36rpx;
-		flex: 1;
-		text-align: right;
-		@include ph();
-	}
-	
-		
- // placeholder 
-=======
 
 	}		
 				
 
  /*placeholder */
->>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
  @mixin ph($color: #e2e2e2) {
  
      // 使用webkit内核的浏览器
@@ -104,10 +50,6 @@ $bc:#4E5A65;
          color: $color;
      }
  }
-<<<<<<< HEAD
-
-=======
->>>>>>> a467162ed25473f908ec179d4e1c85c108fd32be
 .uni-form-item{
 	background:#fff;
 	margin-bottom:1px;
@@ -115,6 +57,7 @@ $bc:#4E5A65;
 	padding:36.23rpx 45.28rpx;
 	font-size:25.36rpx;
 	align-items: center;
+	position: relative;
 	.title{
 		color: #4e5a65;
 	}	
@@ -173,3 +116,66 @@ $bc:#4E5A65;
 .m-form-item{
 	padding:27.17rpx 36.23rpx;
 }
+
+	.brand-bg {
+		margin-bottom: 0 !important;
+		.cl-form-item__container {
+			background-color: #f6f6f6;
+			border-radius: 3px;
+			border: solid 1px #e2e2e2;
+			height: 72.46rpx;
+			line-height: 72.46rpx;
+			padding: 0 18.11rpx !important;
+		}
+	}
+	
+	.select-way{
+		padding:36.23rpx 0;
+		display: flex;
+		justify-content: center;
+		label{
+			margin:0 9.05rpx;
+		}
+	}
+	
+	.upload-item{
+		justify-content:space-between;
+		.cl-card{
+			display: flex;
+			text-align: center;
+			
+		}
+		.cl-card__container{
+			padding:0 !important;
+			
+		}
+		.cl-upload-list .cl-upload{margin-right:0;}
+	}
+	.mb10{
+		margin-bottom:18.11rpx;
+	}
+	.uni-input-placeholder{font-size:25.36rpx;}
+	/*公共按钮*/
+	.common-btn {
+		position: fixed;
+		left: 0;
+		right: 0;
+		background: #fff;
+		width: 100%;
+		bottom: 0;
+		z-index: 99;
+		padding: 16.3rpx 0;
+	
+		button {
+			width: 576.08rpx;
+			height: 72.46rpx;
+			line-height: 72.46rpx;
+			background: #44a78d;
+			border-radius: 181.15rpx;
+			text-align: center;
+			font-size: 32.6rpx;
+			color: #fff;
+			cursor: pointer;
+	
+		}
+	}
