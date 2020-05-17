@@ -54,6 +54,7 @@
 	        "proxy" : {
 	            "/api" : {
 	                "target" : "http://192.168.1.14:8005/api.php/",  // 需要跨域的域名
+					//"target" : "http://api.scm.yiminshijie.com/api.php",
 	                "changeOrigin" : true,
 	                "secure" : false,
 	                "pathRewrite" : {

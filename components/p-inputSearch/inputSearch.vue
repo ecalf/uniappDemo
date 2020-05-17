@@ -67,6 +67,8 @@
 	.input-group {
 		input {
 			font-size:25.36rpx;
+			height:86.95rpx;
+			line-height: 86.95rpx;
 		}
 
 		.ul {

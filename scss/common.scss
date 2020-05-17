@@ -1,17 +1,6 @@
 
 $ac:#44A78D;
 $bc:#4E5A65;
-
-.m-flex{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	.item{
-		display: flex;
-		flex-wrap: wrap;
-	}
-}
-
 	// -- 推荐等高列表使用，依靠高度实现布局的
 	@mixin ml($lh, $line) {
 	    // display:block;  // 注意：行内元素时，-webkit-box, height不生效
@@ -23,33 +12,41 @@ $bc:#4E5A65;
 	    overflow: hidden;
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: $line;
-
 	}		
-				
+	// placeholder 
+	@mixin ph($color: #e2e2e2) {
 
- /*placeholder */
- @mixin ph($color: #e2e2e2) {
- 
-     // 使用webkit内核的浏览器
-     &::-webkit-input-placeholder {
-         color: $color;
-     }
- 
-     // Firefox版本4-18
-     &:-moz-placeholder {
-         color: $color;
-     }
- 
-     // Firefox版本19+
-     &::-moz-placeholder {
-         color: $color;
-     }
- 
-     // IE浏览器
-     &:-ms-input-placeholder {
-         color: $color;
-     }
- }
+		// 使用webkit内核的浏览器
+		&::-webkit-input-placeholder {
+			color: $color;
+		}
+
+		// Firefox版本4-18
+		&:-moz-placeholder {
+			color: $color;
+		}
+
+		// Firefox版本19+
+		&::-moz-placeholder {
+			color: $color;
+		}
+
+		// IE浏览器
+		&:-ms-input-placeholder {
+			color: $color;
+		}
+	}	
+	
+	.m-flex{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		.item{
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+	
 .uni-form-item{
 	background:#fff;
 	margin-bottom:1px;
@@ -103,21 +100,7 @@ $bc:#4E5A65;
 .cl-input{border:0;padding:0;}
 .cl-form-item__container{padding-left:0 !important;}
 }
-
-.size-text{
-	text{
-		color:#ff2323;
-	}
-}
-.cl-upload-list .cl-upload{
-	border-style:solid;
-	border-radius: 11px;
-}
-.m-form-item{
-	padding:27.17rpx 36.23rpx;
-}
-
-	.brand-bg {
+.brand-bg {
 		margin-bottom: 0 !important;
 		.cl-form-item__container {
 			background-color: #f6f6f6;
@@ -128,33 +111,44 @@ $bc:#4E5A65;
 			padding: 0 18.11rpx !important;
 		}
 	}
+
+.size-text{
+	background:#fff;
+	padding:0 0 36.23rpx 45.28rpx;
+	position:relative;
+	top:-36.23rpx;
+	text{
+		color:#ff2323;
+	}
+}
+
+.m-form-item{
+	padding:27.17rpx 36.23rpx;
+}
+.uoload-wrap{
+	justify-content:space-between;
+.u-list-item{
 	
-	.select-way{
-		padding:36.23rpx 0;
+}
+}
+.upload-item{
+	text-align: center;
+}
+.pb60 {
+		padding-bottom: 108.69rpx;
+	}
+.uni-list-cell {
+		margin-left:18.11rpx;
+	}
+	.checkbox-item-box{
+		padding:12px 0 81.52rpx;
 		display: flex;
-		justify-content: center;
-		label{
-			margin:0 9.05rpx;
-		}
+		justify-content:space-around;
+		
 	}
 	
-	.upload-item{
-		justify-content:space-between;
-		.cl-card{
-			display: flex;
-			text-align: center;
-			
-		}
-		.cl-card__container{
-			padding:0 !important;
-			
-		}
-		.cl-upload-list .cl-upload{margin-right:0;}
-	}
-	.mb10{
-		margin-bottom:18.11rpx;
-	}
-	.uni-input-placeholder{font-size:25.36rpx;}
+	
+
 	/*公共按钮*/
 	.common-btn {
 		position: fixed;
@@ -179,3 +173,5 @@ $bc:#4E5A65;
 	
 		}
 	}
+	
+	

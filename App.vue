@@ -18,6 +18,7 @@
 	@import "/static/font/iconfont.css";
 	@import "./cool/ui/static/css/index.scss";
 	@import "@/scss/common.scss";
+
 	page {
 		background-color: #F8F8F8;
 		font-size: 21.73rpx;

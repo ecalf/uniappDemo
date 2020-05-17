@@ -7,6 +7,7 @@ import store from './store'
 import pageFooter from './components/pageFooter'
 import status from './components/status.vue'
 
+
 Vue.config.productionTip = false
 Vue.prototype.request = http
 
