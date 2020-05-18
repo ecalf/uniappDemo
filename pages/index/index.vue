@@ -55,9 +55,7 @@
 				</view>
 			</view>
 		</uni-popup>
-
 		<page-footer :currentPage="currentPage"></page-footer>
-
 	</view>
 </template>
 

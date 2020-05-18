@@ -2,9 +2,10 @@
 	<view class="pb60">
 		<search-bar placeholder="类目搜索可直接输入产品名称" @confirm="search" class="uni-search-box"></search-bar>
 		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy"></product-category>
-		<view class="next-step">
-			<view class="next-btn" @tap="stepBtn()"><button>下一步</button></view>
+		<view class="common-btn">
+			<button @tap="stepBtn()">下一步</button>
 		</view>
+		
 	</view>
 </template>
 

@@ -12,9 +12,14 @@ const interfaces = {
 	//获取产品类目
 	getCategroyData: domain + "/v1/category/get-product-cate-list",
 	
+   //注册
+   getRegisterData:domain+"/v1/user/register",
+   
+   //发送验证码
+	getCodeData:domain+"/v1/msg/send",
+	
 	//登录
 	getLoignData: domain + "/v1/user/login",
-	
 	//个人认证
 	getPersonData: domain + "/v1/user/identification",
 	

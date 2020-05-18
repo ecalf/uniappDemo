@@ -70,13 +70,25 @@
 				</view>
 			</view>
 		</view>
+		
+		<!--注册入口-->
+		<uni-popup :defaultPopup="true" :defaultTrans="true">
+			<register-enter></register-enter>
+		</uni-popup>
+		
 		<page-footer :currentPage="currentPage"></page-footer>
 
 	</view>
 </template>
 
 <script>
+	import registerEnter from '@/pages/user/components/registerEnter.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
+		components: {
+			uniPopup,
+			registerEnter
+		},
 		data() {
 			return {
 				currentPage:"/pages/personalCenter/personalCenter",
