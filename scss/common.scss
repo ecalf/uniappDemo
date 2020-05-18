@@ -63,6 +63,7 @@ $bc:#4E5A65;
 		font-size:25.36rpx;
 		flex: 1;
 		text-align:right;
+		min-height:41.66rpx;
 		
 	}
 .colorred{
@@ -146,6 +147,9 @@ $bc:#4E5A65;
 		justify-content:space-around;
 		
 	}
+	
+	
+
 /*公共按钮*/
 .common-btn {
 	position: fixed;
@@ -171,4 +175,33 @@ $bc:#4E5A65;
 	}
 }
 
+/*个人注册*/
+uni-input{
+	font-size:25.36rpx;
+}
+.m-input-fullwidth{
+	display: block;
+	flex:1;
+	height:54.34rpx;
+	line-height:54.34rpx;
+	padding:0 18.11rpx;
+}
+.send-code{
+	padding:0 18.11rpx;
+		height:54.34rpx;
+		background-color: #e2e2e2;
+		border-radius:10.86rpx;
+		color: #4e5a65;
+		font-size:25.36rpx;
+		text-align: center;
+		line-height:54.34rpx;
+}	
 	
+	.read-checkbox{padding:54.34rpx 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		navigator{
+			color:$ac;
+		}
+	}

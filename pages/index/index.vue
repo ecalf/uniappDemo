@@ -56,25 +56,6 @@
 			</view>
 		</uni-popup>
 		<page-footer :currentPage="currentPage"></page-footer>
-		
-		<!--注册入口-->
-		<uni-popup :defaultPopup="true" :defaultTrans="true">
-			<view class="register-wrap">
-				<view class="register-item">
-					<image src="@/static/images/personal.png" mode=""></image>
-					<text>个人注册</text>
-				</view>
-				<view class="register-item">
-					<image src="@/static/images/personal.png" mode=""></image>
-					<text>个人注册</text>
-				</view>
-				<view class="register-item">
-					<image src="@/static/images/personal.png" mode=""></image>
-					<text>个人注册</text>
-				</view>
-			</view>
-		</uni-popup>
-
 	</view>
 </template>
 

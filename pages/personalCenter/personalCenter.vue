@@ -25,7 +25,7 @@
 				<view class='procurement-title'>
 					<p>我要采购</p>
 				</view>
-				<view @click="gotopriceControl(index)" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
+				<view @click="gotopriceControl(item)" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -38,7 +38,7 @@
 				<view class='sale-title '>
 					<p>我要销售</p>
 				</view>
-				<view @click="gotoSale(index)" class="sale-content" v-for="(item,index) in saleList" :key="index">
+				<view @click="gotoSale(item)" class="sale-content" v-for="(item,index) in saleList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -50,7 +50,7 @@
 				<view class='account-title '>
 					<p>账户管理</p>
 				</view>
-				<view @click='gotoAccount(index)' class="account-content" v-for="(item,index) in accountList" :key="index">
+				<view @click='gotoAccount(item)' class="account-content" v-for="(item,index) in accountList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -70,13 +70,25 @@
 				</view>
 			</view>
 		</view>
+		
+		<!--注册入口-->
+		<uni-popup :defaultPopup="true" :defaultTrans="true">
+			<register-enter></register-enter>
+		</uni-popup>
+		
 		<page-footer :currentPage="currentPage"></page-footer>
 
 	</view>
 </template>
 
 <script>
+	import registerEnter from '@/pages/user/components/registerEnter.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
+		components: {
+			uniPopup,
+			registerEnter
+		},
 		data() {
 			return {
 				currentPage:"/pages/personalCenter/personalCenter",
@@ -86,15 +98,18 @@
 					},
 					{
 						text: "报价管理",
-						img: "/static/images/lgicon2.png"
+						img: "/static/images/lgicon2.png",
+						url: "/pages/personalCenter/purchaseCenter/priceControl"
 					},
 					{
 						text: "采购订单",
-						img: "/static/images/lgicon3.png"
+						img: "/static/images/lgicon3.png",
+						url: "/pages/personalCenter/purchaseCenter/purchaseOrders"
 					},
 					{
 						text: "供应商库",
-						img: "/static/images/lgicon4.png"
+						img: "/static/images/lgicon4.png",
+						url: "/pages/personalCenter/purchaseCenter/SupplierPool"
 					},
 					{
 						text: "委托采购",
@@ -111,11 +126,13 @@
 					},
 					{
 						text: "销售管理",
-						img: "/static/images/lgicon8.png"
+						img: "/static/images/lgicon8.png",
+						url: "/pages/personalCenter/saleCenter/saleManagement"
 					},
 					{
 						text: "主页管理",
-						img: "/static/images/lgicon9.png"
+						img: "/static/images/lgicon9.png",
+						url: "/pages/personalCenter/saleCenter/homeManager"
 					},
 					{
 						text: "合同管理",
@@ -127,12 +144,14 @@
 					},
 					{
 						text: "我的报价",
-						img: "/static/images/lgicon11.png"
+						img: "/static/images/lgicon11.png",
+						url: "/pages/personalCenter/saleCenter/myQuote"
 					},
 				],
 				accountList: [{
 						text: "我的账户",
-						img: "/static/images/lgicon16.png"
+						img: "/static/images/lgicon16.png",
+						url: "/pages/personalCenter/accountCenter/myAccount"
 					},
 					{
 						text: "发票管理",
@@ -140,7 +159,8 @@
 					},
 					{
 						text: "认证中心",
-						img: "/static/images/lgicon3.png"
+						img: "/static/images/lgicon3.png",
+						url: "/pages/personalCenter/accountCenter/CertificateAuthority"
 					}
 				],
 				serviceList: [{
@@ -159,57 +179,23 @@
 			}
 		},
 		methods: {
-			gotopriceControl(index) {
-				// console.log(index)
-				if (index == 1) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/purchaseCenter/priceControl"
-					})
-
-				};
-				 if (index == 2) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/purchaseCenter/purchaseOrders"
-					})
-
-				};
-				 if (index == 3) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/purchaseCenter/SupplierPool"
-					})
-				
-				};
+			gotopriceControl(item) {
+				uni.navigateTo({
+					url: item.url
+				})
 
 			},
-			gotoSale(index) {
-				if (index == 1) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/saleCenter/saleManagement"
-					})
-				};
-				if (index == 2) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/saleCenter/homeManager"
-					})
-				};
-				 if (index == 5) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/saleCenter/myQuote"
-					})
-				};
+			gotoSale(item) {
+				uni.navigateTo({
+					url: item.url
+				})
 				
 			},
-			gotoAccount(index){
-				if (index == 0) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/accountCenter/myAccount"
-					})
-				};
-				 if (index == 2) {
-					uni.navigateTo({
-						url: "/pages/personalCenter/accountCenter/CertificateAuthority"
-					})
-				};
+			gotoAccount(item){
+				uni.navigateTo({
+					url: item.url
+				})
+				
 			},
 		}
 	}
