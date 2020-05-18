@@ -128,6 +128,12 @@
             "style" : {}
         }
 		,{
+		    "path" : "pages/user/login",
+		    "style" : {
+				"navigationBarTitleText": "登录"
+			}
+		}
+		,{
 		    "path" : "pages/EnterpriseCenter/EnterpriseCenter",
 		    "style" : {
 				"navigationBarTitleText": "深圳万和股份有限公司"

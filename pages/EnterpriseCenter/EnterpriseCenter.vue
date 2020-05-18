@@ -27,13 +27,53 @@
 		</view>
 		<!--商品列表-->
 		<productList :goodsList="goodsList" />
+		<!-- 公司资质 -->
+		<view class="aturalEndowments-box">
+			<text class="CompanyProfile-title">企业资质</text>
+			<text class="CompanyProfile-english">Company profile</text>
+			<view class="aturalEndowments-body">
+				<view class="aturalEndowments">
+					<image src="../../static/images/lgicon40.png"></image>
+				</view>
+				<view class="aturalEndowments">
+					<image src="../../static/images/lgicon40.png"></image>
+				</view>
+				<view class="aturalEndowments">
+					<image src="../../static/images/lgicon40.png"></image>
+				</view>
+				<view class="aturalEndowments">
+					<image src="../../static/images/lgicon40.png"></image>
+				</view>
+			</view>
+		</view>
+		<!-- 联系我们 -->
+		<view class="contact">
+			<text class="contact-title">联系我们</text>
+			<text class="contact-english">contact us</text>
+			<view class="contact-information">
+				<view class="contact-man">
+					<text >联系人：张女士</text>
+				</view>
+				<view>
+					<text class="contact-phone">电话：0755-8888 888</text>
+					<text>QQ：10585855665</text>
+				</view>
+				<view class='contact-weixin'>
+					<text class="contact-emil">微信：10585855665</text>
+					<text>邮箱：0755-8888 888</text>
+				</view>
+				<view>
+					<text>地址：深圳市福田区天安国际大厦6楼405号</text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import productList from '@/components/productList.vue'
 	export default {
-		components:{
+		components: {
 			productList
 		},
 		data() {
@@ -164,18 +204,6 @@
 		z-index: 2;
 		border-radius: 10px;
 
-		.CompanyProfile-title {
-			font-weight: bold;
-			font-size: 27.17rpx;
-			color: #4e5a65;
-			margin-right: 9.05rpx;
-		}
-
-		.CompanyProfile-english {
-			font-size: 21.73rpx;
-			color: #4e5a65;
-		}
-
 		.CompanyProfile-content {
 			display: block;
 			font-size: 21.73rpx;
@@ -184,10 +212,23 @@
 		}
 	}
 
+	.CompanyProfile-title {
+		font-weight: bolder;
+		font-size: 27.17rpx;
+		color: #4e5a65;
+		margin-right: 9.05rpx;
+	}
+
+	.CompanyProfile-english {
+		font-size: 21.73rpx;
+		color: #4e5a65;
+	}
+
 	/*列表推荐导航*/
 	.recommend-nav {
 		display: flex;
 		justify-content: space-between;
+		margin-bottom: 18.11rpx;
 
 		.tab-item {
 			display: flex;
@@ -233,7 +274,7 @@
 
 			.cntitle {
 				font-size: 25.36rpx;
-				font-weight: bold;
+				font-weight: bolder;
 				width: 100%;
 
 			}
@@ -248,6 +289,69 @@
 					display: none;
 				}
 			}
+		}
+	}
+
+	.aturalEndowments-box {
+		box-sizing: border-box;
+		padding: 0 38.04rpx 0 45.28rpx;
+		margin: 36.23rpx 0;
+
+		.aturalEndowments-body {
+			display: flex;
+			justify-content: space-around;
+			margin-top: 36.23rpx;
+
+			.aturalEndowments {
+				width: 155.79rpx;
+				height: 155.79rpx;
+				background-color: #FFFFFF;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				image {
+					width: 96.01rpx;
+					height: 137.68rpx;
+
+				}
+			}
+		}
+
+	}
+
+	.contact {
+		box-sizing: border-box;
+		padding: 0 38.04rpx 0 45.28rpx;
+
+		.contact-title {
+			font-size: 28.98rpx;
+			font-weight: bolder;
+			color: #44a78d;
+			margin-right: 9.05rpx;
+		}
+
+		.contact-english {
+			font-size: 21.73rpx;
+			color: #44a78d;
+		}
+
+		.contact-information {
+			font-size: 28.98rpx;
+			color: #4e5a65;
+			.contact-man{
+				margin: 9.05rpx 0;
+			}
+			.contact-phone {
+				margin-right: 72.46rpx;
+			}
+			.contact-weixin{
+				margin:7.24rpx 0;
+			}
+			.contact-emil {
+				margin-right: 97.82rpx;
+			}
+
 		}
 	}
 </style>
