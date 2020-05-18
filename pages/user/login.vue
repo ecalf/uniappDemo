@@ -4,19 +4,20 @@
 		<view class="input-group">
 			<view class="input-row">
 				<text class="title">账号：</text>
-				<m-input class="m-input" type="text" v-model="account" placeholder="请输入账号"></m-input>
+				<m-input class="m-input" type="text" v-model="fromList.mobile" placeholder="请输入账号"></m-input>
 			</view>
 			<view class="input-buttom">
 			</view>
 			<view class="input-row">
-				<m-input type="number" placeholder="请输入验证码" v-model="code"></m-input>
-				<text class="input-title" @click='getGode()'>获取验证码</text>
+				<m-input type="number" placeholder="请输入验证码" v-model="fromList.code"></m-input>
+				<text class="input-title" @click='sendCode()' v-if="get_code">获取验证码</text>
+				<text class="input-title" v-else>{{count}}秒后重新获取</text>
 			</view>
 			<view class="input-buttom">
 			</view>
 			<view class="input-row">
 				<text class="title">密码：</text>
-				<m-input type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
+				<m-input type="password" displayable v-model="fromList.password" placeholder="请输入密码"></m-input>
 			</view>
 		</view>
 		<view class="btn-row">
@@ -35,28 +36,34 @@
 	export default {
 		data() {
 			return {
-				// 登录请求获取的数据
-				loginList: [],
-				// 请求验证码数据
-				codeList:[],
-				// 账户
-				account: '',
-				// 密码
-				password: '',
-				// 验证码
-				code:'562312'
+				get_code: true,
+				count: 60,
+				// 登录表单请求数据
+				fromList:{
+					// 登录请求获取的数据
+					loginList: [],
+					// 请求验证码数据
+					codeList:[],
+					// 账户
+					mobile:'',
+					// 密码
+					password: '',
+					// 验证码
+					code:'',
+				}
+				
 			}
 		},
 		methods: {
 			bindLogin() {
-				if (this.account.length < 5) {
+				if (this.fromList.mobile.length < 5 || this.fromList.mobile.length < 0) {
 					uni.showToast({
 						icon: 'none',
-						title: '账号最短为 5 个字符'
+						title: '请输入正确的账户'
 					});
 					return;
 				}
-				if (this.password.length < 6) {
+				if (this.fromList.password.length < 6 ) {
 					uni.showToast({
 						icon: 'none',
 						title: '密码最短为 6 个字符'
@@ -69,8 +76,8 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							mobile: '13750091494',
-							code:this.code,
+							mobile: this.fromList.mobile,
+							code:this.fromList.code,
 							state_code:'86'
 							
 						}
@@ -82,30 +89,46 @@
 							uni.showToast({
 							        title: res.message,
 							        icon: "none"
-							       });
+						  });
 						}
 					})
 				});
 
 			},
-			getGode(){
-				this.request({
-					url: interfaces.getLoignData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							mobile: '13750091494',
-							type:'1'
-						}
-					},
-					success: ((res) => {
-						console.log(res, 222);
-						this.codeList = res.data;
-	
-					})
-				});
-			}
+	//发送验证码
+	sendCode() {
+		if (this.fromList.mobile !== "") {
+			this.get_code = false;
+			this.isgetcode = true;
+			let interval = setInterval(() => {
+				this.count--;
+				if (this.count < 1) {
+					this.get_code = true;
+					this.count = 60;
+					clearInterval(interval);
+				}
+			}, 1000);
+		} else {
+			uni.showToast({
+				title: "请输入手机号",
+				icon: "none"
+			});
+		}
+		this.request({
+			url: interfaces.getCodeData,
+			dataType: "JSON",
+			method: 'POST', //请求方式
+			data: {
+				data: {
+					mobile:this.fromList.mobile ,
+					type: '1' //1.login  2.register
+				}
+			},
+			success: ((res) => {
+				console.log(res);
+			})
+		})
+	},
 		}
 
 	}
@@ -177,5 +200,6 @@
 	.input-title{
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
+		padding-left: 36.23rpx;
 	}
 </style>
