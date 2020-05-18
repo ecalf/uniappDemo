@@ -146,32 +146,29 @@ $bc:#4E5A65;
 		justify-content:space-around;
 		
 	}
-	
-	
+/*公共按钮*/
+.common-btn {
+	position: fixed;
+	left: 0;
+	right: 0;
+	background: #fff;
+	width: 100%;
+	bottom: 0;
+	z-index: 99;
+	padding: 16.3rpx 0;
 
-	/*公共按钮*/
-	.common-btn {
-		position: fixed;
-		left: 0;
-		right: 0;
-		background: #fff;
-		width: 100%;
-		bottom: 0;
-		z-index: 99;
-		padding: 16.3rpx 0;
-	
-		button {
-			width: 576.08rpx;
-			height: 72.46rpx;
-			line-height: 72.46rpx;
-			background: #44a78d;
-			border-radius: 181.15rpx;
-			text-align: center;
-			font-size: 32.6rpx;
-			color: #fff;
-			cursor: pointer;
-	
-		}
+	button {
+		width: 576.08rpx;
+		height: 72.46rpx;
+		line-height: 72.46rpx;
+		background: #44a78d;
+		border-radius: 181.15rpx;
+		text-align: center;
+		font-size: 32.6rpx;
+		color: #fff;
+		cursor: pointer;
+
 	}
-	
+}
+
 	

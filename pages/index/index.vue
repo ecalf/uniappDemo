@@ -45,16 +45,16 @@
 		<productList :goodsList="goodsList" />
 
 		<!--登录入口-->
-		<view class="index-login" v-if="isShow">
-			<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
-			<view class="loginenter">
-				<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
+		<uni-popup :defaultPopup="true" :defaultTrans="true">
+			<view class="index-login">
+				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
+				<view class="loginenter">
+					<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
 
-				<button class="weixin_registerbtn"><text class="icon iconfont">&#xe612;</text>免费注册</button>
+					<button class="weixin_registerbtn" @tap="enterRegister"><text class="icon iconfont">&#xe612;</text>免费注册</button>
+				</view>
 			</view>
-		</view>
-		<view class="uni-popup__mask" v-if="isShow" @tap="closePopup()"></view>
-
+		</uni-popup>
 
 		<page-footer :currentPage="currentPage"></page-footer>
 
@@ -71,24 +71,24 @@
 	export default {
 		components: {
 			productList,
-			uniPopup
+			uniPopup,
 		},
 		data() {
 			return {
 				title: 'getUserInfo',
 				hasUserInfo: false,
 				userInfo: {},
-				isShow: false,
-				currentPage:'/pages/index/index',
+				currentPage: '/pages/index/index',
 				swiperList: [{
-					id:1,
-						img: "/static/images/banner.jpg"
-					},
-					{id:2,
+						id: 1,
 						img: "/static/images/banner.jpg"
 					},
 					{
-						id:3,
+						id: 2,
+						img: "/static/images/banner.jpg"
+					},
+					{
+						id: 3,
 						img: "/static/images/banner.jpg"
 					}
 				], //轮播图片
@@ -234,12 +234,17 @@
 					}
 				}
 			},
-			closePopup() {
-				this.isShow = false;
+			enterRegister(){//注册调整
+				uni.switchTab({
+					url:"/pages/personalCenter/personalCenter"
+				})
 			},
-			// 获取用户信息 API 在小程序可直接使用，在 5+App 里面需要先登录才能调用
+			// closePopup() { //关闭弹窗
+			// 	this.isShow = false;
+			// },
+			//获取用户信息 API 在小程序可直接使用，在 5+App 里面需要先登录才能调用
 			getUserInfo() {
-				that=this.isShow;
+				that = this.isShow;
 				uni.getUserInfo({
 					provider: this.loginProvider,
 					success: (result) => {
@@ -525,7 +530,7 @@
 		}
 	}
 
-	//列表推荐
+	/*列表推荐*/
 	.goods-list {
 		padding: 27.17rpx 0;
 
@@ -564,7 +569,7 @@
 		border-top: 1px dashed #E2E2E2;
 		padding-top: 79.71rpx;
 
-		button {
+		button,navigator {
 			color: #fff;
 			font-size: 36.23rpx;
 			height: 108.69rpx;

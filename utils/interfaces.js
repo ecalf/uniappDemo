@@ -1,4 +1,10 @@
+
+ // #ifndef H5
+ const domain = "http://192.168.1.14:8005/api.php";
+ // #endif
+// #ifdef H5
 const domain = "/api";
+// #endif
 const interfaces = {
 	// 获取首页数据
 	getBannerData: domain + "",

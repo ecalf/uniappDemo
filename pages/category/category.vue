@@ -79,7 +79,7 @@
 		data() {
 			return {
 				showRight: false,
-				currentPage:'/pages/category/category',
+				currentPage: '/pages/category/category',
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',
@@ -129,7 +129,7 @@
 				}, {
 					name: "剩余时间"
 				}],
-				categoryList: [],
+				categoryList:[],
 			}
 
 		},
@@ -138,7 +138,7 @@
 		},
 		methods: {
 			initData() {
-				uni.request({
+				this.request({
 					url: interfaces.getCategroyData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
@@ -148,12 +148,15 @@
 						}
 					},
 					success: ((res) => {
-						console.log(res.data.data);
-						this.categoryList = res.data.data;
+						console.log(res);
+						this.categoryList = res.data;
 						//console.log(this.categoryList.child);
 					})
 				});
 			},
+
+			
+
 			//弹窗显示
 			show(e) {
 				if (e === 'left') {
@@ -174,7 +177,7 @@
 					this.showRight = false
 				}
 			},
-			
+
 		},
 		onNavigationBarButtonTap(e) {
 			this.showRight = !this.showRight

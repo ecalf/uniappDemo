@@ -29,7 +29,7 @@
 		},
 		methods: {
 			initData() {
-				uni.request({
+				this.request({
 					url: interfaces.getCategroyData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
@@ -39,8 +39,7 @@
 						}
 					},
 					success: ((res) => {
-						console.log(res.data.data);
-						this.categoryList = res.data.data;
+						this.categoryList = res.data;
 						//console.log(this.categoryList.child);
 					})
 				});

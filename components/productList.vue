@@ -32,7 +32,7 @@
 			handleGoods(goods){
 				// 页面跳转 商品详情
 				uni.navigateTo({
-					url:"/pages/product/productDetails?id="+goods.id
+					url:"/pages/product/productDetails?id=1"
 				})
 			}
 		}

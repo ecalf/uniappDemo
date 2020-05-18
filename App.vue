@@ -36,6 +36,9 @@
 		padding: 0;
 	}
 
+.navigator-hover{
+	opacity:1;
+}
 	.tui-icon {
 		width: 40rpx;
 		height: 36.23rpx;

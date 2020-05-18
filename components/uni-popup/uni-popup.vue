@@ -45,14 +45,22 @@
 			maskClick: {
 				type: Boolean,
 				default: true
-			}
+			},
+			defaultPopup:{
+				type:Boolean,
+				default: false
+			},
+			defaultTrans:{
+				type:Boolean,
+				default: false
+			}		
 		},
 		data() {
 			return {
 				duration: 300,
 				ani: [],
-				showPopup: true,
-				showTrans: true,
+				showPopup:this.defaultPopup,
+				showTrans:this.defaultTrans,
 				maskClass: {
 					'position': 'fixed',
 					'bottom': 0,
