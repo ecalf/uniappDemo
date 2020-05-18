@@ -127,6 +127,12 @@
             "path" : "pages/user/register",
             "style" : {}
         }
+		,{
+		    "path" : "pages/EnterpriseCenter/EnterpriseCenter",
+		    "style" : {
+				"navigationBarTitleText": "深圳万和股份有限公司"
+				}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
