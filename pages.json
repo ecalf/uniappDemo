@@ -127,6 +127,7 @@
             "path" : "pages/user/register",
             "style" : {}
         }
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
