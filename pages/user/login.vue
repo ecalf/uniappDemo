@@ -1,17 +1,16 @@
 <template>
 	<view>
 		<image class="logo" src="../../static/images/logo.png"></image>
-		<view class="input-group">
+		<view class="checkout-login">
+			<text  @click="checkoutlogin(0)" :class="{'checkout-one':current==0}">用户名登录</text>
+			<text  @click="checkoutlogin(1)" :class="{'checkout-one':current==1}">手机登录</text>
+		</view>
+
+		<!-- 用户名登录 -->
+		<view class="input-group" v-if="current==0">
 			<view class="input-row">
-				<text class="title">账号：</text>
+				<text class="title">手机号：</text>
 				<m-input class="m-input" type="text" v-model="fromList.mobile" placeholder="请输入账号"></m-input>
-			</view>
-			<view class="input-buttom">
-			</view>
-			<view class="input-row">
-				<m-input type="number" placeholder="请输入验证码" v-model="fromList.code"></m-input>
-				<text class="input-title" @click='sendCode()' v-if="get_code">获取验证码</text>
-				<text class="input-title" v-else>{{count}}秒后重新获取</text>
 			</view>
 			<view class="input-buttom">
 			</view>
@@ -19,7 +18,29 @@
 				<text class="title">密码：</text>
 				<m-input type="password" displayable v-model="fromList.password" placeholder="请输入密码"></m-input>
 			</view>
+			<view class="input-buttom">
+			</view>
 		</view>
+
+
+		<!-- 手机登录 -->
+		<view class="input-group" v-else>
+			<view class="input-row">
+				<text class="title">手机号：</text>
+				<m-input type="text" v-model="fromList.mobile" placeholder="请输入账号"></m-input>
+			</view>
+			<view class="input-buttom">
+			</view>
+			<view class="input-row">
+				<m-input  type="number" placeholder="请输入验证码" v-model="fromList.code" ></m-input>
+				<text class="input-title" @click='sendCode()' v-if="get_code">获取验证码</text>
+				<text class="input-title" v-else>{{count}}秒后重新获取</text>
+			</view>
+			<view class="input-buttom">
+			</view>
+		</view>
+
+
 		<view class="btn-row">
 			<button class="cu-btn" @tap="bindLogin">登录</button>
 		</view>
@@ -36,37 +57,41 @@
 	export default {
 		data() {
 			return {
+				current: 0, //选择登录方式
 				get_code: true,
 				count: 60,
 				// 登录表单请求数据
-				fromList:{
-					// 登录请求获取的数据
-					loginList: [],
-					// 请求验证码数据
-					codeList:[],
-					// 账户
-					mobile:'',
-					// 密码
-					password: '',
-					// 验证码
-					code:'',
+				fromList: {
+				mobile: '', //手机号
+				password: '', // 密码
+				code: '', // 验证码
 				}
-				
+
 			}
 		},
 		methods: {
+			checkoutlogin(index){
+				console.log(index)
+				if(index ==0) {
+					this.current=0
+				}
+				else{
+					this.current=1
+				}
+			},
+			// 登录
 			bindLogin() {
-				if (this.fromList.mobile.length < 5 || this.fromList.mobile.length < 0) {
+				if (this.fromList.mobile.length < 11 || this.fromList.mobile.length < 0) {
 					uni.showToast({
 						icon: 'none',
 						title: '请输入正确的账户'
 					});
 					return;
 				}
-				if (this.fromList.password.length < 6 ) {
+				if (this.fromList.password.length < 6 || this.fromList.password.length > 15) {
 					uni.showToast({
 						icon: 'none',
-						title: '密码最短为 6 个字符'
+						title: '密码为6~15位'
 					});
 					return;
 				}
@@ -77,58 +102,57 @@
 					data: {
 						data: {
 							mobile: this.fromList.mobile,
-							code:this.fromList.code,
-							state_code:'86'
-							
+							code: this.fromList.code,
+							state_code: '86',
+							type: this.fromList.mobile ? 'code_login' : 'pass_login',
 						}
 					},
 					success: ((res) => {
 						console.log(res, 111);
 						this.loginList = res.data;
-						if(res.code !==200){
+						if (res.code !== 200) {
 							uni.showToast({
-							        title: res.message,
-							        icon: "none"
-						  });
+								title: res.message,
+								icon: "none"
+							});
 						}
 					})
 				});
-
 			},
-	//发送验证码
-	sendCode() {
-		if (this.fromList.mobile !== "") {
-			this.get_code = false;
-			this.isgetcode = true;
-			let interval = setInterval(() => {
-				this.count--;
-				if (this.count < 1) {
-					this.get_code = true;
-					this.count = 60;
-					clearInterval(interval);
+			//发送验证码
+			sendCode() {
+				if (this.fromList.mobile !== "") {
+					this.get_code = false;
+					this.isgetcode = true;
+					let interval = setInterval(() => {
+						this.count--;
+						if (this.count < 1) {
+							this.get_code = true;
+							this.count = 60;
+							clearInterval(interval);
+						}
+					}, 1000);
+				} else {
+					uni.showToast({
+						title: "请输入手机号",
+						icon: "none"
+					});
 				}
-			}, 1000);
-		} else {
-			uni.showToast({
-				title: "请输入手机号",
-				icon: "none"
-			});
-		}
-		this.request({
-			url: interfaces.getCodeData,
-			dataType: "JSON",
-			method: 'POST', //请求方式
-			data: {
-				data: {
-					mobile:this.fromList.mobile ,
-					type: '1' //1.login  2.register
-				}
+				this.request({
+					url: interfaces.getCodeData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							mobile: this.fromList.mobile,
+							type: '1'
+						}
+					},
+					success: ((res) => {
+						console.log(res);
+					})
+				})
 			},
-			success: ((res) => {
-				console.log(res);
-			})
-		})
-	},
 		}
 
 	}
@@ -143,6 +167,27 @@
 		top: 54.34rpx;
 	}
 
+	.checkout-login {
+		display: flex;
+		font-size: 27.17rpx;
+		justify-content: space-around;
+		margin: 0 auto;
+		align-items: center;
+		box-sizing: border-box;
+		padding: 27.17rpx 0rpx;
+	}
+	.checkout-one {
+		display: block;
+		display: flex;
+		justify-content: space-between;
+		font-size: 16px;
+		line-height: 36px;
+		letter-spacing: 0px;
+		color: #44a78d;
+		border-bottom: 5.43rpx solid #44a78d;
+	}
+	
+	
 	.title {
 		width: 130.43rpx;
 		padding-left: 27.17rpx;
@@ -197,9 +242,10 @@
 		position: relative;
 		top: 139.49rpx;
 	}
-	.input-title{
+
+	.input-title {
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
-		padding-left: 36.23rpx;
 	}
+	
 </style>
