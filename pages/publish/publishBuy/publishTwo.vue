@@ -194,7 +194,6 @@
 
 		},
 		onLoad() {
-
 		},
 		methods: {
 
@@ -226,7 +225,8 @@
 						this.$set(item, 'checked', false)
 					}
 				}
-			}
+			},
+			
 		}
 	}
 </script>

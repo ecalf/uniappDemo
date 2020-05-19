@@ -177,7 +177,6 @@
 							value: 3
 						}
 					],
-					url2: ['https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg'],
 				},
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表

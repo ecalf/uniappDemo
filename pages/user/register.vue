@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<form @submit="formSubmit">
+		<form @submit="formSubmit" @reset="formReset">
 			<view class="uni-form-item">
 				<view class="title">选择国家</view>
 				<view class="uni-input">
@@ -100,7 +100,8 @@
 			</view>
 
 			<view class="read-checkbox">
-				<checkbox color="#44a78d" :checked="isChecked" @tap="isChecked = !isChecked" name="checkbox"  style="transform:scale(0.7)"></checkbox>我已阅读并接受 <navigator> 用户协议</navigator>
+				<checkbox color="#44a78d" :checked="isChecked" @tap="isChecked = !isChecked" name="checkbox" style="transform:scale(0.7)"></checkbox>我已阅读并接受
+				<navigator> 用户协议</navigator>
 				和 <navigator>
 					隐私政策</navigator>
 			</view>
@@ -116,37 +117,7 @@
 	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
-			var validatePass = (rule, value, callback) => {
-				if (value === "") {
-					uni.showToast({
-						title: "请输入密码!",
-						icon: "none"
-					});
-				} else {
-					if (value.length < 8) {
-						uni.showToast({
-							title: "密码长度不能少于8位",
-							icon: "none"
-						});
-					} else if (this.registerForm.re_password !== "") {
-						//this.$refs.registerForm.validateField("re_password");
-					}
-
-				}
-			};
-			var validatePass2 = (rule, value, callback) => {
-				if (value === "") {
-					uni.showToast({
-						title: "请再次输入密码!",
-						icon: "none"
-					});
-				} else if (value !== this.registerForm.password) {
-					uni.showToast({
-						title: "两次输入密码不一致!",
-						icon: "none"
-					});
-				}
-			};
+			
 			return {
 				current: 0, //选择国家
 				num: true,
@@ -154,7 +125,7 @@
 				isgetcode: false, // 是否获取过code
 				count: 60,
 				country: "China",
-				isChecked:false,
+				isChecked: false,
 				registerForm: {
 					mobile: "",
 					code: "",
@@ -178,10 +149,9 @@
 					},
 				],
 				//定义表单规则
-				rules: [	
-					{
+				rules: [{
 						name: "organization",
-						checkType:'notnull',
+						checkType: 'notnull',
 						checkRule: "",
 						errorMsg: "请输入组织名称"
 					},
@@ -211,27 +181,53 @@
 					},
 					{
 						name: "password",
-						//checkType: "reg",
-						checkRule: validatePass,
-					},
-					{
-						name: "re_password",
-						//checkType: "reg",
-						checkRule: validatePass2,
-					},
-					{
-						name: "checkbox",
-						checkType: "string",
+						checkType: "notnull",
 						checkRule: "",
-						errorMsg: "您未勾选同意我们的相关注册协议"
+						errorMsg: "请输入密码"
 					},
-					
+					// {
+					// 	name: "re_password",
+					// 	checkType: "same",
+					// 	checkRule: "this.registerForm.re_password,this.registerForm.password",
+					// 	errorMsg: "两次输入的密码不一致"
+					// },
 				]
 			}
 		},
 		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
 			this.registerForm.type = option.type; //打印出上个页面传递的参数。
 			// console.log(this.registerForm.type);
+		},
+		computed: {
+			verify: function() {
+				if (this.registerForm.password == '') {
+					return {
+						"flag": false,
+						"msg": '请输入密码'
+					};
+				}
+				if (this.registerForm.password.length < 8) {
+					return {
+						"flag": false,
+						"msg": '密码长度至少大于8位'
+					};
+				}
+				if (this.registerForm.password != this.registerForm.re_password) {
+					return {
+						"flag": false,
+						"msg": '两次输入的密码不一致'
+					};
+				}
+				if (this.isChecked == false) {
+					return {
+						"flag": false,
+						"msg": '请勾选我们的协议'
+					};
+				}
+				return {
+					"flag": true
+				};
+			},
 		},
 		methods: {
 			radioChange: function(evt) { //选择国家
@@ -244,9 +240,9 @@
 
 				}
 				this.country = evt.target.value; //获取国家
-
+				this.registerForm.password = ''
+				this.registerForm.re_password = ''
 			},
-			
 			//发送验证码
 			sendCode() {
 				if (this.registerForm.mobile !== "") {
@@ -283,19 +279,24 @@
 			},
 			formSubmit: function(e) {
 				//进行表单检查
-				console.log(this.isChecked);
 				var formData = e.detail.value;
 				var checkRes = graceChecker.check(formData, this.rules);
-				// if (checkRes) {
 
-				// } else {
-				// 	uni.showToast({
-				// 		title: graceChecker.error,
-				// 		icon: "none"
-				// 	});
-				// }
-				if (checkRes && this.isChecked=='true') {
-					//console.log(this.country, this.type);
+				if (!checkRes) {
+					uni.showToast({
+						title: graceChecker.error,
+						icon: "none"
+					});
+				}
+				var verifyRes = this.verify.flag;
+				if (!verifyRes) { //自定义验证规则
+					uni.showToast({
+						title: this.verify.msg,
+						icon: "none"
+					});
+					 return;
+				}
+				if (checkRes) {
 					this.request({
 						url: interfaces.getRegisterData,
 						dataType: "JSON",
@@ -329,12 +330,11 @@
 
 
 					});
-				}else {
-					uni.showToast({
-						title: graceChecker.error,
-						icon: "none"
-					});
 				}
+			},
+
+			formReset: function(e) {
+				this.chosen = ''
 			}
 
 		}
