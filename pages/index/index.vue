@@ -45,7 +45,7 @@
 		<productList :goodsList="goodsList" />
 
 		<!--登录入口-->
-		<uni-popup :defaultPopup="true" :defaultTrans="true">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
@@ -63,7 +63,7 @@
 	import {
 		mapState,
 		mapMutations
-	} from 'vuex'
+	} from 'vuex';
 	import productList from '@/components/productList.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
@@ -71,11 +71,13 @@
 			productList,
 			uniPopup,
 		},
+		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
 				title: 'getUserInfo',
 				hasUserInfo: false,
 				userInfo: {},
+				ishow:true,
 				currentPage: '/pages/index/index',
 				swiperList: [{
 						id: 1,
@@ -199,11 +201,6 @@
 
 
 		},
-		computed: {
-			...mapState({
-				loginProvider: state => state.loginProvider
-			})
-		},
 
 		methods: {
 			initData() {
@@ -242,77 +239,17 @@
 					url:"/pages/user/login"
 				})
 			},
-			// closePopup() { //关闭弹窗
-			// 	this.isShow = false;
-			// },
-			//获取用户信息 API 在小程序可直接使用，在 5+App 里面需要先登录才能调用
-			getUserInfo() {
-				that = this.isShow;
-				uni.getUserInfo({
-					provider: this.loginProvider,
-					success: (result) => {
-						console.log('getUserInfo success', result);
-						this.hasUserInfo = true;
-						this.userInfo = result.userInfo;
-						this.isShow = false;
-					},
-					fail: (error) => {
-						console.log('getUserInfo fail', error);
-						let content = error.errMsg;
-						if (~content.indexOf('uni.login')) {
-							content = '请在登录页面完成登录操作';
-						}
-						// #ifndef APP-PLUS
-						uni.getSetting({
-							success: (res) => {
-								let authStatus = res.authSetting['scope.userInfo'];
-								if (!authStatus) {
-									uni.showModal({
-										title: '授权失败',
-										content: 'Hello uni-app需要获取您的用户信息，请在设置界面打开相关权限',
-										success: (res) => {
-											if (res.confirm) {
-												uni.openSetting()
-											}
-										}
-									})
-								} else {
-									uni.showModal({
-										title: '获取用户信息失败',
-										content: '错误原因' + content,
-										showCancel: false
-									});
-								}
-							}
-						})
-						// #endif
-						// #ifdef APP-PLUS
-						uni.showModal({
-							title: '获取用户信息失败',
-							content: '错误原因' + content,
-							showCancel: false
-						});
-						// #endif
-					}
-				});
-			},
-			mpGetUserInfo(result) {
-				console.log('mpGetUserInfo', result);
-				if (result.detail.errMsg !== 'getUserInfo:ok') {
-					uni.showModal({
-						title: '获取用户信息失败',
-						content: '错误原因' + result.detail.errMsg,
-						showCancel: false
-					});
-					return;
+			//判断是否登录状态
+			...mapMutations(['logout']),
+			bindLogin() {
+				if (this.hasLogin) {
+					this.logout();
+					this.ishow=true;
+				} else {
+					uni.reLaunch({
+						url: '/pages/user/login'
+					})
 				}
-				this.hasUserInfo = true;
-				this.userInfo = result.detail.userInfo;
-				this.isShow = false;
-			},
-			clear() {
-				this.hasUserInfo = false;
-				this.userInfo = {};
 			}
 		},
 

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
 			return {
@@ -35,7 +36,7 @@
 						console.log('chooseImage success, temp path is', res.tempFilePaths[0])
 						var imageSrc = res.tempFilePaths[0]
 						uni.uploadFile({
-							url: 'https://unidemo.dcloud.net.cn/upload',
+							url: interfaces.getUploadData,
 							filePath: imageSrc,
 							fileType: 'image',
 							name: 'data',

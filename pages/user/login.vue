@@ -59,7 +59,7 @@
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
 	import {setToken} from '@/utils/common.js'
-	//import {mapMutations} from 'vuex';
+	import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -181,10 +181,11 @@
 									icon: "none"
 								});
 								return;
-							}else{
-								
-								 const profile = setToken(res.data.token,res.data.client);
-									console.log(profile);
+							}else{				
+								 //const profile = setToken(res.data.token,res.data.client);
+									this.login(res.data);
+									//console.log(res.data);
+									// this.$store.commit('profile/updateProfile',profile);
 								uni.switchTab({
 									url:"/pages/personalCenter/personalCenter"
 								})
@@ -200,7 +201,7 @@
 				}
 			},
 
-				//...mapMutations(['login'])
+			...mapMutations(['login'])
 		}
 
 	}

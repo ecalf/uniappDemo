@@ -1,22 +1,22 @@
 <template>
 	<view class="pb60">
 
-		<cl-form ref="form" :model.sync="form" :rules="rules">
+		<cl-form ref="form" :model.sync="formData" :rules="rules">
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="标题" class="uni-tl-input"></cl-input>
+					<cl-input placeholder="标题" class="uni-tl-input" v-model="formData.title" ></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
-				<textarea class="uni-input uni-tl-input uni-textarea" placeholder="描述"></textarea>
+				<textarea class="uni-input uni-tl-input uni-textarea" v-model="formData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
 				<upload-file></upload-file>
 			</view>
 			<view class="uni-form-item m-cl-box">
 				<cl-card label="" class="brand-bg">
-					<cl-select v-model="form.selectbrand" :options="options.selectbrand"></cl-select>
+					<cl-select :options="options.selectbrand"></cl-select>
 				</cl-card>
 			</view>
 			<view class="uni-form-item m-form-item">
@@ -38,7 +38,7 @@
 			<view class="uni-form-item">
 				<view class="title"><text class="colorred">*</text>截止日期</view>
 				<cl-form-item label="" class="uni-input" prop="date" justify="end">
-					<cl-select mode="date" placeholder="请点击选择" v-model="form.date"></cl-select>
+					<cl-select mode="date" placeholder="请点击选择" v-model="formData.date"></cl-select>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
@@ -93,8 +93,29 @@
 		data() {
 			return {
 				date: "",
-				form: {
-					selectbrand: 0,
+				formData: {
+					category: '', //产品类别
+					entrust: '', //委托类型,仅委托表单可用
+					title: '', //标题
+					desc: '', //描述
+					selectbrand: '', //品牌选择
+					otherBrand: '', //其他品牌,非必选
+					country: '', //出口国,非必填
+					supplierPrice: '', //供应商价格,仅发布销售可用
+					price: '', //市场价
+					quantity: '', //数量
+					unit: '', //单位
+					usage: '', //用途
+					qualification: '', //认证
+					techImg: '', //上传图片-技术
+					productImg: '', //上传图片-产品
+					companyImg: '', //上传图片-企业
+					otherImg: '', //上传图片-其他
+					video: '', //上传视频
+					richDesc: '', //富文本描述
+					deadtime: '', //截止时间
+					service: '', //增值服务,非必须选
+					//selectbrand: 0,
 					date: "",
 				},
 				rules: {
@@ -194,9 +215,24 @@
 
 		},
 		onLoad() {
+			this.initData();
 		},
 		methods: {
-
+			initData() {
+				this.request({
+					url: interfaces.getPublishData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							id: '',
+						}
+					},
+					success: ((res) => {
+						console.log(res);
+					})
+				});
+			},
 			//用户点击获取的数据
 			handleChange(data) {
 				console.log(data)
@@ -226,7 +262,7 @@
 					}
 				}
 			},
-			
+
 		}
 	}
 </script>

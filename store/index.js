@@ -11,8 +11,9 @@ const store = new Vuex.Store({
     mutations: {  
         login(state, provider) {//改变登录状态  
             state.hasLogin = true  
-            state.uerInfo.token = provider.token  
-            state.uerInfo.userName = provider.user_name  
+            state.uerInfo.token = provider.token
+            state.uerInfo.userName = provider.client.user_name
+            state.uerInfo.userId = provider.client.uid
             uni.setStorage({//将用户信息保存在本地  
                 key: 'uerInfo',  
                 data: provider  

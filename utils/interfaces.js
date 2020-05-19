@@ -12,6 +12,10 @@ const interfaces = {
 	//获取产品类目
 	getCategroyData: domain + "/v1/category/get-product-cate-list",
 	
+	//发布
+	getPublishData: domain + "/v1/needs/publish",
+	//图片上传
+	getUploadData: domain + "/v1/upload",
    //注册
    getRegisterData:domain+"/v1/user/register",
    
