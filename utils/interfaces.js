@@ -22,6 +22,9 @@ const interfaces = {
 	getLoignData: domain + "/v1/user/login",
 	//个人认证
 	getPersonData: domain + "/v1/user/identification",
-	
+	// 公司主页信息
+	getManagerData: domain + "/v1/user/company_info_edit",
+	// 企业认证
+	getCorporateData: domain + "/v1/user/identification"
 }
 module.exports = interfaces;

@@ -32,7 +32,7 @@
 			<view class="input-buttom">
 			</view>
 			<view class="input-row">
-				<m-input  type="number" placeholder="请输入验证码" v-model="fromList.code" ></m-input>
+				<m-input class="input-cy" type="number" placeholder="请输入验证码" v-model="fromList.code" ></m-input>
 				<text class="input-title" @click='sendCode()' v-if="get_code">获取验证码</text>
 				<text class="input-title" v-else>{{count}}秒后重新获取</text>
 			</view>
@@ -65,6 +65,7 @@
 				mobile: '', //手机号
 				password: '', // 密码
 				code: '', // 验证码
+
 				}
 
 			}
@@ -247,5 +248,7 @@
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
 	}
-	
+	.input-cy{
+		padding-left: 18.11rpx;
+	}
 </style>
