@@ -4,9 +4,9 @@
 		<view class='header'>
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
-				<view class='header-title'><text>比亚迪口罩</text></view>
+				<view class='header-title'><text>{{uerInfo.userId}}</text></view>
 				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
-				<view class='usersname'><text>张某某</text></view>
+				<view class='usersname'><text>{{uerInfo.userName}}</text></view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>
 			<view class='header-vip'>
@@ -185,6 +185,7 @@
 			}
 		},
 		methods: {
+			
 			gotopriceControl(item) {//采购路由
 				uni.navigateTo({
 					url: item.url
@@ -209,9 +210,7 @@
 				if (this.hasLogin) {
 					this.logout();
 					this.ishow=true;
-					console.log(212);
 				} else {
-					console.log(215);
 					uni.reLaunch({
 						url: '/pages/user/login'
 					})

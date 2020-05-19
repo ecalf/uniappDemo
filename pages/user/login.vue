@@ -62,10 +62,15 @@
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
+<<<<<<< HEAD
+	import {setToken} from '@/utils/common.js'
+	import {mapMutations} from 'vuex';
+=======
 	import {
 		setToken
 	} from '@/utils/common.js'
 	//import {mapMutations} from 'vuex';
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 	export default {
 		data() {
 			return {
@@ -188,10 +193,18 @@
 									icon: "none"
 								});
 								return;
+<<<<<<< HEAD
+							}else{				
+								 //const profile = setToken(res.data.token,res.data.client);
+									this.login(res.data);
+									//console.log(res.data);
+									// this.$store.commit('profile/updateProfile',profile);
+=======
 							} else {
 
 								const profile = setToken(res.data.token, res.data.client);
 								console.log(profile);
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
@@ -207,7 +220,11 @@
 				}
 			},
 
+<<<<<<< HEAD
+			...mapMutations(['login'])
+=======
 			//...mapMutations(['login'])
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 		}
 
 	}
