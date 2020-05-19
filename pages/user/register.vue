@@ -13,6 +13,28 @@
 			</view>
 			<!--中国-->
 			<view class="country-list" v-if="current==0">
+
+				<view class="uni-form-item" v-if="registerForm.type==2">
+					<view class="title">机构名称 </view>
+					<view class="uni-input">
+						<input type="text" name="organization" v-model="registerForm.organization_name" value="" placeholder="请输入机构名称" />
+					</view>
+				</view>
+
+				<view class="uni-form-item" v-if="registerForm.type==3">
+					<view class="title">企业名称 </view>
+					<view class="uni-input">
+						<input type="text" name="company" v-model="registerForm.company_name" value="" placeholder="请输入公司名称" />
+					</view>
+				</view>
+
+				<view class="uni-form-item" v-if="registerForm.type==3">
+					<view class="title">联系人</view>
+					<view class="uni-input">
+						<input type="text" name="contact" v-model="registerForm.contact_name" value="" placeholder="请输入联系人" />
+					</view>
+				</view>
+
 				<view class="uni-form-item">
 					<view class="title">手机号码 </view>
 					<view class="uni-input">
@@ -44,29 +66,41 @@
 			</view>
 			<!--海外-->
 			<view class="country-list" v-else>
+				<view class="uni-form-item" v-if="registerForm.type==2">
+					<view class="title">机构名称 </view>
+					<view class="uni-input">
+						<input type="text" name="organization" v-model="registerForm.organization_name" value="" placeholder="请输入机构名称" />
+					</view>
+				</view>
+				<view class="uni-form-item" v-if="registerForm.type==3">
+					<view class="title">企业名称 </view>
+					<view class="uni-input">
+						<input type="text" name="company" v-model="registerForm.company_name" value="" placeholder="请输入公司名称" />
+					</view>
+				</view>
 				<view class="uni-form-item">
 					<view class="title">用户名</view>
 					<view class="uni-input">
-						<input type="text" value="" v-model="user_name" placeholder="用户名" />
+						<input type="text" name="username" value="" v-model="registerForm.user_name" placeholder="用户名" />
 					</view>
 				</view>
 
 				<view class="uni-form-item">
 					<view class="title">设置密码 </view>
 					<view class="uni-input">
-						<input type="password" value="" v-model="password" placeholder="请输入密码" />
+						<input type="password" value="" v-model="registerForm.password" placeholder="请输入密码" />
 					</view>
 				</view>
 				<view class="uni-form-item">
 					<view class="title">确认密码 </view>
 					<view class="uni-input">
-						<input type="password" value="" v-model="re_password" placeholder="请确认密码" />
+						<input type="password" value="" v-model="registerForm.re_password" placeholder="请确认密码" />
 					</view>
 				</view>
 			</view>
 
 			<view class="read-checkbox">
-				<checkbox color="#44a78d" name="checkbox" style="transform:scale(0.7)"></checkbox>我已阅读并接受 <navigator> 用户协议</navigator>
+				<checkbox color="#44a78d" :checked="isChecked" @tap="isChecked = !isChecked" name="checkbox"  style="transform:scale(0.7)"></checkbox>我已阅读并接受 <navigator> 用户协议</navigator>
 				和 <navigator>
 					隐私政策</navigator>
 			</view>
@@ -119,19 +153,20 @@
 				get_code: true,
 				isgetcode: false, // 是否获取过code
 				count: 60,
-				country:"China",
-				registerForm: {	
+				country: "China",
+				isChecked:false,
+				registerForm: {
 					mobile: "",
 					code: "",
 					password: "",
 					re_password: "",
 					state_code: "",
 					checkbox: "",
-					user_name:"",
+					user_name: "",
 					company_name: "",
 					contact_name: "",
-					organization_name: "",	
-					type: ""
+					organization_name: "",
+					type: "", // 1个人 2机构 3公司
 				},
 				countryList: [{
 						value: 'China',
@@ -143,7 +178,26 @@
 					},
 				],
 				//定义表单规则
-				rules: [{
+				rules: [	
+					{
+						name: "organization",
+						checkType:'notnull',
+						checkRule: "",
+						errorMsg: "请输入组织名称"
+					},
+					{
+						name: "company",
+						checkType: "notnull",
+						checkRule: "",
+						errorMsg: "请输入公司名称"
+					},
+					{
+						name: "username",
+						checkType: "notnull",
+						checkRule: "",
+						errorMsg: "请输入联系人"
+					},
+					{
 						name: "mobile",
 						checkType: "phoneno",
 						checkRule: "",
@@ -171,12 +225,13 @@
 						checkRule: "",
 						errorMsg: "您未勾选同意我们的相关注册协议"
 					},
+					
 				]
 			}
 		},
 		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
-			this.type = option.type; //打印出上个页面传递的参数。
-			
+			this.registerForm.type = option.type; //打印出上个页面传递的参数。
+			// console.log(this.registerForm.type);
 		},
 		methods: {
 			radioChange: function(evt) { //选择国家
@@ -189,7 +244,9 @@
 
 				}
 				this.country = evt.target.value; //获取国家
+
 			},
+			
 			//发送验证码
 			sendCode() {
 				if (this.registerForm.mobile !== "") {
@@ -226,53 +283,58 @@
 			},
 			formSubmit: function(e) {
 				//进行表单检查
+				console.log(this.isChecked);
 				var formData = e.detail.value;
 				var checkRes = graceChecker.check(formData, this.rules);
-				if (checkRes) {
-					uni.showToast({
-						title: "验证通过!",
-						icon: "none"
+				// if (checkRes) {
+
+				// } else {
+				// 	uni.showToast({
+				// 		title: graceChecker.error,
+				// 		icon: "none"
+				// 	});
+				// }
+				if (checkRes && this.isChecked=='true') {
+					//console.log(this.country, this.type);
+					this.request({
+						url: interfaces.getRegisterData,
+						dataType: "JSON",
+						method: 'POST', //请求方式
+						data: {
+							data: {
+								mobile: this.registerForm.mobile,
+								code: this.registerForm.code,
+								password: this.registerForm.password,
+								re_password: this.registerForm.re_password,
+								state_code: this.country == 'China' ? 86 : '', //国家代号,暂只处理中国设为86,国外为空
+								user_name: this.registerForm.user_name,
+								company_name: this.registerForm.company_name,
+								contact_name: this.registerForm.contact_name,
+								organization_name: this.organization_name,
+								country: this.country,
+								type: this.registerForm.type //注册类型 1个人 2 机构 3企业
+							}
+						},
+						success: ((res) => {
+							if (res.code !== 200) {
+								uni.showToast({
+									title: res.message,
+									icon: "none"
+								});
+							}
+						}),
+						fail: ((error) => {
+
+						})
+
+
 					});
-				} else {
+				}else {
 					uni.showToast({
 						title: graceChecker.error,
 						icon: "none"
 					});
 				}
-				console.log(this.registerForm.country,this.type);
-				this.request({
-					url: interfaces.getRegisterData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							mobile: this.registerForm.mobile,
-							code: this.registerForm.code,
-							password: this.registerForm.password,
-							re_password: this.registerForm.re_password,
-							state_code: this.country == 'China' ? 86 : '', //国家代号,暂只处理中国设为86,国外为空
-							user_name:'',
-							company_name: '',
-							contact_name: '',
-							organization_name: '',
-							country: this.country,
-							type: this.type //注册类型 1个人 2 机构 3企业
-						}
-					},
-					success: ((res) => {			
-						if (res.code !== 200) {
-							uni.showToast({
-								title: res.message,
-								icon: "none"
-							});
-						}
-					}),
-					fail: ((error) => {
-						
-					})
-
-
-				});
 			}
 
 		}
