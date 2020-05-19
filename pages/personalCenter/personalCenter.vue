@@ -62,7 +62,7 @@
 				<view class='service-title '>
 					<p>功能服务</p>
 				</view>
-				<view  class="service-content" v-for="(item,index) in serviceList" :key="index">
+				<view class="service-content" v-for="(item,index) in serviceList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -70,12 +70,12 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<!--注册入口-->
-		<uni-popup :defaultPopup="true" :defaultTrans="true">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
 			<register-enter></register-enter>
 		</uni-popup>
-		
+
 		<page-footer :currentPage="currentPage"></page-footer>
 
 	</view>
@@ -84,14 +84,20 @@
 <script>
 	import registerEnter from '@/pages/user/components/registerEnter.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
 		components: {
 			uniPopup,
 			registerEnter
 		},
+		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
-				currentPage:"/pages/personalCenter/personalCenter",
+				ishow:true,
+				currentPage: "/pages/personalCenter/personalCenter",
 				procurementList: [{
 						text: "发布采购",
 						img: "/static/images/lgicon1.png"
@@ -179,24 +185,38 @@
 			}
 		},
 		methods: {
-			gotopriceControl(item) {
+			gotopriceControl(item) {//采购路由
 				uni.navigateTo({
 					url: item.url
 				})
 
 			},
-			gotoSale(item) {
+			gotoSale(item) {//销售路由
 				uni.navigateTo({
 					url: item.url
 				})
-				
+
 			},
-			gotoAccount(item){
+			gotoAccount(item) {//账户路由
 				uni.navigateTo({
 					url: item.url
 				})
-				
+
 			},
+			//判断是否登录状态
+			...mapMutations(['logout']),
+			bindLogin() {
+				if (this.hasLogin) {
+					this.logout();
+					this.ishow=true;
+					console.log(212);
+				} else {
+					console.log(215);
+					uni.reLaunch({
+						url: '/pages/user/login'
+					})
+				}
+			}
 		}
 	}
 </script>

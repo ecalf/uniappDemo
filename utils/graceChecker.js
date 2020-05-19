@@ -127,7 +127,6 @@ module.exports = {
 							return false;
 						}
 						break;
-					
 				}
 			}
 		}

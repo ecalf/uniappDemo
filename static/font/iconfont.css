@@ -12,6 +12,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-denglu:before {
+  content: "\e608";
+}
+
+.icon-jia:before {
+  content: "\e61e";
+}
+
+.icon-upload:before {
+  content: "\e613";
+}
+
 .icon-Wechatlogin-icon:before {
   content: "\e611";
 }
@@ -23,10 +35,4 @@
 .icon-Resources-Search:before {
   content: "\e60f";
 }
-.icon-upload:before {
-  content: "\e613";
-}
 
-.icon-jia:before {
-  content: "\e61e";
-}

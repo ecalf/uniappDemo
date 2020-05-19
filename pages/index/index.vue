@@ -49,8 +49,8 @@
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
-					<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
-
+					<!-- <button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button> -->
+					<button type="primary" class="weixin_loginbtn" @tap="enterLogin" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe608;</text>登录</button>
 					<button class="weixin_registerbtn" @tap="enterRegister"><text class="icon iconfont">&#xe612;</text>免费注册</button>
 				</view>
 			</view>
@@ -232,9 +232,14 @@
 					}
 				}
 			},
-			enterRegister(){//注册调整
+			enterRegister(){//注册
 				uni.switchTab({
 					url:"/pages/personalCenter/personalCenter"
+				})
+			},
+			enterLogin(){
+				uni.navigateTo({
+					url:"/pages/user/login"
 				})
 			},
 			// closePopup() { //关闭弹窗

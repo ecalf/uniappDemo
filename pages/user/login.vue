@@ -1,49 +1,52 @@
 <template>
 	<view>
 		<image class="logo" src="../../static/images/logo.png"></image>
-		<view class="checkout-login">
-			<text  @click="checkoutlogin(0)" :class="{'checkout-one':current==0}">用户名登录</text>
-			<text  @click="checkoutlogin(1)" :class="{'checkout-one':current==1}">手机登录</text>
-		</view>
+		<form @submit="formSubmit" @reset="formReset">
+			<view class="checkout-login">
+				<text @click="checkoutlogin(0)" :class="{'checkout-one':current==0}">用户名登录</text>
+				<text @click="checkoutlogin(1)" :class="{'checkout-one':current==1}">手机登录</text>
+			</view>
 
-		<!-- 用户名登录 -->
-		<view class="input-group" v-if="current==0">
-			<view class="input-row">
-				<text class="title">手机号：</text>
-				<m-input class="m-input" type="text" v-model="fromList.mobile" placeholder="请输入账号"></m-input>
+			<!-- 用户名登录 -->
+			<view class="input-group" v-if="current==0">
+				<view class="uni-form-item">
+					<view class="title">账号</view>
+					<view class="uni-input">
+						<input type="text" name="username" v-model="fromList.username" value="" placeholder="请输入手机号/用户名" />
+					</view>
+				</view>
+				<view class="uni-form-item">
+					<view class="title">密码 </view>
+					<view class="uni-input">
+						<input type="password" name="password" v-model="fromList.password" value="" placeholder="请输入密码" />
+					</view>
+				</view>
 			</view>
-			<view class="input-buttom">
+			<!-- 手机登录 -->
+			<view class="input-group" v-else>
+				<view class="uni-form-item">
+					<view class="title">账号</view>
+					<view class="uni-input">
+						<input type="text" name="mobile" v-model="fromList.mobile" value="" placeholder="请输入手机号" />
+					</view>
+				</view>
+				<view class="uni-form-item">
+					<view class="title">验证码 </view>
+					<view class="uni-input">
+						<view class="m-flex">
+							<input type="text" name="code" class="m-input-fullwidth" value="" placeholder="" v-model="fromList.code" />
+							<text class="send-code" @tap="sendCode()" v-if="get_code">发送验证码</text>
+							<text class="send-code" v-else>{{count}}秒后重新获取</text>
+						</view>
+					</view>
+				</view>
 			</view>
-			<view class="input-row">
-				<text class="title">密码：</text>
-				<m-input type="password" displayable v-model="fromList.password" placeholder="请输入密码"></m-input>
+			<view class="btn-row">
+				<button class="cu-btn" form-type="submit">登录</button>
 			</view>
-			<view class="input-buttom">
-			</view>
-		</view>
+		</form>
 
 
-		<!-- 手机登录 -->
-		<view class="input-group" v-else>
-			<view class="input-row">
-				<text class="title">手机号：</text>
-				<m-input type="text" v-model="fromList.mobile" placeholder="请输入账号"></m-input>
-			</view>
-			<view class="input-buttom">
-			</view>
-			<view class="input-row">
-				<m-input  type="number" placeholder="请输入验证码" v-model="fromList.code" ></m-input>
-				<text class="input-title" @click='sendCode()' v-if="get_code">获取验证码</text>
-				<text class="input-title" v-else>{{count}}秒后重新获取</text>
-			</view>
-			<view class="input-buttom">
-			</view>
-		</view>
-
-
-		<view class="btn-row">
-			<button class="cu-btn" @tap="bindLogin">登录</button>
-		</view>
 		<view class="action-row">
 			<navigator url="../reg/reg">注册账号</navigator>
 			<text>|</text>
@@ -53,7 +56,10 @@
 </template>
 
 <script>
+	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
+	import {setToken} from '@/utils/common.js'
+	//import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -62,63 +68,48 @@
 				count: 60,
 				// 登录表单请求数据
 				fromList: {
-				mobile: '', //手机号
-				password: '', // 密码
-				code: '', // 验证码
-				}
-
+					mobile: '', //手机号
+					password: '', // 密码
+					code: '', // 验证码
+					username: '' //用户名
+				},
+				//定义表单规则
+				rules: [{
+						name: "username",
+						checkType: "notnull",
+						checkRule: "",
+						errorMsg: "请输入手机号或用户名"
+					},
+					{
+						name: "mobile",
+						checkType: "phoneno",
+						checkRule: "",
+						errorMsg: "请输入正确的手机号"
+					},
+					{
+						name: "code",
+						checkType: "string",
+						checkRule: "6,6",
+						errorMsg: "请输入验证码"
+					},
+					{
+						name: "password",
+						checkType: "notnull",
+						checkRule: "",
+						errorMsg: "请输入密码"
+					},
+				]
 			}
 		},
 		methods: {
-			checkoutlogin(index){
-				console.log(index)
-				if(index ==0) {
-					this.current=0
-				}
-				else{
-					this.current=1
+			checkoutlogin(index) {
+				if (index == 0) {
+					this.current = 0
+				} else {
+					this.current = 1
 				}
 			},
-			// 登录
-			bindLogin() {
-				if (this.fromList.mobile.length < 11 || this.fromList.mobile.length < 0) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入正确的账户'
-					});
-					return;
-				}
-				if (this.fromList.password.length < 6 || this.fromList.password.length > 15) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码为6~15位'
-					});
-					return;
-				}
-				this.request({
-					url: interfaces.getLoignData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							mobile: this.fromList.mobile,
-							code: this.fromList.code,
-							state_code: '86',
-							type: this.fromList.mobile ? 'code_login' : 'pass_login',
-						}
-					},
-					success: ((res) => {
-						console.log(res, 111);
-						this.loginList = res.data;
-						if (res.code !== 200) {
-							uni.showToast({
-								title: res.message,
-								icon: "none"
-							});
-						}
-					})
-				});
-			},
+
 			//发送验证码
 			sendCode() {
 				if (this.fromList.mobile !== "") {
@@ -149,10 +140,67 @@
 						}
 					},
 					success: ((res) => {
-						console.log(res);
+						//console.log(res);
 					})
 				})
 			},
+
+			// 登录
+			formSubmit: function(e) {
+				//进行表单检查
+				var formData = e.detail.value;
+				var checkRes = graceChecker.check(formData, this.rules);
+				if (!checkRes) {
+					uni.showToast({
+						title: graceChecker.error,
+						icon: "none"
+					});
+				}
+				if (checkRes) {
+					this.request({
+						url: interfaces.getLoignData,
+						dataType: "JSON",
+						method: 'POST', //请求方式
+						data: {
+							data: {
+								type: this.fromList.mobile?'code_login':'pass_login', 
+								//手机号登录
+								mobile: this.fromList.mobile,
+								code: this.fromList.code,//验证码
+								//密码登录
+								user_name: this.fromList.username,
+								 password: this.fromList.password,
+								state_code: '86',//国家区号
+							}
+						},
+						success: (res) => {
+							console.log(res);
+							if (res.code !== 200) {
+								uni.showToast({
+									title: res.message,
+									icon: "none"
+								});
+								return;
+							}else{
+								
+								 const profile = setToken(res.data.token,res.data.client);
+									console.log(profile);
+								uni.switchTab({
+									url:"/pages/personalCenter/personalCenter"
+								})
+							}		
+						},
+						fail: (e) => {
+						    uni.showModal({
+						        content: "请求失败，请重试！",
+						        showCancel: false
+						    })
+						}
+					});
+				}
+			},
+
+				//...mapMutations(['login'])
 		}
 
 	}
@@ -160,11 +208,9 @@
 
 <style>
 	.input-group {
-		box-sizing: border-box;
-		padding: 18.11rpx;
-		background-color: #ffffff;
-		position: relative;
-		top: 54.34rpx;
+		margin:36.23rpx 5% 90.57rpx;
+		border-radius:9.05rpx;
+		overflow: hidden;
 	}
 
 	.checkout-login {
@@ -176,6 +222,7 @@
 		box-sizing: border-box;
 		padding: 27.17rpx 0rpx;
 	}
+
 	.checkout-one {
 		display: block;
 		display: flex;
@@ -186,13 +233,13 @@
 		color: #44a78d;
 		border-bottom: 5.43rpx solid #44a78d;
 	}
-	
-	
-	.title {
+
+
+	/* .title {
 		width: 130.43rpx;
 		padding-left: 27.17rpx;
 		color: #44a78d;
-	}
+	} */
 
 	.input-row {
 		display: flex;
@@ -230,7 +277,7 @@
 	}
 
 	.cu-btn {
-		width: 576.08rpx;
+		width:80%;
 		height: 72.46rpx;
 		line-height: 72.46rpx;
 		background: #44a78d;
@@ -239,13 +286,11 @@
 		font-size: 32.6rpx;
 		color: #fff;
 		cursor: pointer;
-		position: relative;
-		top: 139.49rpx;
+		
 	}
 
 	.input-title {
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
 	}
-	
 </style>

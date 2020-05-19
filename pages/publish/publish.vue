@@ -18,18 +18,18 @@
 			return {
 				currentPage:'/pages/publish/publish',
 			lists:[
-				{img:"/static/images/purchase-icon.png",title:"发布采购"},
-				{img:"/static/images/sales-icon.png",title:"发布销售"},
-				{img:"/static/images/release-icon.png",title:"发布委托"}
+				{img:"/static/images/purchase-icon.png",title:"发布采购",type:"1"},
+				{img:"/static/images/sales-icon.png",title:"发布销售",type:"2"},
+				{img:"/static/images/release-icon.png",title:"发布委托",type:"3"}
 			],
 			
 			}
 		},
 		methods: {
 			handlePublish(item){
-				// 页面跳转 商品详情
+				// 页面跳转 发布详情
 				uni.navigateTo({
-					url:"/pages/publish/publishBuy/publishOne?"+item.title
+					url:"/pages/publish/publishBuy/publishOne?type="+item.type
 				})
 			}
 		}
