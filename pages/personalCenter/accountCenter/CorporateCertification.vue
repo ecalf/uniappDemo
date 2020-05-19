@@ -7,7 +7,7 @@
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">开户银行</view>
-				<input class="uni-input" name="nickname" placeholder="请输入开户行" />
+				<cl-select v-model="form.selectbrand" :options="options.bank" class="uni-input"></cl-select>
 			</view>
 			<view class="uni-form-item uni-column uni-cc">
 				<view class="title">银行账户</view>
@@ -25,9 +25,9 @@
 				<view class="title">负责人姓名</view>
 				<input class="uni-input" name="nickname" placeholder="请输入负责人姓名" />
 			</view>
-			<view class="uni-form-item uni-column ">
+			<view class="uni-form-item uni-column uni-aa ">
 				<view class="title">公司类型</view>
-				<input class="uni-input" name="nickname" placeholder="请输入公司类型" />
+				<cl-select v-model="form.selectbrand" :options="options.selectbrand" class="uni-input"></cl-select>
 			</view>
 			<view class="uni-form-item uni-column ">
 				<view class="title">公司网址</view>
@@ -35,8 +35,9 @@
 			</view>
 			<view class="uni-form-item uni-column uni-cc">
 				<view class="title">所属行业</view>
-				<input class="uni-input" name="nickname" placeholder="请输入所属行业" />
+				<cl-select v-model="form.selectbrand" :options="options.profession" class="uni-input"></cl-select>
 			</view>
+					
 
 			<!--上传图片-->
 			<view class="uni-form-item uoload-wrap">
@@ -94,11 +95,89 @@
 </template>
 
 <script>
+	import interfaces from '@/utils/interfaces.js'
 	var graceChecker = require("../../../utils/graceChecker.js");
 	export default {
 
 		data() {
 			return {
+				CorporateformList:{}, //请求数据
+				Corporateform:{
+					scene:'identify_person',
+					idcard:'identify_person',
+					hand_identify_card_photo:'identify_person',
+					organization_name:'identify_person',
+					contact_name:'',
+					contact_phone:'',
+					company_name:'',
+					contact_name:'',
+					business_license:'',
+					business_license_code:'',
+					official_letter:'',
+					company_form:'',
+					bank_name:'',
+					bank_branch_name:'',
+					bank_account:'',
+					full_name:'',
+				},
+				form: {
+					selectbrand: 0,
+				},
+				options: {
+					bank: [
+						{
+							label: '请选择银行',
+							value: 0
+						},{
+							label: '工商银行',
+							value: 1
+						},
+						{
+							label: '农业银行',
+							value: 2
+						},
+						{
+							label: '浦发银行',
+							value: 3
+						}
+					
+					],
+					selectbrand: [
+						{
+							label: '请选择类型',
+							value: 0
+						},{
+							label: '贸易公司',
+							value: 1
+						},
+						{
+							label: '运输公司',
+							value: 2
+						},
+						{
+							label: '金融公司',
+							value: 3
+						}
+					
+					],
+					profession:[
+						{
+							label: '请选择行业',
+							value: 0
+						},{
+							label: '运输行业',
+							value: 1
+						},
+						{
+							label: '金融行业',
+							value: 2
+						},
+						{
+							label: '贸易行业',
+							value: 3
+						}
+					],
+				},
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表
 				fileList: [],
@@ -143,8 +222,48 @@
 			},
 			formReset: function(e) {
 				console.log('清空数据')
-			}
+			},
+			getCorporateList(){
+				this.request({
+					url: interfaces.getCorporateData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							scene:this.Corporateform.scene,
+							idcard:this.Corporateform.idcard,
+							hand_identify_card_photo:this.Corporateform.hand_identify_card_photo,
+							organization_name:this.Corporateform.organization_name,
+							contact_name:this.Corporateform.contact_name,
+							contact_phone:this.Corporateform.contact_phone,
+							company_name:this.Corporateform.company_name,
+							contact_name:this.Corporateform.contact_name,
+							business_license:this.Corporateform.business_license,
+							business_license_code:this.Corporateform.business_license_code,
+							official_letter:this.Corporateform.official_letter,
+							company_form:this.Corporateform.company_form,
+							bank_name:this.Corporateform.bank_name,
+							bank_branch_name:this.Corporateform.bank_branch_name,
+							bank_account:this.Corporateform.bank_account,
+							full_name:this.Corporateform.full_name,
+						}
+					},
+					success: ((res) => {
+						console.log(res, 222);
+						this.loginList = res.data;
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+						}
+					})
+				});
 		},
+		},
+		onLoad(){
+			this.getCorporateList()
+		}
 	}
 </script>
 
@@ -171,4 +290,6 @@
 		margin-bottom: 18.11rpx;
 
 	}
+
+
 </style>

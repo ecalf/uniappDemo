@@ -22,8 +22,9 @@
 					</view>
 				</view>
 			</view>
+	
 			<!-- 手机登录 -->
-			<view class="input-group" v-else>
+			<view class="input-group" v-if="current==1">
 				<view class="uni-form-item">
 					<view class="title">账号</view>
 					<view class="uni-input">
@@ -40,6 +41,9 @@
 						</view>
 					</view>
 				</view>
+				
+
+
 			</view>
 			<view class="btn-row">
 				<button class="cu-btn" form-type="submit">登录</button>
@@ -58,8 +62,15 @@
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
+<<<<<<< HEAD
 	import {setToken} from '@/utils/common.js'
 	import {mapMutations} from 'vuex';
+=======
+	import {
+		setToken
+	} from '@/utils/common.js'
+	//import {mapMutations} from 'vuex';
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 	export default {
 		data() {
 			return {
@@ -101,6 +112,7 @@
 				]
 			}
 		},
+
 		methods: {
 			checkoutlogin(index) {
 				if (index == 0) {
@@ -163,14 +175,14 @@
 						method: 'POST', //请求方式
 						data: {
 							data: {
-								type: this.fromList.mobile?'code_login':'pass_login', 
+								type: this.fromList.mobile ? 'code_login' : 'pass_login',
 								//手机号登录
 								mobile: this.fromList.mobile,
-								code: this.fromList.code,//验证码
+								code: this.fromList.code, //验证码
 								//密码登录
 								user_name: this.fromList.username,
-								 password: this.fromList.password,
-								state_code: '86',//国家区号
+								password: this.fromList.password,
+								state_code: '86', //国家区号
 							}
 						},
 						success: (res) => {
@@ -181,27 +193,38 @@
 									icon: "none"
 								});
 								return;
+<<<<<<< HEAD
 							}else{				
 								 //const profile = setToken(res.data.token,res.data.client);
 									this.login(res.data);
 									//console.log(res.data);
 									// this.$store.commit('profile/updateProfile',profile);
+=======
+							} else {
+
+								const profile = setToken(res.data.token, res.data.client);
+								console.log(profile);
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 								uni.switchTab({
-									url:"/pages/personalCenter/personalCenter"
+									url: "/pages/personalCenter/personalCenter"
 								})
-							}		
+							}
 						},
 						fail: (e) => {
-						    uni.showModal({
-						        content: "请求失败，请重试！",
-						        showCancel: false
-						    })
+							uni.showModal({
+								content: "请求失败，请重试！",
+								showCancel: false
+							})
 						}
 					});
 				}
 			},
 
+<<<<<<< HEAD
 			...mapMutations(['login'])
+=======
+			//...mapMutations(['login'])
+>>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 		}
 
 	}
@@ -209,8 +232,8 @@
 
 <style>
 	.input-group {
-		margin:36.23rpx 5% 90.57rpx;
-		border-radius:9.05rpx;
+		margin: 36.23rpx 5% 90.57rpx;
+		border-radius: 9.05rpx;
 		overflow: hidden;
 	}
 
@@ -278,7 +301,7 @@
 	}
 
 	.cu-btn {
-		width:80%;
+		width: 80%;
 		height: 72.46rpx;
 		line-height: 72.46rpx;
 		background: #44a78d;
@@ -287,11 +310,15 @@
 		font-size: 32.6rpx;
 		color: #fff;
 		cursor: pointer;
-		
+
 	}
 
 	.input-title {
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
+	}
+
+	.input-cy {
+		padding-left: 18.11rpx;
 	}
 </style>
