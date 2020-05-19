@@ -106,7 +106,7 @@
 				dataSource: [],
 				options: {
 					selectbrand: [{
-							label: '海南东山羊',
+							label: '请选择品牌',
 							value: 0
 						},
 						{
