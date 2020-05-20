@@ -14,15 +14,13 @@
 			<view class="uni-form-item upload-images">
 				<upload-file></upload-file>
 			</view>
-			<!-- <view class="uni-form-item m-cl-box">
-				<cl-card label="" class="brand-bg">
-					<cl-select v-model="formData.brand" :options="options.selectbrand"></cl-select>
-				</cl-card>
-			</view> -->
-			<view class="uni-form-item">
-				
-			</view>
 			
+			<view class="uni-form-item">
+				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="cn_name">
+					<view class="uni-input">{{selectbrand[index].cn_name}}</view>
+				</picker>
+			</view>
+
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
@@ -90,7 +88,7 @@
 	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
 	import httpTypes from '@/utils/http-types'
-	
+
 	export default {
 		components: {
 			uploadFile,
@@ -122,65 +120,9 @@
 					deadtime: '', //截止时间
 					service: '' //增值服务,非必须选
 				},
-				dataSource: [],//出口国家
-				options: {
-<<<<<<< HEAD
-					selectbrand: [], //品牌种类
-=======
-					selectbrand: [{
-							label: '请选择品牌',
-							value: 0
-						},
-						{
-							label: '乌鱼子',
-							value: 1
-						},
-						{
-							label: '葛仙米',
-							value: 2
-						},
-						{
-							label: '亚东鲑鱼',
-							value: 3
-						},
-						{
-							label: '虫草',
-							value: 4
-						},
-						{
-							label: '太湖银鱼',
-							value: 5
-						}
-					],
-					country: [{
-							label: '中国',
-							value: 0
-						},
-						{
-							label: '乌鱼子',
-							value: 1
-						},
-						{
-							label: '葛仙米',
-							value: 2
-						},
-						{
-							label: '亚东鲑鱼',
-							value: 3
-						},
-						{
-							label: '虫草',
-							value: 4
-						},
-						{
-							label: '太湖银鱼',
-							value: 5
-						}
-					],
-
-					url2: ['https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg'],
->>>>>>> 47a25879bac78dbf162fd8f13b34e3a6d8488154
-				},
+				dataSource: [], //出口国家
+				index: 0,
+				selectbrand: [],
 				//多图上传
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表
@@ -236,6 +178,7 @@
 					},
 					success: ((res) => {
 						//console.log(res.data);
+						this.selectbrand=res.data;
 					})
 				});
 			},
@@ -309,7 +252,10 @@
 					}
 				}
 			},
-
+			bindPickerChange: function(e) {
+				console.log('picker发送选择改变，携带值为：' + e.detail.value)
+				this.index = e.detail.value
+			},
 		}
 	}
 </script>
