@@ -14,6 +14,7 @@ function request(obj) {
 			//'Accept': 'application/json',
 			'Content-Type': 'application/x-www-form-urlencoded', //自定义请求头信息
 			'Authorization': token,
+			'Token': token,
 		},
 		method: method,
 		success: function(res) {

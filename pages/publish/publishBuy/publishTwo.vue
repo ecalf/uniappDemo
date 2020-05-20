@@ -16,12 +16,12 @@
 			</view>
 
 			<view class="uni-form-item">
+				<view class="uni-input uni-input-left">
 				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
-					<view class="uni-input">
-						{{selectbrand[index]}}
-					</view>
+					{{selectbrand[index]}}		
 				</picker>
-				<cl-icon name="cl-icon-search"></cl-icon>
+				</view>
+				<cl-icon name="cl-icon-arrow-right"></cl-icon>
 			</view>
 
 			<view class="uni-form-item m-form-item">
@@ -90,8 +90,6 @@
 	import combox from '@/components/uni-combox/uni-combox'
 	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
-	// import httpTypes from '@/utils/http-types'
-
 	export default {
 		components: {
 			uploadFile,
