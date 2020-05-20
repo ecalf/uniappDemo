@@ -76,6 +76,10 @@
 						{
 							label: '金融公司',
 							value: 3
+						},
+						{
+							label: '互联网公司',
+							value: 4
 						}
 					],
 					profession: [
@@ -91,8 +95,12 @@
 							value: 2
 						},
 						{
-							label: '其他',
+							label: '教育行业',
 							value: 3
+						},
+						{
+							label: '其他',
+							value: 4
 						}
 							
 					]

@@ -21,7 +21,6 @@ const interfaces = {
    
    //发送验证码
 	getCodeData:domain+"/v1/msg/send",
-	
 	//登录
 	getLoignData: domain + "/v1/user/login",
 	//个人认证

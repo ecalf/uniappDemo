@@ -263,8 +263,6 @@
 
 	}
 
-
-
 	.usersname {
 		color: #fff;
 		font-size: 25.36rpx;
@@ -274,10 +272,13 @@
 		display: inline-block;
 		width: 16.3rpx;
 		height: 28.98rpx;
-		position: relative;
-		left: 188.4rpx;
-		top: 0rpx;
-
+		position: absolute;
+	   right: 54.34rpx;
+		top: 108.69rpx;
+		img{
+			width: 100%;
+			height: 100%;
+		}
 	}
 
 	.header-vip {
@@ -312,15 +313,17 @@
 	.vip-box {
 		width: 126.81rpx;
 		height: 50.72rpx;
-		line-height: 50.72rpx;
 		background-color: #17F2B9;
 		box-shadow: 0rpx 5.43rpx 10.86rpx 0rpx #11413b;
 		border-radius: 25.36rpx;
-		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		opacity: 0.8;
 		float: right;
 		color: #05544a;
 		font-size: 21.73rpx;
+		margin-top: 9.05rpx;
 	}
 
 	.vip-join {
@@ -329,7 +332,6 @@
 		line-height: 28.98rpx;
 		letter-spacing: 0rpx;
 		color: #05544a;
-		text-align: center;
 	}
 
 	.procurement {

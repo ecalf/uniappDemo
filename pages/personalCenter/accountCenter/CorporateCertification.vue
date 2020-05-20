@@ -37,7 +37,6 @@
 				<view class="title">所属行业</view>
 				<cl-select v-model="form.selectbrand" :options="options.profession" class="uni-input"></cl-select>
 			</view>
-					
 
 			<!--上传图片-->
 			<view class="uni-form-item uoload-wrap">
@@ -101,34 +100,33 @@
 
 		data() {
 			return {
-				CorporateformList:{}, //请求数据
-				Corporateform:{
-					scene:'identify_person',
-					idcard:'identify_person',
-					hand_identify_card_photo:'identify_person',
-					organization_name:'identify_person',
-					contact_name:'',
-					contact_phone:'',
-					company_name:'',
-					contact_name:'',
-					business_license:'',
-					business_license_code:'',
-					official_letter:'',
-					company_form:'',
-					bank_name:'',
-					bank_branch_name:'',
-					bank_account:'',
-					full_name:'',
+				CorporateformList: {}, //请求数据
+				Corporateform: {
+					scene: 'identify_person',
+					idcard: 'identify_person',
+					hand_identify_card_photo: 'identify_person',
+					organization_name: 'identify_person',
+					contact_name: '',
+					contact_phone: '',
+					company_name: '',
+					contact_name: '',
+					business_license: '',
+					business_license_code: '',
+					official_letter: '',
+					company_form: '',
+					bank_name: '',
+					bank_branch_name: '',
+					bank_account: '',
+					full_name: '',
 				},
 				form: {
 					selectbrand: 0,
 				},
 				options: {
-					bank: [
-						{
+					bank: [{
 							label: '请选择银行',
 							value: 0
-						},{
+						}, {
 							label: '工商银行',
 							value: 1
 						},
@@ -140,13 +138,12 @@
 							label: '浦发银行',
 							value: 3
 						}
-					
+
 					],
-					selectbrand: [
-						{
+					selectbrand: [{
 							label: '请选择类型',
 							value: 0
-						},{
+						}, {
 							label: '贸易公司',
 							value: 1
 						},
@@ -157,14 +154,17 @@
 						{
 							label: '金融公司',
 							value: 3
-						}
-					
-					],
-					profession:[
+						},
 						{
+							label: '互联网公司',
+							value: 4
+						}
+
+					],
+					profession: [{
 							label: '请选择行业',
 							value: 0
-						},{
+						}, {
 							label: '运输行业',
 							value: 1
 						},
@@ -175,6 +175,10 @@
 						{
 							label: '贸易行业',
 							value: 3
+						},
+						{
+							label: '教育行业',
+							value: 4
 						}
 					],
 				},
@@ -194,7 +198,7 @@
 		},
 		methods: {
 			onListChange(lists) {
-				
+
 			},
 			formSubmit: function(e) {
 				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
@@ -223,29 +227,29 @@
 			formReset: function(e) {
 				console.log('清空数据')
 			},
-			getCorporateList(){
+			getCorporateList() {
 				this.request({
 					url: interfaces.getCorporateData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							scene:this.Corporateform.scene,
-							idcard:this.Corporateform.idcard,
-							hand_identify_card_photo:this.Corporateform.hand_identify_card_photo,
-							organization_name:this.Corporateform.organization_name,
-							contact_name:this.Corporateform.contact_name,
-							contact_phone:this.Corporateform.contact_phone,
-							company_name:this.Corporateform.company_name,
-							contact_name:this.Corporateform.contact_name,
-							business_license:this.Corporateform.business_license,
-							business_license_code:this.Corporateform.business_license_code,
-							official_letter:this.Corporateform.official_letter,
-							company_form:this.Corporateform.company_form,
-							bank_name:this.Corporateform.bank_name,
-							bank_branch_name:this.Corporateform.bank_branch_name,
-							bank_account:this.Corporateform.bank_account,
-							full_name:this.Corporateform.full_name,
+							scene: this.Corporateform.scene,
+							idcard: this.Corporateform.idcard,
+							hand_identify_card_photo: this.Corporateform.hand_identify_card_photo,
+							organization_name: this.Corporateform.organization_name,
+							contact_name: this.Corporateform.contact_name,
+							contact_phone: this.Corporateform.contact_phone,
+							company_name: this.Corporateform.company_name,
+							contact_name: this.Corporateform.contact_name,
+							business_license: this.Corporateform.business_license,
+							business_license_code: this.Corporateform.business_license_code,
+							official_letter: this.Corporateform.official_letter,
+							company_form: this.Corporateform.company_form,
+							bank_name: this.Corporateform.bank_name,
+							bank_branch_name: this.Corporateform.bank_branch_name,
+							bank_account: this.Corporateform.bank_account,
+							full_name: this.Corporateform.full_name,
 						}
 					},
 					success: ((res) => {
@@ -259,9 +263,9 @@
 						}
 					})
 				});
+			},
 		},
-		},
-		onLoad(){
+		onLoad() {
 			this.getCorporateList()
 		}
 	}
@@ -290,6 +294,4 @@
 		margin-bottom: 18.11rpx;
 
 	}
-
-
 </style>

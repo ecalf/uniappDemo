@@ -217,6 +217,13 @@
 					},
 					success: ((res) => {
 						console.log(res,333);
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+							return;
+						}
 					})
 				})
 			}
