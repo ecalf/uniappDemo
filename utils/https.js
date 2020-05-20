@@ -14,7 +14,7 @@ module.exports = (param) => {
 	
 	// 发起请求 加载动画
 	if(!param.hideLoading){
-		//uni.showLoading({title:"加载中..."})
+		uni.showLoading({title:"加载中..."})
 	}
 	
 	// 发起网络请求
@@ -40,8 +40,8 @@ module.exports = (param) => {
 			typeof param.fail == "function" && param.fail(e.data);
 		},
 		complete: () => {
-			// console.log("网络请求complete");
-			//uni.hideLoading();
+			//console.log("网络请求complete");
+			uni.hideLoading();
 			typeof param.complete == "function" && param.complete(e.data);
 			return;
 		}

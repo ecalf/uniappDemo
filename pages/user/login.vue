@@ -22,9 +22,8 @@
 					</view>
 				</view>
 			</view>
-	
 			<!-- 手机登录 -->
-			<view class="input-group" v-if="current==1">
+			<view class="input-group" v-else>
 				<view class="uni-form-item">
 					<view class="title">账号</view>
 					<view class="uni-input">
@@ -41,9 +40,6 @@
 						</view>
 					</view>
 				</view>
-				
-
-
 			</view>
 			<view class="btn-row">
 				<button class="cu-btn" form-type="submit">登录</button>
@@ -62,15 +58,9 @@
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
-<<<<<<< HEAD
-	import {setToken} from '@/utils/common.js'
-	import {mapMutations} from 'vuex';
-=======
 	import {
-		setToken
-	} from '@/utils/common.js'
-	//import {mapMutations} from 'vuex';
->>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
+		mapMutations
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -112,7 +102,6 @@
 				]
 			}
 		},
-
 		methods: {
 			checkoutlogin(index) {
 				if (index == 0) {
@@ -193,18 +182,28 @@
 									icon: "none"
 								});
 								return;
-<<<<<<< HEAD
-							}else{				
-								 //const profile = setToken(res.data.token,res.data.client);
-									this.login(res.data);
-									//console.log(res.data);
-									// this.$store.commit('profile/updateProfile',profile);
-=======
 							} else {
 
-								const profile = setToken(res.data.token, res.data.client);
-								console.log(profile);
->>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
+								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
+								console.log(clientToken);
+								let userInfo = {
+									userId: res.data.client.uid,
+									token: clientToken,
+									userName: res.data.client.user_name
+								}
+								uni.setStorage({
+									key:'Token',
+									data: userInfo,
+									success: (res) => {
+										uni.getStorage({
+											key:'Token',
+											success: (res) => {
+												console.log(res.data);
+											}
+										})
+									}
+								});
+
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
@@ -220,11 +219,7 @@
 				}
 			},
 
-<<<<<<< HEAD
-			...mapMutations(['login'])
-=======
 			//...mapMutations(['login'])
->>>>>>> c810862026e1e5eb5c2f60580c52b2044fa947d1
 		}
 
 	}
@@ -316,9 +311,5 @@
 	.input-title {
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
-	}
-
-	.input-cy {
-		padding-left: 18.11rpx;
 	}
 </style>
