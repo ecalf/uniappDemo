@@ -1,6 +1,5 @@
 const userInfo = uni.getStorageSync('Token'); //获取token
 const token = userInfo.token //获取token
-console.log('token', token);
 // 请求封装
 function request(obj) {
 	let url = '/api/' + obj.url; //地址
