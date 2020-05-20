@@ -4,11 +4,23 @@ module.exports = (param) => {
 	var header = param.header || {};
 	var data = param.data || {};
 	
+
+	//token
+	const userInfo = uni.getStorageSync('Token'); //获取token
+	if(userInfo&&userInfo.token){
+		const token = userInfo.token //获取token
+		console.log('token', token);
+		header['Authorization'] = token;
+	}
+	
+	
+
+
 	// 请求方式: GET POST 
 	if(method){
 		method = method.toUpperCase(); // 小写转成大写
 		if(method == "POST"){
-			header = {"content-type":"application/json"}
+			header["content-type"] = "application/json";
 		}
 	}
 	
@@ -16,6 +28,8 @@ module.exports = (param) => {
 	if(!param.hideLoading){
 		uni.showLoading({title:"加载中..."})
 	}
+
+
 	
 	// 发起网络请求
 	uni.request({
