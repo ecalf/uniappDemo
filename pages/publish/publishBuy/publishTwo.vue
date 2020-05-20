@@ -124,7 +124,62 @@
 				},
 				dataSource: [],//出口国家
 				options: {
+<<<<<<< HEAD
 					selectbrand: [], //品牌种类
+=======
+					selectbrand: [{
+							label: '请选择品牌',
+							value: 0
+						},
+						{
+							label: '乌鱼子',
+							value: 1
+						},
+						{
+							label: '葛仙米',
+							value: 2
+						},
+						{
+							label: '亚东鲑鱼',
+							value: 3
+						},
+						{
+							label: '虫草',
+							value: 4
+						},
+						{
+							label: '太湖银鱼',
+							value: 5
+						}
+					],
+					country: [{
+							label: '中国',
+							value: 0
+						},
+						{
+							label: '乌鱼子',
+							value: 1
+						},
+						{
+							label: '葛仙米',
+							value: 2
+						},
+						{
+							label: '亚东鲑鱼',
+							value: 3
+						},
+						{
+							label: '虫草',
+							value: 4
+						},
+						{
+							label: '太湖银鱼',
+							value: 5
+						}
+					],
+
+					url2: ['https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg'],
+>>>>>>> 47a25879bac78dbf162fd8f13b34e3a6d8488154
 				},
 				//多图上传
 				action: 'http://192.168.100.17/index.php/index/index/upload',
