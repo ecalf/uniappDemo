@@ -4,18 +4,28 @@ module.exports = (param) => {
 	var header = param.header || {};
 	var data = param.data || {};
 	
+
+	//token
+	const userInfo = uni.getStorageSync('Token'); //获取token
+	if(userInfo&&userInfo.token){
+		const token = userInfo.token //获取token
+		header['Authorization'] = token;
+	}
+
 	// 请求方式: GET POST 
 	if(method){
 		method = method.toUpperCase(); // 小写转成大写
 		if(method == "POST"){
-			header = {"content-type":"application/json"}
+			header["content-type"] = "application/json";
 		}
 	}
 	
 	// 发起请求 加载动画
 	if(!param.hideLoading){
-		//uni.showLoading({title:"加载中..."})
+		uni.showLoading({title:"加载中..."})
 	}
+
+
 	
 	// 发起网络请求
 	uni.request({
@@ -40,8 +50,8 @@ module.exports = (param) => {
 			typeof param.fail == "function" && param.fail(e.data);
 		},
 		complete: () => {
-			// console.log("网络请求complete");
-			//uni.hideLoading();
+			//console.log("网络请求complete");
+			uni.hideLoading();
 			typeof param.complete == "function" && param.complete(e.data);
 			return;
 		}

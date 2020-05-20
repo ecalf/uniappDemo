@@ -1,11 +1,11 @@
 <template>
 	<view class="pb60">
 
-		<cl-form ref="form" :model.sync="formData" :rules="rules">
+		<cl-form ref="form" :model.sync="formData">
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="标题" class="uni-tl-input" v-model="formData.title" ></cl-input>
+					<cl-input placeholder="标题" class="uni-tl-input" v-model="formData.title"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
@@ -14,11 +14,16 @@
 			<view class="uni-form-item upload-images">
 				<upload-file></upload-file>
 			</view>
-			<view class="uni-form-item m-cl-box">
-				<cl-card label="" class="brand-bg">
-					<cl-select :options="options.selectbrand"></cl-select>
-				</cl-card>
+
+			<view class="uni-form-item">
+				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
+					<view class="uni-input">
+						{{selectbrand[index]}}
+					</view>
+				</picker>
+				<cl-icon name="cl-icon-search"></cl-icon>
 			</view>
+
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
@@ -32,13 +37,13 @@
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>价格</view>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="￥ 0.00"></cl-input>
+					<cl-input placeholder="￥ 0.00" v-model="formData.price"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
 				<view class="title"><text class="colorred">*</text>截止日期</view>
 				<cl-form-item label="" class="uni-input" prop="date" justify="end">
-					<cl-select mode="date" placeholder="请点击选择" v-model="formData.date"></cl-select>
+					<cl-select mode="date" placeholder="请点击选择" v-model="formData.deadtime"></cl-select>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
@@ -82,8 +87,11 @@
 <script>
 	import uploadFile from '@/components/uploadFile/uploadFile'
 	import inputSearch from '@/components/p-inputSearch/inputSearch'
-	import interfaces from '@/utils/interfaces.js'
+	import combox from '@/components/uni-combox/uni-combox'
+	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
+	// import httpTypes from '@/utils/http-types'
+
 	export default {
 		components: {
 			uploadFile,
@@ -92,13 +100,12 @@
 		},
 		data() {
 			return {
-				date: "",
 				formData: {
 					category: '', //产品类别
 					entrust: '', //委托类型,仅委托表单可用
 					title: '', //标题
 					desc: '', //描述
-					selectbrand: '', //品牌选择
+					brand: '', //品牌选择
 					otherBrand: '', //其他品牌,非必选
 					country: '', //出口国,非必填
 					supplierPrice: '', //供应商价格,仅发布销售可用
@@ -114,71 +121,12 @@
 					video: '', //上传视频
 					richDesc: '', //富文本描述
 					deadtime: '', //截止时间
-					service: '', //增值服务,非必须选
-					//selectbrand: 0,
-					date: "",
+					service: '' //增值服务,非必须选
 				},
-				rules: {
-					date: {
-						required: true,
-						message: "活动时间不能为空",
-					}
-				},
-				dataSource: [],
-				options: {
-					selectbrand: [{
-							label: '请选择品牌',
-							value: 0
-						},
-						{
-							label: '乌鱼子',
-							value: 1
-						},
-						{
-							label: '葛仙米',
-							value: 2
-						},
-						{
-							label: '亚东鲑鱼',
-							value: 3
-						},
-						{
-							label: '虫草',
-							value: 4
-						},
-						{
-							label: '太湖银鱼',
-							value: 5
-						}
-					],
-					country: [{
-							label: '中国',
-							value: 0
-						},
-						{
-							label: '乌鱼子',
-							value: 1
-						},
-						{
-							label: '葛仙米',
-							value: 2
-						},
-						{
-							label: '亚东鲑鱼',
-							value: 3
-						},
-						{
-							label: '虫草',
-							value: 4
-						},
-						{
-							label: '太湖银鱼',
-							value: 5
-						}
-					],
-
-					url2: ['https://cool-comm.oss-cn-shenzhen.aliyuncs.com/show/imgs/avatar.jpeg'],
-				},
+				dataSource: [], //出口国家
+				index: 0,
+				selectbrand: [],
+				//多图上传
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表
 				fileList: [],
@@ -215,9 +163,44 @@
 
 		},
 		onLoad() {
+			this.selectData(); //选择品牌
 			this.initData();
+			this.countryData(); //出口国
 		},
 		methods: {
+			//品牌种类
+			selectData() {
+				this.request({
+					url: interfaces.getBrandData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							cate_id: 3
+						}
+					},
+					success: ((res) => {
+						const data = []
+						for (let i = 0; i < res.data.length; i++) {
+							data.push(
+								res.data[i].cn_name
+							)
+						}
+						this.selectbrand=data;
+					})
+				});
+			},
+			//出口国
+			countryData() {
+				this.request({
+					url: interfaces.getCountryData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					success: ((res) => {
+						this.dataSource = res.data;
+					})
+				});
+			},
 			initData() {
 				this.request({
 					url: interfaces.getPublishData,
@@ -225,7 +208,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							id: '',
+							needs_id: "14"
 						}
 					},
 					success: ((res) => {
@@ -262,7 +245,9 @@
 					}
 				}
 			},
-
+			bindPickerChange: function(e) {
+				this.index = e.detail.value
+			},
 		}
 	}
 </script>

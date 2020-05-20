@@ -22,9 +22,12 @@
 					</view>
 				</view>
 			</view>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 			<!-- 手机登录 -->
-			<view class="input-group" v-if="current==1">
+			<view class="input-group" v-else>
 				<view class="uni-form-item">
 					<view class="title">账号</view>
 					<view class="uni-input">
@@ -41,9 +44,12 @@
 						</view>
 					</view>
 				</view>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 			</view>
 			<view class="btn-row">
 				<button class="cu-btn" form-type="submit">登录</button>
@@ -63,6 +69,7 @@
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
 	import {
+<<<<<<< HEAD
 		setToken
 	} from '@/utils/common.js'
 	import {
@@ -70,6 +77,10 @@
 	} from 'vuex';
 
 
+=======
+		mapMutations
+	} from 'vuex';
+>>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 	export default {
 		data() {
 			return {
@@ -111,7 +122,6 @@
 				]
 			}
 		},
-
 		methods: {
 			checkoutlogin(index) {
 				if (index == 0) {
@@ -192,6 +202,7 @@
 									icon: "none"
 								});
 								return;
+<<<<<<< HEAD
 
 							}
 							// else if {
@@ -204,6 +215,30 @@
 							else {
 								const profile = setToken(res.data.token, res.data.client);
 								console.log(profile);
+=======
+							} else {
+
+								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
+								console.log(clientToken);
+								let userInfo = {
+									userId: res.data.client.uid,
+									token: clientToken,
+									userName: res.data.client.user_name
+								}
+								uni.setStorage({
+									key:'Token',
+									data: userInfo,
+									success: (res) => {
+										uni.getStorage({
+											key:'Token',
+											success: (res) => {
+												console.log(res.data);
+											}
+										})
+									}
+								});
+
+>>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
@@ -219,10 +254,14 @@
 				}
 			},
 
+<<<<<<< HEAD
 			...mapMutations(['login'])
 
 			//...mapMutations(['login'])
 
+=======
+			//...mapMutations(['login'])
+>>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 		}
 
 	}
@@ -314,9 +353,5 @@
 	.input-title {
 		border: 1.81rpx solid #CCCCCC;
 		background-color: #CCCCCC;
-	}
-
-	.input-cy {
-		padding-left: 18.11rpx;
 	}
 </style>

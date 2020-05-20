@@ -79,8 +79,7 @@
 				//console.log('onListChange', lists);
 				this.lists = lists;
 				this.imgurl.push(this.lists[0].url);
-				console.log(this.lists[0].url);
-					console.log(this.imgurl);
+
 			},
 			confirm(){
 				uni.request({
