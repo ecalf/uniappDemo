@@ -22,10 +22,7 @@
 					</view>
 				</view>
 			</view>
-<<<<<<< HEAD
 
-=======
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 			<!-- 手机登录 -->
 			<view class="input-group" v-else>
 				<view class="uni-form-item">
@@ -44,18 +41,11 @@
 						</view>
 					</view>
 				</view>
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 			</view>
 			<view class="btn-row">
 				<button class="cu-btn" form-type="submit">登录</button>
 			</view>
 		</form>
-
 
 		<view class="action-row">
 			<navigator url="../reg/reg">注册账号</navigator>
@@ -68,19 +58,6 @@
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
-	import {
-<<<<<<< HEAD
-		setToken
-	} from '@/utils/common.js'
-	import {
-		mapMutations
-	} from 'vuex';
-
-
-=======
-		mapMutations
-	} from 'vuex';
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
 	export default {
 		data() {
 			return {
@@ -202,23 +179,10 @@
 									icon: "none"
 								});
 								return;
-<<<<<<< HEAD
 
-							}
-							// else if {
-							// 	//const profile = setToken(res.data.token,res.data.client);
-							// 	// this.login(res.data);
-							// 	//console.log(res.data);
-							// 	// this.$store.commit('profile/updateProfile',profile);
-								
-							// } 
-							else {
-								const profile = setToken(res.data.token, res.data.client);
-								console.log(profile);
-=======
 							} else {
 
-								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
+								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);
 								console.log(clientToken);
 								let userInfo = {
 									userId: res.data.client.uid,
@@ -226,11 +190,11 @@
 									userName: res.data.client.user_name
 								}
 								uni.setStorage({
-									key:'Token',
+									key: 'Token',
 									data: userInfo,
 									success: (res) => {
 										uni.getStorage({
-											key:'Token',
+											key: 'Token',
 											success: (res) => {
 												console.log(res.data);
 											}
@@ -238,7 +202,7 @@
 									}
 								});
 
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
+
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
@@ -254,14 +218,14 @@
 				}
 			},
 
-<<<<<<< HEAD
-			...mapMutations(['login'])
+
+			// ...mapMutations(['login'])
 
 			//...mapMutations(['login'])
 
-=======
+
 			//...mapMutations(['login'])
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
+
 		}
 
 	}

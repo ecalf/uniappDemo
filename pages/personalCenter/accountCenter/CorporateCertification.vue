@@ -2,32 +2,32 @@
 	<view class="pb60">
 		<form @submit="formSubmit" @reset="formReset">
 			<view class="uni-form-item uni-column">
-				<view class="title">企业银行名称</view>
-				<input class="uni-input" name="nickname" placeholder="张小姐" />
+				<view class="title">联系人姓名</view>
+				<input class="uni-input" name="nickname" placeholder="张小姐" v-model="Corporateform.contact_name" />
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">开户银行</view>
-				<cl-select v-model="form.selectbrand" :options="options.bank" class="uni-input"></cl-select>
+				<cl-select v-model="Corporateform.bank_name" :options="options.bank" class="uni-input"></cl-select>
 			</view>
 			<view class="uni-form-item uni-column uni-cc">
 				<view class="title">银行账户</view>
-				<input class="uni-input" name="nickname" placeholder="请输入银行账户" />
+				<input class="uni-input" name="nickname" placeholder="请输入银行账户" v-model="Corporateform.bank_account" />
 			</view>
 			<view class="uni-form-item uni-column ">
 				<view class="title">公司名称</view>
-				<input class="uni-input" name="nickname" value="张小姐" />
+				<input class="uni-input" name="nickname" value="张小姐" v-model="Corporateform.company_name" />
 			</view>
 			<view class="uni-form-item uni-column ">
 				<view class="title">纳税人识别号</view>
-				<input class="uni-input" name="nickname" placeholder="请输入识别号" />
+				<input class="uni-input" name="nickname" placeholder="请输入识别号" v-model="Corporateform.business_license_code" />
 			</view>
 			<view class="uni-form-item uni-column ">
 				<view class="title">负责人姓名</view>
-				<input class="uni-input" name="nickname" placeholder="请输入负责人姓名" />
+				<input class="uni-input" name="nickname" placeholder="请输入负责人姓名" v-model="Corporateform.full_name" />
 			</view>
 			<view class="uni-form-item uni-column uni-aa ">
 				<view class="title">公司类型</view>
-				<cl-select v-model="form.selectbrand" :options="options.selectbrand" class="uni-input"></cl-select>
+				<cl-select v-model="Corporateform.business_scope_cate" :options="options.selectbrand" class="uni-input"></cl-select>
 			</view>
 			<view class="uni-form-item uni-column ">
 				<view class="title">公司网址</view>
@@ -35,7 +35,7 @@
 			</view>
 			<view class="uni-form-item uni-column uni-cc">
 				<view class="title">所属行业</view>
-				<cl-select v-model="form.selectbrand" :options="options.profession" class="uni-input"></cl-select>
+				<cl-select v-model="Corporateform.business_scope_cate" :options="options.profession" class="uni-input"></cl-select>
 			</view>
 
 			<!--上传图片-->
@@ -197,78 +197,62 @@
 			};
 		},
 		methods: {
-			onListChange(lists) {
-
-			},
+			onListChange(lists) {},
 			formSubmit: function(e) {
-				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
-				//定义表单规则
+				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
+				// 定义表单规则
 				var rule = [{
 					name: "nickname",
 					checkType: "string",
 					// checkRule: "1,3",
-					errorMsg: "请输入内容"
+					errorMsg: "请输入正确的信息"
 				}, ];
 				//进行表单检查
 				var formData = e.detail.value;
 				var checkRes = graceChecker.check(formData, rule);
 				if (checkRes) {
-					uni.showToast({
-						title: "验证通过!",
-						icon: "none"
-					});
+					uni.request({
+						url: interfaces.getCorporateData,
+						dataType: "JSON",
+						method: 'POST', //请求方式
+						data: {
+							data: {
+								scene: this.Corporateform.scene,
+								idcard: this.Corporateform.idcard,
+								hand_identify_card_photo: this.Corporateform.hand_identify_card_photo,
+								organization_name: this.Corporateform.organization_name,
+								contact_name: this.Corporateform.contact_name,
+								contact_phone: this.Corporateform.contact_phone,
+								company_name: this.Corporateform.company_name,
+								contact_name: this.Corporateform.contact_name,
+								business_license: this.Corporateform.business_license,
+								business_license_code: this.Corporateform.business_license_code,
+								official_letter: this.Corporateform.official_letter,
+								company_form: this.Corporateform.company_form,
+								bank_name: this.Corporateform.bank_name,
+								bank_branch_name: this.Corporateform.bank_branch_name,
+								bank_account: this.Corporateform.bank_account,
+								full_name: this.Corporateform.full_name,
+							}
+						},
+						success: ((res) => {
+							console.log(res,3333);
+						})
+					})
+					
 				} else {
 					uni.showToast({
 						title: graceChecker.error,
 						icon: "none"
 					});
 				}
+				
 			},
-			formReset: function(e) {
-				console.log('清空数据')
-			},
-			getCorporateList() {
-				this.request({
-					url: interfaces.getCorporateData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							scene: this.Corporateform.scene,
-							idcard: this.Corporateform.idcard,
-							hand_identify_card_photo: this.Corporateform.hand_identify_card_photo,
-							organization_name: this.Corporateform.organization_name,
-							contact_name: this.Corporateform.contact_name,
-							contact_phone: this.Corporateform.contact_phone,
-							company_name: this.Corporateform.company_name,
-							contact_name: this.Corporateform.contact_name,
-							business_license: this.Corporateform.business_license,
-							business_license_code: this.Corporateform.business_license_code,
-							official_letter: this.Corporateform.official_letter,
-							company_form: this.Corporateform.company_form,
-							bank_name: this.Corporateform.bank_name,
-							bank_branch_name: this.Corporateform.bank_branch_name,
-							bank_account: this.Corporateform.bank_account,
-							full_name: this.Corporateform.full_name,
-						}
-					},
-					success: ((res) => {
-						console.log(res, 222);
-						this.loginList = res.data;
-						if (res.code !== 200) {
-							uni.showToast({
-								title: res.message,
-								icon: "none"
-							});
-						}
-					})
-				});
-			},
+			
+
 		},
-		onLoad() {
-			this.getCorporateList()
 		}
-	}
+	
 </script>
 
 <style lang="scss">

@@ -17,14 +17,14 @@ const interfaces = {
 	//发布
 	getPublishData: baseurl + "/v1/needs/get-info",
 	//图片上传
-<<<<<<< HEAD
-	getUploadData: domain + "/v1/upload",
+
+	getUploadData: baseurl + "/v1/upload",
    //注册
-   getRegisterData:domain+"/v1/user/register",
+   getRegisterData:baseurl+"/v1/user/register",
    
    //发送验证码
-	getCodeData:domain+"/v1/msg/send",
-=======
+	getCodeData:baseurl+"/v1/msg/send",
+
 	getUploadData: baseurl + "/v1/upload",
 	//注册
 	getRegisterData: baseurl + "/v1/user/register",
@@ -32,7 +32,7 @@ const interfaces = {
 	//发送验证码
 	getCodeData: baseurl + "/v1/msg/send",
 
->>>>>>> 24be0e0de6b9fe757733c3b3d482dc57a8f10f23
+
 	//登录
 	getLoignData: baseurl + "/v1/user/login",
 	//个人认证
