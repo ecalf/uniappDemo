@@ -15,7 +15,7 @@ const interfaces = {
 	//获取出口国
 	getCountryData: baseurl + "/v1/user/countrylist",
 	//发布
-	getPublishData: baseurl + "/v1/needs/get-info",
+	getPublishData: baseurl + "/v1/needs/publish",
 	//图片上传
 
 	getUploadData: baseurl + "/v1/upload",
@@ -24,15 +24,6 @@ const interfaces = {
    
    //发送验证码
 	getCodeData:baseurl+"/v1/msg/send",
-
-	getUploadData: baseurl + "/v1/upload",
-	//注册
-	getRegisterData: baseurl + "/v1/user/register",
-
-	//发送验证码
-	getCodeData: baseurl + "/v1/msg/send",
-
-
 	//登录
 	getLoignData: baseurl + "/v1/user/login",
 	//个人认证

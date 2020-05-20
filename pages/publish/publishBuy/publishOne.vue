@@ -5,7 +5,7 @@
 		<view class="common-btn">
 			<button @tap="stepBtn()">下一步</button>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -23,10 +23,12 @@
 				searchVal: '', //搜索关键字
 				categoryList: [], //产品类目
 				backgroundColor: "#F8F8F8", //修改类目背景色
-				}
+				type:""
+			}
 		},
-		onLoad() {
+		onLoad(option) {
 			this.initData();
+			this.type=option.type;//发布类型
 		},
 		methods: {
 			initData() {
@@ -50,10 +52,10 @@
 			},
 			stepBtn() { //下一步
 				uni.navigateTo({
-				    url: '/pages/publish/publishBuy/publishTwo'
+					url: '/pages/publish/publishBuy/publishTwo?type='+this.type
 				});
 			},
-		
+
 		}
 	}
 </script>

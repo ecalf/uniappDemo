@@ -324,6 +324,7 @@
 		color: #05544a;
 		font-size: 21.73rpx;
 		margin-top: 9.05rpx;
+		
 	}
 
 	.vip-join {

@@ -22,7 +22,6 @@
 					</view>
 				</view>
 			</view>
-
 			<!-- 手机登录 -->
 			<view class="input-group" v-else>
 				<view class="uni-form-item">
@@ -179,7 +178,6 @@
 									icon: "none"
 								});
 								return;
-
 							} else {
 
 								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);
@@ -201,8 +199,6 @@
 										})
 									}
 								});
-
-
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
@@ -217,15 +213,6 @@
 					});
 				}
 			},
-
-
-			// ...mapMutations(['login'])
-
-			//...mapMutations(['login'])
-
-
-			//...mapMutations(['login'])
-
 		}
 
 	}

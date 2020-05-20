@@ -23,6 +23,12 @@
 				imageSrc: ''
 			}
 		},
+		props:{
+			imagesrc:{
+				type: String,
+				default: ''
+			}
+		},
 		onUnload() {
 			this.imageSrc = '';
 		},
@@ -33,7 +39,6 @@
 					sizeType: ['compressed'],
 					sourceType: ['album'],
 					success: (res) => {
-						console.log('chooseImage success, temp path is', res.tempFilePaths[0])
 						var imageSrc = res.tempFilePaths[0]
 						uni.uploadFile({
 							url: interfaces.getUploadData,
@@ -41,7 +46,6 @@
 							fileType: 'image',
 							name: 'data',
 							success: (res) => {
-								console.log('uploadImage success, res is:', res)
 								uni.showToast({
 									title: '上传成功',
 									icon: 'success',
@@ -49,8 +53,7 @@
 								})
 								this.imageSrc = imageSrc
 							},
-							fail: (err) => {
-								console.log('uploadImage fail', err);
+							fail: (err) => {	
 								uni.showModal({
 									content: err.errMsg,
 									showCancel: false
@@ -59,7 +62,6 @@
 						});
 					},
 					fail: (err) => {
-						console.log('chooseImage fail', err)
 						// #ifdef MP
 						uni.getSetting({
 							success: (res) => {

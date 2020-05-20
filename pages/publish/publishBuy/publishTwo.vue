@@ -12,16 +12,17 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="formData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<upload-file></upload-file>
+				<u-upload ref="uUpload" @on-uploaded="onUploaded"  @on-list-change="onListChange" :action="action" :auto-upload="false" :max-count="1" width="145"></u-upload>
 			</view>
 
+
 			<view class="uni-form-item">
-				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
-					<view class="uni-input">
+				<view class="uni-input uni-input-left">
+					<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
 						{{selectbrand[index]}}
-					</view>
-				</picker>
-				<cl-icon name="cl-icon-search"></cl-icon>
+					</picker>
+				</view>
+				<cl-icon name="cl-icon-arrow-right"></cl-icon>
 			</view>
 
 			<view class="uni-form-item m-form-item">
@@ -57,9 +58,9 @@
 				</view>
 			</view>
 			<view class="uni-form-item more-upload">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-				 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" :max-count="maxCount"
-				 width="145" @on-list-change="onListChange">
+				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="false"
+				 :file-list="fileList" uploadText="" :show-progress="true" :deletable="true" :max-count="8" width="145"
+				 @on-list-change="onListChange">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -76,7 +77,7 @@
 				</checkbox-group>
 			</view>
 			<view class="common-btn">
-				<button>立即发布</button>
+				<button @tap="publishSubmit">立即发布</button>
 			</view>
 		</cl-form>
 
@@ -85,21 +86,18 @@
 </template>
 
 <script>
-	import uploadFile from '@/components/uploadFile/uploadFile'
 	import inputSearch from '@/components/p-inputSearch/inputSearch'
 	import combox from '@/components/uni-combox/uni-combox'
 	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
-	// import httpTypes from '@/utils/http-types'
-
 	export default {
 		components: {
-			uploadFile,
 			inputSearch,
 			uUpload
 		},
 		data() {
 			return {
+				type: "",
 				formData: {
 					category: '', //产品类别
 					entrust: '', //委托类型,仅委托表单可用
@@ -125,18 +123,13 @@
 				},
 				dataSource: [], //出口国家
 				index: 0,
-				selectbrand: [],
+				selectbrand: [],//选择品牌
 				//多图上传
-				action: 'http://192.168.100.17/index.php/index/index/upload',
+				action: interfaces.getUploadData,
+				filesArr: [],
 				// 预置上传列表
 				fileList: [],
-				showUploadList: true,
 				customBtn: false,
-				autoUpload: false,
-				showProgress: true,
-				deletable: true,
-				customStyle: false,
-				maxCount: 8,
 				lists: [], // 组件内部的文件列表
 				current: 0, //用途
 				useItems: [{
@@ -162,10 +155,11 @@
 			}
 
 		},
-		onLoad() {
+
+		onLoad(option) {
 			this.selectData(); //选择品牌
-			this.initData();
 			this.countryData(); //出口国
+			this.type = option.type;
 		},
 		methods: {
 			//品牌种类
@@ -186,7 +180,7 @@
 								res.data[i].cn_name
 							)
 						}
-						this.selectbrand=data;
+						this.selectbrand = data;
 					})
 				});
 			},
@@ -201,27 +195,12 @@
 					})
 				});
 			},
-			initData() {
-				this.request({
-					url: interfaces.getPublishData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							needs_id: "14"
-						}
-					},
-					success: ((res) => {
-						console.log(res);
-					})
-				});
-			},
 			//用户点击获取的数据
 			handleChange(data) {
 				console.log(data)
 			},
 			onListChange(lists) { //商品详情
-				//console.log('onListChange', lists);
+				console.log('onListChange', lists);
 				this.lists = lists;
 
 			},
@@ -248,6 +227,32 @@
 			bindPickerChange: function(e) {
 				this.index = e.detail.value
 			},
+			publishSubmit() {
+				this.$refs.uUpload.upload();
+				let params={
+					data:{
+						type:this.type,
+						title:this.formData.title,
+						desc:this.formData.desc,
+						//productImg:
+					}
+				}
+				this.request({
+					url: interfaces.getPublishData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data:params,
+					success: ((res) => {
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+						}
+					})
+				});
+			},
+			
 		}
 	}
 </script>
