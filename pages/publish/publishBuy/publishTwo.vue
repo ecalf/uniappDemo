@@ -14,11 +14,14 @@
 			<view class="uni-form-item upload-images">
 				<upload-file></upload-file>
 			</view>
-			
+
 			<view class="uni-form-item">
-				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="cn_name">
-					<view class="uni-input">{{selectbrand[index].cn_name}}</view>
+				<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
+					<view class="uni-input">
+						{{selectbrand[index]}}
+					</view>
 				</picker>
+				<cl-icon name="cl-icon-search"></cl-icon>
 			</view>
 
 			<view class="uni-form-item m-form-item">
@@ -87,7 +90,7 @@
 	import combox from '@/components/uni-combox/uni-combox'
 	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
-	import httpTypes from '@/utils/http-types'
+	// import httpTypes from '@/utils/http-types'
 
 	export default {
 		components: {
@@ -161,7 +164,7 @@
 		},
 		onLoad() {
 			this.selectData(); //选择品牌
-			//this.initData();
+			this.initData();
 			this.countryData(); //出口国
 		},
 		methods: {
@@ -177,8 +180,13 @@
 						}
 					},
 					success: ((res) => {
-						//console.log(res.data);
-						this.selectbrand=res.data;
+						const data = []
+						for (let i = 0; i < res.data.length; i++) {
+							data.push(
+								res.data[i].cn_name
+							)
+						}
+						this.selectbrand=data;
 					})
 				});
 			},
@@ -194,35 +202,20 @@
 				});
 			},
 			initData() {
-				httpTypes.request({
-					url: 'v1/needs/publish',
-					method: "POST",
+				this.request({
+					url: interfaces.getPublishData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
 					data: {
 						data: {
-							needs_id: ""
+							needs_id: "14"
 						}
 					},
-					success: (e) => {
-						console.log(e);
-					}
-				})
-
+					success: ((res) => {
+						console.log(res);
+					})
+				});
 			},
-
-			// initData() {
-			// 	this.request({
-			// 		url: interfaces.getPublishData,
-			// 		dataType: "JSON",
-			// 		method: 'POST', //请求方式
-			// 		header: {
-			// 			"Content-Type": "application/x-www-form-urlencoded",
-			// 			"Token":res.data.token
-			// 		},
-			// 		success: ((res) => {
-			// 			console.log(res);
-			// 		})
-			// 	});
-			// },
 			//用户点击获取的数据
 			handleChange(data) {
 				console.log(data)

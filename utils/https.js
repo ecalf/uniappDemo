@@ -9,12 +9,8 @@ module.exports = (param) => {
 	const userInfo = uni.getStorageSync('Token'); //获取token
 	if(userInfo&&userInfo.token){
 		const token = userInfo.token //获取token
-		console.log('token', token);
 		header['Authorization'] = token;
 	}
-	
-	
-
 
 	// 请求方式: GET POST 
 	if(method){
