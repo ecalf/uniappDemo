@@ -14,8 +14,6 @@
 			<view class="uni-form-item upload-images">
 				<u-upload ref="uUpload" @on-uploaded="onUploaded"  @on-list-change="onListChange" :action="action" :auto-upload="false" :max-count="1" width="145"></u-upload>
 			</view>
-
-
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
 					<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="">
