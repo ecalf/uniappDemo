@@ -103,16 +103,17 @@ $bc:#4E5A65;
 .cl-form-item__container{padding-left:0 !important;}
 }
 .brand-bg {
-		margin-bottom: 0 !important;
-		.cl-form-item__container {
+		
 			background-color: #f6f6f6;
 			border-radius: 3px;
 			border: solid 1px #e2e2e2;
 			height: 72.46rpx;
 			line-height: 72.46rpx;
 			padding: 0 18.11rpx !important;
+			position: relative;
+			.cl-icon{position:absolute;right:18.11rpx;top:3.62rpx;}
 		}
-	}
+	
 
 .size-text{
 	background:#fff;

@@ -1,40 +1,44 @@
 <template>
 	<view class="pb60">
 
-		<cl-form ref="form" :model.sync="formData">
+		<cl-form ref="form" :model.sync="publishData">
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="标题" class="uni-tl-input" v-model="formData.title"></cl-input>
+					<cl-input placeholder="标题" class="uni-tl-input" v-model="publishData.title"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
-				<textarea class="uni-input uni-tl-input uni-textarea" v-model="formData.desc" placeholder="描述"></textarea>
+				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload ref="uUpload" @on-uploaded="onUploaded" :custom-btn="false" @on-list-change="onListChange" :action="action" formData="{file:'image'}"
+				<u-upload ref="uUpload" @on-uploaded="onUploaded" :custom-btn="false" @on-list-change="onListChange" :action="action"
 				 :auto-upload="false" :max-count="1" width="145" @on-change="onlistSuccess"></u-upload>
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
-					<picker @change="bindPickerChange" :value="index" :range="selectbrand" range-key="cn_name">
-						{{selectbrand[index].cn_name}}
-					</picker>
+					<view @tap="handleTap('picker1')" class="brand-bg">
+						<view class="title">{{brandvalue}}</view>
+						<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
+					</view>
+					<lb-picker v-model="brandvalue" ref="picker1" :props="myProps" :list="selectbrand" @change="handleChange">
+					</lb-picker>
+
 				</view>
-				<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
+
 			</view>
 
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="请输入品牌" v-model="formData.otherBrand"></cl-input>
+					<cl-input placeholder="请输入品牌" v-model="publishData.otherBrand"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>数量</view>
 				<view class="uni-input uni-input-left m-flex">
 
-					<cl-input class="inline-block" placeholder="请输入数量" v-model="formData.num"></cl-input>
+					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
 						<picker @change="unitChange" :value="unitindex" :range="selectUnit" :range-key="'cn_name'">
 							{{selectUnit[unitindex].cn_name}}
@@ -50,7 +54,7 @@
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>价格</view>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="￥ 0.00" v-model="formData.price"></cl-input>
+					<cl-input placeholder="￥ 0.00" v-model="publishData.price"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="qualifications">
@@ -67,7 +71,7 @@
 			<view class="uni-form-item">
 				<view class="title"><text class="colorred">*</text>截止日期</view>
 				<cl-form-item label="" class="uni-input" prop="date" justify="end">
-					<cl-select mode="date" placeholder="请点击选择" v-model="formData.deadtime"></cl-select>
+					<cl-select mode="date" placeholder="请点击选择" v-model="publishData.deadtime"></cl-select>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
@@ -122,15 +126,16 @@
 	import combox from '@/components/uni-combox/uni-combox'
 	import interfaces from '@/utils/interfaces'
 	import uUpload from '@/components/u-upload/u-upload'
+	import LbPicker from '@/components/lb-picker'
 	export default {
 		components: {
 			inputSearch,
-			uUpload
+			uUpload,
+			LbPicker
 		},
 		data() {
 			return {
-
-				formData: {
+				publishData: {
 					type: "", //类型1 发布采购 2 发布销售 3 委托销售	
 					cate_id: '', //品类id
 					brand_id: '', //品牌id
@@ -151,13 +156,12 @@
 					service_id: ''
 				},
 				dataSource: [], //出口国家
-				index: 0, //当前选择品牌索引
+				brandvalue: '请选择品牌', //当前选择品牌
 				selectbrand: [], //选择品牌
 				unitindex: 0,
 				selectUnit: [],
 				selectUnitid: [],
 				action: interfaces.getUploadData,
-				uploadHeader: '',
 				filesArr: [],
 				// 预置上传列表
 				fileList: [],
@@ -187,7 +191,13 @@
 						price: '30'
 					},
 				],
-				qualtitems: []
+				qualtitems: [],
+				myProps: {
+					label: 'cn_name',
+					value: 'cn_name',
+					brandid: 'id'
+				}
+
 			}
 
 		},
@@ -195,12 +205,15 @@
 		onLoad(option) {
 			this.initData(); //初始化数据
 			this.countryData(); //出口国
-			this.formData.type = option.type;
-			this.formData.cate_id = option.cate_id;
-			
+			this.publishData.type = option.type;
+			this.publishData.cate_id = option.cate_id;
+
+
 		},
 		methods: {
 			initData() {
+				// const fromfile=new FormData();
+				// console.log(fromfile);
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -260,7 +273,6 @@
 				this.exit_country = data;
 			},
 			onListChange(lists) { //上传产品主图
-				//console.log('onListChange', lists);
 				this.productImg = lists[0].url;
 				console.log(this.fileList);
 			},
@@ -270,11 +282,16 @@
 			onMoreChange(lists) { //上传产品详情
 				this.lists = lists;
 				// console.log(lists);
+			},
 
-
+			handleTap(name) { //picker弹出
+				this.$refs[name].show()
+			},
+			handleChange(item) { //品牌id 
+				this.publishData.brand_id = item.item.id;
 			},
 			radioChange: function(e) { //用途选择
-				this.formData.use_way = e.detail.value;
+				this.publishData.use_way = e.detail.value;
 			},
 			qualtChange: function(e) { //资质证书
 				var items = this.qualtitems,
@@ -288,17 +305,17 @@
 					}
 				}
 				var data = values.join(',');
-				this.formData.qualification = data
+				this.publishData.qualification = data
 			},
 
-			bindPickerChange: function(e) { //获取品牌id
-				this.index = e.detail.value;
-				this.formData.brand_id = this.selectbrand[e.target.value].id;
-				console.log(this.formData.brand_id);
-			},
+			// bindPickerChange: function(e) { //获取品牌id
+			// 	this.index = e.detail.value;
+			// 	this.publishData.brand_id = this.selectbrand[e.target.value].id;
+			// 	console.log(this.publishData.brand_id);
+			// },
 			unitChange: function(e) { //单位
 				this.unitindex = e.target.value;
-				this.formData.unit_cate_id = this.selectUnit[e.target.value].id;
+				this.publishData.unit_cate_id = this.selectUnit[e.target.value].id;
 			},
 			checkboxChange: function(id, item) { //选择增值服务
 				//console.log(item);
@@ -310,28 +327,28 @@
 				} else {
 					//选中该按钮
 					this.Listids.push(id);
-					this.formData.service_id = id;
+					this.publishData.service_id = id;
 				}
 			},
 			publishSubmit() {
 				this.$refs.uUpload.upload();
 				let params = {
 					data: {
-						type: this.formData.type,
-						cate_id: this.formData.cate_id,
-						title: this.formData.title,
-						desc: this.formData.desc,
+						type: this.publishData.type,
+						cate_id: this.publishData.cate_id,
+						title: this.publishData.title,
+						desc: this.publishData.desc,
 						productImg: this.productImg,
-						otherBrand: this.formData.otherBrand,
-						brand_id: this.formData.brand_id,
-						num: this.formData.num,
+						otherBrand: this.publishData.otherBrand,
+						brand_id: this.publishData.brand_id,
+						num: this.publishData.num,
 						exit_country: this.exit_country,
-						price: this.formData.price,
-						deadtime: this.formData.deadtime,
-						use_way: this.formData.use_way,
-						qualification: this.formData.qualification,
-						unit_cate_id: this.formData.unit_cate_id,
-						service_id: this.formData.service_id
+						price: this.publishData.price,
+						deadtime: this.publishData.deadtime,
+						use_way: this.publishData.use_way,
+						qualification: this.publishData.qualification,
+						unit_cate_id: this.publishData.unit_cate_id,
+						service_id: this.publishData.service_id
 					}
 				}
 
