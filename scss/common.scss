@@ -57,6 +57,7 @@ $bc:#4E5A65;
 	position: relative;
 	.title{
 		color: #4e5a65;
+		padding-right:9.05rpx;
 	}	
 }
 .uni-input{
@@ -145,7 +146,11 @@ $bc:#4E5A65;
 		padding:12px 0 81.52rpx;
 		display: flex;
 		justify-content:space-around;
-		
+		image{
+			width:36.23rpx;
+			height:36.23rpx;
+			vertical-align:middle;
+		}
 	}
 	
 	
@@ -214,4 +219,74 @@ uni-input{
 	
 	.uni-input-left{
 		text-align:left;
+		
+	}
+	
+	.qualifications{
+		background:#fff;
+		margin-bottom:1px;
+		padding:20px 25px;
+	}
+	.pb0{
+		padding-bottom:0;
+	}
+	.inline-block{
+		flex: 1;
+	}
+	.unit-picker{
+		display: flex;
+		align-items: center;
+		text-align:right;
+		.cl-icon{margin-left:36.23rpx;}
+		uni-picker{
+			flex: 1;
+			border:1px solid $ac;
+			padding:0 9.05rpx;
+			margin-right:18.11rpx;
+		}
+	}
+	.checkbox-list-bottom{
+		padding:0 45.28rpx 54.34rpx;
+		display: flex;
+		justify-content: space-around;
+	}
+	.checkbox-item{width:48%;
+		.title{
+			position: relative;
+			background-image: linear-gradient(270deg, 
+					#cee6e0 0%, 
+					#48a990 100%);
+				border-radius: 11px 11px 0px 0px;
+				color:#fff;
+				padding:12.68rpx 18.11rpx;
+				text{position: absolute;right:18.11rpx;}
+		}
+		.checkboxbg{
+			background:#fff;
+			padding:16.3rpx 18.11rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-radius:19.92rpx;
+		}
+		.dec-text{
+			.iconfont{
+				display: inline-block;
+				border:1px solid #8E8E93;
+				border-radius:50%;
+				margin-left:7.24rpx;
+			}
+		}
+		.price{
+			font-size:21.73rpx;
+			color:#4E5A65;
+			.cl-checkbox{margin-right:0;}
+			.cl-checkbox .cl-checkbox__input{margin-right:0;width:36.23rpx;height:36.23rpx;margin-left:10.86rpx;}
+			.checkbox-icon{
+				display: inline-block;
+				vertical-align:-7.24rpx;
+				width:36.23rpx;
+				height:36.23rpx;
+			}
+		}
 	}

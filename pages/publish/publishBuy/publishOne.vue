@@ -1,7 +1,7 @@
 <template>
 	<view class="pb60">
 		<search-bar placeholder="类目搜索可直接输入产品名称" @confirm="search" class="uni-search-box"></search-bar>
-		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy"></product-category>
+		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy" @update-value="updateValue"></product-category>
 		<view class="common-btn">
 			<button @tap="stepBtn()">下一步</button>
 		</view>
@@ -23,7 +23,8 @@
 				searchVal: '', //搜索关键字
 				categoryList: [], //产品类目
 				backgroundColor: "#F8F8F8", //修改类目背景色
-				type:""
+				type:"",
+				cate_id:""
 			}
 		},
 		onLoad(option) {
@@ -50,10 +51,21 @@
 			search(res) {
 				this.searchVal = res.value
 			},
+			updateValue(item){
+				//console.log(item.id);
+				this.cate_id=item.id;				
+			},
 			stepBtn() { //下一步
+				if(!this.cate_id==''){
 				uni.navigateTo({
-					url: '/pages/publish/publishBuy/publishTwo?type='+this.type
+					url: '/pages/publish/publishBuy/publishTwo?type='+this.type+'&cate_id='+this.cate_id
 				});
+				}else{
+					uni.showToast({
+						title: '请选择品类',
+						icon: "none"
+					});
+				}
 			},
 
 		}

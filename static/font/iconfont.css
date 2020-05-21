@@ -12,6 +12,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-jisutuikuan:before {
+  content: "\e616";
+}
+
+.icon-Doubt-icon:before {
+  content: "\e614";
+}
+
 .icon-denglu:before {
   content: "\e608";
 }
@@ -35,4 +43,5 @@
 .icon-Resources-Search:before {
   content: "\e60f";
 }
+
 

@@ -240,8 +240,11 @@
 
 				}
 				this.country = evt.target.value; //获取国家
-				this.registerForm.password = ''
-				this.registerForm.re_password = ''
+				this.registerForm.password = '',
+				this.registerForm.re_password = '',
+				 this.registerForm.company_name= '',
+				this.registerForm.contact_name= '',
+				this.registerForm.organization_name= ''
 			},
 			//发送验证码
 			sendCode() {
@@ -311,7 +314,7 @@
 								user_name: this.registerForm.user_name,
 								company_name: this.registerForm.company_name,
 								contact_name: this.registerForm.contact_name,
-								organization_name: this.organization_name,
+								organization_name: this.registerForm.organization_name,
 								country: this.country,
 								type: this.registerForm.type //注册类型 1个人 2 机构 3企业
 							}
@@ -322,6 +325,14 @@
 									title: res.message,
 									icon: "none"
 								});
+							}else{
+								uni.showToast({
+									title: '注册成功',
+									icon: "none"
+								});
+								uni.navigateTo({
+									url: "/pages/user/login"
+								})
 							}
 						}),
 						fail: ((error) => {

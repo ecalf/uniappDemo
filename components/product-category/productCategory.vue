@@ -4,7 +4,7 @@
 			<view class="uni-list-item" v-for="(category,index) in categoryList" :key="category.id" :class="index==showCategoryIndex?'on':''">
 				<view class="uni-list-item__content" :style="{backgroundColor:backgroundColor}" @tap="handleCategory(index)">{{category.cn_name}}</view>
 				<view class="uni-list-item__subcon"  v-if="index==showCategoryIndex">
-					<text v-for="(item,index) in category.child" :key="index">{{item.cn_name}}</text>
+					<text v-for="(item,index) in category.child" :key="item.id" :class="item.id==value?'active':''" @tap="selectCategory(item)">{{item.cn_name}}</text>
 				</view>
 				<view class="uni-list-item__extra"></view>
 			</view>
@@ -17,6 +17,7 @@
 		data() {
 			return {
 				showCategoryIndex: 0,
+				value:''
 			}
 		},
 		props: {
@@ -31,6 +32,10 @@
 		methods:{
 			handleCategory(index) {
 				this.showCategoryIndex = index;
+			},
+			selectCategory(item){
+				this.value=item.id;
+				this.$emit('update-value',item);
 			}
 		}
 	}
@@ -69,6 +74,9 @@
 			border-radius: 9.05rpx;
 			padding: 10.86rpx 19.92rpx;
 			margin: 0 9.05rpx 9.05rpx;
+			&.active{
+				color:$ac;
+			}
 		}
 	}
 
