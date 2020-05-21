@@ -319,6 +319,7 @@
 							this.uploadError(index, res.data);
 						} else {
 							// 上传成功
+							console.log(231);
 							this.lists[index].response = res.data;
 							this.lists[index].progress = 100;
 							this.lists[index].error = false;

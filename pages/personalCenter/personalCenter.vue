@@ -72,7 +72,7 @@
 		</view>
 
 		<!--注册入口-->
-		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<register-enter></register-enter>
 		</uni-popup>
 
@@ -209,13 +209,15 @@
 			bindLogin() {
 				if (this.hasLogin) {
 					this.logout();
-					this.ishow=true;
 				} else {
 					uni.reLaunch({
 						url: '/pages/user/login'
 					})
 				}
 			}
+			
+		
+			
 		}
 	}
 </script>

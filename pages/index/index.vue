@@ -45,7 +45,7 @@
 		<productList :goodsList="goodsList" />
 
 		<!--登录入口-->
-		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
