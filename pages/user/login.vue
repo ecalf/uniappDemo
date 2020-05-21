@@ -46,6 +46,7 @@
 			</view>
 		</form>
 
+
 		<view class="action-row">
 			<navigator url="../reg/reg">注册账号</navigator>
 			<text>|</text>
@@ -57,6 +58,9 @@
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
+	import {
+		mapMutations
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -171,7 +175,6 @@
 							}
 						},
 						success: (res) => {
-							console.log(res);
 							if (res.code !== 200) {
 								uni.showToast({
 									title: res.message,
@@ -179,29 +182,33 @@
 								});
 								return;
 							} else {
+								 this.login(res.data);
+								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
 
-								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);
-								console.log(clientToken);
 								let userInfo = {
 									userId: res.data.client.uid,
 									token: clientToken,
 									userName: res.data.client.user_name
 								}
 								uni.setStorage({
-									key: 'Token',
+									key:'Token',
 									data: userInfo,
 									success: (res) => {
 										uni.getStorage({
-											key: 'Token',
+											key:'Token',
 											success: (res) => {
 												console.log(res.data);
 											}
 										})
 									}
 								});
+								let page = getCurrentPages().pop(); //跳转页面成功之后
+								if (!page) return;
+								page.onLoad(); //如果页面存在，则重新刷新页面
 								uni.switchTab({
 									url: "/pages/personalCenter/personalCenter"
 								})
+				
 							}
 						},
 						fail: (e) => {
@@ -212,7 +219,10 @@
 						}
 					});
 				}
+				
 			},
+			
+			...mapMutations(['login'])
 		}
 
 	}

@@ -26,7 +26,7 @@
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="请输入品牌"></cl-input>
+					<cl-input placeholder="请输入品牌" v-model="formData.otherBrand"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item m-form-item">
@@ -50,7 +50,7 @@
 				<view class="uni-input">
 					<radio-group @change="radioChange">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in useItems" :key="index">
-							<radio :value="item.value" :checked="index === current" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
+							<radio :value="item.value" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
 						</label>
 					</radio-group>
 				</view>
@@ -58,7 +58,7 @@
 			<view class="uni-form-item more-upload">
 				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="false"
 				 :file-list="fileList" uploadText="" :show-progress="true" :deletable="true" :max-count="8" width="145"
-				 @on-list-change="onListChange">
+				 @on-list-change="onMoreChange">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -97,8 +97,6 @@
 			return {
 				type: "",
 				formData: {
-					category: '', //产品类别
-					entrust: '', //委托类型,仅委托表单可用
 					title: '', //标题
 					desc: '', //描述
 					brand: '', //品牌选择
@@ -106,37 +104,28 @@
 					country: '', //出口国,非必填
 					supplierPrice: '', //供应商价格,仅发布销售可用
 					price: '', //市场价
-					quantity: '', //数量
-					unit: '', //单位
-					usage: '', //用途
-					qualification: '', //认证
-					techImg: '', //上传图片-技术
+					num: '', //数量
 					productImg: '', //上传图片-产品
-					companyImg: '', //上传图片-企业
-					otherImg: '', //上传图片-其他
-					video: '', //上传视频
-					richDesc: '', //富文本描述
 					deadtime: '', //截止时间
-					service: '' //增值服务,非必须选
+					info:'',//产品详情图
 				},
 				dataSource: [], //出口国家
 				index: 0,
 				selectbrand: [],//选择品牌
-				//多图上传
 				action: interfaces.getUploadData,
+				uploadHeader:'',
 				filesArr: [],
 				// 预置上传列表
 				fileList: [],
 				customBtn: false,
 				lists: [], // 组件内部的文件列表
-				current: 0, //用途
 				useItems: [{
-						value: '民用',
+						value:'1',
 						name: '民用',
 
 					},
 					{
-						value: '医用',
+						value:'2',
 						name: '医用',
 					},
 				],
@@ -160,6 +149,7 @@
 			this.type = option.type;
 		},
 		methods: {
+		
 			//品牌种类
 			selectData() {
 				this.request({
@@ -195,20 +185,20 @@
 			},
 			//用户点击获取的数据
 			handleChange(data) {
-				console.log(data)
+				this.exit_country=data;
 			},
-			onListChange(lists) { //商品详情
+			onListChange(lists) { //上传产品主图
 				console.log('onListChange', lists);
-				this.lists = lists;
-
+				this.productImg=lists[0].url;
 			},
-			radioChange: function(evt) { //用途选择
-				for (let i = 0; i < this.useItems.length; i++) {
-					if (this.useItems[i].value === evt.target.value) {
-						this.current = i;
-						break;
-					}
-				}
+			onMoreChange(lists){//上传产品详情
+				this.lists = lists;
+				console.log(lists);
+				console.log(this.fileList);
+				
+			},
+			radioChange: function(e) { //用途选择
+				this.use_way=e.detail.value;
 			},
 			checkboxChange: function(e) {
 				var items = this.checkitems,
@@ -227,14 +217,23 @@
 			},
 			publishSubmit() {
 				this.$refs.uUpload.upload();
+				
 				let params={
 					data:{
 						type:this.type,
 						title:this.formData.title,
 						desc:this.formData.desc,
-						//productImg:
+						productImg:this.productImg,
+						otherBrand:this.formData.otherBrand,
+						
+						exit_country:this.exit_country,
+						price:this.formData.price,
+						deadtime:this.formData.deadtime,
+						use_way:this.use_way,
+						
 					}
 				}
+			
 				this.request({
 					url: interfaces.getPublishData,
 					dataType: "JSON",
