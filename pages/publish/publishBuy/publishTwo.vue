@@ -12,8 +12,8 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload ref="uUpload" @on-uploaded="onUploaded" :custom-btn="false" @on-list-change="onListChange" :action="action"
-				 :auto-upload="false" :max-count="1" width="145" @on-change="onlistSuccess"></u-upload>
+				<!-- <u-upload ref="uUpload" @on-uploaded="onUploaded" :custom-btn="false" @on-list-change="onListChange" :action="action"
+				 :auto-upload="false" :max-count="1" width="145" @on-change="onlistSuccess"></u-upload> -->
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -85,9 +85,10 @@
 				</view>
 			</view>
 			<view class="uni-form-item more-upload">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="false"
+				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
 				 :file-list="fileList" uploadText="" :show-progress="true" :deletable="true" :max-count="8" width="145"
-				 @on-list-change="onMoreChange">
+				 @on-list-change="onMoreChange" @on-success="successlist" @on-oversize="onoversize">
+				 <!-- formData="formdata" -->
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -131,7 +132,7 @@
 		components: {
 			inputSearch,
 			uUpload,
-			LbPicker
+			LbPicker,
 		},
 		data() {
 			return {
@@ -217,7 +218,8 @@
 		methods: {
 			initData() {
 				// const fromfile=new FormData();
-				// console.log(fromfile);
+				// fromfile.append('image',file);
+				
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -272,8 +274,9 @@
 				this.productImg = lists[0].url;
 				console.log(this.fileList);
 			},
-			onlistSuccess(data, index, lists) {
-				console.log('onSuccess', data, index, lists);
+			
+			onoversize(file,lists){
+				console.log('onoversize',file,lists);
 			},
 			onMoreChange(lists) { //上传产品详情
 				this.lists = lists;
@@ -317,6 +320,11 @@
 				}
 				var serviceId=this.Listids.join(',');
 				this.publishData.service_id = serviceId
+			},
+			successlist:function(data, index, lists){
+				console.log(data, index, lists);
+				//const formdata=new FormData();
+				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
 				this.$refs.uUpload.upload();
