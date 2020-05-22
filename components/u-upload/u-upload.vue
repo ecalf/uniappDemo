@@ -153,7 +153,7 @@
 				type: [String, Number],
 				default: Number.MAX_VALUE
 			},
-			// 显示已上传的文件列表
+			// 显示已上传的文件列表，保存在父组件，传入该组件以便组件更新后可以显示这些文件
 			fileList: {
 				type: Array,
 				default () {
@@ -237,7 +237,12 @@
 				});
 				chooseFile
 					.then((res) => {
+						console.log('=============chooseFile=============');
+						console.log('res:', res);
+						
+						
 						let file = null;
+						//传入的 file-list 是已经上传完毕的文件,新选择的文件index从listOldLength开始
 						let listOldLength = this.lists.length;
 						res.tempFiles.map((val, index) => {
 							// 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
@@ -251,6 +256,7 @@
 									this.showToast('超出最大允许的文件个数');
 									return ;
 								}
+								
 								lists.push({
 									url: val.path,
 									progress: 0,
@@ -347,7 +353,7 @@
 							this.uploadError(index, res.data);
 						} else {
 							// 上传成功
-							debugger
+							//debugger
 							this.lists[index].response = res.data;
 							this.lists[index].progress = 100;
 							this.lists[index].error = false;

@@ -32,20 +32,48 @@
 		<!-- 上传图片 -->
 		<view class="upload-aa">
 			<view class="upload-item">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-				 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-				 @on-list-change="onListChange">
-					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
-					</view>
+				<u-upload
+					:custom-btn="customBtn" 
+					:show-upload-list="showUploadList" 
+					:action="action" 
+					:auto-upload="autoUpload"
+					:file-list="fileList" 
+					:show-progress="showProgress" 
+					:deletable="deletable" 
+					max-count="1" 
+					width="145"
+					uploadText="" 
+					name="image"
+					@on-progress="uploadHandler(arguments,'onProgress','company_logo')"
+					@on-success="uploadHandler(arguments,'onSuccess','company_logo')"
+					@on-error="uploadHandler(arguments,'onError','company_logo')"
+					@on-change="uploadHandler(arguments,'onChange','company_logo')"
+					@on-remove="uploadHandler(arguments,'onRemove','company_logo')"
+					>
+						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
+						</view>
 				</u-upload>
 				<view>公司logo</view>
 			</view>
 		<view class="upload-item">
 		
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn"
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+			
+			 >
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -55,9 +83,21 @@
 		</view>
 		<view class="upload-item">
 		
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn" 
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+			>
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -67,9 +107,21 @@
 		</view>
 		<view class="upload-item">
 		
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn"
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+			>
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -81,9 +133,21 @@
 			<view class="upload-cc">上传公司资质</view>
 		<view class="upload-aa">
 			<view class="upload-item">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-				 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-				 @on-list-change="onListChange">
+				<u-upload 
+					:custom-btn="customBtn"
+					:show-upload-list="showUploadList" 
+					:action="action" 
+					:auto-upload="autoUpload"
+					:file-list="fileList" 
+					:show-progress="showProgress" 
+					:deletable="deletable" 
+					max-count="1" 
+					width="145"
+					uploadText="" 
+					name="image"
+					@on-progress="onProgress"
+					@on-success="onSuccess"
+				>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -92,9 +156,21 @@
 			</view>
 		<view class="upload-item">
 		
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn"
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+				>
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -103,9 +179,21 @@
 			<view>公司资质</view>
 		</view>
 		<view class="upload-item">
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn"
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+			>
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -113,9 +201,21 @@
 			<view>公司资质</view>
 		</view>
 		<view class="upload-item">
-			<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-			 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-			 @on-list-change="onListChange">
+			<u-upload 
+				:custom-btn="customBtn"
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="145"
+				uploadText="" 
+				name="image"
+				@on-progress="onProgress"
+				@on-success="onSuccess"
+			>
 				<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 					<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 				</view>
@@ -133,12 +233,19 @@
 	export default {
 		data() {
 			return {
-				action: 'http://192.168.100.17/index.php/index/index/upload',
+				uploadState:{
+					COMPLETE:0,
+					UNFINISHED:1,
+					SUCCESS:2,
+					ERROR:3,
+					files:{}
+				},
+				action: interfaces.getUploadData,
 				// 预置上传列表
-				fileList: [],
+				fileList: [],//保存上传完毕的文件，用于组件多文件上传时，如果是多个上传组件则每个组件应独占一个fileList
 				showUploadList: true,
 				customBtn: false,
-				autoUpload: false,
+				autoUpload: true,//选择图片后自动开始上传
 				showProgress: true,
 				deletable: true,
 				customStyle: false,
@@ -149,6 +256,7 @@
 				getManagerdataList:{},
 				// 请求参数
 				ManagerList: {
+					company_logo:'',
 					company_name:'',
 					company_images:'',
 					company_transparency:'',
@@ -164,8 +272,58 @@
 			};
 		},
 		methods: {
-			onListChange(lists) {
+			checkUploadFiles(){
+				let finished = true;
+				let uploadState = this.uploadState;
+				let files = this.uploadState.files;
 				
+				for(let fieldName in files){
+					if(files[fieldName]==uploadState.UNFINISHED||files[fieldName]==uploadState.EEROR){
+						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
+						finished = false;
+						break;
+					}
+				}
+				
+				return finished;
+			},
+			uploadHandler(args,handlerName,fieldName){
+				let argsMerge = [];
+				for(let i=0;i<args.length;i++){
+					argsMerge.push(args[i]);
+				}
+				argsMerge.push(fieldName);
+				
+				this[handlerName].apply(this,argsMerge);
+			},
+			onProgress(res,index,lists,fieldName){
+				console.log('onProgress',res,index,lists,fieldName);
+				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
+			},
+			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
+				console.log('onSuccess',res,index,lists,fieldName);
+				res =  JSON.parse(res);
+				
+				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
+				
+				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
+				//this.fileList.push({url:res.data.img_url});
+				
+				this.ManagerList[fieldName] = res.data.img_url;
+				console.log('this.ManagerList[fieldName]>>>',this.ManagerList[fieldName]);
+			},
+			onChange(res,index,lists,fieldName){
+				console.log('onChange ',res,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
+			},
+			onError(err,index,lists,fieldName){
+				console.log('onError ',err,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.EEROR;
+			},
+			onRemove(index,lists,fieldName){
+				console.log('onRemove ',index,lists,fieldName);
+				this.uploadState.files[fieldName] = undefined;
+				this.ManagerList[fieldName] = '';
 			},
 			formSubmit: function(e) {
 				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
@@ -196,6 +354,16 @@
 			},
 			
 			getManager(){
+				if(!this.checkUploadFiles()){
+					uni.showToast({
+						title: '文件未上传完毕',
+						icon: "none"
+					});
+					console.log('文件未上传完毕',this.uploadState.files);
+					return false;
+				}
+				
+				
 				this.request({
 					url: interfaces.getManagerData,
 					dataType: "JSON",
