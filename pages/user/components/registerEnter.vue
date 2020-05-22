@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="full-height">
 		<view class="register-wrap">
 			<view class="register-item" v-for="item in registerList" :key="item.id" @tap="handleRegister(item)">
 				<image :src="item.images" mode=""></image>
@@ -32,12 +32,15 @@
 </script>
 
 <style lang="scss" scoped>
+	.full-height{height: calc(100vh - var(--window-top));}
 	.register-wrap{
 		display: flex;
 		justify-content: space-between;
 		background:#fff;
 		padding:50.72rpx 18.11rpx;
 		border-radius:19.92rpx;
+		align-items:center;
+		height:100%;
 		.register-item{
 			text-align: center;
 			margin:0 45.28rpx;

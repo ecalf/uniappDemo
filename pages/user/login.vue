@@ -48,7 +48,7 @@
 
 
 		<view class="action-row">
-			<navigator url="/pages/user/register?type=1">注册账号</navigator>
+			<navigator url="/pages/user/registerEnter">注册账号</navigator>
 			<text>|</text>
 			<navigator url="/pwd/pwd">忘记密码</navigator>
 		</view>

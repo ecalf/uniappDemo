@@ -72,9 +72,9 @@
 		</view>
 
 		<!--注册入口-->
-		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
+<!-- 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<register-enter></register-enter>
-		</uni-popup>
+		</uni-popup> -->
 
 		<page-footer :currentPage="currentPage"></page-footer>
 
@@ -82,21 +82,16 @@
 </template>
 
 <script>
-	import registerEnter from '@/pages/user/components/registerEnter.vue'
-	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	// import registerEnter from '@/pages/user/components/registerEnter.vue'
+	// import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import {
 		mapState,
 		mapMutations
 	} from 'vuex';
 	export default {
-		components: {
-			uniPopup,
-			registerEnter
-		},
 		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
-				ishow:true,
 				currentPage: "/pages/personalCenter/personalCenter",
 				procurementList: [{
 						text: "发布采购",

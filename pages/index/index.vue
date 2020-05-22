@@ -230,8 +230,8 @@
 				}
 			},
 			enterRegister(){//注册
-				uni.switchTab({
-					url:"/pages/personalCenter/personalCenter"
+				uni.navigateTo({
+					url:"/pages/user/registerEnter"
 				})
 			},
 			enterLogin(){
