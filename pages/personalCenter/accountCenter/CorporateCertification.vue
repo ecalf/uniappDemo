@@ -97,27 +97,29 @@
 	import interfaces from '@/utils/interfaces.js'
 	var graceChecker = require("../../../utils/graceChecker.js");
 	export default {
-
 		data() {
 			return {
 				CorporateformList: {}, //请求数据
 				Corporateform: {
-					scene: 'identify_person',
-					idcard: 'identify_person',
-					hand_identify_card_photo: 'identify_person',
-					organization_name: 'identify_person',
-					contact_name: '',
-					contact_phone: '',
-					company_name: '',
-					contact_name: '',
-					business_license: '',
-					business_license_code: '',
-					official_letter: '',
-					company_form: '',
-					bank_name: '',
-					bank_branch_name: '',
-					bank_account: '',
-					full_name: '',
+					scene: 'identify_person',//公司认证
+					idcard: 'identify_person',//身份证号码
+					hand_identify_card_photo: 'identify_person',//手持身份证照片
+					organization_name: 'identify_person',//机构名称
+					contact_name: '',//联系人
+					contact_phone: '',//	联系人号码
+					company_name: '',//	公司名称
+					business_license: '',//	营业执照
+					business_license_code: '',//营业执照编号
+					official_letter: '',//	公函
+					company_form: '',//	企业形式
+					bank_name: '',//银行名称
+					bank_branch_name: '',//	支行名称
+					bank_account: '',//	银行卡号
+					full_name: '',//姓名
+					legal_person:'',//法人
+					legal_person_cardno:'',//法人身份证号
+					legal_hand_identify_card_photo_font:'',//法人手持身份证正面照片
+					legal_hand_identify_card_photo_back:'',//法人手持身份证反面照片
 				},
 				form: {
 					selectbrand: 0,
@@ -199,7 +201,6 @@
 		methods: {
 			onListChange(lists) {},
 			formSubmit: function(e) {
-				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 				// 定义表单规则
 				var rule = [{
 					name: "nickname",
@@ -233,6 +234,10 @@
 								bank_branch_name: this.Corporateform.bank_branch_name,
 								bank_account: this.Corporateform.bank_account,
 								full_name: this.Corporateform.full_name,
+								legal_person:this.Corporateform.legal_person,
+								legal_person_cardno:this.Corporateform.legal_person_cardno,
+								legal_hand_identify_card_photo_font:this.Corporateform.legal_hand_identify_card_photo_font,
+								legal_hand_identify_card_photo_back:this.Corporateform.legal_hand_identify_card_photo_back,
 							}
 						},
 						success: ((res) => {
