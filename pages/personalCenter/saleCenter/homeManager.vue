@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="pb60">
 		<form @submit="formSubmit" @reset="formReset">
 		<view class="uni-form-item uni-column">
 			<view class="title">企业名称</view>

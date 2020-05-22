@@ -16,6 +16,11 @@
 	export default {
 		data() {
 			return {
+				quoto:{
+					page_size:'',
+					page_index:'',
+					keyword:''
+				},
 				goodsPrice: [{
 					title: '飞利浦呼吸机',
 					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
