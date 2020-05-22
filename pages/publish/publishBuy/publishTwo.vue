@@ -159,7 +159,7 @@
 		components: {
 			inputSearch,
 			uUpload,
-			LbPicker
+			LbPicker,
 		},
 		data() {
 			return {
@@ -245,7 +245,8 @@
 		methods: {
 			initData() {
 				// const fromfile=new FormData();
-				// console.log(fromfile);
+				// fromfile.append('image',file);
+				
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -365,6 +366,11 @@
 				}
 				var serviceId=this.Listids.join(',');
 				this.publishData.service_id = serviceId
+			},
+			successlist:function(data, index, lists){
+				console.log(data, index, lists);
+				//const formdata=new FormData();
+				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
 								

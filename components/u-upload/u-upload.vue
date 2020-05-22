@@ -64,8 +64,12 @@
 	 * @event {Function} on-choose-complete 每次选择图片后触发，只是让外部可以得知每次选择后，内部的文件列表
 	 * @example <u-upload :action="action" :file-list="fileList" ></u-upload>
 	 */
+	import uLineProgress from '@/components/u-line-progress/u-line-progress'
 	export default {
 		name: 'u-upload',
+		components:{
+			uLineProgress
+		},
 		props: {
 			//是否显示组件自带的图片预览功能
 			showUploadList: {
@@ -343,7 +347,7 @@
 							this.uploadError(index, res.data);
 						} else {
 							// 上传成功
-							//console.log(231);
+							debugger
 							this.lists[index].response = res.data;
 							this.lists[index].progress = 100;
 							this.lists[index].error = false;
