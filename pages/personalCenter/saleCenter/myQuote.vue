@@ -2,7 +2,6 @@
 	<view>
 		<view class="input-view">
 			<view class="search-icon"></view>
-			
 			<input type="text" placeholder="搜索订单" />
 		</view>
 		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
@@ -17,6 +16,11 @@
 	export default {
 		data() {
 			return {
+				quoto:{
+					page_size:'',
+					page_index:'',
+					keyword:''
+				},
 				goodsPrice: [{
 					title: '飞利浦呼吸机',
 					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",

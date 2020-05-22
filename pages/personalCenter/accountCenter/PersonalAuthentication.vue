@@ -2,11 +2,11 @@
 	<view class="pb60">
 		<view class="uni-form-item">
 			<view class="title">姓名</view>
-			<input class="uni-input" text name="nickname" value="张小姐" />
+			<input class="uni-input" text name="nickname" value="张小姐" v-model="personalForm.real_name"/>
 		</view>
 		<view class="uni-form-item mb10">
 			<view class="title">身份证号</view>
-			<input class="uni-input" number name="nickname" value="410221155885888888888" />
+			<input class="uni-input" number name="nickname" value="410221155885888888888" v-model="personalForm.legal_person_cardno"/>
 		</view>
 		<!--上传图片-->
 		<view class="uni-form-item uoload-wrap">
@@ -71,6 +71,14 @@
 				maxCount:1,
 				lists: [], // 组件内部的文件列表
 				imgurl:[],
+				personalForm:{
+					scene:'identify_person',
+					real_name:'',
+					legal_person_cardno:'',
+					hand_identify_card_photo_front:'',
+					hand_identify_card_photo_back:'',
+				}
+				
 			}
 		},
 		methods: {
@@ -82,14 +90,17 @@
 
 			},
 			confirm(){
-				uni.request({
-					url: interfaces.getPersonData,
+				// console.log(this.personalForm.legal_person_cardno,111)
+				this.request({
+					url: interfaces.getCorporateData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: {
-						data:{
-						scene:'identify_person',
-						}
+						scene:this.personalForm.scene,
+						real_name:this.personalForm.real_name,
+						legal_person_cardno:this.personalForm.legal_person_cardno,
+						hand_identify_card_photo_front:this.personalForm.hand_identify_card_photo_front,
+						hand_identify_card_photo_back:this.personalForm.hand_identify_card_photo_back,
 					},
 					success: ((res) => {
 						console.log(res);

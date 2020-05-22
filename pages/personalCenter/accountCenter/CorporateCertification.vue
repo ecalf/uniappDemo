@@ -25,6 +25,10 @@
 				<view class="title">负责人姓名</view>
 				<input class="uni-input" name="nickname" placeholder="请输入负责人姓名" v-model="Corporateform.full_name" />
 			</view>
+			<view class="uni-form-item uni-column ">
+				<view class="title">负责人身份证号</view>
+				<input class="uni-input" name="nickname" placeholder="请输入身份证号" v-model="Corporateform.legal_person_cardno" />
+			</view>
 			<view class="uni-form-item uni-column uni-aa ">
 				<view class="title">公司类型</view>
 				<cl-select v-model="Corporateform.business_scope_cate" :options="options.selectbrand" class="uni-input"></cl-select>
@@ -49,7 +53,7 @@
 						</view>
 
 					</u-upload>
-					<view>上传手持身份证</view>
+					<view>营业执照</view>
 				</view>
 				<view class="upload-item">
 
@@ -66,7 +70,7 @@
 				<view class="upload-item">
 					<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
 					 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="145"
-					 @on-list-change="onListChange">
+					 @on-list-change="onListChange" >
 						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 						</view>
@@ -81,7 +85,7 @@
 							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 						</view>
 					</u-upload>
-					<view>身份证反面</view>
+					<view>手持身份证</view>
 				</view>
 			</view>
 
@@ -95,8 +99,12 @@
 
 <script>
 	import interfaces from '@/utils/interfaces.js'
+	import uUpload from '@/components/u-upload/u-upload'
 	var graceChecker = require("../../../utils/graceChecker.js");
 	export default {
+		comments:{
+			uUpload
+		},
 		data() {
 			return {
 				CorporateformList: {}, //请求数据
@@ -104,7 +112,7 @@
 					scene: 'identify_person',//公司认证
 					idcard: 'identify_person',//身份证号码
 					hand_identify_card_photo: 'identify_person',//手持身份证照片
-					organization_name: 'identify_person',//机构名称
+					organization_name: 'identify_person',//机构名称0
 					contact_name: '',//联系人
 					contact_phone: '',//	联系人号码
 					company_name: '',//	公司名称
@@ -119,7 +127,7 @@
 					legal_person:'',//法人
 					legal_person_cardno:'',//法人身份证号
 					legal_hand_identify_card_photo_font:'',//法人手持身份证正面照片
-					legal_hand_identify_card_photo_back:'',//法人手持身份证反面照片
+					legal_hand_identify_card_photo_back:'',//法人手持身份证反面照片,
 				},
 				form: {
 					selectbrand: 0,
@@ -201,23 +209,22 @@
 		methods: {
 			onListChange(lists) {},
 			formSubmit: function(e) {
-				// 定义表单规则
-				var rule = [{
-					name: "nickname",
-					checkType: "string",
-					// checkRule: "1,3",
-					errorMsg: "请输入正确的信息"
-				}, ];
-				//进行表单检查
-				var formData = e.detail.value;
-				var checkRes = graceChecker.check(formData, rule);
-				if (checkRes) {
-					uni.request({
+			// 	// 定义表单规则
+			// 	var rule = [{
+			// 		name: "nickname",
+			// 		checkType: "string",
+			// 		// checkRule: "1,3",
+			// 		errorMsg: "请输入正确的信息"
+			// 	}, ];
+			// 	//进行表单检查
+			// 	var formData = e.detail.value;
+			// 	var checkRes = graceChecker.check(formData, rule);
+			// 	if (checkRes) {
+					this.request({
 						url: interfaces.getCorporateData,
 						dataType: "JSON",
 						method: 'POST', //请求方式
 						data: {
-							data: {
 								scene: this.Corporateform.scene,
 								idcard: this.Corporateform.idcard,
 								hand_identify_card_photo: this.Corporateform.hand_identify_card_photo,
@@ -238,19 +245,19 @@
 								legal_person_cardno:this.Corporateform.legal_person_cardno,
 								legal_hand_identify_card_photo_font:this.Corporateform.legal_hand_identify_card_photo_font,
 								legal_hand_identify_card_photo_back:this.Corporateform.legal_hand_identify_card_photo_back,
-							}
+							
 						},
 						success: ((res) => {
 							console.log(res,3333);
 						})
 					})
 					
-				} else {
-					uni.showToast({
-						title: graceChecker.error,
-						icon: "none"
-					});
-				}
+				// } else {
+				// 	uni.showToast({
+				// 		title: graceChecker.error,
+				// 		icon: "none"
+				// 	});
+				// }
 				
 			},
 			
