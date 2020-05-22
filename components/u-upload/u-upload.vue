@@ -291,7 +291,7 @@
 			},
 			// 上传图片
 			uploadFile(index = 0) {
-				console.log('=========== u-upload component, uploadFile check params============');
+				/* console.log('=========== u-upload component, uploadFile check params============');
 				console.log('index:',index);
 				console.log('disabled:',this.disabled);
 				console.log('uploading:',this.uploading);
@@ -300,7 +300,7 @@
 				console.log('action:',this.action);
 				console.log('filePath:',this.lists[index]&&this.lists[index].url);
 				console.log('name:',this.name);
-				console.log('formData:',this.formData);
+				console.log('formData:',this.formData); */
 				
 				
 				

@@ -23,7 +23,7 @@
 					testref="image1"
 					@on-choose-complete="onChooseComplete"
 					@on-list-change="onListChange" 
-					@on-change="onlistSuccess"
+					@on-change="onChange"
 					@on-success="onSuccess"
 					@on-uploaded="onUploaded" 
 				></u-upload>
@@ -103,7 +103,7 @@
 					:custom-btn="customBtn" 
 					:show-upload-list="true" 
 					:action="action" 
-					:auto-upload="false"
+					:auto-upload="true"
 					:file-list="fileList" 
 					:show-progress="true" 
 					:deletable="true" 
@@ -114,6 +114,7 @@
 					testref="image2"
 					
 					@on-list-change="onMoreChange"
+					@on-success="onSuccess_2"
 					>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
@@ -301,21 +302,30 @@
 				
 			},
 			onListChange(lists) { //上传产品主图
-				this.productImg = lists.length&&lists[0].url;
+				console.log('onListChange 图片列表发生改变：在列表中添加或删除图片');
 				console.log(this.fileList);
 			},
-			onlistSuccess(data, index, lists) {
-				console.log('onlistSuccess 图片上传完毕，无论成功与否，在组件 complete 内触发',  data, index, lists);
+			onChange(data, index, lists) {
+				console.log('onChange as on-change handler, 每张图片上传完毕，无论成功与否，在上传组件 complete 内触发',  data, index, lists);
 			},
 			onSuccess(data,index,lists){
 				console.log('onSuccess 每张图片上传完毕触发',data,index,lists);
+				data = JSON.parse(data);
+				this.productImg = data.data.img_url;
+				console.log('this.productImg >>>',this.productImg );
 			},
 			onUploaded(lists){
 				console.log('onUploaded 所有图片上传完毕触发',lists);
 			},
 			onMoreChange(lists) { //上传产品详情
 				this.lists = lists;
-				// console.log(lists);
+				console.log('onMoreChange',lists);
+			},
+			onSuccess_2(data,index,lists){
+				console.log('onSuccess_2 每张图片上传完毕触发',data,index,lists);
+				data = JSON.parse(data);
+				let imgUrl = data.data.img_url;
+				console.log('imgUrl>>>',imgUrl);
 			},
 
 			handleTap(name) { //picker弹出
@@ -357,15 +367,7 @@
 				this.publishData.service_id = serviceId
 			},
 			publishSubmit() {
-				console.log('======== ontap publishSubmit =========');
-				console.log('this.$refs.uUpload:',this.$refs.uUpload);
-				console.log('this.$refs.uUpload.$attrs',this.$refs.uUpload.$attrs);
-				console.log('======== call uUpload.upload() ======');
-				
-				
-				this.$refs.uUpload.upload();
-				
-				
+								
 				let params = {
 					data: {
 						type: this.publishData.type,
