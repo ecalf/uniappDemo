@@ -12,8 +12,21 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload ref="uUpload" @on-uploaded="onUploaded" :custom-btn="false" @on-list-change="onListChange" :action="action"
-				 :auto-upload="false" :max-count="1" width="145" @on-change="onlistSuccess"></u-upload>
+				<u-upload 
+					ref="uUpload" 
+					:custom-btn="false" 
+					:action="action"
+					:auto-upload="true" 
+					:max-count="1" 
+					:width="145" 
+					name="image"
+					testref="image1"
+					@on-choose-complete="onChooseComplete"
+					@on-list-change="onListChange" 
+					@on-change="onlistSuccess"
+					@on-success="onSuccess"
+					@on-uploaded="onUploaded" 
+				></u-upload>
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -85,9 +98,23 @@
 				</view>
 			</view>
 			<view class="uni-form-item more-upload">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="false"
-				 :file-list="fileList" uploadText="" :show-progress="true" :deletable="true" :max-count="8" width="145"
-				 @on-list-change="onMoreChange">
+				<u-upload 
+					ref="uUpload_2" 
+					:custom-btn="customBtn" 
+					:show-upload-list="true" 
+					:action="action" 
+					:auto-upload="false"
+					:file-list="fileList" 
+					:show-progress="true" 
+					:deletable="true" 
+					:max-count="8" 
+					width="145"
+					uploadText=""
+					name="image"
+					testref="image2"
+					
+					@on-list-change="onMoreChange"
+					>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -268,12 +295,23 @@
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
 			},
+			onChooseComplete(lists){
+				console.log('onChooseComplete 每次选择图片后触发',  lists);
+				
+				
+			},
 			onListChange(lists) { //上传产品主图
-				this.productImg = lists[0].url;
+				this.productImg = lists.length&&lists[0].url;
 				console.log(this.fileList);
 			},
 			onlistSuccess(data, index, lists) {
-				console.log('onSuccess', data, index, lists);
+				console.log('onlistSuccess 图片上传完毕，无论成功与否，在组件 complete 内触发',  data, index, lists);
+			},
+			onSuccess(data,index,lists){
+				console.log('onSuccess 每张图片上传完毕触发',data,index,lists);
+			},
+			onUploaded(lists){
+				console.log('onUploaded 所有图片上传完毕触发',lists);
 			},
 			onMoreChange(lists) { //上传产品详情
 				this.lists = lists;
@@ -319,7 +357,15 @@
 				this.publishData.service_id = serviceId
 			},
 			publishSubmit() {
+				console.log('======== ontap publishSubmit =========');
+				console.log('this.$refs.uUpload:',this.$refs.uUpload);
+				console.log('this.$refs.uUpload.$attrs',this.$refs.uUpload.$attrs);
+				console.log('======== call uUpload.upload() ======');
+				
+				
 				this.$refs.uUpload.upload();
+				
+				
 				let params = {
 					data: {
 						type: this.publishData.type,
@@ -339,7 +385,9 @@
 						service_id: this.publishData.service_id
 					}
 				}
-
+				
+				
+				console.log('publishSubmit begin, params:',params);
 				this.request({
 					url: interfaces.getPublishData,
 					dataType: "JSON",

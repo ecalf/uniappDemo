@@ -279,6 +279,8 @@
 			},
 			// 对失败的图片重新上传
 			retry(index) {
+				console.log('========== retry uploadFile ==================');
+				
 				this.lists[index].progress = 0;
 				this.lists[index].error = false;
 				this.lists[index].response = null;
@@ -289,6 +291,20 @@
 			},
 			// 上传图片
 			uploadFile(index = 0) {
+				console.log('=========== u-upload component, uploadFile check params============');
+				console.log('index:',index);
+				console.log('disabled:',this.disabled);
+				console.log('uploading:',this.uploading);
+				console.log('lists:',this.lists);
+				console.log('header:',this.header);
+				console.log('action:',this.action);
+				console.log('filePath:',this.lists[index]&&this.lists[index].url);
+				console.log('name:',this.name);
+				console.log('formData:',this.formData);
+				
+				
+				
+				
 				if (this.disabled) return;
 				if(this.uploading) return ;
 				// 全部上传完成
@@ -308,6 +324,10 @@
 				}
 				this.lists[index].error = false;
 				this.uploading = true;
+				
+				
+				console.log('==============u-upload component, uploadFile begin======================');
+				
 				// 创建上传对象
 				const task = uni.uploadFile({
 					url: this.action,
@@ -316,6 +336,9 @@
 					formData: this.formData,
 					header: this.header,
 					success: (res) => {
+						console.log('=============uploadFile success============================');
+						console.log('res:',res);
+						
 						if (res.statusCode != 200) {
 							this.uploadError(index, res.data);
 						} else {
@@ -331,6 +354,9 @@
 						this.uploadError(index, e);
 					},
 					complete: (res) => {
+						console.log('=============uploadFile complete============================');
+						console.log('res:',res);
+						
 						uni.hideLoading();
 						this.uploading = false;
 						this.uploadFile(index + 1);
@@ -338,6 +364,10 @@
 					}
 				});
 				task.onProgressUpdate((res) => {
+					console.log('=============uploadFile onProgressUpdate============================');
+					console.log('res:',res);
+					
+					
 					if (res.progress > 0) {
 						this.lists[index].progress = res.progress;
 						this.$emit('on-progress', res, index, this.lists);
@@ -346,6 +376,10 @@
 			},
 			// 上传失败
 			uploadError(index, err) {
+				console.log('=============uploadFile onProgressUpdate============================');
+				console.log('err:',err);
+				
+				
 				this.lists[index].progress = 0;
 				this.lists[index].error = true;
 				this.lists[index].response = null;
