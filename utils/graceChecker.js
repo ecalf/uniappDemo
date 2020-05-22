@@ -6,6 +6,7 @@
 module.exports = {
 	error: '',
 	check: function(data, rule, type) {
+		console.log(rule);
 		for (var i = 0; i < rule.length; i++) {
 			if (!rule[i].checkType) {
 				return true;
@@ -17,7 +18,7 @@ module.exports = {
 				return true;
 			}
 			// if (!data[rule[i].name]) {this.error = rule[i].errorMsg; return false;}
-			if (data[rule[i].name] || (data[rule[i].name] === '' && data[rule[i].name] != 'undefined')) {
+			if (data[rule[i].name] || (data[rule[i].name] === '' && data[rule[i].name] != 'undefined') || data[rule[i].name]==false) {
 				switch (rule[i].checkType) {
 					case 'string':
 						var reg = new RegExp('^.{' + rule[i].checkRule + '}$');
@@ -126,7 +127,19 @@ module.exports = {
 							this.error = rule[i].errorMsg;
 							return false;
 						}
-						break;
+					break;
+					case 'checkpass':
+					if(data['password']!=data['re_password']){
+						this.error = rule[i].errorMsg;
+						return false;
+					}
+					break;
+					case 'ischecked':
+						if(data[rule[i].name]==false){
+							this.error = rule[i].errorMsg;
+							return false;
+						}
+					break;
 				}
 			}
 		}

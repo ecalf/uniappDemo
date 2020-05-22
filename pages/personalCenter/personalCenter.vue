@@ -6,7 +6,7 @@
 			<view class="member-right">
 				<view class='header-title'><text>{{uerInfo.userId}}</text></view>
 				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
-				<view class='usersname'><text>{{uerInfo.userName}}</text></view>
+				<view class='usersname'><text>{{uerInfo.userName}}</text><text @tap="bindLogin">退出</text></view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>
 			<view class='header-vip'>
@@ -209,11 +209,10 @@
 			bindLogin() {
 				if (this.hasLogin) {
 					this.logout();
-				} else {
 					uni.reLaunch({
 						url: '/pages/user/login'
 					})
-				}
+				} 
 			}
 			
 		

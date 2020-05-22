@@ -21,7 +21,7 @@
 						<view class="title">{{brandvalue}}</view>
 						<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
 					</view>
-					<lb-picker v-model="brandvalue" ref="picker1" :props="myProps" :list="selectbrand" @change="handleChange">
+					<lb-picker v-model="brandvalue" ref="picker1" :props="brandProps" :list="selectbrand" @change="brandChange">
 					</lb-picker>
 
 				</view>
@@ -40,10 +40,10 @@
 
 					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
-						<picker @change="unitChange" :value="unitindex" :range="selectUnit" :range-key="'cn_name'">
-							{{selectUnit[unitindex].cn_name}}
-							<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
-						</picker><text>(单位)</text>
+						<view @tap="handleTap('Unitpicker')"><text class="curunit">{{curUnit}}</text><text>(单位)</text></view>
+						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
+						</lb-picker>
+						
 					</view>
 				</view>
 			</view>
@@ -97,7 +97,7 @@
 
 			<view class="checkbox-list checkbox-list-bottom">
 				<view class="checkbox-item" v-for="(item,index) in serviceList" :class="{'isChecked':Listids.indexOf(item.id)>=0}"
-				 :key="index" @tap="checkboxChange(item.id,item)">
+				 :key="index" @tap="checkboxChange(item.id)">
 					<view class="title">{{item.name}}<text class="iconfont">&#xe616;</text></view>
 					<view class="checkboxbg">
 						<view class="dec-text">{{item.name}}
@@ -158,16 +158,15 @@
 				dataSource: [], //出口国家
 				brandvalue: '请选择品牌', //当前选择品牌
 				selectbrand: [], //选择品牌
-				unitindex: 0,
-				selectUnit: [],
-				selectUnitid: [],
+				selectUnit: [],//选择单位
+				curUnit:'',//当前选择单位
 				action: interfaces.getUploadData,
 				filesArr: [],
 				// 预置上传列表
 				fileList: [],
 				customBtn: false,
 				lists: [], // 组件内部的文件列表
-				Listids: [],
+				Listids: [],//选择增值服务
 				isCheckAll: false,
 				useItems: [{
 						value: '1',
@@ -192,10 +191,15 @@
 					},
 				],
 				qualtitems: [],
-				myProps: {
-					label: 'cn_name',
-					value: 'cn_name',
+				brandProps: {
+					label: 'cn_name',//下拉值
+					value: 'cn_name',//显示值
 					brandid: 'id'
+				},
+				UnitProps: {
+					label: 'cn_name',//下拉值
+					value: 'cn_name',//显示值
+					unitid: 'id'
 				}
 
 			}
@@ -225,15 +229,7 @@
 						}
 					},
 					success: ((res) => {
-						// const data = []
-						// for (let i = 0; i < res.data.length; i++) {
-						// 	data.push(
-						// 		res.data[i].cn_name
-						// 	)
-						// }
 						this.selectbrand = res.data;
-
-
 					})
 				});
 				//获取资质种类分类列表
@@ -287,8 +283,11 @@
 			handleTap(name) { //picker弹出
 				this.$refs[name].show()
 			},
-			handleChange(item) { //品牌id 
+			brandChange(item) { //品牌id 
 				this.publishData.brand_id = item.item.id;
+			},
+			Unithange(item) { //单位id
+				this.publishData.unit_cate_id = item.item.id;
 			},
 			radioChange: function(e) { //用途选择
 				this.publishData.use_way = e.detail.value;
@@ -307,28 +306,17 @@
 				var data = values.join(',');
 				this.publishData.qualification = data
 			},
-
-			// bindPickerChange: function(e) { //获取品牌id
-			// 	this.index = e.detail.value;
-			// 	this.publishData.brand_id = this.selectbrand[e.target.value].id;
-			// 	console.log(this.publishData.brand_id);
-			// },
-			unitChange: function(e) { //单位
-				this.unitindex = e.target.value;
-				this.publishData.unit_cate_id = this.selectUnit[e.target.value].id;
-			},
-			checkboxChange: function(id, item) { //选择增值服务
-				//console.log(item);
-				var arr = [];
+			checkboxChange: function(id) { //选择增值服务
 				var ids = this.Listids.indexOf(id);
 				if (ids >= 0) {
 					//如果包含了该ID，则删除（单选按钮由选中变为非选中状态）
 					this.Listids.splice(ids, 1);
 				} else {
 					//选中该按钮
-					this.Listids.push(id);
-					this.publishData.service_id = id;
+					this.Listids.push(id);		
 				}
+				var serviceId=this.Listids.join(',');
+				this.publishData.service_id = serviceId
 			},
 			publishSubmit() {
 				this.$refs.uUpload.upload();

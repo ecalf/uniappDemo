@@ -88,13 +88,13 @@
 				<view class="uni-form-item">
 					<view class="title">设置密码 </view>
 					<view class="uni-input">
-						<input type="password" value="" v-model="registerForm.password" placeholder="请输入密码" />
+						<input type="password" value="" name="password"  v-model="registerForm.password" placeholder="请输入密码" />
 					</view>
 				</view>
 				<view class="uni-form-item">
 					<view class="title">确认密码 </view>
 					<view class="uni-input">
-						<input type="password" value="" v-model="registerForm.re_password" placeholder="请确认密码" />
+						<input type="password" value="" name="re_password" v-model="registerForm.re_password" placeholder="请确认密码" />
 					</view>
 				</view>
 			</view>
@@ -117,7 +117,7 @@
 	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
-			
+
 			return {
 				current: 0, //选择国家
 				num: true,
@@ -153,7 +153,7 @@
 						name: "organization",
 						checkType: 'notnull',
 						checkRule: "",
-						errorMsg: "请输入组织名称"
+						errorMsg: "请输入机构名称"
 					},
 					{
 						name: "company",
@@ -162,10 +162,16 @@
 						errorMsg: "请输入公司名称"
 					},
 					{
-						name: "username",
+						name: "contact",
 						checkType: "notnull",
 						checkRule: "",
 						errorMsg: "请输入联系人"
+					},
+					{
+						name: "username",
+						checkType: "notnull",
+						checkRule: "",
+						errorMsg: "请输入用户名"
 					},
 					{
 						name: "mobile",
@@ -185,12 +191,18 @@
 						checkRule: "",
 						errorMsg: "请输入密码"
 					},
-					// {
-					// 	name: "re_password",
-					// 	checkType: "same",
-					// 	checkRule: "this.registerForm.re_password,this.registerForm.password",
-					// 	errorMsg: "两次输入的密码不一致"
-					// },
+					{
+						name:'re_password',
+						checkType:'checkpass',
+						checkRule:'',
+						errorMsg:'两次密码输入不一致'
+					},
+					{
+						name:'isChecked',
+						checkType:'ischecked',
+						checkRule:'',
+						errorMsg:'请勾选协议'
+					}
 				]
 			}
 		},
@@ -198,37 +210,7 @@
 			this.registerForm.type = option.type; //打印出上个页面传递的参数。
 			// console.log(this.registerForm.type);
 		},
-		computed: {
-			verify: function() {
-				if (this.registerForm.password == '') {
-					return {
-						"flag": false,
-						"msg": '请输入密码'
-					};
-				}
-				if (this.registerForm.password.length < 8) {
-					return {
-						"flag": false,
-						"msg": '密码长度至少大于8位'
-					};
-				}
-				if (this.registerForm.password != this.registerForm.re_password) {
-					return {
-						"flag": false,
-						"msg": '两次输入的密码不一致'
-					};
-				}
-				if (this.isChecked == false) {
-					return {
-						"flag": false,
-						"msg": '请勾选我们的协议'
-					};
-				}
-				return {
-					"flag": true
-				};
-			},
-		},
+		
 		methods: {
 			radioChange: function(evt) { //选择国家
 				for (let i = 0; i < this.countryList.length; i++) {
@@ -241,10 +223,10 @@
 				}
 				this.country = evt.target.value; //获取国家
 				this.registerForm.password = '',
-				this.registerForm.re_password = '',
-				 this.registerForm.company_name= '',
-				this.registerForm.contact_name= '',
-				this.registerForm.organization_name= ''
+					this.registerForm.re_password = '',
+					this.registerForm.company_name = '',
+					this.registerForm.contact_name = '',
+					this.registerForm.organization_name = ''
 			},
 			//发送验证码
 			sendCode() {
@@ -276,72 +258,62 @@
 						}
 					},
 					success: ((res) => {
-						console.log(res);
+						//console.log(res);
 					})
 				})
 			},
 			formSubmit: function(e) {
 				//进行表单检查
 				var formData = e.detail.value;
+				formData.isChecked=this.isChecked;
 				var checkRes = graceChecker.check(formData, this.rules);
-
 				if (!checkRes) {
 					uni.showToast({
 						title: graceChecker.error,
 						icon: "none"
 					});
-				}
-				var verifyRes = this.verify.flag;
-				if (!verifyRes) { //自定义验证规则
-					uni.showToast({
-						title: this.verify.msg,
-						icon: "none"
-					});
-					 return;
-				}
-				if (checkRes) {
-					this.request({
-						url: interfaces.getRegisterData,
-						dataType: "JSON",
-						method: 'POST', //请求方式
+				}else{
+				this.request({
+					url: interfaces.getRegisterData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
 						data: {
-							data: {
-								mobile: this.registerForm.mobile,
-								code: this.registerForm.code,
-								password: this.registerForm.password,
-								re_password: this.registerForm.re_password,
-								state_code: this.country == 'China' ? 86 : '', //国家代号,暂只处理中国设为86,国外为空
-								user_name: this.registerForm.user_name,
-								company_name: this.registerForm.company_name,
-								contact_name: this.registerForm.contact_name,
-								organization_name: this.registerForm.organization_name,
-								country: this.country,
-								type: this.registerForm.type //注册类型 1个人 2 机构 3企业
-							}
-						},
-						success: ((res) => {
-							if (res.code !== 200) {
-								uni.showToast({
-									title: res.message,
-									icon: "none"
-								});
-							}else{
-								uni.showToast({
-									title: '注册成功',
-									icon: "none"
-								});
-								uni.navigateTo({
-									url: "/pages/user/login"
-								})
-							}
-						}),
-						fail: ((error) => {
+							mobile: this.registerForm.mobile,
+							code: this.registerForm.code,
+							password: this.registerForm.password,
+							re_password: this.registerForm.re_password,
+							state_code: this.country == 'China' ? 86 : '', //国家代号,暂只处理中国设为86,国外为空
+							user_name: this.registerForm.user_name,
+							company_name: this.registerForm.company_name,
+							contact_name: this.registerForm.contact_name,
+							organization_name: this.registerForm.organization_name,
+							country: this.country,
+							type: this.registerForm.type //注册类型 1个人 2 机构 3企业
+						}
+					},
+					success: ((res) => {
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+						} else {
+							uni.showToast({
+								title: '注册成功',
+								icon: "none"
+							});
+							uni.navigateTo({
+								url: "/pages/user/login"
+							})
+						}
+					}),
+					fail: ((error) => {
 
-						})
-
-
-					});
+					})
+				});
 				}
+
 			},
 
 			formReset: function(e) {

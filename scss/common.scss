@@ -238,6 +238,7 @@ uni-input{
 		display: flex;
 		align-items: center;
 		text-align:right;
+		
 		.cl-icon{margin-left:36.23rpx;}
 		uni-picker{
 			flex: 1;
@@ -245,6 +246,7 @@ uni-input{
 			padding:0 9.05rpx;
 			margin-right:18.11rpx;
 		}
+		.curunit{min-width:90.57rpx;height:43.47rpx;border:1px solid #f2f2f2; display: inline-block;padding:0 18.11rpx;margin-right:18.11rpx;vertical-align:middle;}
 	}
 	.checkbox-list-bottom{
 		padding:0 45.28rpx 54.34rpx;
