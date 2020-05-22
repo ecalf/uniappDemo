@@ -41,7 +41,7 @@ const interfaces = {
 	// 公司主页信息
 	getManagerData: baseurl + "/v1/user/company_info_edit",
 	
-	// 企业认证
+	// 认证
 	getCorporateData: baseurl + "/v1/user/identification"
 }
 module.exports = interfaces;

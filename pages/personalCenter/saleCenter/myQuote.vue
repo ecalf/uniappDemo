@@ -2,7 +2,6 @@
 	<view>
 		<view class="input-view">
 			<view class="search-icon"></view>
-			
 			<input type="text" placeholder="搜索订单" />
 		</view>
 		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
