@@ -1,14 +1,14 @@
 <template>
 	<view>
-		<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
-		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
+		<converSionPrice :conversionPrice='conversionPrice'></converSionPrice>
+		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
 
 	</view>
 </template>
 
 <script>
-	import conversionPrice from '@/components/conversionPrice.vue'
-	import goodsPrice from '../../../components/goodsPrice.vue'
+	import converSionPrice from '@/components/conversionPrice.vue'
+	import goodsprice from '../../../components/goodsPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
@@ -17,9 +17,13 @@
 					page_size: 2,
 					page_index: 1,
 					keyword: '',
-					type: '',
+					type: 1,
+
 				},
 				goodsPrice: [],
+				conversionPrice: [],
+				
+
 				conversionPrice: [{
 						id: 1,
 						name: '已报价'
@@ -29,6 +33,7 @@
 						name: '未报价'
 					},
 				],
+
 				
 			};
 		},
@@ -42,13 +47,15 @@
 						data: {
 							page_size: this.quoto.page_size,
 							page_index: this.quoto.page_index,
-							keyword: this.quoto.keyword,
+							keyword:'',
 							type: this.quoto.type,
+							
 						}
 					},
 					success: ((res) => {	
 						console.log(res, 1212)
-						this.goodsPrice = res.data.list;
+						 this.goodsPrice = res.data.list;
+						// this.conversionPrice = res.data;
 					})
 				});
 			}
@@ -57,8 +64,8 @@
 			this.getsupplierList()
 		},
 		components: {
-			conversionPrice,
-			goodsPrice
+			converSionPrice,
+			goodsprice
 		}
 	}
 </script>

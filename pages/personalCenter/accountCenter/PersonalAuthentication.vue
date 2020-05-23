@@ -2,11 +2,11 @@
 	<view class="pb60">
 		<view class="uni-form-item">
 			<view class="title">姓名</view>
-			<input class="uni-input" text name="nickname" value="张小姐" v-model="personalForm.real_name" />
+			<input class="uni-input"  name="nickname" value="张小姐" v-model="personalForm.real_name" />
 		</view>
 		<view class="uni-form-item mb10">
 			<view class="title">身份证号</view>
-			<input class="uni-input" number name="nickname" value="410221155885888888888" v-model="personalForm.idcard" />
+			<input class="uni-input"  name="nickname" value="410221155885888888888" v-model="personalForm.idcard" />
 		</view>
 		<!--上传图片-->
 		<view class="uni-form-item uoload-wrap">
@@ -113,10 +113,10 @@
 				},
 				action: interfaces.getUploadData,
 				// 预置上传列表
-				fileList: [],
+				fileList: [],//保存上传完毕的文件，用于组件多文件上传时，如果是多个上传组件则每个组件应独占一个fileList
 				showUploadList: true,
 				customBtn: false,
-				autoUpload: true,
+				autoUpload: true,//选择图片后自动开始上传
 				showProgress: true,
 				deletable: true,
 				customStyle: false,
@@ -201,7 +201,7 @@
 				}
 				
 				this.request({
-					url: interfaces.getCorporateData,
+					url: interfaces.getPersonData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: {
@@ -216,6 +216,22 @@
 					},
 					success: ((res) => {
 						console.log(res, 2222);
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+							return;
+						} else {
+							uni.showToast({
+							    title: '认证成功',
+							    duration: 2000
+							});
+							uni.navigateTo({
+							    url: "/pages/personalCenter/accountCenter/CertificateAuthority"
+							});
+						}
+						
 					})
 				})
 			}
