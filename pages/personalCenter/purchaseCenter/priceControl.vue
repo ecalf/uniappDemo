@@ -23,6 +23,17 @@
 				goodsPrice: [],
 				conversionPrice: [],
 				
+
+				conversionPrice: [{
+						id: 1,
+						name: '已报价'
+					},
+					{
+						id: 2,
+						name: '未报价'
+					},
+				],
+
 				
 			};
 		},
@@ -41,7 +52,7 @@
 							
 						}
 					},
-					success: ((res) => {
+					success: ((res) => {	
 						console.log(res, 1212)
 						 this.goodsPrice = res.data.list;
 						// this.conversionPrice = res.data;
