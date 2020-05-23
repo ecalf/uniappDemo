@@ -7,7 +7,6 @@ const baseurl = "/api";
 const interfaces = {
 	// 获取首页数据
 	getBannerData: baseurl + "",
-
 	//获取产品类目
 	getCategroyData: baseurl + "/v1/category/get-product-cate-list",
 	
@@ -19,8 +18,12 @@ const interfaces = {
 	
 	//获取单位类别
 	getUnitData: baseurl + "/v1/category/get-unit-category",
+	
 	//获取出口国
 	getCountryData: baseurl + "/v1/user/countrylist",
+	
+	//采购，销售，委托采购，委托销售订单
+	getNeedsData: baseurl + "/v1/needs/get-list",
 	
 	//发布
 	getPublishData: baseurl + "/v1/needs/publish",

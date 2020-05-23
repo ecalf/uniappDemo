@@ -7,7 +7,8 @@
 		}, {
 			"path": "pages/category/category",
 			"style": {
-				"navigationBarTitleText": "分类"
+				"navigationBarTitleText": "分类",
+				"enablePullDownRefresh": true
 			}
 		}, {
 			"path": "pages/publish/publish",
@@ -42,6 +43,12 @@
 					"titleNView": false,
 					"bounce": "none"
 				}
+			}
+		},
+		{
+			"path": "pages/user/components/registerEnter",
+			"style": {
+				"navigationBarTitleText": "注册入口页面"
 			}
 		},
 		{

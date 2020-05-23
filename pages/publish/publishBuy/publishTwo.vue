@@ -239,8 +239,6 @@
 			this.countryData(); //出口国
 			this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
-
-
 		},
 		methods: {
 			initData() {
@@ -384,7 +382,7 @@
 						cate_id: this.publishData.cate_id,
 						title: this.publishData.title,
 						desc: this.publishData.desc,
-						productImg: this.productImg,
+						productImg: this.publishData.productImg,
 						otherBrand: this.publishData.otherBrand,
 						brand_id: this.publishData.brand_id,
 						num: this.publishData.num,
@@ -396,9 +394,7 @@
 						unit_cate_id: this.publishData.unit_cate_id,
 						service_id: this.publishData.service_id
 					}
-				}
-				
-				
+				}	
 				console.log('publishSubmit begin, params:',params);
 				this.request({
 					url: interfaces.getPublishData,

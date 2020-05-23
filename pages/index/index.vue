@@ -42,15 +42,16 @@
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
-		<productList :goodsList="goodsList" />
-
+		<!-- <productList :goodsList="goodsList" /> -->
+			<productList></productList>
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
 					<!-- <button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button> -->
-					<button type="primary" class="weixin_loginbtn" @tap="enterLogin" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe608;</text>登录</button>
+					<button type="primary" class="weixin_loginbtn" @tap="enterLogin" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text
+						 class="icon iconfont">&#xe608;</text>登录</button>
 					<button class="weixin_registerbtn" @tap="enterRegister"><text class="icon iconfont">&#xe612;</text>免费注册</button>
 				</view>
 			</view>
@@ -77,7 +78,7 @@
 				title: 'getUserInfo',
 				hasUserInfo: false,
 				userInfo: {},
-				ishow:true,
+				ishow: true,
 				currentPage: '/pages/index/index',
 				swiperList: [{
 						id: 1,
@@ -174,6 +175,36 @@
 						img: "/static/images/product.png",
 						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
 						price: "2000",
+					},
+					{
+						id: 6,
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
+					},
+					{
+						id: 7,
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
+					},
+					{
+						id: 8,
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
+					},
+					{
+						id: 9,
+						img: "",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
+					},
+					{
+						id: 10,
+						img: "/static/images/product.png",
+						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
+						price: "2000",
 					}
 				],
 				filterByList: [{
@@ -229,14 +260,14 @@
 					}
 				}
 			},
-			enterRegister(){//注册
+			enterRegister() { //注册
 				uni.navigateTo({
-					url:"/pages/user/registerEnter"
+					url: "/pages/user/registerEnter"
 				})
 			},
-			enterLogin(){
+			enterLogin() {
 				uni.navigateTo({
-					url:"/pages/user/login"
+					url: "/pages/user/login"
 				})
 			},
 			//判断是否登录状态
@@ -244,7 +275,7 @@
 			bindLogin() {
 				if (this.hasLogin) {
 					this.logout();
-					this.ishow=true;
+					this.ishow = true;
 				} else {
 					uni.reLaunch({
 						url: '/pages/user/login'
@@ -509,7 +540,8 @@
 		border-top: 1px dashed #E2E2E2;
 		padding-top: 79.71rpx;
 
-		button,navigator {
+		button,
+		navigator {
 			color: #fff;
 			font-size: 36.23rpx;
 			height: 108.69rpx;

@@ -48,15 +48,15 @@
 			</view>
 
 			<view class="filter-condition">
-				<view class="text" v-for="(navitem,index) in navlist" :key="index"><text>{{navitem.name}}</text></view>
+				<view class="text" @tap="handleSelect(index)" v-for="(navitem,index) in navlist" :key="index" :class="{'on':navitem.selected}"><text>{{navitem.name}}</text></view>
 				<view class="text filter" @tap="show('right')"><text>筛选</text></view>
 			</view>
-			<productList :goodsList="goodsList" />
+			<productList :goodsList="goodsList" :loadStatus="loadingText" />
 		</view>
 		<!--弹窗-->
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
 			<view class="uni-drawer">
-				<product-category :categoryList="categoryList"></product-category>
+				<product-category :categoryList="categoryList" @update-value="updateValue"></product-category>
 			</view>
 		</uni-drawer>
 		<page-footer :currentPage="currentPage"></page-footer>
@@ -79,7 +79,12 @@
 		data() {
 			return {
 				showRight: false,
+				pageSize: 2, //分页大小
+				pageNum: 1, //页码
+				type: "", //类型1 发布采购 2 发布销售 3 委托销售
+				loadingText: "正在加载....",
 				currentPage: '/pages/category/category',
+				cate_id: "",
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',
@@ -96,67 +101,22 @@
 						content: '内容 C'
 					}
 				], //轮播图片
-				goodsList: [{
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						img: "",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					}
-				],
+				goodsList: [],
 				navlist: [{
-					name: "综合"
+					name: "综合",
+					selected: false
 				}, {
-					name: "价格"
+					name: "价格",
+					selected: false
 				}, {
-					name: "剩余时间"
+					name: "剩余时间",
+					selected: false
 				}],
-				categoryList:[],
+				categoryList: [],
 			}
 
 		},
-		onLoad() {
-			this.initData();
-		},
 		methods: {
-			initData() {
-				this.request({
-					url: interfaces.getCategroyData,
-					dataType: "JSON",
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							id: '',
-						}
-					},
-					success: ((res) => {
-						console.log(res);
-						this.categoryList = res.data;
-						//console.log(this.categoryList.child);
-					})
-				});
-			},
-
-			
-
 			//弹窗显示
 			show(e) {
 				if (e === 'left') {
@@ -166,7 +126,7 @@
 				}
 			},
 			hide() {
-				console.log("hide");
+
 				this.showLeft = false
 				this.showRight = false
 			},
@@ -176,6 +136,78 @@
 				} else {
 					this.showRight = false
 				}
+			},
+			loadData() {
+				this.request({ //分类筛选
+					url: interfaces.getCategroyData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							id: '',
+						}
+					},
+					success: ((res) => {
+						this.categoryList = res.data;;
+					})
+				});
+				let params = {
+					data: {
+						page_size: this.pageSize,
+						page_index: this.pageNum,
+						keyword: "",
+						type: 2,
+						is_defalut_sort: "",
+						price_sort: "",
+						remain_time_sort: "",
+						cate_id: this.cate_id,
+					}
+				}
+				this.request({ //分类产品列表
+					url: interfaces.getNeedsData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: params,
+					success: (res) => {
+						console.log(res.data);
+						if (res.code == 200) {
+							//debugger
+							if (res.data.list.length > 0) {
+								res.data.list.forEach(item => {
+									this.goodsList.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
+						}
+					}
+				})
+
+			},
+
+			handleSelect(index) {
+				this.navlist[index].selected = true;
+				// 其他的selected false
+				for (let i = 0; i < this.navlist.length; i++) {
+					if (i != index) {
+						this.navlist[i].selected = false;
+					}
+				}
+				console.log(this.navlist[index]);
+				// 数据请求
+				//this.filterby = this.navlist[index].filterby;
+				this.page = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+			},
+			updateValue(item) { //分类筛选
+				this.cate_id = item.id;
+				this.page = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				this.closeDrawer('right');
 			},
 
 		},
@@ -187,6 +219,24 @@
 				this.hide()
 				return true
 			}
+		},
+		onLoad() {
+			this.loadData();
+		},
+		onPullDownRefresh() {
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.loadData();
 		}
 	}
 </script>
