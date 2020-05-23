@@ -19,7 +19,6 @@
 					page_size: 2,
 					page_index: 1,
 					keyword: '',
-					type: '',
 				},
 				goodsPrice: [{
 					title: '飞利浦呼吸机',
@@ -44,12 +43,12 @@
 							page_size: this.quoto.page_size,
 							page_index: this.quoto.page_index,
 							keyword: this.quoto.keyword,
-							type: this.quoto.type,
+							
 						}
 					},
 					success: ((res) => {
 						console.log(res, 1111)
-						this.goodsPrice = res.data.list;
+						this.goodsPrice = res.data;
 					})
 				});
 			}

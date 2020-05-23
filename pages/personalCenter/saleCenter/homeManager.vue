@@ -430,7 +430,7 @@
 							    duration: 2000
 							});
 							uni.navigateTo({
-							    url: "pages/personalCenter/accountCenter/myAccount"
+							    url: "/pages/personalCenter/accountCenter/myAccount"
 							});
 							if (res.code !== 200) {
 								uni.showToast({

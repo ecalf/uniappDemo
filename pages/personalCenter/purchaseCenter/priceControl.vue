@@ -1,14 +1,14 @@
 <template>
 	<view>
 		<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
-		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
+		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
 
 	</view>
 </template>
 
 <script>
 	import conversionPrice from '@/components/conversionPrice.vue'
-	import goodsPrice from '../../../components/goodsPrice.vue'
+	import goodsprice from '../../../components/goodsPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
@@ -17,15 +17,9 @@
 					page_size: 2,
 					page_index: 1,
 					keyword: '',
-					type: '',
+					type: 1,
 				},
-				goodsPrice: [{
-					title: '飞利浦呼吸机',
-					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-					price: '200.000',
-					number: '1500',
-					time: '2020.02.05-2020.04.05'
-				}],
+				goodsPrice: [],
 				conversionPrice: [{
 						id: 1,
 						name: '已报价'
@@ -64,7 +58,7 @@
 		},
 		components: {
 			conversionPrice,
-			goodsPrice
+			goodsprice
 		}
 	}
 </script>

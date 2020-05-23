@@ -85,10 +85,10 @@
 				},
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表
-				fileList: [],
+				fileList: [],//保存上传完毕的文件，用于组件多文件上传时，如果是多个上传组件则每个组件应独占一个fileList
 				showUploadList: true,
 				customBtn: false,
-				autoUpload: true,
+				autoUpload: true,//选择图片后自动开始上传
 				showProgress: true,
 				deletable: true,
 				customStyle: false,
