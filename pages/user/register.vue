@@ -293,12 +293,9 @@
 						}
 					},
 					success: ((res) => {
-						if (res.code !== 200) {
-							uni.showToast({
-								title: res.message,
-								icon: "none"
-							});
-						} else {
+						console.log(res);
+						if (res.code == 200) {
+							console.log(123);
 							uni.showToast({
 								title: '注册成功',
 								icon: "none"
@@ -306,6 +303,11 @@
 							uni.navigateTo({
 								url: "/pages/user/login"
 							})
+						} else {					
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
 						}
 					}),
 					fail: ((error) => {

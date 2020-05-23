@@ -48,7 +48,13 @@
 			</view>
 
 			<view class="filter-condition">
-				<view class="text" @tap="handleSelect(index)" v-for="(navitem,index) in navlist" :key="index" :class="{'on':navitem.selected}"><text>{{navitem.name}}</text></view>
+				<!-- <view class="text" @tap="handleSelect(index)" v-for="(navitem,index) in navlist" :key="index" :class="{'on':navitem.selected}"><text>{{navitem.name}}</text></view> -->
+				
+				<view class="text" :class="[{on:filterIndex===0},{up:defalutSort===0},{down:defalutSort===1}]" @tap="handleSelect(0)">
+					<text>综合</text>
+					</view>
+				<view class="text" :class="[{on:filterIndex===1},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(1)"><text>价格</text></view>
+				<view class="text" :class="[{on:filterIndex===2},{up:timeSort==='asc'},{down:timeSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
 				<view class="text filter" @tap="show('right')"><text>筛选</text></view>
 			</view>
 			<productList :goodsList="goodsList" :loadStatus="loadingText" />
@@ -78,6 +84,7 @@
 		},
 		data() {
 			return {
+				filterIndex:0,
 				showRight: false,
 				pageSize: 2, //分页大小
 				pageNum: 1, //页码
@@ -85,6 +92,9 @@
 				loadingText: "正在加载....",
 				currentPage: '/pages/category/category',
 				cate_id: "",
+				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
+				priceSort:"",//价格排序 asc 升序 desc 降序
+				timeSort:"",//剩余时间排序 asc 升序 desc 降序
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',
@@ -157,10 +167,10 @@
 						page_index: this.pageNum,
 						keyword: "",
 						type: 2,
-						is_defalut_sort: "",
-						price_sort: "",
-						remain_time_sort: "",
+						price_sort:this.priceSort,
+						remain_time_sort:this.timeSort,
 						cate_id: this.cate_id,
+						is_defalut_sort:this.defalutsort
 					}
 				}
 				this.request({ //分类产品列表
@@ -183,27 +193,32 @@
 					}
 				})
 
-			},
-
+			},	
 			handleSelect(index) {
-				this.navlist[index].selected = true;
-				// 其他的selected false
-				for (let i = 0; i < this.navlist.length; i++) {
-					if (i != index) {
-						this.navlist[i].selected = false;
-					}
+				this.filterIndex=index;
+				if(index===0){
+					this.defalutSort=this.is_defalutSort===1?0:1;
+				}else{
+					this.defalutSort='';
 				}
-				console.log(this.navlist[index]);
-				// 数据请求
-				//this.filterby = this.navlist[index].filterby;
-				this.page = 1;
+				if(index===1){
+					this.priceSort=this.priceSort==='asc'?'asc':'desc';
+				}else{
+					this.priceSort
+				}
+				if(index===2){
+					this.timeSort=this.timeSort==='asc'?'asc':'desc';
+				}else{
+					this.timeSort
+				}
+				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsList = [];
 				this.loadData();
 			},
 			updateValue(item) { //分类筛选
 				this.cate_id = item.id;
-				this.page = 1;
+				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsList = [];
 				this.loadData();
@@ -411,20 +426,38 @@
 
 			&.on {
 				color: $ac;
-
-				text:after {
-					transform: rotate(180deg);
+				text:after{
 					border-top: 4px solid $ac;
 				}
-
 				&.filter {
 					text:after {
+						
 						background-image: url(~@/static/images/fillericona.png);
 						background-size: cover;
+						
 					}
 				}
+				
 			}
 
+			&.up {
+				text:after {
+					transform: rotate(180deg);
+					
+				}
+
+				
+			}
+
+			&.down {
+
+				text:after {
+					transform: 0;
+					
+				}
+
+				
+			}
 		}
 	}
 

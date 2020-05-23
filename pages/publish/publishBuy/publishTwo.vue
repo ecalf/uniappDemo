@@ -189,7 +189,7 @@
 					use_way: '', //用途
 					productImg: '', //上传图片-产品
 					deadtime: '', //截止时间
-					images: '', //产品详情图
+					images:[], //产品详情图
 					service_id: ''
 				},
 				dataSource: [], //出口国家
@@ -280,15 +280,19 @@
 				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
 			},
 			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
-				// console.log('onSuccess',res,index,lists,fieldName);
+				console.log('onSuccess',res,index,lists,fieldName);
 				res =  JSON.parse(res);
 				
 				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
 				
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 				//this.fileList.push({url:res.data.img_url});
-				
 				this.publishData[fieldName] = res.data.img_url;
+				if(Object.prototype.toString.call(this.uploadState.files[fieldName])=='[object Array]'){
+					var arr=[];
+					
+				}
+				
 				// console.log('this.publishData[fieldName]>>>',this.publishData[fieldName]);
 			},
 			onChange(res,index,lists,fieldName){

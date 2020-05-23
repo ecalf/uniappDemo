@@ -8,12 +8,11 @@
 			uni.getStorage({
 				key: 'uerInfo',
 				success: (res) => {
-					this.login(res.data);
-					// 如果还需要重新校验或是想要刷新token的有效时间 就再联网请求一次		
+					this.login(res.data);	
 					uni.getStorage({
 						key: 'uerInfo',
 						success: (res) => {
-							if (res.statusCode === 200 && res.data.code === 0) {
+							if (res.code === 200) {
 								this.login(res.data);
 							}
 						}

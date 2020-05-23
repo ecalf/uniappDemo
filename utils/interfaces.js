@@ -25,6 +25,9 @@ const interfaces = {
 	//采购，销售，委托采购，委托销售订单
 	getNeedsData: baseurl + "/v1/needs/get-list",
 	
+	//采购，销售，委托采购，委托销售订单详情
+	getInfoData: baseurl + "/v1/needs/get-info",
+	
 	//发布
 	getPublishData: baseurl + "/v1/needs/publish",
 	
@@ -48,7 +51,7 @@ const interfaces = {
 	getCorporateData: baseurl + "/v1/user/identification",
 	
 	//我的订单
-	getMyquoteData:baseurl + "/v1/user/get-my-needs-list",
+	getMyquoteData:baseurl + "/v1/user/get-my-quotation-list",
 	
 	//用户详情
 	getSupplierData:baseurl + "/v1/user/myprofiles",

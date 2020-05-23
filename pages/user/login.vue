@@ -175,6 +175,7 @@
 							}
 						},
 						success: (res) => {
+							console.log(res);
 							if (res.code !== 200) {
 								uni.showToast({
 									title: res.message,
@@ -197,7 +198,7 @@
 										uni.getStorage({
 											key:'Token',
 											success: (res) => {
-												//console.log(res.data);
+											//console.log(res.data);
 											}
 										})
 									}
