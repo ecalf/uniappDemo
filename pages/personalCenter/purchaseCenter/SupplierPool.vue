@@ -32,9 +32,11 @@
 
 <script>
 	import conversionPrice from '@/components/conversionPrice.vue'
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
 			return {
+				
 				conversionPrice: [{
 						id: 1,
 						name: '全部'
@@ -60,6 +62,26 @@
 		},
 		components: {
 			conversionPrice
+		},
+		methods:{
+			getsupplierList(){
+				this.request({
+					url: interfaces.getSupplierData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+						}
+					},
+					success: ((res) => {
+						console.log(res,222)
+						this.supplierList = res.data;
+					})
+				});
+			}
+		},
+		onLoad(){
+			this.getsupplierList()
 		}
 	}
 </script>
@@ -104,8 +126,9 @@
 				align-items: center;
 				margin: 14.49rpx 0rpx;
 				font-size: 18.11rpx;
+
 				text {
-					
+
 					letter-spacing: 0px;
 					color: #44a78d;
 					vertical-align: middle;
@@ -127,6 +150,7 @@
 
 			.supplier-information {
 				margin-top: 19.92rpx;
+
 				.supplier-contacts {
 					font-size: 19.92rpx;
 					color: #4e5a65;
@@ -155,7 +179,7 @@
 				font-size: 21.73rpx;
 				letter-spacing: 0rpx;
 				color: #4e5a65;
-				
+
 			}
 
 			.checkhomeText {

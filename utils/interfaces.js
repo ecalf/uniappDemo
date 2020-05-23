@@ -42,6 +42,13 @@ const interfaces = {
 	getManagerData: baseurl + "/v1/user/company_info_edit",
 	
 	// 认证
-	getCorporateData: baseurl + "/v1/user/identification"
+	getCorporateData: baseurl + "/v1/user/identification",
+	
+	//我的订单
+	getMyquoteData:baseurl + "/v1/user/get-my-needs-list",
+	
+	//用户详情
+	getSupplierData:baseurl + "/v1/user/myprofiles",
+
 }
 module.exports = interfaces;

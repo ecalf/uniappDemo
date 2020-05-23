@@ -1,37 +1,66 @@
 <template>
 	<view>
-			<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
-			<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
-			<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
-		
+		<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
+		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
+
 	</view>
 </template>
 
 <script>
 	import conversionPrice from '@/components/conversionPrice.vue'
 	import goodsPrice from '../../../components/goodsPrice.vue'
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
 			return {
-				conversionPrice:[
-					{
-					  id:1,
-					  name:'已报价'
-					},
-					{
-					 id:2,
-					 name:'未报价'
-					},
-					
-				],
+				quoto: {
+					page_size: 2,
+					page_index: 1,
+					keyword: '',
+					type: '',
+				},
 				goodsPrice: [{
 					title: '飞利浦呼吸机',
 					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
 					price: '200.000',
 					number: '1500',
 					time: '2020.02.05-2020.04.05'
-				}]
+				}],
+				conversionPrice: [{
+						id: 1,
+						name: '已报价'
+					},
+					{
+						id: 2,
+						name: '未报价'
+					},
+				],
+				
 			};
+		},
+		methods: {
+			getsupplierList() {
+				this.request({
+					url: interfaces.getMyquoteData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							page_size: this.quoto.page_size,
+							page_index: this.quoto.page_index,
+							keyword: this.quoto.keyword,
+							type: this.quoto.type,
+						}
+					},
+					success: ((res) => {
+						console.log(res, 1212)
+						this.goodsPrice = res.data.list;
+					})
+				});
+			}
+		},
+		onLoad(){
+			this.getsupplierList()
 		},
 		components: {
 			conversionPrice,

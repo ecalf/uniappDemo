@@ -2,24 +2,24 @@
 	<view>
 		<view class="input-view">
 			<view class="search-icon"></view>
-			<input type="text" placeholder="搜索订单" />
+			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
 		</view>
-		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
-		<goodsPrice :goodsPrice='goodsPrice'></goodsPrice>
+		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
 	</view>
 </template>
 
 <script>
 	import conversionPrice from '../../../components/conversionPrice.vue'
-	import goodsPrice from '../../../components/goodsPrice.vue'
-	
+	import goodsprice from '../../../components/goodsPrice.vue'
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		data() {
 			return {
-				quoto:{
-					page_size:'',
-					page_index:'',
-					keyword:''
+				quoto: {
+					page_size: 2,
+					page_index: 1,
+					keyword: '',
+					type: '',
 				},
 				goodsPrice: [{
 					title: '飞利浦呼吸机',
@@ -31,40 +31,69 @@
 			};
 		},
 		components: {
-			goodsPrice
-		}
+			goodsprice
+		},
+		methods: {
+			getMyquote() {
+				this.request({
+					url: interfaces.getMyquoteData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							page_size: this.quoto.page_size,
+							page_index: this.quoto.page_index,
+							keyword: this.quoto.keyword,
+							type: this.quoto.type,
+						}
+					},
+					success: ((res) => {
+						console.log(res, 1111)
+						this.goodsPrice = res.data.list;
+					})
+				});
+			}
+		},
+		onLoad(option) {
+			this.getMyquote()
+			this.quoto.type = option.type;
+			console.log(this.quoto.type)
+		},
 	}
 </script>
 
 <style lang="less">
-	.input-view{
+	.input-view {
 		width: 659.42rpx;
-		height:65.21rpx;
-		line-height:65.21rpx;
+		height: 65.21rpx;
+		line-height: 65.21rpx;
 		background-color: rgba(142, 142, 147, 0.12);
 		border-radius: 18.11rpx;
 		margin: 18.11rpx auto 36.23rpx;
-		position:relative;
-		input{
-			display:block;
-			height:65.21rpx;
-			line-height:65.21rpx;
-			padding-left:54.34rpx;
-			font-size:23.55rpx;
-			&::-webkit-input-placeholder{
-				color:red;
+		position: relative;
+
+		input {
+			display: block;
+			height: 65.21rpx;
+			line-height: 65.21rpx;
+			padding-left: 54.34rpx;
+			font-size: 23.55rpx;
+
+			&::-webkit-input-placeholder {
+				color: red;
 			}
 		}
-		.search-icon{
+
+		.search-icon {
 			display: inline-block;
 			width: 25.36rpx;
 			height: 25.36rpx;
 			position: absolute;
 			top: 50%;
-			margin-top:-12.68rpx;
+			margin-top: -12.68rpx;
 			left: 21.73rpx;
-			background:url(~@/static/images/lgicon30.png) center center no-repeat;
-			background-size:cover;
+			background: url(~@/static/images/lgicon30.png) center center no-repeat;
+			background-size: cover;
 		}
 	}
 </style>

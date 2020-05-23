@@ -7,7 +7,7 @@
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">开户银行</view>
-				<cl-select v-model="Corporateform.bank_name" :options="options.bank" class="uni-input"></cl-select>
+				<cl-select :options="options.bank" class="uni-input" v-model="Corporateform.bank_name"></cl-select>
 			</view>
 			<view class="uni-form-item uni-column uni-cc">
 				<view class="title">银行账户</view>
@@ -109,10 +109,10 @@
 			return {
 				CorporateformList: {}, //请求数据
 				Corporateform: {
-					scene: 'identify_person',//公司认证
+					scene: 'identify_person',//认证场景
 					idcard: 'identify_person',//身份证号码
 					hand_identify_card_photo: 'identify_person',//手持身份证照片
-					organization_name: 'identify_person',//机构名称0
+					organization_name: 'identify_person',//机构名称
 					contact_name: '',//联系人
 					contact_phone: '',//	联系人号码
 					company_name: '',//	公司名称

@@ -29,7 +29,7 @@
 <script>
 	export default {
 		props: {
-			goodsPrice: Array
+			goodsPrice: Array,
 		},
 		data() {
 			return {
