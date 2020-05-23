@@ -76,14 +76,19 @@
 		},
 		data() {
 			return {
-			
-				
+				uploadState:{
+					COMPLETE:0,
+					UNFINISHED:1,
+					SUCCESS:2,
+					ERROR:3,
+					files:{}
+				},
 				action: 'http://192.168.100.17/index.php/index/index/upload',
 				// 预置上传列表
 				fileList: [],
 				showUploadList: true,
 				customBtn: false,
-				autoUpload: false,
+				autoUpload: true,
 				showProgress: true,
 				deletable: true,
 				customStyle: false,
@@ -104,6 +109,58 @@
 			}
 		},
 		methods: {
+			checkUploadFiles(){
+				let finished = true;
+				let uploadState = this.uploadState;
+				let files = this.uploadState.files;
+				
+				for(let fieldName in files){
+					if(files[fieldName]==uploadState.UNFINISHED||files[fieldName]==uploadState.EEROR){
+						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
+						finished = false;
+						break;
+					}
+				}
+				
+				return finished;
+			},
+			uploadHandler(args,handlerName,fieldName){
+				let argsMerge = [];
+				for(let i=0;i<args.length;i++){
+					argsMerge.push(args[i]);
+				}
+				argsMerge.push(fieldName);
+				
+				this[handlerName].apply(this,argsMerge);
+			},
+			onProgress(res,index,lists,fieldName){
+				console.log('onProgress',res,index,lists,fieldName);
+				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
+			},
+			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
+				console.log('onSuccess',res,index,lists,fieldName);
+				res =  JSON.parse(res);
+				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
+				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
+				//this.fileList.push({url:res.data.img_url});
+				
+				this.personalForm[fieldName] = res.data.img_url;
+				console.log('this.personalForm[fieldName]>>>',this.personalForm[fieldName]);
+			},
+			onChange(res,index,lists,fieldName){
+				console.log('onChange ',res,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
+			},
+			onError(err,index,lists,fieldName){
+				console.log('onError ',err,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.EEROR;
+			},
+			onRemove(index,lists,fieldName){
+				console.log('onRemove ',index,lists,fieldName);
+				this.uploadState.files[fieldName] = undefined;
+				this.personalForm[fieldName] = '';
+			
+			},
 			
 			onListChange(lists) {
 				console.log('onListChange', lists);
@@ -112,7 +169,6 @@
 
 			},
 			confirm() {
-				console.log(this.personalForm.legal_person_cardno, 111)
 				this.request({
 					url: interfaces.getCorporateData,
 					dataType: "JSON",
@@ -131,6 +187,17 @@
 						console.log(res, 2222);
 					})
 				})
+			},
+			getManager(){
+				if(!this.checkUploadFiles()){
+					uni.showToast({
+						title: '文件未上传完毕',
+						icon: "none"
+					});
+					console.log('文件未上传完毕',this.uploadState.files);
+					return false;
+				}
+				
 			}
 		}
 	}
