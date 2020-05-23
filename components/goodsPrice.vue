@@ -29,14 +29,19 @@
 <script>
 	export default {
 		props: {
-			goodsPrice: Array,
-		},
-		data() {
-			return {
+			goodsPrice: {
+				type: Array
+			}
+			},
+			data() {
+				return {
 
-			};
-		}
-	}
+				};
+			},
+			// updated(){
+			// 	console.log(this.goodsPrice,999)
+			// }
+			}
 </script>
 
 <style lang="less">
@@ -116,6 +121,7 @@
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
+
 			.goodsDelete {
 				width: 181.15rpx;
 				height: 45.28rpx;

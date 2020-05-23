@@ -398,20 +398,20 @@
 				
 				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 				//定义表单规则
-				// var rule = [{
-				// 	name: "nickname",
-				// 	checkType: "string",
-				// 	// checkRule: "1,3",
-				// 	errorMsg: "请输入内容"
-				// }, ];
-				// //进行表单检查
-				// var formData = e.detail.value;
-				// var checkRes = graceChecker.check(formData, rule);
-				// if (checkRes) {
-				// 	uni.showToast({
-				// 		title: "验证通过!",
-				// 		icon: "none"
-				// 	});
+				var rule = [{
+					name: "nickname",
+					checkType: "string",
+					// checkRule: "1,3",
+					errorMsg: "请输入内容"
+				}, ];
+				//进行表单检查
+				var formData = e.detail.value;
+				var checkRes = graceChecker.check(formData, rule);
+				if (checkRes) {
+					uni.showToast({
+						title: "验证通过!",
+						icon: "none"
+					});
 					this.request({ 
 						url: interfaces.getManagerData,
 						dataType: "JSON",
@@ -434,28 +434,30 @@
 						},
 						success: ((res) => {
 							console.log(res,656)
-							uni.showToast({
-							    title: '提交成功',
-							    duration: 2000
-							});
-							uni.navigateTo({
-							    url: "/pages/personalCenter/accountCenter/myAccount"
-							});
+							
 							if (res.code !== 200) {
 								uni.showToast({
 									title: res.message,
 									icon: "none"
 								});
 								return;
+							} else {
+								uni.showToast({
+								    title: '提交成功',
+								    duration: 2000
+								});
+								uni.navigateTo({
+								    url: "/pages/personalCenter/accountCenter/myAccount"
+								});
 							}
 						})
 					})
-				// } else {
-				// 	uni.showToast({
-				// 		title: graceChecker.error,
-				// 		icon: "none"
-				// 	});
-				// }
+				} else {
+					uni.showToast({
+						title: graceChecker.error,
+						icon: "none"
+					});
+				}
 				
 			},
 			formReset: function(e) {

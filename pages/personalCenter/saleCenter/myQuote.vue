@@ -20,13 +20,7 @@
 					page_index: 1,
 					keyword: '',
 				},
-				goodsPrice: [{
-					title: '飞利浦呼吸机',
-					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-					price: '200.000',
-					number: '1500',
-					time: '2020.02.05-2020.04.05'
-				}]
+				goodsPrice: []
 			};
 		},
 		components: {
@@ -43,20 +37,17 @@
 							page_size: this.quoto.page_size,
 							page_index: this.quoto.page_index,
 							keyword: this.quoto.keyword,
-							
 						}
 					},
 					success: ((res) => {
 						console.log(res, 1111)
-						this.goodsPrice = res.data;
+						this.goodsPrice = res.data.list;
 					})
 				});
 			}
 		},
 		onLoad(option) {
 			this.getMyquote()
-			this.quoto.type = option.type;
-			console.log(this.quoto.type)
 		},
 	}
 </script>

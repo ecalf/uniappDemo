@@ -32,7 +32,7 @@
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">公司类型</view>
-				<cl-select v-model="form.selectbrand" :options="options.selectbrand" class="uni-input"></cl-select>
+				<input class="uni-input" text name="nickname" value="贸易公司" />
 			</view>
 			<view class="uni-form-item uni-column unni-color">
 				<view class="title">公司网址</view>
@@ -40,7 +40,7 @@
 			</view>
 			<view class="uni-form-item uni-column unni-color">
 				<view class="title">所属行业</view>
-				<cl-select v-model="form.selectbrand" :options="options.profession" class="uni-input"></cl-select>
+				<input class="uni-input" text name="nickname" value="运输行业" />
 			</view>
 		</cl-form>
 	</view>
@@ -60,52 +60,7 @@
 				form: {
 					selectbrand: 0,
 				},
-				options: {
-					selectbrand: [
-						{
-							label: '请选择类型',
-							value: 0
-						},{
-							label: '贸易公司',
-							value: 1
-						},
-						{
-							label: '运输公司',
-							value: 2
-						},
-						{
-							label: '金融公司',
-							value: 3
-						},
-						{
-							label: '互联网公司',
-							value: 4
-						}
-					],
-					profession: [
-						{
-							label: '请选择行业',
-							value: 0
-						},{
-							label: '化工行业',
-							value: 1
-						},
-						{
-							label: '运输行业',
-							value: 2
-						},
-						{
-							label: '教育行业',
-							value: 3
-						},
-						{
-							label: '其他',
-							value: 4
-						}
-							
-					]
-	
-				},	
+				
 			};
 
 		}

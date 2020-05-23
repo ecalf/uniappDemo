@@ -2,11 +2,11 @@
 	<view class="pb60">
 		<view class="uni-form-item">
 			<view class="title">姓名</view>
-			<input class="uni-input" text name="nickname" value="张小姐" v-model="personalForm.real_name" />
+			<input class="uni-input"  name="nickname" value="张小姐" v-model="personalForm.real_name" />
 		</view>
 		<view class="uni-form-item mb10">
 			<view class="title">身份证号</view>
-			<input class="uni-input" number name="nickname" value="410221155885888888888" v-model="personalForm.idcard" />
+			<input class="uni-input"  name="nickname" value="410221155885888888888" v-model="personalForm.idcard" />
 		</view>
 		<!--上传图片-->
 		<view class="uni-form-item uoload-wrap">
@@ -201,7 +201,7 @@
 				}
 				
 				this.request({
-					url: interfaces.getCorporateData,
+					url: interfaces.getPersonData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: {
@@ -216,6 +216,22 @@
 					},
 					success: ((res) => {
 						console.log(res, 2222);
+						if (res.code !== 200) {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+							return;
+						} else {
+							uni.showToast({
+							    title: '认证成功',
+							    duration: 2000
+							});
+							uni.navigateTo({
+							    url: "/pages/personalCenter/accountCenter/CertificateAuthority"
+							});
+						}
+						
 					})
 				})
 			}

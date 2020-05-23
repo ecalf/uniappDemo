@@ -38,17 +38,17 @@ const interfaces = {
 	//登录
 	getLoignData: baseurl + "/v1/user/login",
 	
-	//个人认证
+	//认证
 	getPersonData: baseurl + "/v1/user/identification",
 	
 	// 公司主页信息
 	getManagerData: baseurl + "/v1/user/company_info_edit",
 	
-	// 认证
-	getCorporateData: baseurl + "/v1/user/identification",
-	
 	//我的订单
-	getMyquoteData:baseurl + "/v1/user/get-my-needs-list",
+	getMyneedData:baseurl + "/v1/user/get-my-needs-list",
+	
+	//报价管理
+	getMyquoteData:baseurl + "/v1/user/get-my-quotation-list",
 	
 	//用户详情
 	getSupplierData:baseurl + "/v1/user/myprofiles",
