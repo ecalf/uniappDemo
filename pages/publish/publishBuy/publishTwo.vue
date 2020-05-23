@@ -21,11 +21,11 @@
 					:width="145" 
 					name="image"
 					testref="image1"
-					@on-choose-complete="onChooseComplete"
-					@on-list-change="onListChange" 
-					@on-change="onChange"
-					@on-success="onSuccess"
-					@on-uploaded="onUploaded" 
+					@on-progress="uploadHandler(arguments,'onProgress','productImg')"
+					@on-success="uploadHandler(arguments,'onSuccess','productImg')"
+					@on-error="uploadHandler(arguments,'onError','productImg')"
+					@on-change="uploadHandler(arguments,'onChange','productImg')"
+					@on-remove="uploadHandler(arguments,'onRemove','productImg')"
 				></u-upload>
 			</view>
 			<view class="uni-form-item">
@@ -111,10 +111,12 @@
 					width="145"
 					uploadText=""
 					name="image"
-					testref="image2"
-					
-					@on-list-change="onMoreChange"
-					@on-success="onSuccess_2"
+					testref="image2"					
+					@on-progress="uploadHandler(arguments,'onProgress','images')"
+					@on-success="uploadHandler(arguments,'onSuccess','images')"
+					@on-error="uploadHandler(arguments,'onError','images')"
+					@on-change="uploadHandler(arguments,'onChange','images')"
+					@on-remove="uploadHandler(arguments,'onRemove','images')"
 					>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
@@ -163,6 +165,13 @@
 		},
 		data() {
 			return {
+				uploadState:{
+					COMPLETE:0,
+					UNFINISHED:1,
+					SUCCESS:2,
+					ERROR:3,
+					files:{}
+				},
 				publishData: {
 					type: "", //类型1 发布采购 2 发布销售 3 委托销售	
 					cate_id: '', //品类id
@@ -180,7 +189,7 @@
 					use_way: '', //用途
 					productImg: '', //上传图片-产品
 					deadtime: '', //截止时间
-					info: '', //产品详情图
+					images: '', //产品详情图
 					service_id: ''
 				},
 				dataSource: [], //出口国家
@@ -241,10 +250,63 @@
 			this.publishData.cate_id = option.cate_id;
 		},
 		methods: {
-			initData() {
-				// const fromfile=new FormData();
-				// fromfile.append('image',file);
+			
+			checkUploadFiles(){
+				let finished = true;
+				let uploadState = this.uploadState;
+				let files = this.uploadState.files;
 				
+				for(let fieldName in files){
+					if(files[fieldName]==uploadState.UNFINISHED||files[fieldName]==uploadState.EEROR){
+						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
+						finished = false;
+						break;
+					}
+				}
+				
+				return finished;
+			},
+			uploadHandler(args,handlerName,fieldName){
+				let argsMerge = [];
+				for(let i=0;i<args.length;i++){
+					argsMerge.push(args[i]);
+				}
+				argsMerge.push(fieldName);
+				
+				this[handlerName].apply(this,argsMerge);
+			},
+			onProgress(res,index,lists,fieldName){
+				// console.log('onProgress',res,index,lists,fieldName);
+				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
+			},
+			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
+				// console.log('onSuccess',res,index,lists,fieldName);
+				res =  JSON.parse(res);
+				
+				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
+				
+				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
+				//this.fileList.push({url:res.data.img_url});
+				
+				this.publishData[fieldName] = res.data.img_url;
+				// console.log('this.publishData[fieldName]>>>',this.publishData[fieldName]);
+			},
+			onChange(res,index,lists,fieldName){
+				// console.log('onChange ',res,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
+			},
+			onError(err,index,lists,fieldName){
+				// console.log('onError ',err,index,lists,fieldName);
+				this.uploadState.files[fieldName] = this.uploadState.EEROR;
+			},
+			onRemove(index,lists,fieldName){
+				// console.log('onRemove ',index,lists,fieldName);
+				this.uploadState.files[fieldName] = undefined;
+				this.publishData[fieldName] = '';
+			
+			},
+			
+			initData() {		
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -294,41 +356,6 @@
 
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
-			},
-			onChooseComplete(lists){
-				console.log('onChooseComplete 每次选择图片后触发',  lists);
-				
-				
-			},
-			onListChange(lists) { //上传产品主图
-				console.log('onListChange 图片列表发生改变：在列表中添加或删除图片');
-				console.log('lists>>>',lists);
-				console.log('fileList>>>',this.fileList);
-			},
-			onChange(data, index, lists) {
-				console.log('onChange as on-change handler, 每张图片上传完毕，无论成功与否，在上传组件 complete 内触发',  data, index, lists);
-			},
-			onSuccess(res,index,lists){
-				console.log('onSuccess 每张图片上传完毕触发',res,index,lists);
-				res = JSON.parse(res);
-				this.productImg = res.data.img_url;
-				console.log('this.productImg>>>',this.productImg );
-				
-				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
-				//this.fileList.push({url:res.data.img_url});
-			},
-			onUploaded(lists){
-				console.log('onUploaded 所有图片上传完毕触发',lists);
-			},
-			onMoreChange(lists) { //上传产品详情
-				this.lists = lists;
-				console.log('onMoreChange',lists);
-			},
-			onSuccess_2(data,index,lists){
-				console.log('onSuccess_2 每张图片上传完毕触发',data,index,lists);
-				data = JSON.parse(data);
-				let imgUrl = data.data.img_url;
-				console.log('imgUrl>>>',imgUrl);
 			},
 
 			handleTap(name) { //picker弹出
@@ -388,11 +415,12 @@
 						num: this.publishData.num,
 						exit_country: this.exit_country,
 						price: this.publishData.price,
-						deadtime: this.publishData.deadtime,
+						dead_time: this.publishData.deadtime,
 						use_way: this.publishData.use_way,
 						qualification: this.publishData.qualification,
 						unit_cate_id: this.publishData.unit_cate_id,
-						service_id: this.publishData.service_id
+						service_id: this.publishData.service_id,
+						images:this.publishData.images
 					}
 				}	
 				console.log('publishSubmit begin, params:',params);
