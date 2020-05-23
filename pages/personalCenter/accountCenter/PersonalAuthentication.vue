@@ -11,11 +11,24 @@
 		<!--上传图片-->
 		<view class="uni-form-item uoload-wrap">
 			<view class="upload-item">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-				 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" :max-count="maxCount"
-				 width="180" @on-progress="uploadHandler(arguments,'onProgress','legal_person_cardno')" @on-success="uploadHandler(arguments,'onSuccess','legal_person_cardno')"
-				 @on-error="uploadHandler(arguments,'onError','legal_person_cardno')" @on-change="uploadHandler(arguments,'onChange','legal_person_cardno')"
-				 @on-remove="uploadHandler(arguments,'onRemove','legal_person_cardno')">
+				<u-upload 
+				:custom-btn="customBtn" 
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				:max-count="maxCount"
+				 width="180" 
+				 uploadText="" 
+				 name="image"
+				 @on-progress="uploadHandler(arguments,'onProgress','hand_identify_card_photo')" 
+				 @on-success="uploadHandler(arguments,'onSuccess','hand_identify_card_photo')"
+				 @on-error="uploadHandler(arguments,'onError','hand_identify_card_photo')" 
+				 @on-change="uploadHandler(arguments,'onChange','hand_identify_card_photo')"
+				 @on-remove="uploadHandler(arguments,'onRemove','hand_identify_card_photo')"
+				 >
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -51,9 +64,24 @@
 				<view>身份证正面</view>
 			</view>
 			<view class="upload-item">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload"
-				 :file-list="fileList" uploadText="" :show-progress="showProgress" :deletable="deletable" max-count="1" width="180"
-				 @on-list-change="onListChange">
+				<u-upload 
+				:custom-btn="customBtn" 
+				:show-upload-list="showUploadList" 
+				:action="action" 
+				:auto-upload="autoUpload"
+				:file-list="fileList" 
+				:show-progress="showProgress" 
+				:deletable="deletable" 
+				max-count="1" 
+				width="180"
+				uploadText="" 
+				name="image"
+				@on-progress="uploadHandler(arguments,'onProgress','hand_identify_card_photo_back')"
+				@on-success="uploadHandler(arguments,'onSuccess','hand_identify_card_photo_back')"
+				@on-error="uploadHandler(arguments,'onError','hand_identify_card_photo_back')"
+				@on-change="uploadHandler(arguments,'onChange','hand_identify_card_photo_back')"
+				@on-remove="uploadHandler(arguments,'onRemove','hand_identify_card_photo_back')"
+				>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -83,7 +111,7 @@
 					ERROR:3,
 					files:{}
 				},
-				action: 'http://192.168.100.17/index.php/index/index/upload',
+				action: interfaces.getUploadData,
 				// 预置上传列表
 				fileList: [],//保存上传完毕的文件，用于组件多文件上传时，如果是多个上传组件则每个组件应独占一个fileList
 				showUploadList: true,
@@ -100,10 +128,10 @@
 					real_name: '', //姓名
 					idcard: '', //身份证号
 					legal_person_cardno: '', //法人身份证号码
-					hand_identify_card_photo: '', //法人身份证号码
+					legal_hand_identify_card_photo_font: '', //法人手持身份证正面照片
+					hand_identify_card_photo: '', //身份证号码
 					hand_identify_card_photo_front: '', //手持身份证正面照片
 					hand_identify_card_photo_back: '', //手持身份证反面照片
-					legal_hand_identify_card_photo_font: '' //法人手持身份证正面照片
 				}
 
 			}
@@ -162,13 +190,16 @@
 			
 			},
 			
-			onListChange(lists) {
-				console.log('onListChange', lists);
-				this.lists = lists;
-				this.imgurl.push(this.lists[0].url);
-
-			},
 			confirm() {
+				if(!this.checkUploadFiles()){
+					uni.showToast({
+						title: '文件未上传完毕',
+						icon: "none"
+					});
+					console.log('文件未上传完毕',this.uploadState.files);
+					return false;
+				}
+				
 				this.request({
 					url: interfaces.getCorporateData,
 					dataType: "JSON",
@@ -187,18 +218,8 @@
 						console.log(res, 2222);
 					})
 				})
-			},
-			getManager(){
-				if(!this.checkUploadFiles()){
-					uni.showToast({
-						title: '文件未上传完毕',
-						icon: "none"
-					});
-					console.log('文件未上传完毕',this.uploadState.files);
-					return false;
-				}
-				
 			}
+
 		}
 	}
 </script>

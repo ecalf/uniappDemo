@@ -387,6 +387,15 @@
 
 			},
 			formSubmit: function(e) {
+				if(!this.checkUploadFiles()){
+					uni.showToast({
+						title: '文件未上传完毕',
+						icon: "none"
+					});
+					console.log('文件未上传完毕',this.uploadState.files);
+					return false;
+				}
+				
 				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 				//定义表单规则
 				// var rule = [{
@@ -451,20 +460,7 @@
 			},
 			formReset: function(e) {
 				console.log('清空数据')
-			},
-			
-			getManager(){
-				if(!this.checkUploadFiles()){
-					uni.showToast({
-						title: '文件未上传完毕',
-						icon: "none"
-					});
-					console.log('文件未上传完毕',this.uploadState.files);
-					return false;
-				}
-				
 			}
-
 		},
 	
 	}
