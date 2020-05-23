@@ -357,11 +357,11 @@
 				this[handlerName].apply(this,argsMerge);
 			},
 			onProgress(res,index,lists,fieldName){
-				// console.log('onProgress',res,index,lists,fieldName);
+				console.log('onProgress',res,index,lists,fieldName);
 				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
 			},
 			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
-				// console.log('onSuccess',res,index,lists,fieldName);
+				console.log('onSuccess',res,index,lists,fieldName);
 				res =  JSON.parse(res);
 				
 				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
@@ -370,23 +370,32 @@
 				//this.fileList.push({url:res.data.img_url});
 				
 				this.ManagerForm[fieldName] = res.data.img_url;
-				// console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
+				console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
 			},
 			onChange(res,index,lists,fieldName){
 				console.log('onChange ',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 			},
 			onError(err,index,lists,fieldName){
-				// console.log('onError ',err,index,lists,fieldName);
+				console.log('onError ',err,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index,lists,fieldName){
-				// console.log('onRemove ',index,lists,fieldName);
+				console.log('onRemove ',index,lists,fieldName);
 				this.uploadState.files[fieldName] = undefined;
 				this.ManagerForm[fieldName] = '';
 
 			},
 			formSubmit: function(e) {
+				if(!this.checkUploadFiles()){
+					uni.showToast({
+						title: '文件未上传完毕',
+						icon: "none"
+					});
+					console.log('文件未上传完毕',this.uploadState.files);
+					return false;
+				}
+				
 				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 				//定义表单规则
 				// var rule = [{
@@ -403,7 +412,7 @@
 				// 		title: "验证通过!",
 				// 		icon: "none"
 				// 	});
-					this.request({
+					this.request({ 
 						url: interfaces.getManagerData,
 						dataType: "JSON",
 						method: 'POST', //请求方式
@@ -451,20 +460,7 @@
 			},
 			formReset: function(e) {
 				console.log('清空数据')
-			},
-			
-			getManager(){
-				if(!this.checkUploadFiles()){
-					uni.showToast({
-						title: '文件未上传完毕',
-						icon: "none"
-					});
-					console.log('文件未上传完毕',this.uploadState.files);
-					return false;
-				}
-				
 			}
-
 		},
 	
 	}
