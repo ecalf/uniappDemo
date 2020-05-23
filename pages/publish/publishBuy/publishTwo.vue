@@ -302,16 +302,20 @@
 			},
 			onListChange(lists) { //上传产品主图
 				console.log('onListChange 图片列表发生改变：在列表中添加或删除图片');
-				console.log(this.fileList);
+				console.log('lists>>>',lists);
+				console.log('fileList>>>',this.fileList);
 			},
 			onChange(data, index, lists) {
 				console.log('onChange as on-change handler, 每张图片上传完毕，无论成功与否，在上传组件 complete 内触发',  data, index, lists);
 			},
-			onSuccess(data,index,lists){
-				console.log('onSuccess 每张图片上传完毕触发',data,index,lists);
-				data = JSON.parse(data);
-				this.productImg = data.data.img_url;
-				console.log('this.productImg >>>',this.publishData.productImg );
+			onSuccess(res,index,lists){
+				console.log('onSuccess 每张图片上传完毕触发',res,index,lists);
+				res = JSON.parse(res);
+				this.productImg = res.data.img_url;
+				console.log('this.productImg>>>',this.productImg );
+				
+				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
+				//this.fileList.push({url:res.data.img_url});
 			},
 			onUploaded(lists){
 				console.log('onUploaded 所有图片上传完毕触发',lists);
