@@ -1,6 +1,6 @@
 <template>
 	<view class="pb60">
-		<search-bar placeholder="类目搜索可直接输入产品名称" @confirm="search" class="uni-search-box"></search-bar>
+		<!-- <search-bar placeholder="类目搜索可直接输入产品名称" @confirm="search" class="uni-search-box"></search-bar> -->
 		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy" @update-value="updateValue"></product-category>
 		<view class="common-btn">
 			<button @tap="stepBtn()">下一步</button>

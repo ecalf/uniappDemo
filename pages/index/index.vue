@@ -15,15 +15,15 @@
 		<view class="category-list commonweb">
 			<view @tap="handleCategory(item)" class="category" v-for="(item,index) in categoryList" :key="index">
 				<view class="img">
-					<image :src="item.img"></image>
+					<image :src="item.icon"></image>
 				</view>
-				<view class="text">{{item.text}}</view>
+				<view class="text">{{item.cn_name}}</view>
 			</view>
 		</view>
 		<!--发布入口-->
 		<view class="commonweb">
 			<view class="publish-list">
-				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index">
+				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index" @tap="handlePublish">
 					<view class="inpublish-box">
 						<view class="left">
 							<view class="text">{{item.title}}</view>
@@ -37,13 +37,13 @@
 		</view>
 		<!--列表推荐-->
 		<view class="recommend-nav commonweb">
-			<view class="tab-item" v-for="(target,index) in filterByList" :key="index" @tap="handleSelect(index)" :class="{'on':target.selected}">
+			<view class="tab-item" v-for="(target,index) in filterByList" :key="index" @tap="handleSelect(index,target)" :class="{'on':target.selected}">
 				<view class="cntitle">{{target.cntitle}}</view>
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
-		<!-- <productList :goodsList="goodsList" /> -->
-			<productList></productList>
+		<productList :goodsList="goodsList" :firstImages="firstImages" :loadStatus="loadingText" />
+			
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
@@ -67,6 +67,7 @@
 	} from 'vuex';
 	import productList from '@/components/productList.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import interfaces from '@/utils/interfaces.js'
 	export default {
 		components: {
 			productList,
@@ -77,7 +78,7 @@
 			return {
 				title: 'getUserInfo',
 				hasUserInfo: false,
-				userInfo: {},
+			    userInfo: {},
 				ishow: true,
 				currentPage: '/pages/index/index',
 				swiperList: [{
@@ -97,135 +98,92 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				categoryList: [{
-						text: "口罩类",
-						img: "/static/images/indexicon01.png"
-					},
-					{
-						text: "防护服",
-						img: "/static/images/indexicon02.png"
-					},
-					{
-						text: "呼吸机",
-						img: "/static/images/indexicon03.png"
-					},
-					{
-						text: "医用面罩",
-						img: "/static/images/indexicon04.png"
-					},
-					{
-						text: "测试试剂",
-						img: "/static/images/indexicon05.png"
-					},
-					{
-						text: "温度计",
-						img: "/static/images/indexicon06.png"
-					},
-					{
-						text: "防护原料",
-						img: "/static/images/indexicon07.png"
-					},
-					{
-						text: "消毒用品",
-						img: "/static/images/indexicon08.png"
-					},
-				], // 分类
+				type:1,//1 发布采购 2 发布销售 3 委托销售 4 委托采购 5 官网销售 不传返回所有
+				pageSize: 2, //分页大小
+				pageNum: 1, //页码
+				cate_id: "",
+				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
+				priceSort:"",//价格排序 asc 升序 desc 降序
+				timeSort:"",//剩余时间排序 asc 升序 desc 降序
+				loadingText: "正在加载....",
+				categoryList:[],
+				// categoryList: [{
+				// 		text: "口罩类",
+				// 		img: "/static/images/indexicon01.png"
+				// 	},
+				// 	{
+				// 		text: "防护服",
+				// 		img: "/static/images/indexicon02.png"
+				// 	},
+				// 	{
+				// 		text: "呼吸机",
+				// 		img: "/static/images/indexicon03.png"
+				// 	},
+				// 	{
+				// 		text: "医用面罩",
+				// 		img: "/static/images/indexicon04.png"
+				// 	},
+				// 	{
+				// 		text: "测试试剂",
+				// 		img: "/static/images/indexicon05.png"
+				// 	},
+				// 	{
+				// 		text: "温度计",
+				// 		img: "/static/images/indexicon06.png"
+				// 	},
+				// 	{
+				// 		text: "防护原料",
+				// 		img: "/static/images/indexicon07.png"
+				// 	},
+				// 	{
+				// 		text: "消毒用品",
+				// 		img: "/static/images/indexicon08.png"
+				// 	},
+				// ], // 分类
 				publishList: [{
 						title: "发布采购",
 						bgimg: "/static/images/release01.png",
-						icon: "/static/images/releaseicon01.png"
+						icon: "/static/images/releaseicon01.png",
+						url:"/pages/publish/publishBuy/publishOne?type=1"
 					},
 					{
 						title: "发布销售",
 						bgimg: "/static/images/release02.png",
-						icon: "/static/images/releaseicon02.png"
+						icon: "/static/images/releaseicon02.png",
+						url:"/pages/publish/publishBuy/publishOne?type=2"
 					},
 					{
 						title: "发布委托",
 						bgimg: "/static/images/release03.png",
-						icon: "/static/images/releaseicon03.png"
+						icon: "/static/images/releaseicon03.png",
+						url:"/pages/publish/publishBuy/publishOne?type=3"
 					}
 				], //发布
-				goodsList: [{
-						id: 1,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 2,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 3,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 4,
-						img: "",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 5,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 6,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 7,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 8,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 9,
-						img: "",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					},
-					{
-						id: 10,
-						img: "/static/images/product.png",
-						name: "这款呼吸机 卖疯了这款呼吸机 卖疯了",
-						price: "2000",
-					}
-				],
+				goodsList: [],
+				firstImages:'',
 				filterByList: [{
 						cntitle: "列表推荐",
 						entitle: "Recommend",
-						selected: true
+						selected: true,
+						type:"4"
 					},
 					{
 						cntitle: "采购订单",
 						entitle: "Purchase",
 						selected: false,
+						type:"1"
 					},
 					{
 						cntitle: "销售订单",
 						entitle: "Sale",
 						selected: false,
+						type:"2"
 					},
 					{
 						cntitle: "委托订单",
 						entitle: "Entrust",
 						selected: false,
+						type:"3"
 					},
 				] //列表tabbar
 			}
@@ -234,23 +192,14 @@
 		},
 
 		methods: {
-			initData() {
-				this.request({
-					url: interfaces.getBannerData,
-					success: ((res) => {
-						// console.log(res);
-						this.swiperList = res.data.swiperList;
-					})
-				});
-			},
 			handleCategory(item) {
 				// 分类跳转
 				// console.log(item.text);
 				uni.navigateTo({
-					url: "../product/productList?name=" + item.text
+					url: "../product/productList?id=" + item.id+'&name='+item.cn_name
 				})
 			},
-			handleSelect(index) {
+			handleSelect(index,target) {
 				this.filterByList[index].selected = true;
 
 				// 其他的selected false
@@ -259,6 +208,73 @@
 						this.filterByList[i].selected = false;
 					}
 				}
+				this.type=target.type;
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+			},
+			initData(){
+				this.request({ //分类筛选
+					url: interfaces.getkindData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					success: ((res) => {
+						console.log(res);
+						this.categoryList = res.data;
+					})
+				});
+			},
+			loadData() {
+				let params={
+					data:{
+						page_size: this.pageSize,
+						page_index: this.pageNum,
+						keyword: "",
+						type:this.type,
+						is_defalut_sort:"",
+						status:"",
+						price_sort:"",
+						remain_time_sort:"",
+						cate_id:"",
+						brand_id:""
+					}
+				}
+				this.request({
+					url: interfaces.getNeedsData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data:params,
+					success: (res) => {
+						var lists = res.data.list,
+							arrImage = [],
+							mainImages;
+						if (res.code == 200) {
+							for (var i = 0; i < lists.length; i++) {
+								if (typeof lists[i].images == 'string') {
+									arrImage[i] = lists[i].images.split(",");
+									mainImages = arrImage[i][0];
+								}
+							}
+							this.firstImages = mainImages;
+							console.log(mainImages);
+							//debugger
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.goodsList.push(item);
+									//console.log(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
+						}
+					}
+				});
+			},
+			handlePublish(item){
+				uni.navigateTo({
+					url: "/pages/user/registerEnter"
+				})
 			},
 			enterRegister() { //注册
 				uni.navigateTo({
@@ -283,7 +299,25 @@
 				}
 			}
 		},
-
+		onLoad() {
+			this.initData();
+			this.loadData();
+		},
+		onPullDownRefresh() {
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.loadData();
+		}
 	}
 </script>
 

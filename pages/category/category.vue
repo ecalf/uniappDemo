@@ -49,15 +49,15 @@
 
 			<view class="filter-condition">
 				<!-- <view class="text" @tap="handleSelect(index)" v-for="(navitem,index) in navlist" :key="index" :class="{'on':navitem.selected}"><text>{{navitem.name}}</text></view> -->
-				
+
 				<view class="text" :class="[{on:filterIndex===0},{up:defalutSort===0},{down:defalutSort===1}]" @tap="handleSelect(0)">
 					<text>综合</text>
-					</view>
+				</view>
 				<view class="text" :class="[{on:filterIndex===1},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(1)"><text>价格</text></view>
-				<view class="text" :class="[{on:filterIndex===2},{up:timeSort==='asc'},{down:timeSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
+				<view class="text" :class="[{on:filterIndex===2},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
 				<view class="text filter" @tap="show('right')"><text>筛选</text></view>
 			</view>
-			<productList :goodsList="goodsList" :loadStatus="loadingText" />
+			<productList :goodsList="goodsList" :firstImages="firstImages" :loadStatus="loadingText" />
 		</view>
 		<!--弹窗-->
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
@@ -84,7 +84,7 @@
 		},
 		data() {
 			return {
-				filterIndex:0,
+				filterIndex: '',
 				showRight: false,
 				pageSize: 2, //分页大小
 				pageNum: 1, //页码
@@ -93,8 +93,8 @@
 				currentPage: '/pages/category/category',
 				cate_id: "",
 				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
-				priceSort:"",//价格排序 asc 升序 desc 降序
-				timeSort:"",//剩余时间排序 asc 升序 desc 降序
+				priceSort: "", //价格排序 asc 升序 desc 降序
+				timeSort: "", //剩余时间排序 asc 升序 desc 降序
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',
@@ -112,6 +112,7 @@
 					}
 				], //轮播图片
 				goodsList: [],
+				firstImages: '',
 				navlist: [{
 					name: "综合",
 					selected: false
@@ -166,11 +167,11 @@
 						page_size: this.pageSize,
 						page_index: this.pageNum,
 						keyword: "",
-						type: 2,
-						price_sort:this.priceSort,
-						remain_time_sort:this.timeSort,
+						type: "",
+						price_sort: this.priceSort,
+						remain_time_sort: this.priceSort,
 						cate_id: this.cate_id,
-						is_defalut_sort:this.defalutsort
+						is_defalut_sort: this.defalutsort
 					}
 				}
 				this.request({ //分类产品列表
@@ -179,12 +180,23 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: (res) => {
-						console.log(res.data);
+						//console.log(res.data);
+						var lists = res.data.list,
+							arrImage = [],
+							mainImages;
 						if (res.code == 200) {
+							for (var i = 0; i < lists.length; i++) {
+								if (typeof lists[i].images == 'string') {
+									arrImage[i] = lists[i].images.split(",");
+									mainImages = arrImage[i][0];
+								}
+							}
+							this.firstImages = mainImages;
 							//debugger
-							if (res.data.list.length > 0) {
-								res.data.list.forEach(item => {
+							if (lists.length > 0) {
+								lists.forEach(item => {
 									this.goodsList.push(item);
+									console.log(item);
 								})
 							} else {
 								this.loadingText = "到底了";
@@ -193,23 +205,26 @@
 					}
 				})
 
-			},	
+			},
 			handleSelect(index) {
-				this.filterIndex=index;
-				if(index===0){
-					this.defalutSort=this.is_defalutSort===1?0:1;
-				}else{
-					this.defalutSort='';
+				this.filterIndex = index;
+				if (index === 0) {
+					this.defalutSort = this.defalutSort === 1 ? 0 : 1;
+				} else {
+					this.defalutSort = '';
 				}
-				if(index===1){
-					this.priceSort=this.priceSort==='asc'?'asc':'desc';
-				}else{
-					this.priceSort
-				}
-				if(index===2){
-					this.timeSort=this.timeSort==='asc'?'asc':'desc';
-				}else{
-					this.timeSort
+				if (index === 1 || index === 2) {
+					switch (this.priceSort) {
+						case 'asc':
+							this.priceSort = 'desc';
+							break;
+						case 'desc':
+							this.priceSort = 'asc';
+							break;
+						default:
+							this.priceSort = 'desc';
+							break;
+					}
 				}
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
@@ -239,6 +254,7 @@
 			this.loadData();
 		},
 		onPullDownRefresh() {
+
 			setTimeout(() => {
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
@@ -251,6 +267,7 @@
 		onReachBottom() {
 			//debugger
 			this.pageNum++;
+
 			this.loadData();
 		}
 	}
@@ -426,37 +443,39 @@
 
 			&.on {
 				color: $ac;
-				text:after{
+
+				text:after {
 					border-top: 4px solid $ac;
 				}
+
 				&.filter {
 					text:after {
-						
+
 						background-image: url(~@/static/images/fillericona.png);
 						background-size: cover;
-						
+
 					}
 				}
-				
+
 			}
 
 			&.up {
 				text:after {
 					transform: rotate(180deg);
-					
+
 				}
 
-				
+
 			}
 
 			&.down {
 
 				text:after {
 					transform: 0;
-					
+
 				}
 
-				
+
 			}
 		}
 	}

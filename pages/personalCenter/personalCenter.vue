@@ -89,8 +89,6 @@
 </template>
 
 <script>
-	// import registerEnter from '@/pages/user/components/registerEnter.vue'
-	// import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import {
 		mapState,
 		mapMutations

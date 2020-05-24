@@ -2,6 +2,15 @@
 	<view class="pb60">
 
 		<cl-form ref="form" :model.sync="publishData">
+
+			<view class="uni-form-item m-form-item" v-if="publishData.type==3 || publishData.type==4">
+				<radio-group @change="typeChange">
+					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in entrustList" :key="index">
+						<radio :value="item.value" :checked="index === current" color="#44a78d" style="transform:scale(0.7)"></radio>
+						{{item.name}}
+					</label>
+				</radio-group>
+			</view>
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
@@ -12,10 +21,12 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload ref="uUpload" :custom-btn="false" :action="action" :auto-upload="true" :max-count="1" :width="145" name="image"
+				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
+				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="4" width="145" uploadText="" name="image"
 				 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','productImg')" @on-success="uploadHandler(arguments,'onSuccess','productImg')"
 				 @on-error="uploadHandler(arguments,'onError','productImg')" @on-change="uploadHandler(arguments,'onChange','productImg')"
 				 @on-remove="uploadHandler(arguments,'onRemove','productImg')"></u-upload>
+				<view class="imagestips"><text class="colorred">*</text>宝贝主图</view>
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -42,7 +53,7 @@
 
 					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
-						<view @tap="handleTap('Unitpicker')"><text class="curunit">{{curUnit}}</text><text>(单位)</text></view>
+						<view @tap="handleTap('Unitpicker')"><view class="curunit">{{curUnit}}<cl-icon name="cl-icon-arrow-bottom"></cl-icon></view><text>(单位)</text></view>
 						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
 						</lb-picker>
 
@@ -57,6 +68,12 @@
 				<view class="title"><text class="colorred">*</text>价格</view>
 				<cl-form-item label="" class="uni-input">
 					<cl-input placeholder="￥ 0.00" v-model="publishData.price"></cl-input>
+				</cl-form-item>
+			</view>
+			<view class="uni-form-item m-form-item" v-if="publishData.type==2">
+				<view class="title">供应商价格</view>
+				<cl-form-item label="" class="uni-input">
+					<cl-input placeholder="￥ 0.00" v-model="publishData.supplier_price"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="qualifications">
@@ -86,6 +103,7 @@
 					</radio-group>
 				</view>
 			</view>
+			<view class="upprducttitle">上传商品详情</view>
 			<view class="uni-form-item more-upload">
 				<u-upload ref="uUpload_2" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
 				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="8" width="145" uploadText="" name="image"
@@ -161,16 +179,25 @@
 					unit_cate_id: '1', //单位id
 					qualification: '', //资质
 					use_way: '', //用途
-					productImg: '', //上传图片-产品
+					productImg: [], //上传图片-产品
 					deadtime: '', //截止时间
 					images: [], //产品详情图
 					service_id: ''
 				},
+				entrustList: [{
+						value: '3',
+						name: '销售',
+					},
+					{
+						value: '4',
+						name: '采购',
+					},
+				],
 				dataSource: [], //出口国家
 				brandvalue: '请选择品牌', //当前选择品牌
 				selectbrand: [], //选择品牌
 				selectUnit: [], //选择单位
-				curUnit: '', //当前选择单位
+				curUnit: '请选择', //当前选择单位
 				action: interfaces.getUploadData,
 				filesArr: [],
 				// 预置上传列表
@@ -179,6 +206,8 @@
 				lists: [], // 组件内部的文件列表
 				Listids: [], //选择增值服务
 				isCheckAll: false,
+				supplier_price: '',
+				current: 0, //选择委托方式
 				useItems: [{
 						value: '1',
 						name: '民用',
@@ -224,7 +253,7 @@
 			this.publishData.cate_id = option.cate_id;
 		},
 		methods: {
-
+			
 			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
@@ -265,7 +294,7 @@
 				this.publishData[fieldName] = res.data.img_url;
 				// console.log(this.publishData[fieldName]);
 
-				var imglist = ["images"];
+				var imglist = ["images", "productImg"];
 				if (imglist.includes(fieldName)) {
 					var listimg = [];
 					for (var i = 0; i < lists.length; i++) {
@@ -274,7 +303,7 @@
 							listimg.push(data.data.img_url);
 						}
 					}
-					this.publishData[fieldName] = listimg;
+					this.publishData[fieldName] = listimg.join(",");
 					//console.log('4',this.publishData[fieldName]);
 
 				}
@@ -298,11 +327,20 @@
 					this.uploadState.files[fieldName] = undefined;
 					this.publishData[fieldName] = '';
 				}
-
-
-
 			},
 
+			typeChange: function(evt) { //获取type
+				for (let i = 0; i < this.entrustList.length; i++) {
+					if (this.entrustList[i].value === evt.target.value) {
+						this.current = i;	
+						break;
+					}
+			
+				}
+				this.publishData.type = evt.target.value; //获取type
+				console.log(this.publishData.type);
+			},
+			
 			initData() {
 				//品牌种类
 				this.request({
@@ -350,7 +388,7 @@
 					})
 				});
 			},
-
+			
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
 			},
@@ -417,7 +455,8 @@
 						qualification: this.publishData.qualification,
 						unit_cate_id: this.publishData.unit_cate_id,
 						service_id: this.publishData.service_id,
-						images: this.publishData.images
+						images: this.publishData.images,
+						supplier_price: this.publishData.supplier_price
 					}
 				}
 				console.log('publishSubmit begin, params:', params);
