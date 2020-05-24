@@ -12,21 +12,10 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload 
-					ref="uUpload" 
-					:custom-btn="false" 
-					:action="action"
-					:auto-upload="true" 
-					:max-count="1" 
-					:width="145" 
-					name="image"
-					testref="image1"
-					@on-progress="uploadHandler(arguments,'onProgress','productImg')"
-					@on-success="uploadHandler(arguments,'onSuccess','productImg')"
-					@on-error="uploadHandler(arguments,'onError','productImg')"
-					@on-change="uploadHandler(arguments,'onChange','productImg')"
-					@on-remove="uploadHandler(arguments,'onRemove','productImg')"
-				></u-upload>
+				<u-upload ref="uUpload" :custom-btn="false" :action="action" :auto-upload="true" :max-count="1" :width="145" name="image"
+				 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','productImg')" @on-success="uploadHandler(arguments,'onSuccess','productImg')"
+				 @on-error="uploadHandler(arguments,'onError','productImg')" @on-change="uploadHandler(arguments,'onChange','productImg')"
+				 @on-remove="uploadHandler(arguments,'onRemove','productImg')"></u-upload>
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -56,7 +45,7 @@
 						<view @tap="handleTap('Unitpicker')"><text class="curunit">{{curUnit}}</text><text>(单位)</text></view>
 						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
 						</lb-picker>
-						
+
 					</view>
 				</view>
 			</view>
@@ -98,26 +87,11 @@
 				</view>
 			</view>
 			<view class="uni-form-item more-upload">
-				<u-upload 
-					ref="uUpload_2" 
-					:custom-btn="customBtn" 
-					:show-upload-list="true" 
-					:action="action" 
-					:auto-upload="true"
-					:file-list="fileList" 
-					:show-progress="true" 
-					:deletable="true" 
-					:max-count="8" 
-					width="145"
-					uploadText=""
-					name="image"
-					testref="image2"					
-					@on-progress="uploadHandler(arguments,'onProgress','images')"
-					@on-success="uploadHandler(arguments,'onSuccess','images')"
-					@on-error="uploadHandler(arguments,'onError','images')"
-					@on-change="uploadHandler(arguments,'onChange','images')"
-					@on-remove="uploadHandler(arguments,'onRemove','images')"
-					>
+				<u-upload ref="uUpload_2" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
+				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="8" width="145" uploadText="" name="image"
+				 testref="image2" @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
+				 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
+				 @on-remove="uploadHandler(arguments,'onRemove','images')">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -165,12 +139,12 @@
 		},
 		data() {
 			return {
-				uploadState:{
-					COMPLETE:0,
-					UNFINISHED:1,
-					SUCCESS:2,
-					ERROR:3,
-					files:{}
+				uploadState: {
+					COMPLETE: 0,
+					UNFINISHED: 1,
+					SUCCESS: 2,
+					ERROR: 3,
+					files: {}
 				},
 				publishData: {
 					type: "", //类型1 发布采购 2 发布销售 3 委托销售	
@@ -189,21 +163,21 @@
 					use_way: '', //用途
 					productImg: '', //上传图片-产品
 					deadtime: '', //截止时间
-					images:[], //产品详情图
+					images: [], //产品详情图
 					service_id: ''
 				},
 				dataSource: [], //出口国家
 				brandvalue: '请选择品牌', //当前选择品牌
 				selectbrand: [], //选择品牌
-				selectUnit: [],//选择单位
-				curUnit:'',//当前选择单位
+				selectUnit: [], //选择单位
+				curUnit: '', //当前选择单位
 				action: interfaces.getUploadData,
 				filesArr: [],
 				// 预置上传列表
 				fileList: [],
 				customBtn: false,
 				lists: [], // 组件内部的文件列表
-				Listids: [],//选择增值服务
+				Listids: [], //选择增值服务
 				isCheckAll: false,
 				useItems: [{
 						value: '1',
@@ -229,13 +203,13 @@
 				],
 				qualtitems: [],
 				brandProps: {
-					label: 'cn_name',//下拉值
-					value: 'cn_name',//显示值
+					label: 'cn_name', //下拉值
+					value: 'cn_name', //显示值
 					brandid: 'id'
 				},
 				UnitProps: {
-					label: 'cn_name',//下拉值
-					value: 'cn_name',//显示值
+					label: 'cn_name', //下拉值
+					value: 'cn_name', //显示值
 					unitid: 'id'
 				}
 
@@ -250,67 +224,86 @@
 			this.publishData.cate_id = option.cate_id;
 		},
 		methods: {
-			
-			checkUploadFiles(){
+
+			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
 				let files = this.uploadState.files;
-				
-				for(let fieldName in files){
-					if(files[fieldName]==uploadState.UNFINISHED||files[fieldName]==uploadState.EEROR){
+
+				for (let fieldName in files) {
+					if (files[fieldName] == uploadState.UNFINISHED || files[fieldName] == uploadState.EEROR) {
 						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
 						finished = false;
 						break;
 					}
 				}
-				
+
 				return finished;
 			},
-			uploadHandler(args,handlerName,fieldName){
+			uploadHandler(args, handlerName, fieldName) {
 				let argsMerge = [];
-				for(let i=0;i<args.length;i++){
+				for (let i = 0; i < args.length; i++) {
 					argsMerge.push(args[i]);
 				}
 				argsMerge.push(fieldName);
-				
-				this[handlerName].apply(this,argsMerge);
+
+				this[handlerName].apply(this, argsMerge);
 			},
-			onProgress(res,index,lists,fieldName){
+			onProgress(res, index, lists, fieldName) {
 				// console.log('onProgress',res,index,lists,fieldName);
-				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
+				this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 			},
-			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
-				console.log('onSuccess',res,index,lists,fieldName);
-				res =  JSON.parse(res);
-				
-				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
-				
+			onSuccess(res, index, lists, fieldName) { //fieldName 服务器接收该图片的字段名
+				//console.log('onSuccess22',lists,fieldName);
+				res = JSON.parse(res);
+
+				this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
+
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 				//this.fileList.push({url:res.data.img_url});
+				// console.log(fieldName);
 				this.publishData[fieldName] = res.data.img_url;
-				if(Object.prototype.toString.call(this.uploadState.files[fieldName])=='[object Array]'){
-					var arr=[];
-					
+				// console.log(this.publishData[fieldName]);
+
+				var imglist = ["images"];
+				if (imglist.includes(fieldName)) {
+					var listimg = [];
+					for (var i = 0; i < lists.length; i++) {
+						if (typeof lists[i].response == 'string') {
+							var data = JSON.parse(lists[i].response);
+							listimg.push(data.data.img_url);
+						}
+					}
+					this.publishData[fieldName] = listimg;
+					//console.log('4',this.publishData[fieldName]);
+
 				}
-				
-				// console.log('this.publishData[fieldName]>>>',this.publishData[fieldName]);
 			},
-			onChange(res,index,lists,fieldName){
+			onChange(res, index, lists, fieldName) {
 				// console.log('onChange ',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 			},
-			onError(err,index,lists,fieldName){
+			onError(err, index, lists, fieldName) {
 				// console.log('onError ',err,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
-			onRemove(index,lists,fieldName){
+			onRemove(index, lists, fieldName) {
 				// console.log('onRemove ',index,lists,fieldName);
-				this.uploadState.files[fieldName] = undefined;
-				this.publishData[fieldName] = '';
-			
+				// this.uploadState.files[fieldName] = undefined;
+				// this.publishData[fieldName] = '';
+				var imglist = ["images"];
+				if (imglist.includes(fieldName)) {
+					this.publishData[fieldName].splice(index, 1)
+				} else {
+					this.uploadState.files[fieldName] = undefined;
+					this.publishData[fieldName] = '';
+				}
+
+
+
 			},
-			
-			initData() {		
+
+			initData() {
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -395,18 +388,18 @@
 					this.Listids.splice(ids, 1);
 				} else {
 					//选中该按钮
-					this.Listids.push(id);		
+					this.Listids.push(id);
 				}
-				var serviceId=this.Listids.join(',');
+				var serviceId = this.Listids.join(',');
 				this.publishData.service_id = serviceId
 			},
-			successlist:function(data, index, lists){
+			successlist: function(data, index, lists) {
 				console.log(data, index, lists);
 				//const formdata=new FormData();
 				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
-								
+
 				let params = {
 					data: {
 						type: this.publishData.type,
@@ -424,17 +417,27 @@
 						qualification: this.publishData.qualification,
 						unit_cate_id: this.publishData.unit_cate_id,
 						service_id: this.publishData.service_id,
-						images:this.publishData.images
+						images: this.publishData.images
 					}
-				}	
-				console.log('publishSubmit begin, params:',params);
+				}
+				console.log('publishSubmit begin, params:', params);
 				this.request({
 					url: interfaces.getPublishData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: params,
 					success: ((res) => {
-						if (res.code !== 200) {
+						if (res.code == 200) {
+							uni.showToast({
+								title: '发布需求成功，请前往首页查看',
+								icon: "none"
+							})
+							setTimeout(() => {
+								uni.switchTab({
+									url: "/pages/index/index"
+								})
+							}, 1000);
+						} else {
 							uni.showToast({
 								title: res.message,
 								icon: "none"
