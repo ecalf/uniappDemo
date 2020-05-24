@@ -50,11 +50,11 @@
 					width="180"
 					uploadText="" 
 					name="image"
-					@on-progress="uploadHandler(arguments,'onProgress','hand_identify_card_photo_front')"
-					@on-success="uploadHandler(arguments,'onSuccess','hand_identify_card_photo_front')"
-					@on-error="uploadHandler(arguments,'onError','hand_identify_card_photo_front')"
-					@on-change="uploadHandler(arguments,'onChange','hand_identify_card_photo_front')"
-					@on-remove="uploadHandler(arguments,'onRemove','hand_identify_card_photo_front')"
+					@on-progress="uploadHandler(arguments,'onProgress','identify_card_photo_front')"
+					@on-success="uploadHandler(arguments,'onSuccess','identify_card_photo_front')"
+					@on-error="uploadHandler(arguments,'onError','identify_card_photo_front')"
+					@on-change="uploadHandler(arguments,'onChange','identify_card_photo_front')"
+					@on-remove="uploadHandler(arguments,'onRemove','identify_card_photo_front')"
 					>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
@@ -76,11 +76,11 @@
 				width="180"
 				uploadText="" 
 				name="image"
-				@on-progress="uploadHandler(arguments,'onProgress','hand_identify_card_photo_back')"
-				@on-success="uploadHandler(arguments,'onSuccess','hand_identify_card_photo_back')"
-				@on-error="uploadHandler(arguments,'onError','hand_identify_card_photo_back')"
-				@on-change="uploadHandler(arguments,'onChange','hand_identify_card_photo_back')"
-				@on-remove="uploadHandler(arguments,'onRemove','hand_identify_card_photo_back')"
+				@on-progress="uploadHandler(arguments,'onProgress','identify_card_photo_back')"
+				@on-success="uploadHandler(arguments,'onSuccess','identify_card_photo_back')"
+				@on-error="uploadHandler(arguments,'onError','identify_card_photo_back')"
+				@on-change="uploadHandler(arguments,'onChange','identify_card_photo_back')"
+				@on-remove="uploadHandler(arguments,'onRemove','identify_card_photo_back')"
 				>
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
@@ -127,11 +127,9 @@
 					scene: 'identify_person', //认证场景 
 					real_name: '', //姓名
 					idcard: '', //身份证号
-					legal_person_cardno: '', //法人身份证号码
-					legal_hand_identify_card_photo_font: '', //法人手持身份证正面照片
-					hand_identify_card_photo: '', //身份证号码
-					hand_identify_card_photo_front: '', //手持身份证正面照片
-					hand_identify_card_photo_back: '', //手持身份证反面照片
+					hand_identify_card_photo: '', //手持身份证正面照片
+					identify_card_photo_front: '', //手持身份证正面照片
+					identify_card_photo_back: '', //手持身份证反面照片
 				}
 
 			}
@@ -210,8 +208,8 @@
 							real_name: this.personalForm.real_name,
 							idcard: this.personalForm.idcard,
 							hand_identify_card_photo: this.personalForm.hand_identify_card_photo,
-							hand_identify_card_photo_front: this.personalForm.hand_identify_card_photo_front,
-							hand_identify_card_photo_back: this.personalForm.hand_identify_card_photo_back,
+							identify_card_photo_front: this.personalForm.identify_card_photo_front,
+							identify_card_photo_back: this.personalForm.identify_card_photo_back,
 						}
 					},
 					success: ((res) => {

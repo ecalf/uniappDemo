@@ -37,8 +37,9 @@
 		data() {
 			return {
 				
-				conversionPrice: [{
-						id: 1,
+				conversionPrice: [
+					{
+					id: 1,
 						name: '全部'
 					},
 					{
@@ -49,7 +50,6 @@
 						id: 3,
 						name: '我的收藏'
 					},
-
 				],
 				supplierList: [{
 					name: '万和国际股份有限公司',
