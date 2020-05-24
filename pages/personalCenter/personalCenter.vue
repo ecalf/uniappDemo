@@ -4,9 +4,12 @@
 		<view class='header'>
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
-				<view class='header-title'><text>{{uerInfo.userId}}</text></view>
+				<view class='header-title'><text>{{uerInfo.userName}}</text></view>
 				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
-				<view class='usersname'><text>{{uerInfo.userName}}</text><text @tap="bindLogin">退出</text></view>
+				<view class='usersname'><text>{{uerInfo.userName}}</text></view>
+				<view v-if="!hasLogin">
+					<navigator url="/pages/user/login">登录</navigator>		
+				</view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>
 			<view class='header-vip'>
@@ -70,7 +73,11 @@
 				</view>
 			</view>
 		</view>
-
+		
+		
+		<view class="btn-row">
+			<button class="cu-btn" @tap="bindLogin">退出登录</button>
+		</view>
 		<!--注册入口-->
 <!-- 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<register-enter></register-enter>
@@ -468,5 +475,18 @@
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
+	}
+	.cu-btn {
+		width: 80%;
+		height: 72.46rpx;
+		line-height: 72.46rpx;
+		background: #44a78d;
+		border-radius: 9.05rpx;
+		text-align: center;
+		font-size: 32.6rpx;
+		color: #fff;
+		cursor: pointer;
+		margin-bottom: 54.34rpx;
+		margin-top: 36.23rpx;
 	}
 </style>
