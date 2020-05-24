@@ -6,17 +6,13 @@
 				<input class="uni-input" text name="nickname" placeholder="请输入公司名称" v-model="ManagerForm.company_name" />
 			</view>
 			<textarea value="" placeholder="请输入公司介绍" maxlength="200" v-model="ManagerForm.company_introduce" />
-			<view class="uni-form-item uni-column">
-			<view class="title">邮箱地址</view>
-			<input class="uni-input" text name="nickname" value="11059845575@qq.com" />
-		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">联系人</view>
 			<input class="uni-input" text name="nickname" placeholder="请输入联系人" v-model="ManagerForm.contact_name" />
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">联系电话</view>
-			<input class="uni-input" number name="nickname" value="18525464251" v-model="ManagerForm.contact_phone"/>
+			<input class="uni-input" number name="nickname" placeholder="18525464251" v-model="ManagerForm.contact_phone"/>
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">邮箱</view>
@@ -24,7 +20,7 @@
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">微信</view>
-			<input class="uni-input" number name="nickname" value="请输入微信" v-model="ManagerForm.wechat"/>
+			<input class="uni-input" number name="nickname" placeholder="请输入微信" v-model="ManagerForm.wechat"/>
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">QQ</view>
@@ -402,7 +398,7 @@
 					name: "nickname",
 					checkType: "string",
 					// checkRule: "1,3",
-					errorMsg: "请输入内容"
+					errorMsg: "请输入正确的信息"
 				}, ];
 				//进行表单检查
 				var formData = e.detail.value;

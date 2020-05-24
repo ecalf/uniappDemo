@@ -16,13 +16,38 @@
 					page_size: 2,
 					page_index: 1,
 					keyword: '',
-					type: 2,
-					status: 0,
-					is_deadtime: 0
+					type: 1,
+					status: '',
+					is_deadtime: '',
+					kinds:1
 				},
 				conversionPrice: [
+					{
+					id: 1,
+						name: '全部'
+					},
+					{
+						id: 2,
+						name: '上架'
+					},
+					{
+						id: 3,
+						name: '下架'
+					},
+					{
+						id: 4,
+						name: '已截止'
+					},
 				],
-				goodsPrice: []
+				goodsPrice: [
+					{
+							title: '飞利浦呼吸机',
+							content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
+							price: '200.000',
+							number: '1500',
+							time: '2020.02.05-2020.04.05'
+						},
+				]
 			};
 		},
 		methods: {
@@ -38,13 +63,13 @@
 							keyword: this.quoto.keyword,
 							type: this.quoto.type,
 							status: this.quoto.status,
-							is_deadtime: this.quoto.is_deadtime
+							is_deadtime: this.quoto.is_deadtime,
+							kinds:this.quoto.kinds,
 						}
 					},
 					success: ((res) => {
 						console.log(res, 366)
-						this.goodsPrice = res.data.list;
-						this.conversionPrice = res.data.list;
+						// this.goodsPrice = res.data.list;
 					})
 				});
 			}

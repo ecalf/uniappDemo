@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view class="input-view">
-			<view class="search-icon"></view>
-			<input type="text" placeholder="搜索订单" v-model="quoto.keyword" />
+			<view class="search-icon" ></view>
+			<input type="text" placeholder="搜索订单" v-model="quoto.keyword"/>
 		</view>
 		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
 	</view>
@@ -18,15 +18,38 @@
 					page_size: 2,
 					page_index: 1,
 					keyword: '',
-					type: 3,
-					status: 0,
-					is_deadtime: 0
+					type: 2,
+					status: '',
+					is_deadtime: '',
+					kinds: 1
 				},
-				goodsPrice: []
-				
+				goodsPrice: [{
+						title: '飞利浦呼吸机',
+						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
+						price: '200.000',
+						number: '1500',
+						time: '2020.02.05-2020.04.05'
+					},
+					{
+						title: '丽丽呼吸机',
+						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
+						price: '200.000',
+						number: '1500',
+						time: '2020.02.05-2020.04.05'
+					},
+					{
+						title: '啦啦呼吸机',
+						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
+						price: '200.000',
+						number: '1500',
+						time: '2020.02.05-2020.04.05'
+					}
+				]
+
 			};
 		},
 		methods: {
+			
 			getsupplierList() {
 				this.request({
 					url: interfaces.getMyneedData,
@@ -39,7 +62,8 @@
 							keyword: this.quoto.keyword,
 							type: this.quoto.type,
 							status: this.quoto.status,
-							is_deadtime: this.quoto.is_deadtime
+							is_deadtime: this.quoto.is_deadtime,
+							kinds: this.quoto.kinds,
 						}
 					},
 					success: ((res) => {
@@ -49,11 +73,13 @@
 				});
 			},
 		},
+
 		onLoad() {
 			this.getsupplierList()
 		},
 		components: {
-			goodsprice
+			goodsprice,
+
 		}
 	}
 </script>
