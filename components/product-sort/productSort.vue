@@ -1,7 +1,11 @@
 <template>
 	<view class="commonweb">
 		<view class="filter-condition">
-			<view class="text" v-for="(navitem,index) in navlist" :key="index"><text>{{navitem.name}}</text></view>
+			<view class="text" :class="[{on:filterIndex===0},{up:defalutSort===0},{down:defalutSort===1}]" @tap="handleSelect(0)">
+				<text>综合</text>
+			</view>
+			<view class="text" :class="[{on:filterIndex===1},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(1)"><text>价格</text></view>
+			<view class="text" :class="[{on:filterIndex===2},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
 		</view>
 		
 	</view>
@@ -9,17 +13,9 @@
 
 <script>
 	export default {
-		data() {
+		data() {	
 			return {
-				navlist: [{
-					name: "综合"
-				}, {
-					name: "价格"
-				}, {
-					name: "剩余时间"
-				}, {
-					name: "搜索"
-				}]
+				Sort:"",//排序 asc 升序 desc 降序
 			}
 		},
 		methods: {

@@ -2,7 +2,8 @@
 	"pages": [{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
 			}
 		}, {
 			"path": "pages/category/category",
@@ -23,7 +24,8 @@
 		}, {
 			"path": "pages/product/productList",
 			"style": {
-				"navigationBarTitleText": "产品"
+				"navigationBarTitleText": "产品",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -36,9 +38,6 @@
 			"path": "pages/product/productDetails",
 			"style": {
 				"navigationBarTitleText": "商品详情",
-				"h5": {
-					"titleNView": false
-				},
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"

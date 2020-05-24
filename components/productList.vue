@@ -1,9 +1,9 @@
 <template>
 	<view class="goods-list commonweb">
-		<view class="product-list">
+		<view class="product-list" v-if="goodsList.length">
 			<view class="product" v-for="(goods,index) in goodsList" :key="goods.id" @tap="handleGoods(goods)">
-				<view class="image" v-if="goods.images">
-					<image mode="widthFix" :src="goods.images"></image>
+				<view class="image">
+					<image mode="widthFix" :src="firstImages"></image>
 				</view>
 				<view class="info">
 					<view class="name"><text class="tui-icon">推</text>{{goods.title}}</view>
@@ -18,7 +18,11 @@
 				</view>
 			</view>
 		</view>
-		<view class="loading-text">{{loadStatus}}</view>
+		<view v-else class="errormsg">
+			<view><image src="../static/images/error.png"></image></view>
+			<view>抱歉 Sorry！~ 没有找到符合条件的商品</view>
+		</view>
+		<view v-if="goodsList.length" class="loading-text">{{loadStatus}}</view>
 	</view>
 </template>
 
@@ -38,6 +42,9 @@
 			goodsList:{
 				type:Array
 			},
+			firstImages:{
+				type:String
+			},
 			loadStatus:{
 				type:String,
 				default: "正在加载...."
@@ -45,9 +52,10 @@
 		},
 		methods: {
 			handleGoods(goods) {
+				console.log(goods.id);
 				// 页面跳转 商品详情
 				uni.navigateTo({
-					url: "/pages/product/productDetails?id=1"
+					url: "/pages/product/productDetails?id="+goods.id
 				})
 			},
 		}
@@ -116,4 +124,10 @@
 		
 	}
 	.loading-text{padding:20px 0;text-align: center;}
+	
+	.errormsg{
+		padding:90.57rpx 0 0;
+		text-align:center;
+		image{width:295.28rpx;height:204.71rpx;margin-bottom:20px;}
+	}
 </style>

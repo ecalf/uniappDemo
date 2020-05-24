@@ -28,11 +28,17 @@ const interfaces = {
 	//采购，销售，委托采购，委托销售订单详情
 	getInfoData: baseurl + "/v1/needs/get-info",
 	
+	//报价
+	getQuotationData: baseurl + "v1/needs/quotation",
+	
 	//发布
 	getPublishData: baseurl + "/v1/needs/publish",
 	
 	//图片上传
 	getUploadData: baseurl + "/v1/upload",
+	
+	//首页分类列表
+		getkindData: baseurl + "v1/category/get-product-kinds",
 	
    //注册
    getRegisterData:baseurl+"/v1/user/register",

@@ -34,9 +34,9 @@ module.exports = (param) => {
 		header:header,
 		data: data,
 		success: res => {
-			if(res.statusCode && res.statusCode != 200){ // api错误
+			if(res.code && res.code != 200){ // api错误
 				uni.showModal({
-					content:res.msg
+					content:res.message
 				})
 				return;
 			}
