@@ -12,7 +12,7 @@
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">联系电话</view>
-			<input class="uni-input" number name="nickname" placeholder="18525464251" v-model="ManagerForm.contact_phone"/>
+			<input class="uni-input" number name="nickname" placeholder="请输入联系电话" v-model="ManagerForm.contact_phone"/>
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">邮箱</view>
@@ -279,7 +279,7 @@
 </template>
 
 <script>
-	var graceChecker = require("../../../utils/graceChecker.js");
+	// var graceChecker = require("../../../utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
 	import uUpload from '@/components/u-upload/u-upload'
 	export default {
@@ -394,20 +394,20 @@
 				
 				// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 				//定义表单规则
-				var rule = [{
-					name: "nickname",
-					checkType: "string",
-					// checkRule: "1,3",
-					errorMsg: "请输入正确的信息"
-				}, ];
-				//进行表单检查
-				var formData = e.detail.value;
-				var checkRes = graceChecker.check(formData, rule);
-				if (checkRes) {
-					uni.showToast({
-						title: "验证通过!",
-						icon: "none"
-					});
+				// var rule = [{
+				// 	name: "nickname",
+				// 	checkType: "string",
+				// 	// checkRule: "1,3",
+				// 	errorMsg: "请输入正确的信息"
+				// }, ];
+				// //进行表单检查
+				// var formData = e.detail.value;
+				// // var checkRes = graceChecker.check(formData, rule);
+				// if (checkRes) {
+				// 	uni.showToast({
+				// 		title: "验证通过!",
+				// 		icon: "none"
+				// 	});
 					this.request({ 
 						url: interfaces.getManagerData,
 						dataType: "JSON",
@@ -448,17 +448,18 @@
 							}
 						})
 					})
-				} else {
-					uni.showToast({
-						title: graceChecker.error,
-						icon: "none"
-					});
-				}
+				} 
+				// else {
+				// 	uni.showToast({
+				// 		title: graceChecker.error,
+				// 		icon: "none"
+				// 	});
+				// }
 				
-			},
-			formReset: function(e) {
-				console.log('清空数据')
-			}
+			// },
+			// formReset: function(e) {
+			// 	console.log('清空数据')
+			// }
 		},
 	
 	}

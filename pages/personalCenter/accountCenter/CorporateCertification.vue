@@ -132,7 +132,7 @@
 <script>
 	import interfaces from '@/utils/interfaces.js'
 	import uUpload from '@/components/u-upload/u-upload'
-	var graceChecker = require("../../../utils/graceChecker.js");
+	// var graceChecker = require("../../../utils/graceChecker.js");
 	export default {
 		comments: {
 			uUpload
@@ -180,11 +180,11 @@
 					industry:''//所属行业
 					},
 				countryList: [{
-						value: '1',
+						value: 'proxy',
 						name: '代理',
 					},
 					{
-						value: '2',
+						value: 'works',
 						name: '工厂',
 					},
 					]
@@ -257,24 +257,24 @@
 				onListChange(lists) {},
 				confirm() {
 						// 定义表单规则
-						var rule = [{
-							name: "nickname",
-							checkType: "string",
-							// checkRule: "1,3",
-							errorMsg: "请输入正确的信息"
-						}, ];
-						//进行表单检查
-						var formData = e.detail.value;
-						var checkRes = graceChecker.check(formData, rule);
-						if (checkRes) {
-						if(!this.checkUploadFiles()){
-							uni.showToast({
-								title: '文件未上传完毕',
-								icon: "none"
-							});
-							console.log('文件未上传完毕',this.uploadState.files);
-							return false;
-						}
+						// var rule = [{
+						// 	name: "nickname",
+						// 	checkType: "string",
+						// 	// checkRule: "1,3",
+						// 	errorMsg: "请输入正确的信息"
+						// }, ];
+						// //进行表单检查
+						// var formData = e.detail.value;
+						// var checkRes = graceChecker.check(formData, rule);
+						// if (checkRes) {
+						// if(!this.checkUploadFiles()){
+						// 	uni.showToast({
+						// 		title: '文件未上传完毕',
+						// 		icon: "none"
+						// 	});
+						// 	console.log('文件未上传完毕',this.uploadState.files);
+						// 	return false;
+						// }
 					this.request({
 						url: interfaces.getPersonData,
 						dataType: "JSON",
@@ -325,14 +325,14 @@
 						})
 					})
 
-					} else {
-						uni.showToast({
-							title: graceChecker.error,
-							icon: "none"
-						});
-					}
-
-				},
+					} 
+					// else {
+					// 	uni.showToast({
+					// 		title: graceChecker.error,
+					// 		icon: "none"
+					// 	});
+					// }
+				// },
 
 
 			},

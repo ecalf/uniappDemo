@@ -4,9 +4,11 @@
 		<view class='header'>
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
-				<view class='header-title'><text>{{uerInfo.userName}}</text></view>
-				<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
-				<view class='usersname'><text>{{uerInfo.userName}}</text></view>
+				<view v-if="hasLogin" >
+					<view class='header-title'><text>{{uerInfo.userName}}</text></view>
+					<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
+					<view class='usersname'><text>{{uerInfo.userName}}</text></view>
+				</view>
 				<view v-if="!hasLogin">
 					<navigator url="/pages/user/login">登录</navigator>		
 				</view>
@@ -75,7 +77,7 @@
 		</view>
 		
 		
-		<view class="btn-row">
+		<view class="btn-row" v-if="hasLogin">
 			<button class="cu-btn" @tap="bindLogin">退出登录</button>
 		</view>
 		<!--注册入口-->
@@ -100,7 +102,8 @@
 				currentPage: "/pages/personalCenter/personalCenter",
 				procurementList: [{
 						text: "发布采购",
-						img: "/static/images/lgicon1.png"
+						img: "/static/images/lgicon1.png",
+						url: "/pages/publish/publish"
 					},
 					{
 						text: "报价管理",
@@ -190,7 +193,8 @@
 				uni.navigateTo({
 					url: item.url
 				})
-
+			
+ 
 			},
 			gotoSale(item) {//销售路由
 				uni.navigateTo({
@@ -486,5 +490,9 @@
 		cursor: pointer;
 		margin-bottom: 54.34rpx;
 		margin-top: 36.23rpx;
+	}
+	navigator{
+		color: #FFFFFF;
+		font-size: 28.98rpx;
 	}
 </style>
