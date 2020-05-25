@@ -19,11 +19,10 @@
 					type: 1,
 					status: '',
 					is_deadtime: '',
-					kinds:1
+					kinds: ''
 				},
-				conversionPrice: [
-					{
-					id: 1,
+				conversionPrice: [{
+						id: 1,
 						name: '全部'
 					},
 					{
@@ -39,37 +38,37 @@
 						name: '已截止'
 					},
 				],
-				goodsPrice: [
-					{
-							title: '飞利浦呼吸机',
-							content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-							price: '200.000',
-							number: '1500',
-							time: '2020.02.05-2020.04.05'
-						},
-				]
+				goodsPrice: [{
+					title: '飞利浦呼吸机',
+					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
+					price: '200.000',
+					number: '1500',
+					time: '2020.02.05-2020.04.05'
+				}, ]
 			};
 		},
 		methods: {
 			getsupplierList() {
+				let params = {
+					data: {
+						page_size: this.quoto.page_size,
+						page_index: this.quoto.page_index,
+						keyword: this.quoto.keyword,
+						type: this.quoto.type,
+						status: this.quoto.status,
+						is_deadtime: this.quoto.is_deadtime,
+						kinds: this.quoto.kinds,
+					}
+				}
+				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data: {
-						data: {
-							page_size: this.quoto.page_size,
-							page_index: this.quoto.page_index,
-							keyword: this.quoto.keyword,
-							type: this.quoto.type,
-							status: this.quoto.status,
-							is_deadtime: this.quoto.is_deadtime,
-							kinds:this.quoto.kinds,
-						}
-					},
+					data: params,
 					success: ((res) => {
-						console.log(res, 366)
-						// this.goodsPrice = res.data.list;
+						//console.log(res, 366)
+						this.goodsPrice = res.data.list;
 					})
 				});
 			}

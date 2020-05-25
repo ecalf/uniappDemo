@@ -21,7 +21,7 @@
 					type: 2,
 					status: '',
 					is_deadtime: '',
-					kinds: 1
+					kinds: ''
 				},
 				goodsPrice: [{
 						title: '飞利浦呼吸机',
@@ -51,24 +51,26 @@
 		methods: {
 			
 			getsupplierList() {
+				let params = {
+					data: {
+						page_size: this.quoto.page_size,
+						page_index: this.quoto.page_index,
+						keyword: this.quoto.keyword,
+						type: this.quoto.type,
+						status: this.quoto.status,
+						is_deadtime: this.quoto.is_deadtime,
+						kinds: this.quoto.kinds,
+					}
+				}
+				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data: {
-						data: {
-							page_size: this.quoto.page_size,
-							page_index: this.quoto.page_index,
-							keyword: this.quoto.keyword,
-							type: this.quoto.type,
-							status: this.quoto.status,
-							is_deadtime: this.quoto.is_deadtime,
-							kinds: this.quoto.kinds,
-						}
-					},
+					data:params,
 					success: ((res) => {
-						console.log(res, 132)
-						// this.goodsPrice = res.data.list;
+						//console.log(res, 132)
+						this.goodsPrice = res.data.list;
 					})
 				});
 			},

@@ -23,7 +23,7 @@
 			<view class="uni-form-item upload-images">
 				<view class="upload-item">
 					<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
-					 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image"
+					 :file-list="mainImage" :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image"
 					 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','thumbnail')" @on-success="uploadHandler(arguments,'onSuccess','thumbnail')"
 					 @on-error="uploadHandler(arguments,'onError','thumbnail')" @on-change="uploadHandler(arguments,'onChange','thumbnail')"
 					 @on-remove="uploadHandler(arguments,'onRemove','thumbnail')"></u-upload>
@@ -31,7 +31,7 @@
 					<view class="imagestips"><text class="colorred">*</text>宝贝主图</view>
 				</view>
 				<view class="upload-item">
-					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
+					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="swipeImage"
 					 :show-progress="true" :deletable="true" :max-count="3" width="145" uploadText="" name="image" testref="image2"
 					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
 					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
@@ -42,30 +42,6 @@
 					</u-upload>
 					<view class="imagestips">添加上传图片</view>
 				</view>
-			<!-- 	<view class="upload-item">
-					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
-					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
-					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
-					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
-					 @on-remove="uploadHandler(arguments,'onRemove','images')">
-						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
-						</view>
-					</u-upload>
-					<view class="imagestips">添加上传图片</view>
-				</view>
-				<view class="upload-item">
-					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
-					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
-					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
-					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
-					 @on-remove="uploadHandler(arguments,'onRemove','images')">
-						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
-						</view>
-					</u-upload>
-					<view class="imagestips">添加上传图片</view>
-				</view> -->
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -149,7 +125,7 @@
 			<view class="upprducttitle">上传商品详情</view>
 			<view class="uni-form-item more-upload">
 				<u-upload ref="uUpload_2" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
-				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="8" width="145" uploadText="" name="image"
+				 :file-list="productList" :show-progress="true" :deletable="true" :max-count="8" width="145" uploadText="" name="image"
 				 testref="image2" @on-progress="uploadHandler(arguments,'onProgress','info')" @on-success="uploadHandler(arguments,'onSuccess','info')"
 				 @on-error="uploadHandler(arguments,'onError','info')" @on-change="uploadHandler(arguments,'onChange','info')"
 				 @on-remove="uploadHandler(arguments,'onRemove','info')">
@@ -244,14 +220,30 @@
 				curUnit: '请选择', //当前选择单位
 				action: interfaces.getUploadData,
 				filesArr: [],
-				// 预置上传列表
-				fileList: [],
 				customBtn: false,
 				lists: [], // 组件内部的文件列表
 				Listids: [], //选择增值服务
 				isCheckAll: false,
 				supplier_price: '',
 				current: 0, //选择委托方式
+				mainImage:[//宝贝主图
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
+				],
+				swipeImage:[//轮播图
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
+				],
+				productList:[//商品详情
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
+					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
+				],
 				useItems: [{
 						value: '1',
 						name: '民用',
@@ -362,7 +354,7 @@
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index, lists, fieldName) {
-				console.log('onRemove ',index,lists,fieldName,22222);
+				// console.log('onRemove ',index,lists,fieldName);
 				// this.uploadState.files[fieldName] = undefined;
 				// this.publishData[fieldName] = '';
 				var imglist = ["images", "info"];
