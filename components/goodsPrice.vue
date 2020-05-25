@@ -1,20 +1,22 @@
 <template>
 	<view>
-		<view class="goods" v-for="(item,index) in goodsPrice" :key='item.index'>
-			<view class="goodslist-header">
-				<text class="goodslist-icon">推</text>
-				<text class="goodslist-title">{{item.title}}</text>
-				<text class="goodslist-time">{{item.time}}</text>
-			</view>
-			<text class="goodslist-content">{{item.content}}</text>
-			<view class="goodslist-comter">
-				<view class="goodslist-price">
-					<text>￥</text>
-					{{item.price}}
+		<view class="goods" v-for="(item,index) in goodsPrice" :key='item.index' >
+			<view class="cc" @click.native='gotoDetails()'>
+				<view class="goodslist-header">
+					<text class="goodslist-icon">推</text>
+					<text class="goodslist-title">{{item.title}}</text>
+					<text class="goodslist-time">{{item.time}}</text>
 				</view>
-				<view class="goodslist-number">
-					{{item.number}}
-					<text>个</text>
+				<text class="goodslist-content">{{item.content}}</text>
+				<view class="goodslist-comter">
+					<view class="goodslist-price">
+						<text>￥</text>
+						{{item.price}}
+					</view>
+					<view class="goodslist-number">
+						{{item.number}}
+						<text>个</text>
+					</view>
 				</view>
 			</view>
 			<view class="goods-operate">
@@ -38,9 +40,14 @@
 
 				};
 			},
-			// updated(){
-			// 	console.log(this.goodsPrice,999)
-			// }
+			methods:{
+				gotoDetails(){
+					console.log(111)
+					uni.navigateTo({
+					    url: '/pages/personalCenter/purchaseCenter/offerDetails'
+					});
+				}
+			}
 			}
 </script>
 

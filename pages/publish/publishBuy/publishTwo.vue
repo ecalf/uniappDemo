@@ -362,7 +362,7 @@
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index, lists, fieldName) {
-				// console.log('onRemove ',index,lists,fieldName);
+				console.log('onRemove ',index,lists,fieldName,22222);
 				// this.uploadState.files[fieldName] = undefined;
 				// this.publishData[fieldName] = '';
 				var imglist = ["images", "info"];

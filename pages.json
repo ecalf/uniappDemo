@@ -152,7 +152,13 @@
             "style": {
              "navigationBarTitleText": "注册入口"
             }
-        }
+        },
+		{
+		    "path" : "pages/personalCenter/purchaseCenter/offerDetails",
+		    "style": {
+		     "navigationBarTitleText": "报价详情"
+		    }
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

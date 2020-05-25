@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice"></converSionPrice>
-		<goodsprice :goodsPrice="goodsPrice"></goodsprice>
+		<goodsprice :goodsPrice="goodsPrice" ></goodsprice>
 	</view>
 </template>
 
@@ -58,7 +58,8 @@ export default {
 					// this.goodsPrice = res.data.list;
 				}
 			});
-		}
+		},
+
 	},
 	onLoad() {
 		this.getsupplierList();

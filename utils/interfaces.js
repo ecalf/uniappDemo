@@ -60,7 +60,9 @@ const interfaces = {
 	getMyquoteData: baseurl + "/v1/user/get-my-quotation-list",
 
 	//用户详情
-	getSupplierData: baseurl + "/v1/user/myprofiles",
+	getSupplierData: baseurl  + "/v1/user/myprofiles",
+	// 企业信息
+	getEnterpriseData:baseurl + "/v1/user/get-other-user-info",
 
 }
 module.exports = interfaces;

@@ -383,7 +383,7 @@
 				console.log('onRemove ',index,lists,fieldName);
 				this.uploadState.files[fieldName] = undefined;
 				this.ManagerForm[fieldName] = '';
-
+			
 			},
 			formSubmit: function(e) {
 				if(!this.checkUploadFiles()){

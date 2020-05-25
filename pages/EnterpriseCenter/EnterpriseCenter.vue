@@ -72,12 +72,21 @@
 
 <script>
 	import productList from '@/components/productList.vue'
+	import interfaces from '@/utils/interfaces.js';
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
+		computed: mapState(['hasLogin', 'uerInfo']),
 		components: {
 			productList
 		},
 		data() {
+			
 			return {
+				user_id:'',
+				EnterpriseList:[],
 				swiperList: [{
 						id: 1,
 						img: "/static/images/lgicon41.png"
@@ -160,6 +169,27 @@
 					}
 				}
 			},
+			getEnterprise(){
+				this.request({
+					url: interfaces.getEnterpriseData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							user_id:this.user_id
+						}
+					},
+					success: res => {
+						console.log(res, 1212);
+						this.EnterpriseList = res.data.list;
+						console.log(this.EnterpriseList,222)
+					}
+				});
+			}
+		},
+		onLoad(){
+				this.getEnterprise()
+		
 		}
 	}
 </script>
