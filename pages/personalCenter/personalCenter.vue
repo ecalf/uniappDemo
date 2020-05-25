@@ -30,7 +30,7 @@
 				<view class='procurement-title'>
 					<p>我要采购</p>
 				</view>
-				<view @click="gotopriceControl(item)" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
+				<view @click="gotopriceControl(item,index)" class="procurement-content" v-for="(item,index) in procurementList" :key="index">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -89,7 +89,6 @@
 
 	</view>
 </template>
-
 <script>
 	import {
 		mapState,
@@ -189,12 +188,16 @@
 		},
 		methods: {
 			
-			gotopriceControl(item) {//采购路由
+			gotopriceControl(item,index) {//采购路由
 				uni.navigateTo({
 					url: item.url
 				})
+				if(index == 0) {
+					uni.switchTab({
+						url: item.url
+					})
+				}
 			
- 
 			},
 			gotoSale(item) {//销售路由
 				uni.navigateTo({
@@ -493,6 +496,7 @@
 	}
 	navigator{
 		color: #FFFFFF;
-		font-size: 28.98rpx;
+		font-size: 32.6rpx;
+		margin-left: 27.17rpx;
 	}
 </style>

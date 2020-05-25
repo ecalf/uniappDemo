@@ -6,6 +6,10 @@
 				<input class="uni-input" text name="nickname" placeholder="请输入公司名称" v-model="ManagerForm.company_name" />
 			</view>
 			<textarea value="" placeholder="请输入公司介绍" maxlength="200" v-model="ManagerForm.company_introduce" />
+			<view class="uni-form-item uni-column">
+				<view class="title">地址</view>
+				<input class="uni-input" text name="nickname" placeholder="请输入地址" v-model="ManagerForm.addr" />
+			</view>
 		<view class="uni-form-item uni-column">
 			<view class="title">联系人</view>
 			<input class="uni-input" text name="nickname" placeholder="请输入联系人" v-model="ManagerForm.contact_name" />
@@ -323,7 +327,6 @@
 					qq:'',//qq
 					wechat:'',//微信
 					email:'',//邮箱
-
 				}
 			};
 		},
@@ -431,7 +434,6 @@
 						},
 						success: ((res) => {
 							console.log(res,656)
-							
 							if (res.code !== 200) {
 								uni.showToast({
 									title: res.message,
