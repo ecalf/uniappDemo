@@ -18,7 +18,7 @@
 				</view>
 			</view>
 			<view class="goods-operate">
-				<view class="goodsDelete"><text class="deleteText">删除</text></view>
+				<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
 				<view class="goodsDelete"><text class="updataText">修改</text></view>
 				<view class="goodsDelete"><text class="pullText">上架</text></view>
 			</view>
@@ -32,16 +32,18 @@
 			goodsPrice: {
 				type: Array
 			}
-			},
-			data() {
-				return {
+		},
+		data() {
+			return {
 
-				};
-			},
-			// updated(){
-			// 	console.log(this.goodsPrice,999)
-			// }
+			};
+		},
+		methods:{
+			handleDelete(index){
+				this.$emit('update-value',index);
 			}
+		}
+	}
 </script>
 
 <style lang="less">
@@ -52,6 +54,7 @@
 		box-sizing: border-box;
 		margin: 0 auto;
 		padding: 36.23rpx;
+		margin-bottom: 18.11rpx;
 
 		.goodslist-header {
 			margin-bottom: 18.11rpx;

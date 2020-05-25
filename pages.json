@@ -153,6 +153,18 @@
              "navigationBarTitleText": "注册入口"
             }
         }
+        ,{
+            "path" : "pages/personalCenter/modify/PublishPrev",
+            "style" : {
+				"navigationBarTitleText": "修改发布信息"
+			}
+        }
+       ,{
+           "path" : "pages/personalCenter/modify/PublishNext",
+           "style" : {
+       		"navigationBarTitleText": "修改发布信息"
+       	}
+       }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

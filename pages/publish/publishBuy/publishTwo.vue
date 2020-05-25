@@ -337,7 +337,7 @@
 				//this.fileList.push({url:res.data.img_url});
 				// console.log(fieldName);
 				this.publishData[fieldName] = res.data.img_url;
-				// console.log(this.publishData[fieldName]);
+				
 
 				var imglist = ["images","info"];
 				if (imglist.includes(fieldName)) {

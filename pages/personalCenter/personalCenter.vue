@@ -5,7 +5,7 @@
 			<view class='headerImg'><img src='~@/static/images/header-ico.png' /></view>
 			<view class="member-right">
 				<view v-if="hasLogin" >
-					<view class='header-title'><text>{{uerInfo.userName}}</text></view>
+					<view class='header-title'><text>{{uerInfo.companyName}}</text></view>
 					<view class='headerImg2'><img src="~@/static/images/vipicon.png"></view>
 					<view class='usersname'><text>{{uerInfo.userName}}</text></view>
 				</view>
