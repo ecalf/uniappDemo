@@ -25,12 +25,12 @@
 		</view> -->
 		<view class="swiper-box">
 			<swiper @change="swiperChange" circular="true" autoplay="true">
-				<swiper-item v-for="swiper in swiperList" :key="swiper.id">
-					<image :src="swiper.url"></image>
+				<swiper-item v-for="(swiper,index) in detail.swiperList" :key="index">
+					<image :src="swiper"></image>
 				</swiper-item>
 			</swiper>
 			<view class="indicator">
-				{{currentSwiper + 1}}/{{swiperList.length}}
+				{{currentSwiper + 1}}/{{detail.swiperList.length}}
 			</view>
 		</view>
 		<view class="product-details-con">
@@ -75,7 +75,10 @@
 		<view class="description">
 			<view class="title">———— 商品详情 ————</view>
 			<view class="content">
-				<rich-text :nodes="detail.info"></rich-text>
+				<rich-text :nodes="detail.detailsList"></rich-text>
+				<!-- <view v-for="(item,index) in detail.detailsList">
+					<image :src="item"></image>
+				</view> -->
 			</view>
 		</view>
 
@@ -84,7 +87,7 @@
 			<view class="product-footer">
 				<view class="footerlist">
 					<view class="contact-btn m-btn" @tap="contactBtn()">立即联系</view>
-					<view class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
+					<view v-if="detail.type=2" class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
 				</view>
 			</view>
 		</view>
@@ -152,22 +155,12 @@
 		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
-				swiperList: [{
-						colorClass: 'uni-bg-red',
-						url: '/static/images/wbigimg01.jpg',
-					},
-					{
-						colorClass: 'uni-bg-green',
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
-					},
-					{
-						colorClass: 'uni-bg-blue',
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg',
-					}
-				],
 				currentSwiper: 0, // 轮播图下标	
 				needId:"",//获取id
-				detail:{},//产品详情
+				detail:{
+					swiperList:[],
+					detailsList:[]
+				},//产品详情
 				ishow:false,
 				userid:"",
 				contactForm:{
@@ -221,7 +214,16 @@
 					success: ((res) => {
 						console.log(res);
 						if(res.code==200){
+						var swiperData=res.data.images.split(',');
+						var detailsData=res.data.info.split(',');
+						var htmlString=[];
 						this.detail=res.data;
+						this.detail.swiperList=swiperData;
+						for(var i=0;i<detailsData.length;i++){//产品详情
+						htmlString[i]='<img style="width:100%;display:block;" src="'+detailsData[i]+'"></img>';
+						}
+						this.detail.detailsList =htmlString.join("");
+					
 						}
 					})
 				});
@@ -448,12 +450,6 @@
 
 	}
 
-	.content {
-		img {
-			width: 100%;
-		}
-	}
-
 	.footer-wrap {
 		height: 101.44rpx;
 	}
@@ -517,4 +513,5 @@
 	.contact-input textarea{height:181.15rpx;border:1px solid #f2f2f2;padding:28.98rpx 18.11rpx;width:100%;font-size:21.73rpx;}
 	.contactSubmit{background: #44a78d;border-radius:36.23rpx; text-align: center; font-size:28.98rpx; color: #fff;
 cursor: pointer;height:58.34rpx;line-height:58.34rpx;}
+	
 </style>

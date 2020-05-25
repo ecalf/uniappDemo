@@ -48,8 +48,6 @@
 			</view>
 
 			<view class="filter-condition">
-				<!-- <view class="text" @tap="handleSelect(index)" v-for="(navitem,index) in navlist" :key="index" :class="{'on':navitem.selected}"><text>{{navitem.name}}</text></view> -->
-
 				<view class="text" :class="[{on:filterIndex===0},{up:defalutSort===0},{down:defalutSort===1}]" @tap="handleSelect(0)">
 					<text>综合</text>
 				</view>
@@ -57,7 +55,7 @@
 				<view class="text" :class="[{on:filterIndex===2},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
 				<view class="text filter" @tap="show('right')"><text>筛选</text></view>
 			</view>
-			<productList :goodsList="goodsList" :firstImages="firstImages" :loadStatus="loadingText" />
+			<productList :goodsList="goodsList"  :loadStatus="loadingText" />
 		</view>
 		<!--弹窗-->
 		<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
@@ -86,7 +84,7 @@
 			return {
 				filterIndex: '',
 				showRight: false,
-				pageSize: 2, //分页大小
+				pageSize: 6, //分页大小
 				pageNum: 1, //页码
 				type: "", //类型1 发布采购 2 发布销售 3 委托销售
 				loadingText: "正在加载....",
@@ -95,6 +93,7 @@
 				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
 				priceSort: "", //价格排序 asc 升序 desc 降序
 				timeSort: "", //剩余时间排序 asc 升序 desc 降序
+				reload:false,
 				info: [{
 						colorClass: 'uni-bg-red',
 						url: '/static/images/cateimg01.png',
@@ -113,16 +112,6 @@
 				], //轮播图片
 				goodsList: [],
 				firstImages: '',
-				navlist: [{
-					name: "综合",
-					selected: false
-				}, {
-					name: "价格",
-					selected: false
-				}, {
-					name: "剩余时间",
-					selected: false
-				}],
 				categoryList: [],
 			}
 
@@ -181,22 +170,11 @@
 					data: params,
 					success: (res) => {
 						//console.log(res.data);
-						var lists = res.data.list,
-							arrImage = [],
-							mainImages;
+						var lists = res.data.list;	
 						if (res.code == 200) {
-							for (var i = 0; i < lists.length; i++) {
-								if (typeof lists[i].images == 'string') {
-									arrImage[i] = lists[i].images.split(",");
-									mainImages = arrImage[i][0];
-								}
-							}
-							this.firstImages = mainImages;
-							//debugger
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
-									console.log(item);
 								})
 							} else {
 								this.loadingText = "到底了";

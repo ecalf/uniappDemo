@@ -2,14 +2,14 @@
 	<view class="goods-list commonweb">
 		<view class="product-list" v-if="goodsList.length">
 			<view class="product" v-for="(goods,index) in goodsList" :key="goods.id" @tap="handleGoods(goods)">
-				<view class="image">
-					<image mode="widthFix" :src="firstImages"></image>
+				<view class="image" v-if="goods.thumbnail">
+					<image mode="widthFix" :src="goods.thumbnail"></image>
 				</view>
 				<view class="info">
-					<view class="name"><text class="tui-icon">推</text>{{goods.title}}</view>
+					<view class="name"><text class="tui-icon">{{goods.service_cnname}}</text>{{goods.title}}</view>
 
 					<view class="certificate">
-						<image :src="goods.qualification" mode=""></image>
+						<image :src="goods.qualifications" mode=""></image>
 					</view>
 					<view class="price">
 						<text>￥</text>
@@ -91,7 +91,6 @@
 					display: -webkit-box;
 					-webkit-box-orient: vertical;
 					-webkit-line-clamp: 2;
-					text-align: justify;
 					overflow: hidden;
 					font-size: 25.36rpx;
 					color: #000000;

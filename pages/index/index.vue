@@ -23,7 +23,7 @@
 		<!--发布入口-->
 		<view class="commonweb">
 			<view class="publish-list">
-				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index" @tap="handlePublish">
+				<view class="item" :class="'item-'+index" v-for="(item,index) in publishList" :key="index" @tap="handlePublish(item)">
 					<view class="inpublish-box">
 						<view class="left">
 							<view class="text">{{item.title}}</view>
@@ -42,7 +42,7 @@
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
-		<productList :goodsList="goodsList" :firstImages="firstImages" :loadStatus="loadingText" />
+		<productList :goodsList="goodsList" :loadStatus="loadingText" />
 			
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
@@ -98,8 +98,8 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				type:1,//1 发布采购 2 发布销售 3 委托销售 4 委托采购 5 官网销售 不传返回所有
-				pageSize: 2, //分页大小
+				type:5,//1 发布采购 2 发布销售 3 委托销售 4 委托采购 5 官网销售 不传返回所有
+				pageSize: 4, //分页大小
 				pageNum: 1, //页码
 				cate_id: "",
 				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
@@ -107,39 +107,6 @@
 				timeSort:"",//剩余时间排序 asc 升序 desc 降序
 				loadingText: "正在加载....",
 				categoryList:[],
-				// categoryList: [{
-				// 		text: "口罩类",
-				// 		img: "/static/images/indexicon01.png"
-				// 	},
-				// 	{
-				// 		text: "防护服",
-				// 		img: "/static/images/indexicon02.png"
-				// 	},
-				// 	{
-				// 		text: "呼吸机",
-				// 		img: "/static/images/indexicon03.png"
-				// 	},
-				// 	{
-				// 		text: "医用面罩",
-				// 		img: "/static/images/indexicon04.png"
-				// 	},
-				// 	{
-				// 		text: "测试试剂",
-				// 		img: "/static/images/indexicon05.png"
-				// 	},
-				// 	{
-				// 		text: "温度计",
-				// 		img: "/static/images/indexicon06.png"
-				// 	},
-				// 	{
-				// 		text: "防护原料",
-				// 		img: "/static/images/indexicon07.png"
-				// 	},
-				// 	{
-				// 		text: "消毒用品",
-				// 		img: "/static/images/indexicon08.png"
-				// 	},
-				// ], // 分类
 				publishList: [{
 						title: "发布采购",
 						bgimg: "/static/images/release01.png",
@@ -165,7 +132,7 @@
 						cntitle: "列表推荐",
 						entitle: "Recommend",
 						selected: true,
-						type:"4"
+						type:"5"
 					},
 					{
 						cntitle: "采购订单",
@@ -246,19 +213,9 @@
 					method: 'POST', //请求方式
 					data:params,
 					success: (res) => {
-						var lists = res.data.list,
-							arrImage = [],
-							mainImages;
+						var lists = res.data.list;
+						console.log(res.data);
 						if (res.code == 200) {
-							for (var i = 0; i < lists.length; i++) {
-								if (typeof lists[i].images == 'string') {
-									arrImage[i] = lists[i].images.split(",");
-									mainImages = arrImage[i][0];
-								}
-							}
-							this.firstImages = mainImages;
-							console.log(mainImages);
-							//debugger
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
@@ -272,8 +229,9 @@
 				});
 			},
 			handlePublish(item){
+				
 				uni.navigateTo({
-					url: "/pages/user/registerEnter"
+					url: item.url
 				})
 			},
 			enterRegister() { //注册

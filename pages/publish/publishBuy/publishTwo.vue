@@ -21,12 +21,51 @@
 				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
-				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="4" width="145" uploadText="" name="image"
-				 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','productImg')" @on-success="uploadHandler(arguments,'onSuccess','productImg')"
-				 @on-error="uploadHandler(arguments,'onError','productImg')" @on-change="uploadHandler(arguments,'onChange','productImg')"
-				 @on-remove="uploadHandler(arguments,'onRemove','productImg')"></u-upload>
-				<view class="imagestips"><text class="colorred">*</text>宝贝主图</view>
+				<view class="upload-item">
+					<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
+					 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image"
+					 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','thumbnail')" @on-success="uploadHandler(arguments,'onSuccess','thumbnail')"
+					 @on-error="uploadHandler(arguments,'onError','thumbnail')" @on-change="uploadHandler(arguments,'onChange','thumbnail')"
+					 @on-remove="uploadHandler(arguments,'onRemove','thumbnail')"></u-upload>
+
+					<view class="imagestips"><text class="colorred">*</text>宝贝主图</view>
+				</view>
+				<view class="upload-item">
+					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
+					 :show-progress="true" :deletable="true" :max-count="3" width="145" uploadText="" name="image" testref="image2"
+					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
+					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
+					 @on-remove="uploadHandler(arguments,'onRemove','images')">
+						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
+						</view>
+					</u-upload>
+					<view class="imagestips">添加上传图片</view>
+				</view>
+			<!-- 	<view class="upload-item">
+					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
+					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
+					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
+					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
+					 @on-remove="uploadHandler(arguments,'onRemove','images')">
+						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
+						</view>
+					</u-upload>
+					<view class="imagestips">添加上传图片</view>
+				</view>
+				<view class="upload-item">
+					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
+					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
+					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
+					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
+					 @on-remove="uploadHandler(arguments,'onRemove','images')">
+						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
+							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
+						</view>
+					</u-upload>
+					<view class="imagestips">添加上传图片</view>
+				</view> -->
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -53,7 +92,11 @@
 
 					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
-						<view @tap="handleTap('Unitpicker')"><view class="curunit">{{curUnit}}<cl-icon name="cl-icon-arrow-bottom"></cl-icon></view><text>(单位)</text></view>
+						<view @tap="handleTap('Unitpicker')">
+							<view class="curunit">{{curUnit}}
+								<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
+							</view><text>(单位)</text>
+						</view>
 						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
 						</lb-picker>
 
@@ -107,9 +150,9 @@
 			<view class="uni-form-item more-upload">
 				<u-upload ref="uUpload_2" :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true"
 				 :file-list="fileList" :show-progress="true" :deletable="true" :max-count="8" width="145" uploadText="" name="image"
-				 testref="image2" @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
-				 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
-				 @on-remove="uploadHandler(arguments,'onRemove','images')">
+				 testref="image2" @on-progress="uploadHandler(arguments,'onProgress','info')" @on-success="uploadHandler(arguments,'onSuccess','info')"
+				 @on-error="uploadHandler(arguments,'onError','info')" @on-change="uploadHandler(arguments,'onChange','info')"
+				 @on-remove="uploadHandler(arguments,'onRemove','info')">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 					</view>
@@ -179,9 +222,10 @@
 					unit_cate_id: '1', //单位id
 					qualification: '', //资质
 					use_way: '', //用途
-					productImg: [], //上传图片-产品
+					thumbnail: '', //上传图片-产品
 					deadtime: '', //截止时间
-					images: [], //产品详情图
+					images: [], //产品轮播图
+					info: [], //产品详情图
 					service_id: ''
 				},
 				entrustList: [{
@@ -250,10 +294,11 @@
 			this.initData(); //初始化数据
 			this.countryData(); //出口国
 			this.publishData.type = option.type;
+		
 			this.publishData.cate_id = option.cate_id;
 		},
 		methods: {
-			
+
 			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
@@ -294,7 +339,7 @@
 				this.publishData[fieldName] = res.data.img_url;
 				// console.log(this.publishData[fieldName]);
 
-				var imglist = ["images", "productImg"];
+				var imglist = ["images","info"];
 				if (imglist.includes(fieldName)) {
 					var listimg = [];
 					for (var i = 0; i < lists.length; i++) {
@@ -304,7 +349,7 @@
 						}
 					}
 					this.publishData[fieldName] = listimg.join(",");
-					//console.log('4',this.publishData[fieldName]);
+					console.log('4',this.publishData[fieldName]);
 
 				}
 			},
@@ -320,7 +365,7 @@
 				// console.log('onRemove ',index,lists,fieldName);
 				// this.uploadState.files[fieldName] = undefined;
 				// this.publishData[fieldName] = '';
-				var imglist = ["images"];
+				var imglist = ["images", "info"];
 				if (imglist.includes(fieldName)) {
 					this.publishData[fieldName].splice(index, 1)
 				} else {
@@ -332,15 +377,15 @@
 			typeChange: function(evt) { //获取type
 				for (let i = 0; i < this.entrustList.length; i++) {
 					if (this.entrustList[i].value === evt.target.value) {
-						this.current = i;	
+						this.current = i;
 						break;
 					}
-			
+
 				}
 				this.publishData.type = evt.target.value; //获取type
 				console.log(this.publishData.type);
 			},
-			
+
 			initData() {
 				//品牌种类
 				this.request({
@@ -388,7 +433,7 @@
 					})
 				});
 			},
-			
+
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
 			},
@@ -437,14 +482,14 @@
 				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
-
+				//console.log(this.publishData.type);
 				let params = {
 					data: {
 						type: this.publishData.type,
 						cate_id: this.publishData.cate_id,
 						title: this.publishData.title,
 						desc: this.publishData.desc,
-						productImg: this.publishData.productImg,
+						thumbnail: this.publishData.thumbnail,
 						otherBrand: this.publishData.otherBrand,
 						brand_id: this.publishData.brand_id,
 						num: this.publishData.num,
@@ -456,7 +501,8 @@
 						unit_cate_id: this.publishData.unit_cate_id,
 						service_id: this.publishData.service_id,
 						images: this.publishData.images,
-						supplier_price: this.publishData.supplier_price
+						supplier_price: this.publishData.supplier_price,
+						info: this.publishData.info,
 					}
 				}
 				console.log('publishSubmit begin, params:', params);
@@ -529,8 +575,10 @@
 	/*发布页面*/
 
 	.upload-images {
-		display: block;
+		display: flex;
 		text-align: center;
+		justify-content:left;
+
 	}
 
 	.m-cl-box {
@@ -553,5 +601,9 @@
 			line-height: 72.46rpx;
 			padding: 0 18.11rpx !important;
 		}
+	}
+
+	.imagestips {
+		text-align:left;
 	}
 </style>

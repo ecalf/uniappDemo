@@ -12,7 +12,7 @@
 			<view><image src="/static/images/error.png"></image></view>
 			<view>抱歉 Sorry！~当前还未登录</view>
 			<view>请登陆再发布信息哦</view>
-			<button class="enter-login">登录</button>
+			<button class="enter-login" @tap="enterlogin">登录</button>
 		</view>
 		<page-footer :currentPage="currentPage"></page-footer>
 	</view>
@@ -41,6 +41,11 @@
 				// 页面跳转 发布详情
 				uni.navigateTo({
 					url:"/pages/publish/publishBuy/publishOne?type="+item.type
+				})
+			},
+			enterlogin(){
+				uni.navigateTo({
+					url:"/pages/user/login"
 				})
 			}
 		}
