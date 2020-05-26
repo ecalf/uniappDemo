@@ -43,7 +43,7 @@
 				<view class='sale-title '>
 					<p>我要销售</p>
 				</view>
-				<view @click="gotoSale(item)" class="sale-content" v-for="(item,index) in saleList" :key="index">
+				<view @click="gotoSale(item,index)" class="sale-content" v-for="(item,index) in saleList" :key="index" v-if="index==2 && (usertype==1||usertype==2) ?false:true">
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -55,7 +55,7 @@
 				<view class='account-title '>
 					<p>账户管理</p>
 				</view>
-				<view @click='gotoAccount(item)' class="account-content" v-for="(item,index) in accountList" :key="index">
+				<view @click='gotoAccount(item)' class="account-content" v-for="(item,index) in accountList" :key="index" >
 					<view class="img">
 						<image :src="item.img"></image>
 					</view>
@@ -98,6 +98,9 @@
 		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
+				usertype:'',
+				saleId:'',
+				show:false,
 				currentPage: "/pages/personalCenter/personalCenter",
 				procurementList: [{
 						text: "发布采购",
@@ -130,30 +133,37 @@
 				],
 				saleList: [{
 						text: "发布销售",
-						img: "/static/images/lgicon7.png"
+						img: "/static/images/lgicon7.png",
+						url: "/pages/publish/publish",
+						id:1
 					},
 					{
 						text: "销售管理",
 						img: "/static/images/lgicon8.png",
-						url: "/pages/personalCenter/saleCenter/saleManagement"
+						url: "/pages/personalCenter/saleCenter/saleManagement",
+						id:2
 					},
 					{
 						text: "主页管理",
 						img: "/static/images/lgicon9.png",
-						url: "/pages/personalCenter/saleCenter/homeManager"
+						url: "/pages/personalCenter/saleCenter/homeManager",
+						id:3
 					},
 					{
 						text: "合同管理",
-						img: "/static/images/lgicon6.png"
+						img: "/static/images/lgicon6.png",
+						id:4
 					},
 					{
 						text: "委托销售",
-						img: "/static/images/lgicon10.png"
+						img: "/static/images/lgicon10.png",
+						id:5
 					},
 					{
 						text: "我的报价",
 						img: "/static/images/lgicon11.png",
-						url: "/pages/personalCenter/saleCenter/myQuote"
+						url: "/pages/personalCenter/saleCenter/myQuote",
+						id:6
 					},
 				],
 				accountList: [{
@@ -187,7 +197,6 @@
 			}
 		},
 		methods: {
-			
 			gotopriceControl(item,index) {//采购路由
 				uni.navigateTo({
 					url: item.url
@@ -199,10 +208,15 @@
 				}
 			
 			},
-			gotoSale(item) {//销售路由
+			gotoSale(item,index) {//销售路由
 				uni.navigateTo({
 					url: item.url
 				})
+				if(index == 0) {
+					uni.switchTab({
+						url: item.url
+					})
+				}
 
 			},
 			gotoAccount(item) {//账户路由
@@ -222,9 +236,12 @@
 				} 
 			}
 			
+		},
+		onLoad(){
+			this.usertype = this.uerInfo.user_Type,
+			console.log(this.usertype)
+		},
 		
-			
-		}
 	}
 </script>
 
@@ -400,7 +417,7 @@
 		border-radius: 19.92rpx;
 		margin: 9.05rpx auto;
 		display: flex;
-		justify-content: space-between;
+		justify-content: left;
 		flex-wrap: wrap;
 	}
 

@@ -13,9 +13,10 @@ const store = new Vuex.Store({
             state.hasLogin = true  
             state.uerInfo.token = provider.token
             state.uerInfo.userName = provider.client.user_name
-            state.uerInfo.userId = provider.client.uid
+            state.uerInfo.userId = provider.client.uid //用户id
 			state.uerInfo.companyName = provider.client.profiles.user_company.company_name
-			state.uerInfo.user_Id =provider.client.profiles.user_info.user_id
+			state.uerInfo.user_Id =provider.client.profiles.user_info.user_id //用户信息Id
+			state.uerInfo.user_Type = provider.client.profiles.user_info.type
             uni.setStorage({//将用户信息保存在本地  
                 key: 'uerInfo',  
                 data: provider  
