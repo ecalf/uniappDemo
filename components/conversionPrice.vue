@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="priceInfo">
-			<text @click='gotoprice(index)'  :class='Priceindex==index?"quotedPrice":""'  v-for='(item,index) in conversionPrice' :key='item.id'>{{item.name}}</text>
+			<text @click='gotoprice(index,item)'  :class='Priceindex==index?"quotedPrice":""'  v-for='(item,index) in conversionPrice' :key='item.id'>{{item.name}}</text>
 		</view>
 	</view>
 </template>
@@ -9,7 +9,8 @@
 <script>
 	export default {
 		props:{
-			conversionPrice:Array
+			conversionPrice:Array,
+			
 		},
 		data() {
 			return {
@@ -17,9 +18,9 @@
 			};
 		},
 		methods:{
-			gotoprice(index){
-				console.log(index)
-				this.Priceindex = index
+			gotoprice(index,item){
+				this.Priceindex = index;
+				this.$emit('gotoprice',index,item);
 			}
 		}
 	}

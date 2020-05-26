@@ -1,56 +1,69 @@
 <template>
 	<view>
-		<view class="goods" v-for="(item,index) in goodsPrice" :key='item.index' >
-			<view class="cc" @click.native='gotoDetails()'>
-				<view class="goodslist-header">
-					<text class="goodslist-icon">推</text>
-					<text class="goodslist-title">{{item.title}}</text>
-					<text class="goodslist-time">{{item.time}}</text>
-				</view>
-				<text class="goodslist-content">{{item.content}}</text>
-				<view class="goodslist-comter">
-					<view class="goodslist-price">
-						<text>￥</text>
-						{{item.price}}
+		<view v-if="goodsPrice.length">
+			<view class="goods" v-for="(item,index) in goodsPrice" :key='item.id'>
+				<view class="cc" @tap='gotoDetails()'>
+					<view class="goodslist-header">
+						<text class="goodslist-icon">推</text>
+						<text class="goodslist-title">{{item.title}}</text>
+						<text class="goodslist-time">{{item.time}}</text>
 					</view>
-					<view class="goodslist-number">
-						{{item.number}}
-						<text>个</text>
+					<text class="goodslist-content">{{item.content}}</text>
+					<view class="goodslist-comter">
+						<view class="goodslist-price">
+							<text>￥</text>
+							{{item.price}}
+						</view>
+						<view class="goodslist-number">
+							{{item.number}}
+							<text>个</text>
+						</view>
 					</view>
 				</view>
-			</view>
-			<view class="goods-operate">
-				<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
-				<view class="goodsDelete"><text class="updataText">修改</text></view>
-				<view class="goodsDelete"><text class="pullText">上架</text></view>
+				<view class="goods-operate">
+					<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
+					<view class="goodsDelete"><text class="updataText">修改</text></view>
+					<view class="goodsDelete" v-if="current==2"><text class="pullText">上架</text></view>
+					<view class="goodsDelete" v-if="current==1"><text class="pullText">下架</text></view>
+				</view>
 			</view>
 		</view>
+		<error-msg v-else></error-msg>
 	</view>
 </template>
 
 <script>
+	import errorMsg from '@/components/errorMsg/errorMsg'
 	export default {
+		components: {
+			errorMsg
+		},
 		props: {
 			goodsPrice: {
 				type: Array
-			}
 			},
-			data() {
-				return {
+			current:{
+				type:String
+			}
+		},
+		data() {
+			return {
 
-				};
+			};
+		},
+		methods: {
+			gotoDetails() {
+				uni.navigateTo({
+					url: '/pages/personalCenter/purchaseCenter/offerDetails'
+				});
 			},
-			methods:{
-				gotoDetails(){
-					console.log(111)
-					uni.navigateTo({
-					    url: '/pages/personalCenter/purchaseCenter/offerDetails'
-					});
-				},
-				handleDelete(index){
-					this.$emit('update-value',index);
-				}
+			handleDelete(item) {
+				this.$emit('update-value', item);
 			}
+		},
+		onLoad() {
+			console.log(current);
+		}
 	}
 </script>
 

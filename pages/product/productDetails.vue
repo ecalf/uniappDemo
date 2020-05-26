@@ -69,7 +69,7 @@
 			<view class="product-footer">
 				<view class="footerlist">
 					<view class="contact-btn m-btn" @tap="contactBtn()">立即联系</view>
-					<view v-if="detail.type==2" class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
+					<view v-if="detail.type==1" class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
 				</view>
 			</view>
 		</view>

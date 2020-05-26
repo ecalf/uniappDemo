@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<converSionPrice :conversionPrice='conversionPrice'></converSionPrice>
-		<goodsprice :goodsPrice='goodsPrice' @update-value="updateValue"></goodsprice>
+		<converSionPrice :conversionPrice='conversionPrice' @gotoprice="gotoPrice"></converSionPrice>
+		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" @current="current"></goodsprice>
 	</view>
 </template>
 
@@ -10,45 +10,53 @@
 	import goodsprice from '@/components/goodsPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
+		components: {
+			converSionPrice,
+			goodsprice
+		},
 		data() {
 			return {
 				quoto: {
-					page_size: 2,
+					page_size: 15,
 					page_index: 1,
 					keyword: '',
 					type: 1,
 					status: '',
 					is_deadtime: '',
 					kinds: ''
-				},   
-				needId:'',//需求id
+				},
+				needId: '', //需求id
 				conversionPrice: [{
 						id: 1,
-						name: '全部'
+						name: '全部',
+						status: '',
+						is_deadtime: '',
 					},
 					{
 						id: 2,
-						name: '上架'
+						name: '上架',
+						status: 1,
+						is_deadtime: '',
+
 					},
 					{
 						id: 3,
-						name: '下架'
+						name: '下架',
+						status: 0,
+						is_deadtime: '',
 					},
 					{
 						id: 4,
-						name: '已截止'
+						name: '已截止',
+						status: '',
+						is_deadtime: 1,
 					},
 				],
-				goodsPrice: [{
-					title: '飞利浦呼吸机',
-					content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-					price: '200.000',
-					number: '1500',
-					time: '2020.02.05-2020.04.05'
-				}, ]
+				goodsPrice: [],
+				current:0
 			};
 		},
-		methods: {
+		methods: {	
 			getsupplierList() {
 				let params = {
 					data: {
@@ -61,29 +69,37 @@
 						kinds: this.quoto.kinds,
 					}
 				}
-				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: params,
-					success: ((res) => {
-						console.log('70',res, 366)
+					success: (res) => {
+						console.log(res);
 						this.goodsPrice = res.data.list;
-						this.needId=res.data.id;
-					})
+						
+					}
 				});
 			},
-			updateValue(index) {
-				console.log('onRemove', index);
+			gotoPrice(index,item) {//传值
+				this.current=index;
+				console.log(this.current);
+				this.quoto.type = item.type;
+				this.quoto.status = item.status;
+				this.quoto.is_deadtime = item.is_deadtime;
+				this.getsupplierList();//更新数据
+			},
+			updateValue(item) {
+				console.log('onRemove', item);
+				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
 					dataType: 'JSON',
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							need_id:'',
-							status:'',
+							need_id:this.needId,
+							status: -1,
 						}
 					},
 					success: res => {
@@ -92,9 +108,10 @@
 							content: '您确定要删除此项吗？',
 							success: res => {
 								console.log(res);
-								// if (res.confirm) {
-								// 	this.goodsPrice.splice(index, 1);
-								// }
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+								//this.goodsPrice();
 							}
 						})
 					}
@@ -102,12 +119,9 @@
 			}
 		},
 		onLoad() {
-			this.getsupplierList()
+			this.getsupplierList();
 		},
-		components: {
-			converSionPrice,
-			goodsprice
-		}
+		
 	}
 </script>
 

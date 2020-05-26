@@ -18,20 +18,19 @@
 				</view>
 			</view>
 		</view>
-		<view v-else class="errormsg">
-			<view><image src="../static/images/error.png"></image></view>
-			<view>抱歉 Sorry！~ 没有找到符合条件的商品</view>
-		</view>
+		<error-msg v-else></error-msg>
 		<view v-if="goodsList.length" class="loading-text">{{loadStatus}}</view>
 	</view>
 </template>
 
 <script>
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import errorMsg from '@/components/errorMsg/errorMsg'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
 		components: {
-			uniLoadMore
+			uniLoadMore,
+			errorMsg
 		},
 		data() {
 			return {
@@ -124,9 +123,5 @@
 	}
 	.loading-text{padding:20px 0;text-align: center;}
 	
-	.errormsg{
-		padding:90.57rpx 0 0;
-		text-align:center;
-		image{width:295.28rpx;height:204.71rpx;margin-bottom:20px;}
-	}
+
 </style>
