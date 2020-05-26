@@ -75,7 +75,7 @@
 					},
 					success: ((res) => {
 						console.log(res,222)
-						this.supplierList = res.data;
+						// this.supplierList = res.data.list;
 					})
 				});
 			}

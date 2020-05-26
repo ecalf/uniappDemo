@@ -49,7 +49,7 @@
 					},
 					success: ((res) => {
 						console.log(res, 1111)
-						// this.goodsPrice = res.data.list;
+						this.goodsPrice = res.data.list;
 					})
 				});
 			}

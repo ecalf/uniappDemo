@@ -4,8 +4,8 @@
 		<view class="banner-swiper">
 			<view class="swiper-box">
 				<swiper circular="true" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-					<swiper-item v-for="(swiper,index) in swiperList" :key="index">
-						<image :src="swiper.img"></image>
+					<swiper-item v-for="(swiper,index) in user_company.transparencyData" :key="index">
+						<image :src="swiper"></image>
 					</swiper-item>
 				</swiper>
 
@@ -15,8 +15,7 @@
 		<view class="CompanyProfile">
 			<text class="CompanyProfile-title">企业简介</text>
 			<text class="CompanyProfile-english">Company profile</text>
-			<text class="CompanyProfile-content">万合国际供应链投资（深圳）有限公司创立于20018年11月19日。自成立以来，万合专注于服务质量的提升，已积累国际供应链服务21年的行业经验，与2018年成立全流程服务的，凭借卓越的物流供应链服务和持续创新的技术应用，与诸多产业客户建立了长期深度合作。
-				公司成立2年来，紧跟市场变化及客户需求，持续创新发展，专注于服务质量的提升，通过多元业务联动，围绕仓配一体服务、跨境物流服务、物流科技装备、供应链金融科技、大健康产业平台等领域，致力于在全球范围内打造商流、物流、信息流和资金流四流合一的供应链有机圈。</text>
+			<text class="CompanyProfile-content">{{user_company.company_introduce}}</text>
 		</view>
 		<!--列表推荐-->
 		<view class="recommend-nav">
@@ -32,7 +31,10 @@
 			<text class="CompanyProfile-title">企业资质</text>
 			<text class="CompanyProfile-english">Company profile</text>
 			<view class="aturalEndowments-body">
-				<view class="aturalEndowments">
+				<view class="aturalEndowments" v-for="(cc,index) in user_company.qualificationsData" :key="index">
+					<image :src="cc"></image>
+				</view>
+				<!-- <view class="aturalEndowments">
 					<image src="../../static/images/lgicon40.png"></image>
 				</view>
 				<view class="aturalEndowments">
@@ -40,10 +42,7 @@
 				</view>
 				<view class="aturalEndowments">
 					<image src="../../static/images/lgicon40.png"></image>
-				</view>
-				<view class="aturalEndowments">
-					<image src="../../static/images/lgicon40.png"></image>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!-- 联系我们 -->
@@ -52,18 +51,18 @@
 			<text class="contact-english">contact us</text>
 			<view class="contact-information">
 				<view class="contact-man">
-					<text >联系人：张女士</text>
+					<text >联系人：{{user_company.contact_name}}</text>
 				</view>
 				<view>
-					<text class="contact-phone">电话：0755-8888 888</text>
-					<text>QQ：10585855665</text>
+					<text class="contact-phone">电话：{{user_company.contact_phone}}</text>
+					<text>QQ：{{user_company.qq}}</text>
 				</view>
 				<view class='contact-weixin'>
-					<text class="contact-emil">微信：10585855665</text>
-					<text>邮箱：0755-8888 888</text>
+					<text class="contact-emil">微信：{{user_company.wechat}}</text>
+					<text>邮箱：{{user_company.email}}</text>
 				</view>
 				<view>
-					<text>地址：深圳市福田区天安国际大厦6楼405号</text>
+					<text>地址：{{user_company.addr}}</text>
 				</view>
 			</view>
 		</view>
@@ -83,23 +82,14 @@
 			productList
 		},
 		data() {
-			
 			return {
 				user_id:'',
-				EnterpriseList:[],
-				swiperList: [{
-						id: 1,
-						img: "/static/images/lgicon41.png"
-					},
-					{
-						id: 2,
-						img: "/static/images/banner.jpg"
-					},
-					{
-						id: 3,
-						img: "/static/images/banner.jpg"
-					}
-				], //轮播图片
+				user_bank:{},
+				user_company:{
+					transparencyData:[],
+					qualificationsData:[]
+				},
+				
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
@@ -158,7 +148,14 @@
 				],
 			}
 		},
+		onLoad(){
+				
+				this.user_id=this.uerInfo.user_Id;
+				this.getEnterprise()
+				//console.log(this.user_id);
+		},
 		methods: {
+			
 			handleSelect(index) {
 				this.filterByList[index].selected = true;
 
@@ -169,6 +166,7 @@
 					}
 				}
 			},
+			
 			getEnterprise(){
 				this.request({
 					url: interfaces.getEnterpriseData,
@@ -180,17 +178,16 @@
 						}
 					},
 					success: res => {
-						console.log(res, 1212);
-						this.EnterpriseList = res.data.list;
-						console.log(this.EnterpriseList,222)
+						console.log(res);
+						this.user_bank = res.data.profiles.user_bank;
+						this.user_company = res.data.profiles.user_company;
+						this.user_company.transparencyData = this.user_company.company_transparency.split(',');
+						this.user_company.qualificationsData = this.user_company.qualifications.split(',');
+						console.log(this.user_company.transparencyData,this.user_company.qualificationsData,2355)
 					}
 				});
 			}
 		},
-		onLoad(){
-				this.getEnterprise()
-		
-		}
 	}
 </script>
 
@@ -326,10 +323,10 @@
 		box-sizing: border-box;
 		padding: 0 38.04rpx 0 45.28rpx;
 		margin: 36.23rpx 0;
-
+		
 		.aturalEndowments-body {
 			display: flex;
-			justify-content: space-around;
+			// justify-content: space-around;
 			margin-top: 36.23rpx;
 
 			.aturalEndowments {
