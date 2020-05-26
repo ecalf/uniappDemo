@@ -2,27 +2,9 @@
 	<view>
 		<!-- 状态栏 -->
 		<!-- 	<page-status></page-status> -->
+		<!--头部返回按钮-->
+		<product-header></product-header>
 		<!-- 轮播图 -->
-
-		<!-- <view class="swiper-box">
-			<swiper @change="swiperChange" circular="true" autoplay="true">
-				<swiper-item v-for="swiper in swiperList" :key="swiper.id">
-					<image :src="swiper.url"></image>
-				</swiper-item>
-			</swiper>
-			<view class="indicator">
-				{{currentSwiper + 1}}/{{swiperList.length}}
-			</view>
-		</view> -->
-		<!-- 		<view class="product-details-con">
-			<view class="top">
-				<view class="new-price"><text>￥</text>2000.00</view>
-				<view class="old-price">￥2000.00</view>
-				<view class="good-num">库存：1500个</view>
-			</view>
-			<view class="product-title"><text class="tui-icon">推</text>医用正压单水平自动无创呼吸器睡眠老人止鼾机YH-450鼾机YH-450</view>
-			<view class="product-text">鱼跃呼吸机家医用正压单水平自动无创呼吸器睡眠老人止鼾YH-450鱼跃呼吸机家医用正压单水平自动无创呼吸器睡眠老人止鼾YH-450鱼跃呼吸机家医用正压。</view>
-		</view> -->
 		<view class="swiper-box">
 			<swiper @change="swiperChange" circular="true" autoplay="true">
 				<swiper-item v-for="(swiper,index) in detail.swiperList" :key="index">
@@ -36,7 +18,7 @@
 		<view class="product-details-con">
 			<view class="top">
 				<view class="new-price"><text>￥</text>{{detail.price}}</view>
-				<view class="old-price">￥{{detail.supplier_price}}</view>
+				<view class="old-price" v-if="detail.type==2">￥{{detail.supplier_price}}</view>
 				<view class="good-num">库存：{{detail.num}}{{detail.unit_category_cnname}}</view>
 			</view>
 			<view class="product-title"><text class="tui-icon">推</text>{{detail.title}}</view>
@@ -65,9 +47,9 @@
 		<view class="company-box">
 			<view class="company-info">
 				<view class="title">
-					<image src="@/static/images/lgicon33.png"></image>深圳万合国际股份有限公司
+					<image :src="companyInfo.company_images"></image>{{companyInfo.company_name}}
 				</view>
-				<view class="desc">深圳万合国际股份有限公司深圳万合国际股份有限公司深圳万合国际深圳万合国际股份有...</view>
+				<view class="desc">{{companyInfo.company_introduce}}</view>
 			</view>
 			<navigator url="/pages/EnterpriseCenter/EnterpriseCenter" class="company-link">查看企业</navigator>
 		</view>
@@ -75,7 +57,7 @@
 		<view class="description">
 			<view class="title">———— 商品详情 ————</view>
 			<view class="content">
-				<rich-text :nodes="detail.detailsList"></rich-text>
+				<rich-text :nodes="detail.info"></rich-text>
 				<!-- <view v-for="(item,index) in detail.detailsList">
 					<image :src="item"></image>
 				</view> -->
@@ -87,16 +69,16 @@
 			<view class="product-footer">
 				<view class="footerlist">
 					<view class="contact-btn m-btn" @tap="contactBtn()">立即联系</view>
-					<view v-if="detail.type=2" class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
+					<view v-if="detail.type==2" class="price-btn m-btn" @tap="offerBtn()">立即报价</view>
 				</view>
 			</view>
 		</view>
 		<!--联系我们-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" ref="popup">
 			<view class="contact-us m-contactbg">
-				<view>联系人：张女士</view>
-				<view>电话：0755-8888 888</view>
-				<view>地址：深圳市福田区天安国际大厦6楼405号</view>
+				<view>联系人：{{companyInfo.contact_name}}</view>
+				<view>电话：{{companyInfo.contact_phone}}</view>
+			<!-- 	<view>地址：{{companyInfo.contact_phone}}</view> -->
 			</view>
 		</uni-popup>
 		<!--报价-->
@@ -144,13 +126,15 @@
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import productHeader from '@/components/productHeader/productHeader.vue'
 	import {
 		mapState,
 		mapMutations
 	} from 'vuex';
 	export default {
 		components:{
-			uniPopup
+			uniPopup,
+			productHeader
 		},
 		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
@@ -159,8 +143,9 @@
 				needId:"",//获取id
 				detail:{
 					swiperList:[],
-					detailsList:[]
+					detailsList:[],
 				},//产品详情
+				companyInfo:{},
 				ishow:false,
 				userid:"",
 				contactForm:{
@@ -201,7 +186,6 @@
 		methods: {
 			loadData() {
 				this.userid=this.uerInfo.userId;
-				console.log(this.userid);
 				this.request({
 					url: interfaces.getInfoData,
 					dataType: "JSON",
@@ -211,22 +195,42 @@
 							needs_id:this.needId
 						}
 					},
-					success: ((res) => {
-						console.log(res);
+					success: (res) => {
 						if(res.code==200){
 						var swiperData=res.data.images.split(',');
 						var detailsData=res.data.info.split(',');
 						var htmlString=[];
 						this.detail=res.data;
+						//console.log(this.detail.type);
 						this.detail.swiperList=swiperData;
 						for(var i=0;i<detailsData.length;i++){//产品详情
 						htmlString[i]='<img style="width:100%;display:block;" src="'+detailsData[i]+'"></img>';
 						}
-						this.detail.detailsList =htmlString.join("");
+						this.detail.info=htmlString.join("");
 					
 						}
-					})
+					}
 				});
+				//获取公司信息
+				this.request({
+					url: interfaces.getEnterpriseData,
+					dataType: "JSON",
+					method: 'POST', 
+					data: {
+						data: {
+							user_id:this.userid
+						}
+					},
+					success: (res) => {
+						console.log(res.data.profiles.user_company);
+						if(res.code==200){				
+							this.companyInfo=res.data.profiles.user_company;
+						}
+					}
+				})
+				
+				
+				
 			},
 			contactBtn(){
 				  this.$refs.popup.open();
@@ -501,7 +505,7 @@
 		align-items: center;
 	}
 	.company-info{flex: 1;
-		image{width:54.34rpx;height:54.34rpx;vertical-align:middle;}
+		image{width:54.34rpx;height:54.34rpx;vertical-align:middle;border-radius:50%;margin-right:7.24rpx;}
 		.title{color:#000000;margin-bottom:9.05rpx;}
 		.desc{color:#8E8E93;font-size:21.73rpx;}
 	}

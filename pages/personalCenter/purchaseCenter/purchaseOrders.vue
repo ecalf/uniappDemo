@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<converSionPrice :conversionPrice='conversionPrice'></converSionPrice>
-		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
+		<goodsprice :goodsPrice='goodsPrice' @update-value="updateValue"></goodsprice>
 	</view>
 </template>
 
@@ -20,7 +20,8 @@
 					status: '',
 					is_deadtime: '',
 					kinds: ''
-				},
+				},   
+				needId:'',//需求id
 				conversionPrice: [{
 						id: 1,
 						name: '全部'
@@ -67,9 +68,36 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: ((res) => {
-						//console.log(res, 366)
+						console.log('70',res, 366)
 						this.goodsPrice = res.data.list;
+						this.needId=res.data.id;
 					})
+				});
+			},
+			updateValue(index) {
+				console.log('onRemove', index);
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id:'',
+							status:'',
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要删除此项吗？',
+							success: res => {
+								console.log(res);
+								// if (res.confirm) {
+								// 	this.goodsPrice.splice(index, 1);
+								// }
+							}
+						})
+					}
 				});
 			}
 		},
