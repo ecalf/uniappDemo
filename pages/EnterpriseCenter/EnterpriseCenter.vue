@@ -89,7 +89,7 @@
 					transparencyData:[],
 					qualificationsData:[]
 				},
-				
+	
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
@@ -149,10 +149,10 @@
 			}
 		},
 		onLoad(){
-				
 				this.user_id=this.uerInfo.user_Id;
-				this.getEnterprise()
 				//console.log(this.user_id);
+				this.getEnterprise()
+				
 		},
 		methods: {
 			

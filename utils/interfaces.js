@@ -61,11 +61,17 @@ const interfaces = {
 
 	//用户详情
 	getSupplierData: baseurl  + "/v1/user/myprofiles",
+	
 	// 企业信息
 	getEnterpriseData:baseurl + "/v1/user/get-other-user-info",
 	
 	//需求订单状态修改
 	getSatusData:baseurl + "/v1/needs/change-status",
-
+	
+	//供应商库
+	PoolData:baseurl + "/v1/user/collect",
+	
+	//获取供应商库
+	getPoolData:baseurl + "/v1/user/get-collect-list"
 }
 module.exports = interfaces;

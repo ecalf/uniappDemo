@@ -355,11 +355,11 @@ export default {
 						return;
 					} else {
 						uni.showToast({
-							title: '认证成功',
+							title: '您的资料已提交',
 							duration: 2000
 						});
-						uni.navigateTo({
-							url: '/pages/personalCenter/accountCenter/CertificateAuthority'
+						uni.switchTab({
+							url: '/pages/personalCenter/personalCenter'
 						});
 					}
 				}
