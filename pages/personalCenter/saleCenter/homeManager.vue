@@ -313,6 +313,7 @@
 				imgurl: [],
 				// 请求获取的数据
 				getManagerdataList:{},
+				imglist:[],
 				// 请求参数
 				ManagerForm: {
 					company_logo:'',
@@ -367,9 +368,29 @@
 				
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 				//this.fileList.push({url:res.data.img_url});
+
 				
 				this.ManagerForm[fieldName] = res.data.img_url;
 				console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
+
+				//定义一个数组
+				//var  imglist=[];
+				// this.imglist[fieldName]=[];
+				// this.ManagerForm[fieldName] = res.data.img_url;
+				// imglist[fieldName]=res.data.img_url;
+				//console.log(this.imglist[fieldName]);
+				if(!this.imglist[fieldName]){
+					this.imglist[fieldName]=new Array(res.data.img_url);
+				}else{
+					this.imglist[fieldName].push(res.data.img_url);
+				}
+				this.ManagerForm[fieldName] = this.imglist[fieldName].join(',');
+				//console.log(this.ManagerForm[fieldName]);
+				// console.log(res.data.img_url);
+				//console.log(this.imglist[fieldName]);
+				//console.log(this.uploadState.files[fieldName]);
+				//console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
+
 			},
 			onChange(res,index,lists,fieldName){
 				console.log('onChange ',res,index,lists,fieldName);

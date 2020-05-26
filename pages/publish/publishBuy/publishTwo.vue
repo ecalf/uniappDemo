@@ -12,7 +12,7 @@
 				</radio-group>
 			</view>
 			<view class="uni-form-item m-form-item">
-				<text class="colorred">*</text>
+			 	<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
 					<cl-input placeholder="标题" class="uni-tl-input" v-model="publishData.title"></cl-input>
 				</cl-form-item>
@@ -229,11 +229,11 @@
 					service_id: ''
 				},
 				entrustList: [{
-						value: '3',
+						value: '4',
 						name: '销售',
 					},
 					{
-						value: '4',
+						value: '3',
 						name: '采购',
 					},
 				],

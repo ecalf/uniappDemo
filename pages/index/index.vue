@@ -150,7 +150,7 @@
 						cntitle: "委托订单",
 						entitle: "Entrust",
 						selected: false,
-						type:"3"
+						type:"3,4"
 					},
 				] //列表tabbar
 			}
@@ -186,10 +186,10 @@
 					url: interfaces.getkindData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					success: ((res) => {
+					success: (res) => {
 						console.log(res);
 						this.categoryList = res.data;
-					})
+					}
 				});
 			},
 			loadData() {

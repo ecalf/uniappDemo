@@ -63,6 +63,9 @@ const interfaces = {
 	getSupplierData: baseurl  + "/v1/user/myprofiles",
 	// 企业信息
 	getEnterpriseData:baseurl + "/v1/user/get-other-user-info",
+	
+	//需求订单状态修改
+	getSatusData:baseurl + "/v1/needs/change-status",
 
 }
 module.exports = interfaces;
