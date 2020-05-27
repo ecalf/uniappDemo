@@ -56,7 +56,7 @@ const interfaces = {
 	//我的订单
 	getMyneedData: baseurl + "/v1/user/get-my-needs-list",
 
-	//报价管理
+	//我的报价
 	getMyquoteData: baseurl + "/v1/user/get-my-quotation-list",
 
 	//用户详情
@@ -68,10 +68,11 @@ const interfaces = {
 	//需求订单状态修改
 	getSatusData:baseurl + "/v1/needs/change-status",
 	
+	//获取收藏
+	getPoolData:baseurl + "/v1/user/get-collect-list",
 	
-	
-	//获取供应商库收藏
-	getPoolData:baseurl + "/v1/user/get-collect-list"
+	//收藏
+	getCollectData:baseurl+"/v1/user/collect"
 
 }
 module.exports = interfaces;

@@ -40,7 +40,7 @@ export default {
 		return {
 			user_id: '',
 			poolfrom: {
-				collect_type: 1,
+				collect_type: '',
 				page_size: 6,
 				page_index: 1
 			},
@@ -53,10 +53,6 @@ export default {
 				},
 				{
 					id: 2,
-					name: '合作过'
-				},
-				{
-					id: 3,
 					name: '我的收藏',
 					collect_type: 1
 				}
@@ -76,12 +72,10 @@ export default {
 			// if (index == 0) {
 			// 	this.getsupplierList(); //更新数据
 			// }
-			if (index == 2) {
-				this.getpoollist();
-			}else if(index==0){
-				this.getsupplierList();	
+			if (index == 0) {
+				this.getsupplierList();		
 			}else{
-				this.poolList=""
+				this.getpoollist();
 			}
 		},
 		getsupplierList() {//全部
@@ -139,7 +133,6 @@ export default {
 		this.user_id = this.uerInfo.user_Id;
 		// console.log(this.user_id,2222);
 		this.getsupplierList();
-		//this.getpoollist()
 	},
 	onReachBottom() {
 		this.poolfrom.page_index++;

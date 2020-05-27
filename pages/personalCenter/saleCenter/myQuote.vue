@@ -4,7 +4,7 @@
 			<view class="search-icon"></view>
 			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
 		</view>
-		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
+		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue"></goodsprice>
 	</view>
 </template>
 
@@ -13,6 +13,9 @@
 	import goodsprice from '../../../components/goodsPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
+		components: {
+			goodsprice
+		},
 		data() {
 			return {
 				quoto: {
@@ -20,22 +23,13 @@
 					page_index: 1,
 					keyword: '',
 				},
-				goodsPrice: [
-					{
-							title: '飞利浦呼吸机',
-							content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-							price: '200.000',
-							number: '1500',
-							time: '2020.02.05-2020.04.05'
-						},
-				]
+				needId: '', //需求id
+				goodsPrice: [],
 			};
-		},
-		components: {
-			goodsprice
 		},
 		methods: {
 			getMyquote() {
+				// debugger
 				this.request({
 					url: interfaces.getMyquoteData,
 					dataType: "JSON",
@@ -52,11 +46,39 @@
 						this.goodsPrice = res.data.list;
 					})
 				});
-			}
+			},
+			updateValue(item) {
+				console.log(item,235)
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id:this.needId,
+							status: -1,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要删除此项吗？',
+							success: res => {
+								console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+							}
+						})
+					}
+				});
+			},
 		},
 		onLoad(option) {
 			this.getMyquote()
 		},
+		
 	}
 </script>
 

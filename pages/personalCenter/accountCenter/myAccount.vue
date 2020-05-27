@@ -81,12 +81,10 @@
 					method: 'POST', //请求方式
 					data: {
 						data:{
-							
 						}
 					},
 					success: res => {
 						console.log(res,555)
-					
 					}
 				})
 			}

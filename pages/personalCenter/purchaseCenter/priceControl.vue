@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
-		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue"></goodsprice>
+		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" :loadStatus="loadingText"></goodsprice>
 	</view>
 </template>
 
@@ -9,6 +9,7 @@
 	import converSionPrice from '@/components/conversionPrice.vue';
 	import goodsprice from '../../../components/goodsPrice.vue';
 	import interfaces from '@/utils/interfaces.js';
+	
 	export default {
 		components: {
 			converSionPrice,
@@ -17,7 +18,7 @@
 		data() {
 			return {
 				quoto: {
-					page_size: 10,
+					page_size:6,
 					page_index: 1,
 					keyword: '',
 					type:1,
@@ -26,7 +27,9 @@
 					kinds: '',
 					is_quoted:1
 				},
+				needId: '', //需求id
 				goodsPrice: [],
+				loadingText: "正在加载....",
 				conversionPrice: [{
 						id: 1,
 						name: '已报价',
@@ -62,16 +65,16 @@
 					data: params,
 					success: res => {
 						var lists = res.data.list;
-						console.log(res.data,666)
+						// console.log(res.data,666)
 						if (res.code == 200) {
-							this.goodsPrice=lists;
-							// if (lists.length > 0) {
-							// 	lists.forEach(item => {
-							// 		this.goodsPrice.push(item);
-							// 	})
-							// } else {
-							// 	this.loadingText = "到底了";
-							// }
+							//this.goodsPrice=lists;
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.goodsPrice.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
 						}
 					
 					}
@@ -81,28 +84,44 @@
 				this.current=index;
 				// console.log(this.current,111)
 				this.quoto.is_quoted = item.is_quoted;
-				// console.log(item.is_quoted,222)
-				this.initData();//更新数据
+				 // console.log(item.is_quoted,222)
+				this.quoto.page_index =1;
+				this.loadingText = "加载中...";
+				this.goodsPrice = [];
+				this.initData();
+			},
+			updateValue(item) {
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id:this.needId,
+							status: -1,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要删除此项吗？',
+							success: res => {
+								console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+							}
+						})
+					}
+				});
 			},
 			
-			updateValue(index) {
-				console.log('onRemove', index);
-				
-			}
 		},
 		onLoad() {
 			this.initData();
 		},
-		//下拉加载
-		// onPullDownRefresh() {
-		// 	setTimeout(() => {
-		// 		this.page_index = 1;
-		// 		this.loadingText = "加载中...";
-		// 		this.goodsPrice = [];
-		// 		this.initData();
-		// 		uni.stopPullDownRefresh();
-		// 	}, 1000)
-		// },
+	
 		// 上拉加载
 		onReachBottom() {
 			this.quoto.page_index ++;

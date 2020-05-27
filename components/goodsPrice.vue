@@ -29,6 +29,7 @@
 			</view>
 		</view>
 		<error-msg v-else></error-msg>
+			<view v-if="goodsPrice.length" class="loading-text">{{loadStatus}}</view>
 	</view>
 </template>
 
@@ -44,6 +45,10 @@
 			},
 			current:{
 				type:Number
+			},
+			loadStatus:{
+				type:String,
+				default: "正在加载...."
 			}
 		},
 		data() {
@@ -150,7 +155,7 @@
 
 		.goods-operate {
 			display: flex;
-			justify-content:left;
+			justify-content:space-around;
 			align-items: center;
 			margin-left:-9.05rpx;
 			.goodsDelete {
@@ -185,4 +190,5 @@
 		}
 	}
 	.goods .goods-operate .borderline{border:1px solid #44A78D;}
+	.loading-text{padding:20px 0;text-align: center;}
 </style>

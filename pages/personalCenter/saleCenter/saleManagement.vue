@@ -15,7 +15,7 @@
 		data() {
 			return {
 				quoto: {
-					page_size: 2,
+					page_size: 10,
 					page_index: 1,
 					keyword: '',
 					type: 2,
@@ -23,29 +23,7 @@
 					is_deadtime: '',
 					kinds: ''
 				},
-				goodsPrice: [{
-						title: '飞利浦呼吸机',
-						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-						price: '200.000',
-						number: '1500',
-						time: '2020.02.05-2020.04.05'
-					},
-					{
-						title: '丽丽呼吸机',
-						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-						price: '200.000',
-						number: '1500',
-						time: '2020.02.05-2020.04.05'
-					},
-					{
-						title: '啦啦呼吸机',
-						content: "民用疯疯了这款呼吸机呼吸机呼吸机 卖疯疯疯了疯疯款呼吸机 卖疯疯疯了疯疯...",
-						price: '200.000',
-						number: '1500',
-						time: '2020.02.05-2020.04.05'
-					}
-				]
-
+				goodsPrice: []
 			};
 		},
 		methods: {
@@ -69,7 +47,7 @@
 					method: 'POST', //请求方式
 					data:params,
 					success: ((res) => {
-						//console.log(res, 132)
+						console.log(res, 132)
 						this.goodsPrice = res.data.list;
 					})
 				});
