@@ -490,7 +490,7 @@
 						title: this.publishData.title,
 						desc: this.publishData.desc,
 						thumbnail: this.publishData.thumbnail,
-						otherBrand: this.publishData.otherBrand,
+						other_brand: this.publishData.otherBrand,
 						brand_id: this.publishData.brand_id,
 						num: this.publishData.num,
 						exit_country: this.exit_country,

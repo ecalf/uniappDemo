@@ -28,8 +28,9 @@
 
 		<view class="product-info-wrap">
 			<view class="info-box">
-				<view class="item">品牌：{{detail.product_brand_cnname}}</view>
-				<view class="item">应用类型：{{detail.user_name}}</view>
+				<view class="item" v-if="detail.other_brand">品牌：{{detail.other_brand}}</view>
+				<view class="item" v-else>品牌：{{detail.product_brand_cnname}}</view>
+				<view class="item">应用类型：{{detail.user_way==1?'医用':'民用'}}</view>
 				<view class="item">出口国：{{detail.exit_country}}</view>
 			</view>
 			<!-- <view class="certi-img">认证：<image src="@/static/images/certificate1.png" mode=""></image>
@@ -51,7 +52,7 @@
 				</view>
 				<view class="desc">{{companyInfo.company_introduce}}</view>
 			</view>
-			<navigator url="/pages/EnterpriseCenter/EnterpriseCenter" class="company-link">查看企业</navigator>
+			<view @tap="viewEnter" class="company-link">查看企业</view>
 		</view>
 
 		<view class="description">
@@ -198,6 +199,7 @@
 					method: 'POST', //请求方式
 					data:params,
 					success: (res) => {		
+						console.log(res);
 						if(res.code==200){	
 						this.user_id=res.data.user_id;
 						var swiperData=res.data.images !=null && res.data.images.length?res.data.images.split(','):'';
@@ -211,7 +213,6 @@
 						this.detail.info=htmlString.join("");
 						
 						this.companyData();
-					
 						}
 					}
 				})			
@@ -241,7 +242,12 @@
 							this.companyInfo=res.data.profiles.user_company;
 						}
 					}
-				})	
+				})
+			},
+			viewEnter(item){
+				uni.navigateTo({
+				    url: "/pages/EnterpriseCenter/EnterpriseCenter?userid="+this.user_id
+				});
 			},
 			formSubmit: function(e) {
 				//进行表单检查
@@ -404,16 +410,16 @@
 
 	.info-box {
 		display: flex;
-		justify-content: flex-start;
+		justify-content:left;
 		margin-bottom: 27.17rpx;
-		margin-left: -36.23rpx;
+		margin-left:-18.11rpx;
 
 		.item {
 			display: flex;
 			position: relative;
 			text-align: center;
-			padding: 0 9.05rpx;
-
+			padding:0 18.11rpx;
+			
 			&:after {
 				content: "";
 				display: block;
@@ -423,7 +429,6 @@
 				top: 7.24rpx;
 				right: 0;
 			}
-
 			&:last-child {
 				&:after {
 					display: none;

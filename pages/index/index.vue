@@ -162,6 +162,7 @@
 			handleCategory(item) {
 				// 分类跳转
 				// console.log(item.text);
+				console.log(item);
 				uni.navigateTo({
 					url: "../product/productList?id=" + item.id+'&name='+item.cn_name
 				})

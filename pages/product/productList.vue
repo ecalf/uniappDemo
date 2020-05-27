@@ -49,10 +49,11 @@
 						page_size: this.pageSize,
 						page_index: this.pageNum,
 						keyword: "",
-						type: 5,
+						type:'',
 						price_sort: this.priceSort,
 						remain_time_sort: this.timeSort,
-						cate_id: this.cate_id,
+						cate_id:'',
+						brand_id:'',
 						is_defalut_sort: this.defalutsort,
 						kind_id: this.kind_id,
 					}
@@ -64,19 +65,8 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: (res) => {
-						console.log(res.data);
-						var lists = res.data.list,
-							arrImage = [],
-							mainImages;
 						if (res.code == 200) {
-							for (var i = 0; i < lists.length; i++) {
-								if (typeof lists[i].images == 'string') {
-									arrImage[i] = lists[i].images.split(",");
-									mainImages = arrImage[i][0];
-								}
-							}
-							this.firstImages = mainImages;
-							//debugger
+							var lists=res.data.list;
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
