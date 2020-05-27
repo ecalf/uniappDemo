@@ -97,8 +97,7 @@
 								<cl-icon name="cl-icon-arrow-bottom"></cl-icon>
 							</view><text>(单位)</text>
 						</view>
-						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
-						</lb-picker>
+						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange"></lb-picker>
 
 					</view>
 				</view>
@@ -291,11 +290,12 @@
 		},
 
 		onLoad(option) {
-			this.initData(); //初始化数据
-			this.countryData(); //出口国
+			
 			this.publishData.type = option.type;
 		
 			this.publishData.cate_id = option.cate_id;
+			this.initData(); //初始化数据
+			this.countryData(); //出口国
 		},
 		methods: {
 
@@ -394,7 +394,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							cate_id: 3
+							cate_id:this.publishData.cate_id
 						}
 					},
 					success: ((res) => {

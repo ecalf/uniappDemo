@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view v-if="goodsPrice.length">
-			<view class="goods" v-for="(item,index) in goodsPrice" :key='item.id'>
-				<view class="cc" @tap='gotoDetails()'>
+			<view class="goods" v-for="(item,index) in goodsPrice" :key="item.id">
+				<view class="cc" @tap="gotoDetails(item)">
 					<view class="goodslist-header">
 						<text class="goodslist-icon">推</text>
 						<text class="goodslist-title">{{item.title}}</text>
@@ -16,15 +16,15 @@
 						</view>
 						<view class="goodslist-number">
 							{{item.number}}
-							<text>个</text>
+							<text>{{item.number}}</text>
 						</view>
 					</view>
 				</view>
 				<view class="goods-operate">
 					<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
-					<view class="goodsDelete"><text class="updataText">修改</text></view>
-					<view class="goodsDelete" v-if="current==2"><text class="pullText">上架</text></view>
-					<view class="goodsDelete" v-if="current==1"><text class="pullText">下架</text></view>
+					<view class="goodsDelete"><text class="updataText" @tap="handlemodify(item)">修改</text></view>
+					<view class="goodsDelete borderline" v-if="current==2" @tap="handleUp(item)"><text class="pullText">上架</text></view>
+					<view class="goodsDelete borderline" v-if="current==1" @tap="handleDown(item)"><text class="pullText">下架</text></view>
 				</view>
 			</view>
 		</view>
@@ -43,7 +43,7 @@
 				type: Array
 			},
 			current:{
-				type:String
+				type:Number
 			}
 		},
 		data() {
@@ -52,17 +52,24 @@
 			};
 		},
 		methods: {
-			gotoDetails() {
-				uni.navigateTo({
-					url: '/pages/personalCenter/purchaseCenter/offerDetails'
-				});
+			gotoDetails(item) {
+				this.$emit('details-url', item);
 			},
 			handleDelete(item) {
 				this.$emit('update-value', item);
+			},
+			handleUp(item){
+				this.$emit('update-up', item);
+			},
+			handleDown(item){
+				this.$emit('update-down', item);
+			},
+			handlemodify(item){
+				this.$emit('update-modify', item);
 			}
 		},
 		onLoad() {
-			console.log(current);
+			
 		}
 	}
 </script>
@@ -143,18 +150,18 @@
 
 		.goods-operate {
 			display: flex;
-			justify-content: space-around;
+			justify-content:left;
 			align-items: center;
-
+			margin-left:-9.05rpx;
 			.goodsDelete {
 				width: 181.15rpx;
 				height: 45.28rpx;
 				border-radius: 23.55rpx;
-				border: solid 1.81rpx #8e8e93;
+				border: solid 1px #8e8e93;
 				display: flex;
 				justify-content: space-around;
 				align-items: center;
-
+				margin:0 9.05rpx;
 				.deleteText {
 					font-size: 25.36rpx;
 					letter-spacing: 0rpx;
@@ -177,4 +184,5 @@
 
 		}
 	}
+	.goods .goods-operate .borderline{border:1px solid #44A78D;}
 </style>

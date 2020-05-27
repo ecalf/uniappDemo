@@ -78,7 +78,7 @@
 			<view class="contact-us m-contactbg">
 				<view>联系人：{{companyInfo.contact_name}}</view>
 				<view>电话：{{companyInfo.contact_phone}}</view>
-			<!-- 	<view>地址：{{companyInfo.contact_phone}}</view> -->
+				<!-- 	<view>地址：{{companyInfo.contact_phone}}</view> -->
 			</view>
 		</uni-popup>
 		<!--报价-->
@@ -119,6 +119,7 @@
 				</view>
 			</form>
 		</uni-popup>
+		
 	</view>
 </template>
 
@@ -140,14 +141,15 @@
 		data() {
 			return {
 				currentSwiper: 0, // 轮播图下标	
-				needId:"",//获取id
+				needId:"",//获取产品id
 				detail:{
 					swiperList:[],
 					detailsList:[],
 				},//产品详情
 				companyInfo:{},
 				ishow:false,
-				userid:"",
+				userid:'',//获取该用户id
+				user_id:'',//获取订单用户id
 				contactForm:{
 					contactname:"",
 					telphone:"",
@@ -180,57 +182,39 @@
 		},
 		onLoad(option) {
 			this.needId=option.id;
-			console.log(this.needId);
-			this.loadData(); //初始化数据
+			this.userid=this.uerInfo.userId;
+			this.loadData(); //初始化数据	
 		},
 		methods: {
-			loadData() {
-				this.userid=this.uerInfo.userId;
-				this.request({
+		 loadData() {
+			 let params={
+				 data: {
+				 	needs_id:this.needId
+				 }
+			 }
+			this.request({
 					url: interfaces.getInfoData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data: {
-						data: {
-							needs_id:this.needId
-						}
-					},
-					success: (res) => {
-						if(res.code==200){
-						var swiperData=res.data.images.split(',');
-						var detailsData=res.data.info.split(',');
+					data:params,
+					success: (res) => {		
+						if(res.code==200){	
+						this.user_id=res.data.user_id;
+						var swiperData=res.data.images !=null && res.data.images.length?res.data.images.split(','):'';
+						var detailsData=res.data.info !=null && res.data.info.length?res.data.info.split(','):'';
 						var htmlString=[];
 						this.detail=res.data;
-						//console.log(this.detail.type);
 						this.detail.swiperList=swiperData;
 						for(var i=0;i<detailsData.length;i++){//产品详情
 						htmlString[i]='<img style="width:100%;display:block;" src="'+detailsData[i]+'"></img>';
 						}
 						this.detail.info=htmlString.join("");
+						
+						this.companyData();
 					
 						}
 					}
-				});
-				//获取公司信息
-				this.request({
-					url: interfaces.getEnterpriseData,
-					dataType: "JSON",
-					method: 'POST', 
-					data: {
-						data: {
-							user_id:this.userid
-						}
-					},
-					success: (res) => {
-						console.log(res.data.profiles.user_company);
-						if(res.code==200){				
-							this.companyInfo=res.data.profiles.user_company;
-						}
-					}
-				})
-				
-				
-				
+				})			
 			},
 			contactBtn(){
 				  this.$refs.popup.open();
@@ -241,8 +225,27 @@
 			swiperChange(event) {
 				this.currentSwiper = event.detail.current;
 			},
+			
+			 companyData(){
+				 this.request({
+					url: interfaces.getEnterpriseData,
+					dataType: "JSON",
+					method: 'POST', 
+					data:{
+						data: {
+							user_id:this.user_id
+						}
+					},
+					success: (res) => {
+						if(res.code==200){				
+							this.companyInfo=res.data.profiles.user_company;
+						}
+					}
+				})	
+			},
 			formSubmit: function(e) {
 				//进行表单检查
+				
 				var formData = e.detail.value;
 				formData.isChecked=this.isChecked;
 				var checkRes = graceChecker.check(formData, this.rules);
@@ -268,8 +271,7 @@
 							company_name:this.contactForm.companyname
 						}
 					},
-					 success: (res) => {  
-							
+					 success: (res) => {  					
 							if(res.code ==200){
 								  offerclose.close();
 								setTimeout(() => {
@@ -287,10 +289,8 @@
 					 },
 					})
 				}
-			}
-			
+			}	
 		},
-		
 	}
 </script>
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<converSionPrice :conversionPrice='conversionPrice' @gotoprice="gotoPrice"></converSionPrice>
-		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" @current="current"></goodsprice>
+		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
+		<goodsprice :goodsPrice="goodsPrice"  @update-value="updateValue" @update-up="updateUp" @update-down="updateDown" @details-url="updateDetails" @update-modify="updateModify" :current="current"></goodsprice>
 	</view>
 </template>
 
@@ -64,7 +64,7 @@
 						page_index: this.quoto.page_index,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
-						status: this.quoto.status,
+						status: this.quoto.statu,
 						is_deadtime: this.quoto.is_deadtime,
 						kinds: this.quoto.kinds,
 					}
@@ -80,17 +80,15 @@
 						
 					}
 				});
-			},
+			},	
 			gotoPrice(index,item) {//传值
 				this.current=index;
-				console.log(this.current);
 				this.quoto.type = item.type;
 				this.quoto.status = item.status;
 				this.quoto.is_deadtime = item.is_deadtime;
 				this.getsupplierList();//更新数据
 			},
 			updateValue(item) {
-				console.log('onRemove', item);
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
@@ -111,13 +109,77 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
-								//this.goodsPrice();
 							}
 						})
 					}
 				});
+			},
+			updateUp(item){//上架
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id:this.needId,
+							status: 1,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要上架吗？',
+							success: res => {
+								console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+							}
+						})
+					}
+				});
+			},
+			updateDown(item){//上架
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id:this.needId,
+							status:0,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要下架吗？',
+							success: res => {
+								console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+							}
+						})
+					}
+				});
+			},
+			updateDetails(item){
+				//跳转链接
+				uni.navigateTo({
+					url: "/pages/product/productDetails?id="+item.id
+				})
+			},
+			updateModify(item){
+				uni.navigateTo({
+					url: "/pages/personalCenter/modify/PublishPrev?id="+item.id
+				})
 			}
 		},
+
+		
 		onLoad() {
 			this.getsupplierList();
 		},

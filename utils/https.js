@@ -1,4 +1,5 @@
 module.exports = (param) => {
+	
 	var url = param.url;
 	var method = param.method;
 	var header = param.header || {};
@@ -28,12 +29,14 @@ module.exports = (param) => {
 
 	
 	// 发起网络请求
+return new Promise((resolve, reject)=>{
 	uni.request({
 		url: url,
 		method:method || "POST",
 		header:header,
 		data: data,
 		success: res => {
+			
 			if(res.code && res.code != 200){ // api错误
 				uni.showModal({
 					content:res.message
@@ -56,5 +59,6 @@ module.exports = (param) => {
 			return;
 		}
 	})
+})
 }
 

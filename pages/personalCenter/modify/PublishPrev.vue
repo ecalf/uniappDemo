@@ -1,7 +1,8 @@
 <template>
 	<view class="pb60">
 		<view class="category-cur">当前选择品类：检验检测用品>新型冠状病毒检测试剂盒</view>
-		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy" @update-value="updateValue"></product-category>
+		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy"
+		 @update-value="updateValue"></product-category>
 		<view class="common-btn">
 			<button @tap="stepBtn()">下一步</button>
 		</view>
@@ -23,13 +24,13 @@
 				searchVal: '', //搜索关键字
 				categoryList: [], //产品类目
 				backgroundColor: "#F8F8F8", //修改类目背景色
-				type:"",
-				cate_id:""
+				type: "",
+				cate_id: ""
 			}
 		},
 		onLoad(option) {
 			this.initData();
-			this.type=option.type;//发布类型
+			this.type = option.type; //发布类型
 		},
 		methods: {
 			initData() {
@@ -45,21 +46,21 @@
 					success: ((res) => {
 						this.categoryList = res.data;
 					})
-				});
+				})
 			},
 			search(res) {
 				this.searchVal = res.value
 			},
-			updateValue(item){
+			updateValue(item) {
 				//console.log(item.id);
-				this.cate_id=item.id;				
+				this.cate_id = item.id;
 			},
 			stepBtn() { //下一步
-				if(!this.cate_id==''){
-				uni.navigateTo({
-					url: '/pages/personalCenter/modify/PublishNext'
-				});
-				}else{
+				if (!this.cate_id == '') {
+					uni.navigateTo({
+						url: '/pages/personalCenter/modify/PublishNext'
+					});
+				} else {
 					uni.showToast({
 						title: '请选择品类',
 						icon: "none"
@@ -133,6 +134,10 @@
 			padding: 0 18.11rpx !important;
 		}
 	}
-	
-	.category-cur{padding:27.17rpx 32.6rpx;background:#fff;color:#44A78D;}
+
+	.category-cur {
+		padding: 27.17rpx 32.6rpx;
+		background: #fff;
+		color: #44A78D;
+	}
 </style>
