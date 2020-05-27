@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
-		<goodsprice :goodsPrice="goodsPrice"  @update-value="updateValue" @update-up="updateUp" @update-down="updateDown" @details-url="updateDetails" @update-modify="updateModify" :current="current"></goodsprice>
+		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" @update-up="updateUp" @update-down="updateDown"
+		 @details-url="updateDetails" @update-modify="updateModify" :current="current"></goodsprice>
 	</view>
 </template>
 
@@ -17,7 +18,7 @@
 		data() {
 			return {
 				quoto: {
-					page_size: 15,
+					page_size: 100,
 					page_index: 1,
 					keyword: '',
 					type: 1,
@@ -53,10 +54,10 @@
 					},
 				],
 				goodsPrice: [],
-				current:0
+				current: 0
 			};
 		},
-		methods: {	
+		methods: {
 			getsupplierList() {
 				let params = {
 					data: {
@@ -76,17 +77,18 @@
 					data: params,
 					success: (res) => {
 						console.log(res);
-						this.goodsPrice = res.data.list;
-						
+						if (res.code == 200) {
+							this.goodsPrice = res.data.list;
+						}
 					}
 				});
-			},	
-			gotoPrice(index,item) {//传值
-				this.current=index;
+			},
+			gotoPrice(index, item) { //传值
+				this.current = index;
 				this.quoto.type = item.type;
 				this.quoto.status = item.status;
 				this.quoto.is_deadtime = item.is_deadtime;
-				this.getsupplierList();//更新数据
+				this.getsupplierList(); //更新数据
 			},
 			updateValue(item) {
 				this.needId = item.id;
@@ -96,7 +98,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							need_id:this.needId,
+							need_id: this.needId,
 							status: -1,
 						}
 					},
@@ -114,7 +116,7 @@
 					}
 				});
 			},
-			updateUp(item){//上架
+			updateUp(item) { //上架
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
@@ -122,7 +124,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							need_id:this.needId,
+							need_id: this.needId,
 							status: 1,
 						}
 					},
@@ -140,7 +142,7 @@
 					}
 				});
 			},
-			updateDown(item){//上架
+			updateDown(item) { //上架
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
@@ -148,8 +150,8 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							need_id:this.needId,
-							status:0,
+							need_id: this.needId,
+							status: 0,
 						}
 					},
 					success: res => {
@@ -166,24 +168,22 @@
 					}
 				});
 			},
-			updateDetails(item){
+			updateDetails(item) {
 				//跳转链接
 				uni.navigateTo({
-					url: "/pages/product/productDetails?id="+item.id
+					url: "/pages/product/productDetails?id=" + item.id
 				})
 			},
-			updateModify(item){
+			updateModify(item) {
 				uni.navigateTo({
-					url: "/pages/personalCenter/modify/PublishPrev?id="+item.id
+					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+"&type=1"
 				})
 			}
 		},
-
-		
 		onLoad() {
 			this.getsupplierList();
 		},
-		
+
 	}
 </script>
 

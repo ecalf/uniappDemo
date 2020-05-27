@@ -34,6 +34,8 @@
 		},
 		methods: {
 			initData() {
+				//修改当前的发布信息
+				
 				this.request({
 					url: interfaces.getCategroyData,
 					dataType: "JSON",
@@ -53,7 +55,7 @@
 			},
 			updateValue(item) {
 				//console.log(item.id);
-				this.cate_id = item.id;
+				this.cate_id = item.id;	
 			},
 			stepBtn() { //下一步
 				if (!this.cate_id == '') {

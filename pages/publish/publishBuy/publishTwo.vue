@@ -40,7 +40,7 @@
 							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
 						</view>
 					</u-upload>
-					<view class="imagestips">添加上传图片</view>
+					<view class="imagestips"><text class="colorred">*</text>添加上传图片</view>
 				</view>
 			<!-- 	<view class="upload-item">
 					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"

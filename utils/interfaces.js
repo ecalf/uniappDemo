@@ -33,7 +33,9 @@ const interfaces = {
 
 	//发布
 	getPublishData: baseurl + "/v1/needs/publish",
-
+	
+	//修改发布信息
+	getModifyData: baseurl + "/v1/needs/edit",
 	//图片上传
 	getUploadData: baseurl + "/v1/upload",
 
