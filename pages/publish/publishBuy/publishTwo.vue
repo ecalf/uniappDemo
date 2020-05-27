@@ -222,7 +222,7 @@
 					qualification: '', //资质
 					use_way: '', //用途
 					thumbnail: '', //上传图片-产品
-					deadtime: '', //截止时间
+					dead_time: '', //截止时间
 					images: [], //产品轮播图
 					info: [], //产品详情图
 					service_id: ''

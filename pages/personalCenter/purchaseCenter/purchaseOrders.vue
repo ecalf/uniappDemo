@@ -175,9 +175,35 @@
 				})
 			},
 			updateModify(item) {
+				//console.log(item);
+				let params={
+					id:item.id,
+					type:item.type,
+					cate_id:item.cate_id, //品类id
+					brand_id:item.brand_id, //品牌id
+					title:item.title, //标题
+					desc:item.desc, //描述
+					brand:item.brand, //品牌选择
+					otherBrand:item.otherBrand, //其他品牌,非必选
+					country:item.country, //出口国,非必填
+					supplierPrice:item.supplierPrice, //供应商价格,仅发布销售可用
+					price:item.price, //市场价	
+					num:item.num, //数量
+					unit_cate_id:item.unit_cate_id, //单位id
+					qualification:item.qualification, //资质
+					use_way:item.use_way, //用途
+					thumbnail:item.thumbnail, //上传图片-产品
+					dead_time:item.deadtime, //截止时间
+					images:item.images, //产品轮播图
+					info:item.info, //产品详情图
+					service_id: item.service_id
+				}
 				uni.navigateTo({
-					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+"&type=1"
-				})
+					url: "/pages/personalCenter/modify/PublishPrev?params=" + JSON.stringify(params)
+				});
+				 uni.$emit("test", {
+				          test: "成功",
+				        });
 			}
 		},
 		onLoad() {
