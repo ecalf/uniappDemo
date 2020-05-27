@@ -3,7 +3,7 @@
 		<!-- 状态栏 -->
 		<!-- 	<page-status></page-status> -->
 		<!--头部返回按钮-->
-		<product-header></product-header>
+		<product-header @back="back"></product-header>
 		<!-- 轮播图 -->
 		<view class="swiper-box">
 			<swiper @change="swiperChange" circular="true" autoplay="true">
@@ -45,7 +45,7 @@
 			</view>
 		</view>
 
-		<view class="company-box">
+		<view class="company-box" v-if="user_type==3">
 			<view class="company-info">
 				<view class="title">
 					<image :src="companyInfo.company_images"></image>{{companyInfo.company_name}}
@@ -151,6 +151,7 @@
 				ishow:false,
 				userid:'',//获取该用户id
 				user_id:'',//获取订单用户id
+				user_type:'',//用户注册类型
 				contactForm:{
 					contactname:"",
 					telphone:"",
@@ -202,6 +203,7 @@
 						console.log(res);
 						if(res.code==200){	
 						this.user_id=res.data.user_id;
+						this.user_type=res.data.user_type;
 						var swiperData=res.data.images !=null && res.data.images.length?res.data.images.split(','):'';
 						var detailsData=res.data.info !=null && res.data.info.length?res.data.info.split(','):'';
 						var htmlString=[];
@@ -218,10 +220,43 @@
 				})			
 			},
 			contactBtn(){
-				  this.$refs.popup.open();
+				if(!this.hasLogin){
+					uni.showModal({
+					    title: '提示',
+					    content: '您未登录，登录后可查看联系方式',
+					    success: function (res) {
+					        if (res.confirm) {
+					             uni.navigateTo({
+					                 url: "/pages/user/login"
+					             });
+					        } else if (res.cancel) {
+					           // console.log('用户点击取消');
+					        }
+					    }
+					});
+				}else{
+					this.$refs.popup.open();
+				}
+				 
 			},
 			offerBtn(){
+				if(!this.hasLogin){
+				uni.showModal({
+				    title: '提示',
+				    content: '您未登录，登录后可填写报价方案',
+				    success: function (res) {
+				        if (res.confirm) {
+				             uni.navigateTo({
+				                 url: "/pages/user/login"
+				             });
+				        } else if (res.cancel) {
+				           // console.log('用户点击取消');
+				        }
+				    }
+				});
+				}else{
 				 this.$refs.offerpopup.open();
+				 }
 			},
 			swiperChange(event) {
 				this.currentSwiper = event.detail.current;
@@ -248,6 +283,9 @@
 				uni.navigateTo({
 				    url: "/pages/EnterpriseCenter/EnterpriseCenter?userid="+this.user_id
 				});
+			},
+			back(){//返回
+				uni.navigateBack();
 			},
 			formSubmit: function(e) {
 				//进行表单检查

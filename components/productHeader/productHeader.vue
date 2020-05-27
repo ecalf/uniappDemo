@@ -28,7 +28,8 @@
 		},
 		methods:{
 			back(){
-				uni.navigateBack()
+				//uni.navigateBack();
+				this.$emit('back')
 			},
 		}
 	}

@@ -12,6 +12,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-xingxing:before {
+  content: "\e60e";
+}
+
+.icon-xingxing1:before {
+  content: "\e635";
+}
+
+.icon-back:before {
+  content: "\e600";
+}
+
 .icon-jisutuikuan:before {
   content: "\e616";
 }
@@ -43,5 +55,6 @@
 .icon-Resources-Search:before {
   content: "\e60f";
 }
+
 
 

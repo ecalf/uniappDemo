@@ -29,7 +29,6 @@ module.exports = (param) => {
 
 	
 	// 发起网络请求
-return new Promise((resolve, reject)=>{
 	uni.request({
 		url: url,
 		method:method || "POST",
@@ -59,6 +58,6 @@ return new Promise((resolve, reject)=>{
 			return;
 		}
 	})
-})
+
 }
 

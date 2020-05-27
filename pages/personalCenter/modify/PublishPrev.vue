@@ -1,6 +1,5 @@
 <template>
 	<view class="pb60">
-		<view class="category-cur">当前选择品类：检验检测用品>新型冠状病毒检测试剂盒</view>
 		<product-category :categoryList="categoryList" :style="{backgroundColor:backgroundColor}" class="publish-categroy"
 		 @update-value="updateValue"></product-category>
 		<view class="common-btn">
@@ -25,15 +24,53 @@
 				categoryList: [], //产品类目
 				backgroundColor: "#F8F8F8", //修改类目背景色
 				type: "",
-				cate_id: ""
+				cate_id: "",	
+			   modifyParams:""//修改参数
 			}
 		},
 		onLoad(option) {
+			 this.modifyParams=JSON.parse(option.params);
 			this.initData();
-			this.type = option.type; //发布类型
 		},
 		methods: {
 			initData() {
+				//修改当前的发布信息
+				//debugger
+				let params={
+					data:{
+						id:this.modifyParams.id,
+						type:this.modifyParams.type,
+						cate_id:this.modifyParams.cate_id, //品类id
+						brand_id:this.modifyParams.brand_id, //品牌id
+						title:this.modifyParams.title, //标题
+						desc:this.modifyParams.desc, //描述
+						brand:this.modifyParams.brand, //品牌选择
+						otherBrand:this.modifyParams.otherBrand, //其他品牌,非必选
+						country:this.modifyParams.country, //出口国,非必填
+						supplierPrice:this.modifyParams.supplierPrice, //供应商价格,仅发布销售可用
+						price:this.modifyParams.price, //市场价	
+						num:this.modifyParams.num, //数量
+						unit_cate_id:this.modifyParams.unit_cate_id, //单位id
+						qualification:this.modifyParams.qualification, //资质
+						use_way:this.modifyParams.use_way, //用途
+						thumbnail:this.modifyParams.thumbnail, //上传图片-产品
+						dead_time:this.modifyParams.deadtime, //截止时间
+						images:this.modifyParams.images, //产品轮播图
+						info:this.modifyParams.info, //产品详情图
+						service_id: this.modifyParams.service_id
+					}
+				}
+				console.log('获取参数',params);
+				this.request({
+					url: interfaces.getModifyData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data:params,
+					success: (res) => {	
+						console.log(res);
+						//this.categoryList = res.data;
+					}
+				}),
 				this.request({
 					url: interfaces.getCategroyData,
 					dataType: "JSON",
@@ -43,23 +80,26 @@
 							id: '',
 						}
 					},
-					success: ((res) => {
+					success: (res) => {
 						this.categoryList = res.data;
-					})
+	
+					}
 				})
 			},
 			search(res) {
 				this.searchVal = res.value
 			},
 			updateValue(item) {
-				//console.log(item.id);
-				this.cate_id = item.id;
+				//console.log(this.modifyParams.cate_id);
+				this.modifyParams.id= item.id	
+				console.log(item,this.modifyParams.id);
 			},
 			stepBtn() { //下一步
-				if (!this.cate_id == '') {
+				if (!this.modifyParams.id == '') {
 					uni.navigateTo({
-						url: '/pages/personalCenter/modify/PublishNext'
+						url: "/pages/personalCenter/modify/PublishNext?params=" + JSON.stringify(this.modifyParams)
 					});
+					console.log(this.modifyParams)
 				} else {
 					uni.showToast({
 						title: '请选择品类',

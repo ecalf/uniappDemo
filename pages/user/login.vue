@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<image class="logo" src="../../static/images/logo.png"></image>
+		<image class="logo" @tap="enterHome" src="../../static/images/logo.png"></image>
 		<form @submit="formSubmit" @reset="formReset">
 			<view class="checkout-login">
 				<text @click="checkoutlogin(0)" :class="{'checkout-one':current==0}">用户名登录</text>
@@ -110,7 +110,11 @@
 					this.current = 1
 				}
 			},
-
+			enterHome(){
+				uni.switchTab({
+					url:"/pages/index/index"
+				})
+			},
 			//发送验证码
 			sendCode() {
 				if (this.fromList.mobile !== "") {

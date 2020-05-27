@@ -14,11 +14,11 @@
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="标题" class="uni-tl-input" v-model="publishData.title"></cl-input>
+					<cl-input placeholder="标题" class="uni-tl-input" v-model="this.modifyParams.title"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
-				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
+				<textarea class="uni-input uni-tl-input uni-textarea" v-model="this.modifyParams.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
 				<view class="upload-item">
@@ -226,6 +226,7 @@
 				isCheckAll: false,
 				supplier_price: '',
 				current: 0, //选择委托方式
+				modifyParams:"",//修改参数
 				mainImage:[//宝贝主图
 					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
 				],
@@ -285,8 +286,9 @@
 		onLoad(option) {
 			this.initData(); //初始化数据
 			this.countryData(); //出口国
+			debugger
+			this.modifyParams=JSON.parse(option.params);
 			this.publishData.type = option.type;
-		
 			this.publishData.cate_id = option.cate_id;
 		},
 		methods: {
