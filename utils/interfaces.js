@@ -68,10 +68,9 @@ const interfaces = {
 	//需求订单状态修改
 	getSatusData:baseurl + "/v1/needs/change-status",
 	
-	//供应商库
-	PoolData:baseurl + "/v1/user/collect",
 	
-	//获取供应商库
+	
+	//获取供应商库收藏
 	getPoolData:baseurl + "/v1/user/get-collect-list"
 
 }
