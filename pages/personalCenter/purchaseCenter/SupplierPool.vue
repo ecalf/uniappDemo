@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
+		<conversionPrice :conversionPrice='conversionPrice' @gotoprice="gotoPrice"></conversionPrice>
 		<view class="supplier-box" v-for="(item,index) in poolList" :key='index'>
 			<view class="supplier-header">
 				<image class='title-icon' :src="item.company_images"></image>
@@ -15,7 +15,7 @@
 			<view class="supplier-footer">
 				<view class="supplier-information">
 					<view class="supplier-contacts">
-						<text>联系人</text>
+						<text>联系人:  </text>
 						<text>{{item.contact_name}}</text>
 					</view>
 					<view class="supplier-phone">
@@ -48,6 +48,7 @@
 					page_index:1,
 				},
 				poolList: [],
+				current:0,
 				conversionPrice: [
 					{
 					id: 1,
@@ -55,11 +56,12 @@
 					},
 					{
 						id: 2,
-						name: '合作过'
+						name: '合作过',
 					},
 					{
 						id: 3,
-						name: '我的收藏'
+						name: '我的收藏',
+						collect_type:1
 					},
 				]
 				
@@ -85,6 +87,12 @@
 					})
 				});
 			},
+			// gotoPrice(index,item) {//传值
+			// 	this.current=index;
+			// 	console.log(this.current,333);
+			// 	this.poolfrom.collect_type = item.collect_type;
+			// 	this.getsupplierList();//更新数据
+			// },
 			getpoollist(){
 				this.request({
 					url: interfaces.getPoolData,
@@ -98,7 +106,7 @@
 						}
 					},
 					success: ((res) => {
-						var lists = res.data.list;
+						var lists = res.data.list
 						console.log(lists,442)
 
 						if (res.code == 200) {
