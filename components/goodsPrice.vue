@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view v-if="goodsPrice.length">
-			<view class="goods" v-for="(item,index) in goodsPrice" :key="item.id">
-				<view class="cc" @tap="gotoDetails(item)">
+			<view class="goods" v-for="(item,index) in goodsPrice" :key='index'>
+				<view class="cc" @tap='gotoDetails(item)'>
 					<view class="goodslist-header">
 						<text class="goodslist-icon">推</text>
 						<text class="goodslist-title">{{item.title}}</text>

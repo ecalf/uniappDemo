@@ -280,7 +280,7 @@
 	}
 
 	.header-title {
-		font-size: 36.23rpx;
+		font-size: 25.36rpx;
 		line-height: 47.1rpx;
 		color: #ffffff;
 		display: inline-block;

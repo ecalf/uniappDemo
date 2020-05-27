@@ -219,7 +219,7 @@
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
-									//console.log(item);
+									// console.log(item,2222);
 								})
 							} else {
 								this.loadingText = "到底了";

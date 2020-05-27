@@ -1,26 +1,26 @@
 <template>
 	<view>
-		<conversionPrice :conversionPrice='conversionPrice'></conversionPrice>
-		<view class="supplier-box" v-for="(item,index) in supplierList" :key='item.index'>
+		<conversionPrice :conversionPrice='conversionPrice' @gotoprice="gotoPrice"></conversionPrice>
+		<view class="supplier-box" v-for="(item,index) in poolList" :key='index'>
 			<view class="supplier-header">
-				<image class='title-icon' src="@/static/images/lgicon31.jpg"></image>
+				<image class='title-icon' :src="item.company_images"></image>
 				<view class="supplier-content">
-					<text class="supplier-name">{{item.name}}</text>
+					<text class="supplier-name">{{item.company_name}}</text>
 					<view class="supplier-kind">
-						<text>{{item.kind}}</text>
+						<text>{{item.business_scope_cate}}</text>
 					</view>
-					<text class="supplier-url">{{item.url}}</text>
+					<text class="supplier-url">{{item.addr}}</text>
 				</view>
 			</view>
 			<view class="supplier-footer">
 				<view class="supplier-information">
 					<view class="supplier-contacts">
-						<text>联系人:&ensp;</text>
-						<text>{{item.contact}}</text>
+						<text>联系人:  </text>
+						<text>{{item.contact_name}}</text>
 					</view>
 					<view class="supplier-phone">
-						<text>电话:&ensp;</text>
-						<text>{{item.number}}</text>
+						<text>电话:   </text>
+						<text>{{item.contact_phone}}</text>
 					</view>
 				</view>
 				<view class="supplierDelete"><text class="deleteText">删除</text></view>
@@ -33,10 +33,22 @@
 <script>
 	import conversionPrice from '@/components/conversionPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
+		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
-				
+				user_id:'',
+				poolfrom:{
+					collect_type:1,
+					page_size:6,
+					page_index:1,
+				},
+				poolList: [],
+				current:0,
 				conversionPrice: [
 					{
 					id: 1,
@@ -44,20 +56,15 @@
 					},
 					{
 						id: 2,
-						name: '合作过'
+						name: '合作过',
 					},
 					{
 						id: 3,
-						name: '我的收藏'
+						name: '我的收藏',
+						collect_type:1
 					},
-				],
-				supplierList: [{
-					name: '万和国际股份有限公司',
-					kind: '口罩，呼吸机',
-					url: '深圳市福田区天安国际大天国际6楼405号...',
-					contact: '张**',
-					number: '188****6685'
-				}]
+				]
+				
 			};
 		},
 		components: {
@@ -66,22 +73,65 @@
 		methods:{
 			getsupplierList(){
 				this.request({
-					url: interfaces.getSupplierData,
+					url: interfaces.PoolData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: {
 						data: {
+							collect_id:this.user_id,
+							collect_type:this.poolfrom.collect_type
 						}
 					},
 					success: ((res) => {
-						console.log(res,222)
-						// this.supplierList = res.data.list;
+						// console.log(res,222)
+					})
+				});
+			},
+			// gotoPrice(index,item) {//传值
+			// 	this.current=index;
+			// 	console.log(this.current,333);
+			// 	this.poolfrom.collect_type = item.collect_type;
+			// 	this.getsupplierList();//更新数据
+			// },
+			getpoollist(){
+				this.request({
+					url: interfaces.getPoolData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							collect_type:this.poolfrom.collect_type,
+							page_size:this.poolfrom.page_size,
+							page_index:this.poolfrom.page_index,
+						}
+					},
+					success: ((res) => {
+						var lists = res.data.list
+						console.log(lists,442)
+
+						if (res.code == 200) {
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.poolList.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
+						}
+											
 					})
 				});
 			}
 		},
 		onLoad(){
-			this.getsupplierList()
+			this.user_id=this.uerInfo.user_Id;
+			// console.log(this.user_id,2222);
+			this.getsupplierList();
+			this.getpoollist()
+		},
+		onReachBottom() {
+			this.poolfrom.page_index ++;
+			this.getpoollist();
 		}
 	}
 </script>

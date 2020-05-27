@@ -23,35 +23,40 @@
 				<navigator class="uni-input" url="/pages/personalCenter/accountCenter/CertificateAuthority">未认证</navigator>
 				<text class="guide"></text>
 			</view>
-			<view>
-				<text class="CompanyInformation">公司信息</text>
-			</view>
-			<view class="uni-form-item uni-column">
-				<view class="title">公司名称</view>
-				<input class="uni-input" text name="nickname" value="深圳市虾米科技信息服务有限公司" />
-			</view>
-			<view class="uni-form-item uni-column">
-				<view class="title">公司类型</view>
-				<input class="uni-input" text name="nickname" value="贸易公司" />
-			</view>
-			<view class="uni-form-item uni-column unni-color">
-				<view class="title">公司网址</view>
-				<input class="uni-input" text name="nickname" value="www.cccccc.com" />
-			</view>
-			<view class="uni-form-item uni-column unni-color">
-				<view class="title">所属行业</view>
-				<input class="uni-input" text name="nickname" value="运输行业" />
+			
+			<view class="dd" v-if="usertype == 3">
+				<view>
+					<text class="CompanyInformation">公司信息</text>
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">公司名称</view>
+					<input class="uni-input" text name="nickname" value="深圳市虾米科技信息服务有限公司" />
+				</view>
+				<view class="uni-form-item uni-column">
+					<view class="title">公司类型</view>
+					<input class="uni-input" text name="nickname" value="贸易公司" />
+				</view>
+				<view class="uni-form-item uni-column unni-color">
+					<view class="title">所属行业</view>
+					<input class="uni-input" text name="nickname" value="运输行业" />
+				</view>
 			</view>
 		</cl-form>
 	</view>
 </template>
 
 <script>
-
+	import interfaces from '@/utils/interfaces.js';
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
+		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
 				rules: {
+					usertype:'',
 					date: {
 						required: true,
 						message: "",
@@ -60,11 +65,38 @@
 				form: {
 					selectbrand: 0,
 				},
-				
+				myccountForm:{
+					
+				},
+				myccountList:{}
+					
 			};
 
-		}
-
+		},
+		methods:{
+			getMyccount(){
+				this.request({
+					url: interfaces.getManagerData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data:{
+							
+						}
+					},
+					success: res => {
+						console.log(res,555)
+					
+					}
+				})
+			}
+			
+		},
+		onLoad(){
+				this.usertype = this.uerInfo.user_Type
+				// console.log(this.usertype)
+				this.getMyccount()
+		},
 	}
 </script>
 
