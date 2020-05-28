@@ -212,20 +212,19 @@
 					brand_id: '', //品牌id
 					title: '', //标题
 					desc: '', //描述
-					brand: '', //品牌选择
 					otherBrand: '', //其他品牌,非必选
 					country: '', //出口国,非必填
 					supplierPrice: '', //供应商价格,仅发布销售可用
 					price: '', //市场价	
 					num: '', //数量
-					unit_cate_id: '1', //单位id
+					unit_cate_id: '	', //单位id
 					qualification: '', //资质
 					use_way: '', //用途
 					thumbnail: '', //上传图片-产品
 					dead_time: '', //截止时间
 					images: [], //产品轮播图
 					info: [], //产品详情图
-					service_id: ''
+					service_id: '',
 				},
 				entrustList: [{
 						value: '4',
@@ -249,7 +248,7 @@
 				lists: [], // 组件内部的文件列表
 				Listids: [], //选择增值服务
 				isCheckAll: false,
-				supplier_price: '',
+				supplier_price: '',//供应商价格
 				current: 0, //选择委托方式
 				useItems: [{
 						value: '1',
@@ -292,7 +291,6 @@
 		onLoad(option) {
 			
 			this.publishData.type = option.type;
-		
 			this.publishData.cate_id = option.cate_id;
 			this.initData(); //初始化数据
 			this.countryData(); //出口国

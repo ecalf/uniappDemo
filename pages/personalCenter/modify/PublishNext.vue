@@ -3,7 +3,7 @@
 
 		<cl-form ref="form" :model.sync="publishData">
 
-			<view class="uni-form-item m-form-item" v-if="publishData.type==3 || publishData.type==4">
+			<view class="uni-form-item m-form-item" v-if="publishData.type==3 ||publishData.type==4">
 				<radio-group @change="typeChange">
 					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in entrustList" :key="index">
 						<radio :value="item.value" :checked="index === current" color="#44a78d" style="transform:scale(0.7)"></radio>
@@ -14,11 +14,11 @@
 			<view class="uni-form-item m-form-item">
 				<text class="colorred">*</text>
 				<cl-form-item label="" class="uni-input">
-					<cl-input placeholder="标题" class="uni-tl-input" v-model="this.modifyParams.title"></cl-input>
+					<cl-input placeholder="标题" class="uni-tl-input" v-model="publishData.title"></cl-input>
 				</cl-form-item>
 			</view>
 			<view class="uni-form-item">
-				<textarea class="uni-input uni-tl-input uni-textarea" v-model="this.modifyParams.desc" placeholder="描述"></textarea>
+				<textarea class="uni-input uni-tl-input uni-textarea" v-model="publishData.desc" placeholder="描述"></textarea>
 			</view>
 			<view class="uni-form-item upload-images">
 				<view class="upload-item">
@@ -214,7 +214,7 @@
 					},
 				],
 				dataSource: [], //出口国家
-				brandvalue: '请选择品牌', //当前选择品牌
+				brandvalue: '', //当前选择品牌
 				selectbrand: [], //选择品牌
 				selectUnit: [], //选择单位
 				curUnit: '请选择', //当前选择单位
@@ -284,15 +284,14 @@
 		},
 
 		onLoad(option) {
-			this.initData(); //初始化数据
-			this.countryData(); //出口国
-			debugger
 			this.modifyParams=JSON.parse(option.params);
+			//console.log(this.modifyParams);
 			this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
+			this.initData(); //初始化数据
+			this.countryData(); //出口国
 		},
 		methods: {
-
 			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
@@ -381,6 +380,7 @@
 			},
 
 			initData() {
+				
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -388,7 +388,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							cate_id: 3
+							cate_id:this.publishData.cate_id
 						}
 					},
 					success: ((res) => {
@@ -437,8 +437,10 @@
 			},
 			brandChange(item) { //品牌id 
 				this.publishData.brand_id = item.item.id;
+				
 			},
 			Unithange(item) { //单位id
+			console.log(item)
 				this.publishData.unit_cate_id = item.item.id;
 			},
 			radioChange: function(e) { //用途选择
@@ -476,54 +478,88 @@
 				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
-				//console.log(this.publishData.type);
-				let params = {
-					data: {
-						type: this.publishData.type,
-						cate_id: this.publishData.cate_id,
-						title: this.publishData.title,
-						desc: this.publishData.desc,
-						thumbnail: this.publishData.thumbnail,
-						otherBrand: this.publishData.otherBrand,
-						brand_id: this.publishData.brand_id,
-						num: this.publishData.num,
-						exit_country: this.exit_country,
-						price: this.publishData.price,
-						dead_time: this.publishData.deadtime,
-						use_way: this.publishData.use_way,
-						qualification: this.publishData.qualification,
-						unit_cate_id: this.publishData.unit_cate_id,
-						service_id: this.publishData.service_id,
-						images: this.publishData.images,
-						supplier_price: this.publishData.supplier_price,
-						info: this.publishData.info,
+				//修改当前的发布信息
+				let params={
+					data:{
+						id:this.modifyParams.id,
+						type: this.modifyParams.type,
+						cate_id: this.modifyParams.cate_id,
+						title:this.modifyParams.title,
+						desc: this.modifyParams.desc,
+						thumbnail:this.modifyParams.thumbnail,
+						other_brand:this.modifyParams.other_brand,
+						brand_id:this.modifyParams.brand_id,
+						num: this.modifyParams.num,
+						exit_country:this.modifyParams.exit_country,
+						price:this.modifyParams.price,
+						dead_time:this.modifyParams.dead_time,
+						use_way: this.modifyParams.use_way,
+						qualification:this.modifyParams.qualification,
+						unit_cate_id:this.modifyParams.unit_cate_id,
+						service_id: this.modifyParams.service_id,
+						images: this.modifyParams.images,
+						supplier_price: this.modifyParams.supplier_price,
+						info:this.modifyParams.info,
 					}
 				}
-				console.log('publishSubmit begin, params:', params);
 				this.request({
-					url: interfaces.getPublishData,
+					url: interfaces.getModifyData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data: params,
-					success: ((res) => {
-						if (res.code == 200) {
-							uni.showToast({
-								title: '发布需求成功，请前往首页查看',
-								icon: "none"
-							})
-							setTimeout(() => {
-								uni.switchTab({
-									url: "/pages/index/index"
-								})
-							}, 1000);
-						} else {
-							uni.showToast({
-								title: res.message,
-								icon: "none"
-							});
-						}
-					})
-				});
+					data:params,
+					success: (res) => {	
+						console.log("请求成功",res);
+						//this.categoryList = res.data;
+					}
+				})
+				// //console.log(this.publishData.type);
+				// let params = {
+				// 	data: {
+				// 		type: this.publishData.type,
+				// 		cate_id: this.publishData.cate_id,
+				// 		title: this.publishData.title,
+				// 		desc: this.publishData.desc,
+				// 		thumbnail: this.publishData.thumbnail,
+				// 		otherBrand: this.publishData.otherBrand,
+				// 		brand_id: this.publishData.brand_id,
+				// 		num: this.publishData.num,
+				// 		exit_country: this.exit_country,
+				// 		price: this.publishData.price,
+				// 		dead_time: this.publishData.deadtime,
+				// 		use_way: this.publishData.use_way,
+				// 		qualification: this.publishData.qualification,
+				// 		unit_cate_id: this.publishData.unit_cate_id,
+				// 		service_id: this.publishData.service_id,
+				// 		images: this.publishData.images,
+				// 		supplier_price: this.publishData.supplier_price,
+				// 		info: this.publishData.info,
+				// 	}
+				// }
+				// console.log('publishSubmit begin, params:', params);
+				// this.request({
+				// 	url: interfaces.getPublishData,
+				// 	dataType: "JSON",
+				// 	method: 'POST', //请求方式
+				// 	data: params,
+				// 	success: ((res) => {
+				// 		if (res.code == 200) {
+				// 			uni.showToast({
+				// 				title: '发布需求成功，请前往首页查看',
+				// 				icon: "none"
+				// 			})
+				// 			setTimeout(() => {
+				// 				uni.switchTab({
+				// 					url: "/pages/index/index"
+				// 				})
+				// 			}, 1000);
+				// 		} else {
+				// 			uni.showToast({
+				// 				title: res.message,
+				// 				icon: "none"
+				// 			});
+				// 		}
+				// 	})
+				// });
 			},
 
 		}
