@@ -100,7 +100,7 @@
 				<view class="checkbox-list">
 					<checkbox-group @change="qualtChange" class="checkbox-item-box pb0">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in qualtitems" :key="item.value">
-							<checkbox :value="item.cn_name" :checked="item.checked" color="#44a78d" style="transform:scale(0.7)" />
+							<checkbox :value="item.cn_name" :checked="item.checked"  color="#44a78d" style="transform:scale(0.7)" />
 							<image :src="item.icon" mode=""></image>
 						</label>
 					</checkbox-group>
@@ -117,7 +117,7 @@
 				<view class="uni-input">
 					<radio-group @change="radioChange">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in useItems" :key="index">
-							<radio :value="item.value" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
+							<radio :value="item.value" :checked="item.checked" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
 						</label>
 					</radio-group>
 				</view>
@@ -184,6 +184,7 @@
 					files: {}
 				},
 				publishData: {
+					needId:"",//需求id
 					type: "", //类型1 发布采购 2 发布销售 3 委托销售	
 					cate_id: '', //品类id
 					brand_id: '', //品牌id
@@ -224,35 +225,20 @@
 				lists: [], // 组件内部的文件列表
 				Listids: [], //选择增值服务
 				isCheckAll: false,
-				supplier_price: '',
 				current: 0, //选择委托方式
-				modifyParams:"",//修改参数
-				mainImage:[//宝贝主图
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
-				],
-				swipeImage:[//轮播图
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
-				],
-				productList:[//商品详情
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'},
-					{url:'http://qamdtrcrj.bkt.clouddn.com/1cf9b746ad89e527b0637f3666768c5f.jpg'}
-				],
+				mainImage:[],//宝贝主图
+				swipeImage:[],//轮播图
+				productList:[],//商品详情
 				useItems: [{
 						value: '1',
 						name: '民用',
+						checked:'',
 
 					},
 					{
 						value: '2',
 						name: '医用',
+						checked:'',
 					},
 				],
 				serviceList: [{
@@ -284,14 +270,89 @@
 		},
 
 		onLoad(option) {
-			this.modifyParams=JSON.parse(option.params);
 			//console.log(this.modifyParams);
-			this.publishData.type = option.type;
+			//this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
+			this.publishData.needId=option.id;
+			console.log(option.id);
+			this.getProdcutData();
 			this.initData(); //初始化数据
 			this.countryData(); //出口国
 		},
 		methods: {
+			//获取默认发布信息
+			getProdcutData(){
+				this.request({
+						url: interfaces.getInfoData,
+						dataType: "JSON",
+						method: 'POST', //请求方式
+						data:{
+							data: {
+								needs_id:this.publishData.needId
+							}
+						},
+						success: (res) => {		
+							console.log(res);
+							if(res.code==200){	
+								var item=res.data;
+								this.publishData.type=item.type;
+								this.publishData.title=item.title,
+								this.publishData.desc=item.desc,
+								
+								this.publishData.otherBrand=item.other_brand,
+								this.publishData.deadtime=item.dead_time.substring(0,10),//截止时间
+							
+								this.publishData.num=item.num,
+								this.exit_country=item.exit_country,
+								this.publishData.price=item.price,
+								this.useItems[item.use_way].checked==true, //用途
+								this.publishData.service_id=item.service_id,
+								this.publishData.supplier_price=item.supplier_price,
+								this.brandvalue=item.product_brand_cnname,//品牌
+								this.curUnit=item.unit_category_cnname,//单位
+								this.exit_country = item.exit_country;//出口国
+								
+								let chekbox=item.qualification
+								let chekboxArr= chekbox !=null && chekbox.length?chekbox.split(','):''
+								for(let i=0; i<chekboxArr.length;i++){
+									//console.log(this.qualtitems)	
+									 for(let j=0;j<this.qualtitems.length;j++){
+										  console.log('34324',this.qualtitems[j].cn_name)
+										  if(this.qualtitems[j].cn_name==chekboxArr[i]){						  
+										  }
+									 }
+								}
+									 
+								let thumb = {url:item.thumbnail}
+								this.mainImage.push(thumb)//主图
+								
+								let swImages=item.images;
+								let swiperArr= swImages !=null && swImages.length?swImages.split(','):''
+								for(let i = 0;i<swiperArr.length;i++) {
+									this.swipeImage.push({url: swiperArr[i]}//轮播图
+								)}
+					
+								let infoImage=item.info;
+								let infoArr=infoImage !=null && infoImage.length?infoImage.split(','):''
+								for(let i = 0;i<infoArr.length;i++) {
+									this.productList.push({url: infoArr[i]}//轮播图
+								)}
+								
+								
+								let service=item.service_id;
+								for(let i = 0;i<this.serviceList.length;i++) {
+										console.log(this.serviceList[i].id);
+										if(service==this.serviceList[i].id){
+											
+										}
+									}
+								
+								
+							
+							}
+						}
+					})			
+			},
 			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
@@ -440,7 +501,7 @@
 				
 			},
 			Unithange(item) { //单位id
-			console.log(item)
+			
 				this.publishData.unit_cate_id = item.item.id;
 			},
 			radioChange: function(e) { //用途选择
@@ -479,27 +540,28 @@
 			},
 			publishSubmit() {
 				//修改当前的发布信息
-				let params={
-					data:{
-						id:this.modifyParams.id,
-						type: this.modifyParams.type,
-						cate_id: this.modifyParams.cate_id,
-						title:this.modifyParams.title,
-						desc: this.modifyParams.desc,
-						thumbnail:this.modifyParams.thumbnail,
-						other_brand:this.modifyParams.other_brand,
-						brand_id:this.modifyParams.brand_id,
-						num: this.modifyParams.num,
-						exit_country:this.modifyParams.exit_country,
-						price:this.modifyParams.price,
-						dead_time:this.modifyParams.dead_time,
-						use_way: this.modifyParams.use_way,
-						qualification:this.modifyParams.qualification,
-						unit_cate_id:this.modifyParams.unit_cate_id,
-						service_id: this.modifyParams.service_id,
-						images: this.modifyParams.images,
-						supplier_price: this.modifyParams.supplier_price,
-						info:this.modifyParams.info,
+				//debugger
+				let params = {
+					data: {
+						id:this.publishData.needId,
+						type: this.publishData.type,
+						cate_id: this.publishData.cate_id,
+						title: this.publishData.title,
+						desc: this.publishData.desc,
+						thumbnail: this.publishData.thumbnail,
+						otherBrand: this.publishData.otherBrand,
+						brand_id: this.publishData.brand_id,
+						num: this.publishData.num,
+						exit_country: this.exit_country,
+						price: this.publishData.price,
+						dead_time: this.publishData.deadtime,
+						use_way: this.publishData.use_way,
+						qualification: this.publishData.qualification,
+						unit_cate_id: this.publishData.unit_cate_id,
+						service_id: this.publishData.service_id,
+						images: this.publishData.images,
+						supplier_price: this.publishData.supplier_price,
+						info: this.publishData.info,
 					}
 				}
 				this.request({

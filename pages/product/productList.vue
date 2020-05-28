@@ -7,7 +7,7 @@
 			<view class="text" :class="[{on:filterIndex===1},{up:priceSort==='asc'},{down:priceSort==='desc'}]" @tap="handleSelect(1)"><text>价格</text></view>
 			<view class="text" :class="[{on:filterIndex===2},{up:timeSort==='asc'},{down:timeSort==='desc'}]" @tap="handleSelect(2)"><text>剩余时间</text></view>
 		</view>
-		
+
 		<productList :goodsList="goodsList" :firstImages="firstImages" :loadStatus="loadingText" />
 		<page-footer :current="1"></page-footer>
 	</view>
@@ -22,11 +22,11 @@
 		},
 		data() {
 			return {
-				filterIndex:'',
+				filterIndex: '',
 				defalutSort: 1, //是否综合排序 0 否 1 是 如果为 1
 				priceSort: "", //价格排序 asc 升序 desc 降序
 				timeSort: "", //剩余时间排序 asc 升序 desc 降序
-				pageSize: 2, //分页大小
+				pageSize: 10, //分页大小
 				pageNum: 1, //页码
 				type: "", //类型1 发布采购 2 发布销售 3 委托销售
 				loadingText: "正在加载....",
@@ -40,7 +40,8 @@
 			this.kind_id = option.id;
 			uni.setNavigationBarTitle({
 				title: option.name
-			})
+			});
+			this.loadData();
 		},
 		methods: {
 			loadData() {
@@ -52,8 +53,8 @@
 						type:'',
 						price_sort: this.priceSort,
 						remain_time_sort: this.timeSort,
-						cate_id:'',
-						brand_id:'',
+						cate_id: '',
+						brand_id: '',
 						is_defalut_sort: this.defalutsort,
 						kind_id: this.kind_id,
 					}
@@ -66,15 +67,18 @@
 					data: params,
 					success: (res) => {
 						if (res.code == 200) {
-							var lists=res.data.list;
+							
+							var lists = res.data.list;
+							if(lists.length<this.pageSize){
+								this.loadingText = "到底了";
+							}
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
-
 								})
 							} else {
 								this.loadingText = "到底了";
-							}
+							}	
 						}
 					}
 				})
@@ -100,7 +104,7 @@
 							break;
 					}
 				}
-				
+
 				if (index === 2) {
 					switch (this.timeSort) {
 						case 'asc':
@@ -129,7 +133,22 @@
 			},
 
 		},
+		onPullDownRefresh() {
 
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.loadData();
+		}
 	}
 </script>
 
@@ -144,19 +163,19 @@
 		flex-wrap: wrap;
 		justify-content: space-around;
 		margin-bottom: 9.05rpx;
-	
+
 		.text {
 			font-size: 25.36rpx;
 			display: flex;
-	
+
 			text-align: center;
 			padding: 28.98rpx 0;
 			color: #4e5a65;
-	
+
 			text {
 				width: 100%;
 				position: relative;
-	
+
 				&:after {
 					content: "";
 					display: inline-block;
@@ -168,9 +187,9 @@
 					border-top: 4px solid #4e5a65;
 					margin-left: 5px;
 				}
-	
+
 			}
-	
+
 			&.filter {
 				text:after {
 					border: 0;
@@ -180,45 +199,46 @@
 					background-size: cover;
 				}
 			}
-	
+
 			&.on {
 				color: $ac;
-	
+
 				text:after {
 					border-top: 4px solid $ac;
 				}
-	
+
 				&.filter {
 					text:after {
-	
+
 						background-image: url(~@/static/images/fillericona.png);
 						background-size: cover;
-	
+
 					}
 				}
-	
+
 			}
-	
+
 			&.up {
 				text:after {
 					transform: rotate(180deg);
-	
+
 				}
-	
-	
+
+
 			}
-	
+
 			&.down {
-	
+
 				text:after {
 					transform: 0;
-	
+
 				}
-	
-	
+
+
 			}
 		}
 	}
+
 	.header {
 		width: 92%;
 		padding: 0 4%;
