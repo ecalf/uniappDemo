@@ -40,7 +40,7 @@ const interfaces = {
 	getUploadData: baseurl + "/v1/upload",
 
 	//首页分类列表
-	getkindData: baseurl + "v1/category/get-product-kinds",
+	getkindData: baseurl + "/v1/category/get-product-kinds",
 
 	//注册
 	getRegisterData: baseurl + "/v1/user/register",
