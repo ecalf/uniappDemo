@@ -1,5 +1,5 @@
 // #ifndef H5
-const baseurl = "http://api.scm.wanheglobal.com/api.php/";
+const baseurl = "http://api.scm.wanheglobal.com/api.php";
 // #endif
 // #ifdef H5
 const baseurl = "/api";
