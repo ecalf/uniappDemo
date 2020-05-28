@@ -356,7 +356,7 @@
 			width: 100%;
 			height: 641.3rpx;
 
-			swiper-item {
+			swiper-item { 
 				image {
 					width: 100%;
 					height: 641.3rpx;

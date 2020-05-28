@@ -1,76 +1,129 @@
 <template>
 	<view>
 		<view class="swiper-box">
-			<swiper >
-				<swiper-item >
-					<image src="@/static/images/banner.jpg"></image>
-				</swiper-item>
+			<swiper @change="swiperChange" circular="true" autoplay="true">
+				<swiper-item v-for="(swiper, index) in detail.swiperList" :key="index"><image :src="swiper"></image></swiper-item>
 			</swiper>
-			<view class="indicator">1/3</view>
+			<view class="indicator">{{ currentSwiper + 1 }}/{{ detail.swiperList.length }}</view>
 		</view>
 		<view class="product-details-con">
 			<view class="top">
 				<view class="new-price">
 					<text>￥</text>
-					20000
+					<text>{{ detail.price }}</text>
 				</view>
-				<view class="old-price">￥20000</view>
-				<view class="good-num">库存：500台</view>
+				<view class="old-price" v-if="detail.type == 2">￥{{ detail.supplier_price }}</view>
+				<view class="good-num">库存：{{ detail.num }}{{ detail.unit_category_cnname }}</view>
 			</view>
 			<view class="product-title">
-				<text class="tui-icon">推</text>
-				防护服
+				<text class="tui-icon" v-for="(item,index) in detail.cnnameList" :key='index'>{{item}}</text>
+				{{ detail.title }}
 			</view>
-			<view class="product-text">43266</view>
-		</view>
-		
-		<view class="cc">
-			<text class="bb">姓名: </text>
-			<text>李某某</text>
-		</view>
-		<view class="cc">
-			<text class="bb">联系人: </text>
-			<text>1800000000</text>
-		</view>
-		<view class="cc">
-			<text class="bb">公司名称: </text>
-			<text>万合国际</text>
-		</view>
-		<view class="cc">
-			<text class="bb">价格: </text>
-			<text>2000</text>
-		</view>
-		<view class="cc">
-			<text class="bb">留言: </text>
-			<text>123456789</text>
+			<view class="product-text">{{ detail.desc }}</view>
 		</view>
 
+		<view class="offer">
+			<text class="offerinfo">联系人:</text>
+			<text>{{ offerList.contact_name }}</text>
+		</view>
+		<view class="offer">
+			<text class="offerinfo">联系人电话:</text>
+			<text>{{ offerList.phone }}</text>
+		</view>
+		<view class="offer">
+			<text class="offerinfo">公司名称:</text>
+			<text>{{ offerList.company_name }}</text>
+		</view>
+		<view class="offer">
+			<text class="offerinfo">价格:</text>
+			<text>{{ offerList.quoted_price }}</text>
+		</view>
+		<view class="offer">
+			<text class="offerinfo">留言:</text>
+			<text>{{ offerList.desc }}</text>
+		</view>
 	</view>
 </template>
 
 <script>
+import interfaces from '@/utils/interfaces.js';
 export default {
 	data() {
 		return {
+			quotation_id: '', //报价id和需求ID
+			offerList: {}, // 报价详情数据
+			detail: {
+				swiperList: [],
+				cnnameList:[]
+			},
+			currentSwiper: 0 // 轮播图下标
+		};
+	},
+	methods: {
+		swiperChange(event) {
+			this.currentSwiper = event.detail.current;
+		},
+		getofferList() {
+			this.request({
+				url: interfaces.getofferData,
+				dataType: 'JSON',
+				method: 'POST', //请求方式
+				data: {
+					data: {
+						quotation_id: this.quotation_id
+					}
+				},
+				success: res => {
+					console.log(res, 555);
+					this.offerList = res.data;
+				}
+			});
+		},
+		getccompanyList() {
+			this.request({
+				url: interfaces.getInfoData,
+				dataType: 'JSON',
+				method: 'POST', //请求方式
+				data: {
+					data: {
+						needs_id: this.quotation_id
+					}
+				},
+				success: res => {
+					if (res.code == 200) {
+						console.log(res,636);
+						var swiperData = res.data.images != null && res.data.images.length ? res.data.images.split(',') : '';
+						var cnnameData = res.data.service_cnname.split(',')
+						this.detail = res.data;
+						this.detail.swiperList = swiperData;
+						this.detail.cnnameList = cnnameData
+					}
+				}
+			});
 		}
+	},
+	onLoad(optinos) {
+		this.quotation_id = optinos.id;
+		this.getofferList();
+		this.getccompanyList();
 	}
-}
+};
 </script>
 <style lang="scss">
 @import '@/scss/common.scss';
-.cc{
-    background: #fff;
-    margin-bottom: 1.81rpx;
-    display: flex;
-    padding: 30.79rpx 38.04rpx;
-    font-size: 21.73rpx;
-    align-items: center;
-    position: relative;
-	.bb{
+.offer {
+	background: #fff;
+	margin-bottom: 1.81rpx;
+	display: flex;
+	padding: 30.79rpx 38.04rpx;
+	font-size: 21.73rpx;
+	align-items: center;
+	position: relative;
+	.offerinfo {
 		margin-right: 108.69rpx;
 		width: 181.15rpx;
 	}
-	}
+}
 
 /*  修改状态栏样式 */
 .status {
@@ -168,6 +221,4 @@ export default {
 		font-size: 21.73rpx;
 	}
 }
-
-
 </style>

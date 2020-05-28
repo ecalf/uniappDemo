@@ -74,7 +74,10 @@ const interfaces = {
 	getPoolData:baseurl + "/v1/user/get-collect-list",
 	
 	//收藏
-	getCollectData:baseurl+"/v1/user/collect"
+	getCollectData:baseurl+"/v1/user/collect",
+	
+	//报价详情
+	getofferData:baseurl+"/v1/user/get-quotation-info"
 
 }
 module.exports = interfaces;

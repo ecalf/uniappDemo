@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
-		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" :loadStatus="loadingText"></goodsprice>
+		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" :loadStatus="loadingText" @details-url="updateDetails" ></goodsprice>
 	</view>
 </template>
 
@@ -91,6 +91,7 @@
 				this.initData();
 			},
 			updateValue(item) {
+				console.log(item,235)
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
@@ -116,7 +117,13 @@
 					}
 				});
 			},
-			
+			updateDetails(item) {
+				
+				//跳转到报价详情
+				uni.navigateTo({
+					url: "/pages/personalCenter/purchaseCenter/offerDetails?id=" + item.id
+				})
+			},
 		},
 		onLoad() {
 			this.initData();

@@ -53,12 +53,13 @@
 		},
 		data() {
 			return {
-
+				
 			};
 		},
 		methods: {
 			gotoDetails(item) {
 				this.$emit('details-url', item);
+				// console.log(item)
 			},
 			handleDelete(item) {
 				this.$emit('update-value', item);

@@ -34,11 +34,11 @@
 				</view>
 				<view class="uni-form-item uni-column">
 					<view class="title">公司类型</view>
-					<input class="uni-input" text name="nickname" value="贸易公司" />
+					<input class="uni-input" text name="nickname" value="互联网公司" />
 				</view>
 				<view class="uni-form-item uni-column unni-color">
 					<view class="title">所属行业</view>
-					<input class="uni-input" text name="nickname" value="运输行业" />
+					<input class="uni-input" text name="nickname" value="IT行业" />
 				</view>
 			</view>
 		</cl-form>
@@ -74,26 +74,26 @@
 
 		},
 		methods:{
-			getMyccount(){
-				this.request({
-					url: interfaces.getManagerData,
-					dataType: 'JSON',
-					method: 'POST', //请求方式
-					data: {
-						data:{
-						}
-					},
-					success: res => {
-						console.log(res,555)
-					}
-				})
-			}
+			// getMyccount(){
+			// 	this.request({
+			// 		url: interfaces.getManagerData,
+			// 		dataType: 'JSON',
+			// 		method: 'POST', //请求方式
+			// 		data: {
+			// 			data:{
+			// 			}
+			// 		},
+			// 		success: res => {
+			// 			console.log(res,555)
+			// 		}
+			// 	})
+			// }
 			
 		},
 		onLoad(){
 				this.usertype = this.uerInfo.user_Type
 				// console.log(this.usertype)
-				this.getMyccount()
+				// this.getMyccount()
 		},
 	}
 </script>
