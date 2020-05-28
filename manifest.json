@@ -72,9 +72,10 @@
             "https" : false
         },
         "router" : {
-            "base" : "/h5"
+            "base" : "/h5/",
+            "mode" : "history"
         },
-        "domain" : "http://m.scm.wanheglobal.com"
+        "domain" : "http://api.scm.wanheglobal.com"
     }
 }
 // 需要跨域的域名
