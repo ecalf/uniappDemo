@@ -72,8 +72,7 @@
             "https" : false
         },
         "router" : {
-            "base" : "/h5/",
-            "mode" : "history"
+            "base" : "/h5/"
         },
         "domain" : "http://api.scm.wanheglobal.com"
     }
