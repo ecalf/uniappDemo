@@ -169,7 +169,7 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: (res) => {
-						//console.log(res.data);
+						console.log(res.data);
 						
 						if (res.code == 200) {
 							let lists = res.data.list;	

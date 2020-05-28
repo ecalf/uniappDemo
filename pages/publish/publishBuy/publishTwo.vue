@@ -3,7 +3,7 @@
 
 		<cl-form ref="form" :model.sync="publishData">
 
-			<view class="uni-form-item m-form-item" v-if="publishData.type==3 || publishData.type==4">
+			<view class="uni-form-item m-form-item" v-if="publishData.type==3 || publishData.type==4 || publishData.type==5">
 				<radio-group @change="typeChange">
 					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in entrustList" :key="index">
 						<radio :value="item.value" :checked="index === current" color="#44a78d" style="transform:scale(0.7)"></radio>
@@ -233,6 +233,10 @@
 					{
 						value: '3',
 						name: '采购',
+					},
+					{
+						value: '5',
+						name: '官方自营',
 					},
 				],
 				dataSource: [], //出口国家

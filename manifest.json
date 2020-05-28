@@ -52,6 +52,9 @@
         }
     },
     "h5" : {
+		"router":{
+			"base":"/html5/"
+		},
         "devServer" : {
             "port" : 8080,
             "disableHostCheck" : true,
