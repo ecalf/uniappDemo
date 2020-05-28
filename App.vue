@@ -27,6 +27,9 @@
 		onShow: function() {
 			uni.hideTabBar();
 		},
+		onLoad(){
+			document.domain=location.host.split('.').slice(-2).join('.')
+		}
 	}
 </script>
 
