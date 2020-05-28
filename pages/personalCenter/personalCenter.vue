@@ -10,7 +10,7 @@
 					<view class='usersname'><text>{{uerInfo.userName}}</text></view>
 				</view>
 				<view v-if="!hasLogin">
-					<navigator url="/pages/user/login">登录</navigator>		
+					<navigator url="/pages/user/login">您未登录，请登录</navigator>		
 				</view>
 			</view>
 			<view class='arrow'><img src="~@/static/images/arrow.png" /></view>

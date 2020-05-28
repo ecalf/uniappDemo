@@ -123,7 +123,7 @@
 				<view class="checkbox-list">
 					<checkbox-group @change="qualtChange" class="checkbox-item-box pb0">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in qualtitems" :key="item.value">
-							<checkbox :value="item.cn_name" :checked="item.checked" color="#44a78d" style="transform:scale(0.7)" />
+							<checkbox :value="item.id.toString()" color="#44a78d" style="transform:scale(0.7)" />
 							<image :src="item.icon" mode=""></image>
 						</label>
 					</checkbox-group>
@@ -475,7 +475,7 @@
 				this.publishData.service_id = serviceId
 			},
 			successlist: function(data, index, lists) {
-				console.log(data, index, lists);
+				//console.log(data, index, lists);
 				//const formdata=new FormData();
 				//formdata.append("image",data.name);
 			},
@@ -503,7 +503,7 @@
 						info: this.publishData.info,
 					}
 				}
-				console.log('publishSubmit begin, params:', params);
+				//console.log('publishSubmit begin, params:', params);
 				this.request({
 					url: interfaces.getPublishData,
 					dataType: "JSON",

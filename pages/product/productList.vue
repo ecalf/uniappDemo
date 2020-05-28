@@ -69,6 +69,12 @@
 						if (res.code == 200) {
 							
 							var lists = res.data.list;
+							for(let i=0;i<lists.length;i++){//转数组
+								let serviceData=lists[i].service_cnname.split(',');
+								lists[i].service_cnname=serviceData;
+								let qualification = lists[i].qualification_icon.split(',');
+								lists[i].qualification_icon = qualification;
+							}	
 							if(lists.length<this.pageSize){
 								this.loadingText = "到底了";
 							}
