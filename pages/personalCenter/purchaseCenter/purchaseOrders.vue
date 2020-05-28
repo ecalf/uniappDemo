@@ -83,7 +83,7 @@
 						if (res.code == 200) {
 							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData = lists[i].service_cnname.split(',');
+								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
 							}
 							if(lists.length<this.pageSize){
