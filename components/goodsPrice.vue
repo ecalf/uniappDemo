@@ -4,7 +4,7 @@
 			<view class="goods" v-for="(item,index) in goodsPrice" :key='index'>
 				<view class="cc" @tap='gotoDetails(item)'>
 					<view class="goodslist-header">
-						<text class="goodslist-icon">{{item.service_cnname}}</text>
+						<text class="goodslist-icon" v-for="serviceitem in item.service_cnname">{{serviceitem}}</text>
 						<text class="goodslist-title">{{item.title}}</text>
 						<text class="goodslist-time">{{item.time}}</text>
 					</view>
@@ -100,7 +100,7 @@
 				line-height: 36.23rpx;
 				text-align: center;
 				font-size: 21.73rpx;
-				margin-right: 12.68rpx;
+				margin-right:1.81rpx;
 			}
 
 			.goodslist-title {

@@ -42,8 +42,8 @@
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
-		<productList :goodsList="goodsList"  :loadStatus="loadingText" />
-			
+		<productList :goodsList="goodsList" :loadStatus="loadingText" />
+
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
@@ -78,7 +78,7 @@
 			return {
 				title: 'getUserInfo',
 				hasUserInfo: false,
-			    userInfo: {},
+				userInfo: {},
 				ishow: true,
 				currentPage: '/pages/index/index',
 				swiperList: [{
@@ -98,59 +98,59 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				type:5,//1 发布采购 2 发布销售 3 委托销售 4 委托采购 5 官网销售 不传返回所有
+				type: 5, //1 发布采购 2 发布销售 3 委托销售 4 委托采购 5 官网销售 不传返回所有
 				pageSize: 4, //分页大小
 				pageNum: 1, //页码
 				cate_id: "",
 				defalutSort: "", //是否综合排序 0 否 1 是 如果为 1
-				priceSort:"",//价格排序 asc 升序 desc 降序
-				timeSort:"",//剩余时间排序 asc 升序 desc 降序
+				priceSort: "", //价格排序 asc 升序 desc 降序
+				timeSort: "", //剩余时间排序 asc 升序 desc 降序
 				loadingText: "正在加载....",
-				categoryList:[],
+				categoryList: [],
 				publishList: [{
 						title: "发布采购",
 						bgimg: "/static/images/release01.png",
 						icon: "/static/images/releaseicon01.png",
-						url:"/pages/publish/publishBuy/publishOne?type=1"
+						url: "/pages/publish/publishBuy/publishOne?type=1"
 					},
 					{
 						title: "发布销售",
 						bgimg: "/static/images/release02.png",
 						icon: "/static/images/releaseicon02.png",
-						url:"/pages/publish/publishBuy/publishOne?type=2"
+						url: "/pages/publish/publishBuy/publishOne?type=2"
 					},
 					{
 						title: "发布委托",
 						bgimg: "/static/images/release03.png",
 						icon: "/static/images/releaseicon03.png",
-						url:"/pages/publish/publishBuy/publishOne?type=3"
+						url: "/pages/publish/publishBuy/publishOne?type=3"
 					}
 				], //发布
-				goodsList:[],
-				firstImages:'',
+				goodsList: [],
+				firstImages: '',
 				filterByList: [{
 						cntitle: "列表推荐",
 						entitle: "Recommend",
 						selected: true,
-						type:"5"
+						type: "5"
 					},
 					{
 						cntitle: "采购订单",
 						entitle: "Purchase",
 						selected: false,
-						type:"1"
+						type: "1"
 					},
 					{
 						cntitle: "销售订单",
 						entitle: "Sale",
 						selected: false,
-						type:"2"
+						type: "2"
 					},
 					{
 						cntitle: "委托订单",
 						entitle: "Entrust",
 						selected: false,
-						type:"3,4"
+						type: "3,4"
 					},
 				] //列表tabbar
 			}
@@ -164,10 +164,10 @@
 				// console.log(item.text);
 				console.log(item);
 				uni.navigateTo({
-					url: "../product/productList?id=" + item.id+'&name='+item.cn_name
+					url: "../product/productList?id=" + item.id + '&name=' + item.cn_name
 				})
 			},
-			handleSelect(index,target) {
+			handleSelect(index, target) {
 				this.filterByList[index].selected = true;
 
 				// 其他的selected false
@@ -176,13 +176,13 @@
 						this.filterByList[i].selected = false;
 					}
 				}
-				this.type=target.type;
+				this.type = target.type;
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsList = [];
 				this.loadData();
 			},
-			initData(){
+			initData() {
 				this.request({ //分类筛选
 					url: interfaces.getkindData,
 					dataType: "JSON",
@@ -194,32 +194,37 @@
 				});
 			},
 			loadData() {
-				let params={
-					data:{
+				let params = {
+					data: {
 						page_size: this.pageSize,
 						page_index: this.pageNum,
 						keyword: "",
-						type:this.type,
-						is_defalut_sort:"",
-						status:"",
-						price_sort:"",
-						remain_time_sort:"",
-						cate_id:"",
-						brand_id:""
+						type: this.type,
+						is_defalut_sort: "",
+						status: "",
+						price_sort: "",
+						remain_time_sort: "",
+						cate_id: "",
+						brand_id: ""
 					}
 				}
 				this.request({
 					url: interfaces.getNeedsData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data:params,
+					data: params,
 					success: (res) => {
 						if (res.code == 200) {
 							let lists = res.data.list;
-							for(let i=0;i<lists.length;i++){
-								let serviceData=lists[i].service_cnname.split(',');
-								lists[i].service_cnname=serviceData;
-							}	
+							for (let i = 0; i < lists.length; i++) { //转成数组
+								let serviceData = lists[i].service_cnname.split(',');
+								lists[i].service_cnname = serviceData;
+								let qualification = lists[i].qualification_icon.split(',');
+								lists[i].qualification_icon = qualification;
+							}
+							if (lists.length < this.pageSize) {
+								this.loadingText = "到底了";
+							}
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
@@ -231,8 +236,8 @@
 					}
 				});
 			},
-			handlePublish(item){
-				
+			handlePublish(item) {
+
 				uni.navigateTo({
 					url: item.url
 				})

@@ -9,7 +9,7 @@
 					<view class="name"><text class="tui-icon" v-for="(item,num) in goods.service_cnname">{{item}}</text>{{goods.title}}</view>
 
 					<view class="certificate">
-						<image :src="goods.qualifications" mode=""></image>
+						<image  v-for="item in goods.qualification_icon" :src="item" mode=""></image>
 					</view>
 					<view class="price">
 						<text>￥</text>
@@ -106,8 +106,8 @@
 					margin-bottom: 9.05rpx;
 
 					image {
-						width: 36.23rpx;
-						height: 36.23rpx;
+						width:39.85rpx;
+						height:39.85rpx;
 						margin-right: 10.86rpx;
 					}
 				}
