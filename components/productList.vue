@@ -6,7 +6,7 @@
 					<image mode="widthFix" :src="goods.thumbnail"></image>
 				</view>
 				<view class="info">
-					<view class="name"><text class="tui-icon">{{goods.service_cnname}}</text>{{goods.title}}</view>
+					<view class="name"><text class="tui-icon" v-for="(item,num) in goods.service_cnname">{{item}}</text>{{goods.title}}</view>
 
 					<view class="certificate">
 						<image :src="goods.qualifications" mode=""></image>
@@ -39,7 +39,11 @@
 		},
 		props: {
 			goodsList:{
-				type:Array
+				type:Array,		
+			},
+			serviceList:{
+				type:Array,
+				
 			},
 			firstImages:{
 				type:String

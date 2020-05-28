@@ -148,7 +148,7 @@
 						}
 					},
 					success: ((res) => {
-						this.categoryList = res.data;;
+						this.categoryList = res.data;
 					})
 				});
 				let params = {
@@ -170,8 +170,16 @@
 					data: params,
 					success: (res) => {
 						//console.log(res.data);
-						var lists = res.data.list;	
+						
 						if (res.code == 200) {
+							let lists = res.data.list;	
+							for(let i=0;i<lists.length;i++){
+								let serviceData=lists[i].service_cnname.split(',');
+								lists[i].service_cnname=serviceData;
+							}	
+							if (lists.length == this.pageSize) {
+								this.loadingText = "到底了";
+							}
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);

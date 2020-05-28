@@ -4,7 +4,7 @@
 			<view class="goods" v-for="(item,index) in goodsPrice" :key='index'>
 				<view class="cc" @tap='gotoDetails(item)'>
 					<view class="goodslist-header">
-						<text class="goodslist-icon">推</text>
+						<text class="goodslist-icon">{{item.service_cnname}}</text>
 						<text class="goodslist-title">{{item.title}}</text>
 						<text class="goodslist-time">{{item.time}}</text>
 					</view>
@@ -22,7 +22,7 @@
 				</view>
 				<view class="goods-operate">
 					<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
-					<view class="goodsDelete"><text class="updataText" @tap="handlemodify(item)">修改</text></view>
+					<!-- <view class="goodsDelete"><text class="updataText" @tap="handlemodify(item)">修改</text></view> -->
 					<view class="goodsDelete borderline" v-if="current==2" @tap="handleUp(item)"><text class="pullText">上架</text></view>
 					<view class="goodsDelete borderline" v-if="current==1" @tap="handleDown(item)"><text class="pullText">下架</text></view>
 				</view>
@@ -156,7 +156,7 @@
 
 		.goods-operate {
 			display: flex;
-			justify-content:space-around;
+			justify-content:left;
 			align-items: center;
 			margin-left:-9.05rpx;
 			.goodsDelete {

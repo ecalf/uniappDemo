@@ -65,7 +65,7 @@
 		line-height: 36.23rpx;
 		text-align: center;
 		font-size: 21.73rpx;
-		margin-right: 5px;
+		margin-right: 1px;
 		vertical-align: 2px;
 
 	}

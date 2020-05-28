@@ -2,7 +2,7 @@
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
 		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" @update-up="updateUp" @update-down="updateDown"
-		 @details-url="updateDetails" @update-modify="updateModify" :current="current"></goodsprice>
+		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText"></goodsprice>
 	</view>
 </template>
 
@@ -16,16 +16,17 @@
 			goodsprice
 		},
 		data() {
-			return {
-				quoto: {
-					page_size: 100,
-					page_index: 1,
+			return {	
+				quoto: {	
 					keyword: '',
 					type: 1,
 					status: '',
 					is_deadtime: '',
 					kinds: ''
 				},
+				pageSize: 6, //分页大小
+				pageNum: 1, //页码
+				loadingText: "正在加载中",
 				needId: '', //需求id
 				conversionPrice: [{
 						id: 1,
@@ -58,11 +59,11 @@
 			};
 		},
 		methods: {
-			getsupplierList() {
+			loadData() {
 				let params = {
 					data: {
-						page_size: this.quoto.page_size,
-						page_index: this.quoto.page_index,
+						page_size: this.pageSize,
+						page_index: this.pageNum,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
 						status: this.quoto.statu,
@@ -76,9 +77,20 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: (res) => {
-						console.log(res);
+						//console.log(res);
+						//debugger
 						if (res.code == 200) {
-							this.goodsPrice = res.data.list;
+							var lists=res.data.list;
+							if(lists.length<this.pageSize){
+								this.loadingText = "到底了";
+							}
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.goodsPrice.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
 						}
 					}
 				});
@@ -88,7 +100,10 @@
 				this.quoto.type = item.type;
 				this.quoto.status = item.status;
 				this.quoto.is_deadtime = item.is_deadtime;
-				this.getsupplierList(); //更新数据
+				this.pageNum= 1;
+				this.loadingText = "正在加载中";
+				this.goodsPrice = [];
+				this.loadData(); //更新数据
 			},
 			updateValue(item) {
 				this.needId = item.id;
@@ -133,7 +148,7 @@
 							title: '提示',
 							content: '您确定要上架吗？',
 							success: res => {
-								console.log(res);
+								//console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -159,7 +174,7 @@
 							title: '提示',
 							content: '您确定要下架吗？',
 							success: res => {
-								console.log(res);
+								//console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -183,9 +198,24 @@
 			}
 		},
 		onLoad() {
-			this.getsupplierList();
+			this.loadData();
 		},
-
+		onPullDownRefresh() {
+		
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.loadData();
+		}
 	}
 </script>
 

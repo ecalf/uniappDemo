@@ -42,7 +42,7 @@
 				<view class="entitle">{{target.entitle}}</view>
 			</view>
 		</view>
-		<productList :goodsList="goodsList" :loadStatus="loadingText" />
+		<productList :goodsList="goodsList"  :loadStatus="loadingText" />
 			
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
@@ -126,7 +126,7 @@
 						url:"/pages/publish/publishBuy/publishOne?type=3"
 					}
 				], //发布
-				goodsList: [],
+				goodsList:[],
 				firstImages:'',
 				filterByList: [{
 						cntitle: "列表推荐",
@@ -188,7 +188,7 @@
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					success: (res) => {
-						console.log(res);
+						//console.log(res);
 						this.categoryList = res.data;
 					}
 				});
@@ -214,13 +214,15 @@
 					method: 'POST', //请求方式
 					data:params,
 					success: (res) => {
-						var lists = res.data.list;
-						console.log(res.data);
 						if (res.code == 200) {
+							let lists = res.data.list;
+							for(let i=0;i<lists.length;i++){
+								let serviceData=lists[i].service_cnname.split(',');
+								lists[i].service_cnname=serviceData;
+							}	
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsList.push(item);
-									// console.log(item,2222);
 								})
 							} else {
 								this.loadingText = "到底了";
