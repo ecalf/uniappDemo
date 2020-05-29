@@ -23,7 +23,7 @@
 						<text>{{ item.contact_phone }}</text>
 					</view>
 				</view>
-				<view class="supplierDelete"><text class="deleteText">删除</text></view>
+				<!-- <view class="supplierDelete"><text class="deleteText">删除</text></view> -->
 				<view class="supplierDelete"><text class="checkhomeText">查看主页</text></view>
 			</view>
 		</view>

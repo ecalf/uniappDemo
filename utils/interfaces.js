@@ -58,7 +58,7 @@ const interfaces = {
 	//我的订单
 	getMyneedData: baseurl + "/v1/user/get-my-needs-list",
 
-	//我的报价
+	//报价管理 && 我的报价
 	getMyquoteData: baseurl + "/v1/user/get-my-quotation-list",
 
 	//用户详情

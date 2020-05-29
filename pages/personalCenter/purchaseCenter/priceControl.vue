@@ -22,9 +22,6 @@
 					page_index: 1,
 					keyword: '',
 					type:1,
-					status: '',
-					is_deadtime: '',
-					kinds: '',
 					is_quoted:1
 				},
 				needId: '', //需求id
@@ -51,23 +48,23 @@
 						page_index: this.quoto.page_index,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
-						status: this.quoto.status,
-						is_deadtime: this.quoto.is_deadtime,
-						kinds: this.quoto.kinds,
 						is_quoted:this.quoto.is_quoted
 					}
 				}
 				console.log(params);
 				this.request({
-					url: interfaces.getMyneedData,
+					url: interfaces.getMyquoteData,
 					dataType: 'JSON',
 					method: 'POST', //请求方式
 					data: params,
 					success: res => {
-						var lists = res.data.list;
-						// console.log(res.data,666)
 						if (res.code == 200) {
-							//this.goodsPrice=lists;
+							let lists = res.data.list;
+							for (let i = 0; i < lists.length; i++) { //转成数组
+								let serviceData = lists[i].service_cnname.split(',');
+								lists[i].service_cnname = serviceData;
+							}
+							console.log(lists,255)
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsPrice.push(item);
@@ -91,7 +88,6 @@
 				this.initData();
 			},
 			updateValue(item) {
-				console.log(item,235)
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,

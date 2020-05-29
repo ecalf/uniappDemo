@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<view class="input-view">
+<!-- 		<view class="input-view">
 			<view class="search-icon"></view>
 			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
-		</view>
+		</view> -->
 		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue"></goodsprice>
 	</view>
 </template>
@@ -19,9 +19,11 @@
 		data() {
 			return {
 				quoto: {
-					page_size: 2,
+					page_size:6,
 					page_index: 1,
 					keyword: '',
+					type:2,
+					is_quoted:1
 				},
 				needId: '', //需求id
 				goodsPrice: [],
@@ -39,11 +41,21 @@
 							page_size: this.quoto.page_size,
 							page_index: this.quoto.page_index,
 							keyword: this.quoto.keyword,
+							type: this.quoto.type,
+							is_quoted:this.quoto.is_quoted
 						}
 					},
 					success: ((res) => {
 						console.log(res, 1111)
 						this.goodsPrice = res.data.list;
+						if (res.code == 200) {
+							let lists = res.data.list;
+							for (let i = 0; i < lists.length; i++) { //转成数组
+								let serviceData = lists[i].service_cnname.split(',');
+								lists[i].service_cnname = serviceData;
+							}
+							console.log(lists,362)
+						}
 					})
 				});
 			},
@@ -69,6 +81,8 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
+								
+								
 							}
 						})
 					}

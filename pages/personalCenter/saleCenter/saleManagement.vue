@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<view class="input-view">
+	<!-- 	<view class="input-view">
 			<view class="search-icon" ></view>
 			<input type="text" placeholder="搜索订单" v-model="quoto.keyword"/>
-		</view>
+		</view> -->
 		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
 	</view>
 </template>
@@ -49,6 +49,14 @@
 					success: ((res) => {
 						console.log(res, 132)
 						this.goodsPrice = res.data.list;
+						if (res.code == 200) {
+							let lists = res.data.list;
+							for (let i = 0; i < lists.length; i++) { //转成数组
+								let serviceData = lists[i].service_cnname.split(',');
+								lists[i].service_cnname = serviceData;
+							}
+						}
+						
 					})
 				});
 			},

@@ -64,13 +64,14 @@ export default {
 			this.currentSwiper = event.detail.current;
 		},
 		getofferList() {
+			// debugger
 			this.request({
 				url: interfaces.getofferData,
 				dataType: 'JSON',
 				method: 'POST', //请求方式
 				data: {
 					data: {
-						quotation_id: this.quotation_id
+						quotation_id:0
 					}
 				},
 				success: res => {
@@ -93,7 +94,7 @@ export default {
 					if (res.code == 200) {
 						console.log(res,636);
 						var swiperData = res.data.images != null && res.data.images.length ? res.data.images.split(',') : '';
-						var cnnameData = res.data.service_cnname.split(',')
+						var cnnameData = res.data.service_cnname != null && res.data.service_cnname.length ? res.data.service_cnname.split(',') : '';
 						this.detail = res.data;
 						this.detail.swiperList = swiperData;
 						this.detail.cnnameList = cnnameData
