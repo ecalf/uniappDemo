@@ -499,6 +499,7 @@
 		box-sizing: border-box;
 		padding: 18.11rpx;
 		margin-bottom: 18.11rpx;
+		padding-left: 39.85rpx;
 		}
 		.upload-aa{
 			display: flex;

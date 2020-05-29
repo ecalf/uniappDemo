@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- <conversionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></conversionPrice> -->
-		<view class="supplier-box" v-for="(item, index) in poolList" :key="index">
+		<view class="supplier-box" v-for="(item, index) in goodsPrice" :key="index">
 			<view class="supplier-header">
 				<image class="title-icon" :src="item.company_images"></image>
 				<view class="supplier-content">
@@ -25,6 +25,7 @@
 				<view class="supplierDelete"><text class="checkhomeText">查看主页</text></view>
 			</view>
 		</view>
+		<view v-if="goodsPrice.length" class="loading-text">{{ loadingText }}</view>
 	</view>
 </template>
 
@@ -39,10 +40,11 @@ export default {
 			//user_id: '',
 			poolfrom: {
 				collect_type:1,
-				page_size: 6,
-				page_index: 1
 			},
-			poolList: [],
+			pageSize: 6, //分页大小
+			pageNum: 1, //页码
+			loadingText: "正在加载....",
+			goodsPrice: [],
 			current: 0,
 		};
 	},
@@ -55,26 +57,32 @@ export default {
 				data: {
 					data: {
 						collect_type: this.poolfrom.collect_type,
-						page_size: this.poolfrom.page_size,
-						page_index: this.poolfrom.page_index
+						page_size: this.pageSize,
+						page_index: this.pageNum
 					}
 				},
 				success: (res) => {
-					var lists = res.data.list;
-					//console.log('收藏',lists);
-
 					if (res.code == 200) {
-						this.poolList= res.data.list;
-						// if (lists.length > 0) {
-						// 	lists.forEach(item => {
-						// 		this.poolList.push(item);
-						// 	});
-						// } else {
-						// 	this.loadingText = '到底了';
-						// }
+						let lists = res.data.list;
+						if (lists.length < this.pageSize) {
+							this.loadingText = "到底了";
+						}
+						if (lists.length > 0) {
+							lists.forEach(item => {
+								this.goodsPrice.push(item);
+							})
+						} else {
+							this.loadingText = "到底了";
+						} 
 					}
 				}
 			});
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+		this.pageNum++;
+		this.getpoollist();
 		}
 	},
 	onLoad() {
@@ -181,5 +189,9 @@ export default {
 			color: #44a78d;
 		}
 	}
+}
+.loading-text {
+	padding: 20px 0;
+	text-align: center;
 }
 </style>

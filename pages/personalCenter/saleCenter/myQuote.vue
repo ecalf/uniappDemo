@@ -4,7 +4,7 @@
 			<view class="search-icon"></view>
 			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
 		</view> -->
-		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText"></goodsprice>
+		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText" @details-url="updateDetails"></goodsprice>
 	</view>
 </template>
 
@@ -105,6 +105,12 @@
 						})
 					}
 				});
+			},
+			updateDetails(item) {
+				//跳转链接
+				uni.navigateTo({
+					url: "/pages/personalCenter/purchaseCenter/offerDetails?id="+ item.id+'&need_id='+item.need_id
+				})
 			},
 		},
 		onLoad(option) {

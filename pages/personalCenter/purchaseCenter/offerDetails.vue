@@ -71,7 +71,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							needs_id: this.quotationId
+							needs_id: this.needId
 						}
 					},
 					success: (res) => {
@@ -91,7 +91,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							quotation_id:2
+							quotation_id:this.quotationId
 						}
 					},
 					success: (res) => {
@@ -105,7 +105,7 @@
 			},
 		},
 		onLoad(optinos) {
-			this.needId= optinos.needid;
+			this.needId= optinos.need_id;
 			this.quotationId = optinos.id;
 			this.initData();
 		}
