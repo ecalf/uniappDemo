@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="CertificateAuthority-body">
+		<view class="CertificateAuthority-body" v-if="uerInfo.isIdentifiy==0">
 			<view class="CertificateAuthority-content">
 				<view class="icon-left" @click="gotoPersonalAuthentication()">
 					<image src="@/static/images/lgicon33.png"></image>
@@ -15,16 +15,19 @@
 				</view>
 			</view>
 		</view>
+		<view v-else class="isCertificate">
+			您已认证，不需要重新认证
+		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
-		data() {
-			return {
-
-			};
-		},
+		computed: mapState(['hasLogin', 'uerInfo']),
 		methods: {
 			gotoPersonalAuthentication() {
 				uni.navigateTo({
@@ -84,4 +87,5 @@
 			align-items: center;
 		}
 	}
+	.isCertificate{padding:54.34rpx 0;text-align: center;}
 </style>
