@@ -58,7 +58,7 @@
 					dataType: 'JSON',
 					method: 'POST', //请求方式
 					data: params,
-<<<<<<< HEAD
+					
 					success: res => {
 						if (res.code == 200) {
 							let lists = res.data.list;
@@ -66,17 +66,9 @@
 								let serviceData = lists[i].service_cnname.split(',');
 								lists[i].service_cnname = serviceData;
 							}
-							console.log(lists,255)
-=======
-					success: (res) => {
-						console.log(res.data);
-						
-						if (res.code == 200) {
-							let lists = res.data.list;	
 							if (lists.length < this.pageSize) {
 								this.loadingText = "到底了";
 							}
->>>>>>> c487f4a69fac54cdba98d714a585f575a2abe522
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsPrice.push(item);
