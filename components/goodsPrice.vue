@@ -25,7 +25,7 @@
 				</view>
 				<view class="goods-operate">
 					<view class="goodsDelete" @tap="handleDelete(item)" v-if="priceHide"><text class="deleteText">删除</text></view>
-					<view class="goodsDelete" v-if="priceHide"><text class="updataText" @tap="handlemodify(item)">修改</text></view>
+					<!-- <view class="goodsDelete" v-if="priceHide"><text class="updataText" @tap="handlemodify(item)">修改</text></view> -->
 					<view class="goodsDelete borderline" v-if="current == 2" @tap="handleUp(item)"><text class="pullText">上架</text></view>
 					<view class="goodsDelete borderline" v-if="current == 1" @tap="handleDown(item)"><text class="pullText">下架</text></view>
 				</view>
@@ -215,7 +215,7 @@
 		background: #F23A3B;
 		color: #fff;
 		position: absolute;
-		bottom: 34.42rpx;
+		top: 34.42rpx;
 		right: 34.42rpx;
 		color: #fff;
 		padding: 3.62rpx 18.11rpx;

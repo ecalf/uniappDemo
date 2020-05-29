@@ -2,7 +2,7 @@
 const baseurl = "http://api.scm.wanheglobal.com/api.php/";
 // #endif
 // #ifdef H5
-const baseurl = "/api";
+const baseurl = "http://api.scm.wanheglobal.com/api.php/";
 // #endif
 const interfaces = {
 	// 获取首页数据
