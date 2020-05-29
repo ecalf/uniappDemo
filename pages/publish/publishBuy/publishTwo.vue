@@ -42,30 +42,6 @@
 					</u-upload>
 					<view class="imagestips"><text class="colorred">*</text>添加上传图片</view>
 				</view>
-			<!-- 	<view class="upload-item">
-					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
-					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
-					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
-					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
-					 @on-remove="uploadHandler(arguments,'onRemove','images')">
-						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
-						</view>
-					</u-upload>
-					<view class="imagestips">添加上传图片</view>
-				</view>
-				<view class="upload-item">
-					<u-upload :custom-btn="customBtn" :show-upload-list="true" :action="action" :auto-upload="true" :file-list="fileList"
-					 :show-progress="true" :deletable="true" :max-count="1" width="145" uploadText="" name="image" testref="image2"
-					 @on-progress="uploadHandler(arguments,'onProgress','images')" @on-success="uploadHandler(arguments,'onSuccess','images')"
-					 @on-error="uploadHandler(arguments,'onError','images')" @on-change="uploadHandler(arguments,'onChange','images')"
-					 @on-remove="uploadHandler(arguments,'onRemove','images')">
-						<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
-							<cl-icon name="cl-icon" :size="50" color="#E2E2E2" class="icon-jia"></cl-icon>
-						</view>
-					</u-upload>
-					<view class="imagestips">添加上传图片</view>
-				</view> -->
 			</view>
 			<view class="uni-form-item">
 				<view class="uni-input uni-input-left">
@@ -227,11 +203,11 @@
 					service_id: '',
 				},
 				entrustList: [{
-						value: '4',
+						value: '3',
 						name: '销售',
 					},
 					{
-						value: '3',
+						value: '4',
 						name: '采购',
 					},
 					{

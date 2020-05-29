@@ -24,27 +24,34 @@
 			<view class="product-text">{{ detail.desc }}</view>
 		</view>
 
-		<view class="offer">
-			<text class="offerinfo">联系人:</text>
-			<text>{{ offerList.contact_name }}</text>
+		<view v-if="detail.is_quoted==1">
+			<view class="offer">
+				<text class="offerinfo">联系人:</text>
+				<text>{{ offerList.contact_name }}</text>
+			</view>
+			<view class="offer">
+				<text class="offerinfo">联系人电话:</text>
+				<text>{{ offerList.phone }}</text>
+			</view>
+			<view class="offer">
+				<text class="offerinfo">公司名称:</text>
+				<text>{{ offerList.company_name }}</text>
+			</view>
+			<view class="offer">
+				<text class="offerinfo">价格:</text>
+				<text>{{ offerList.quoted_price }}</text>
+			</view>
+			<view class="offer">
+				<text class="offerinfo">留言:</text>
+				<text>{{ offerList.desc }}</text>
+			</view>
 		</view>
-		<view class="offer">
-			<text class="offerinfo">联系人电话:</text>
-			<text>{{ offerList.phone }}</text>
-		</view>
-		<view class="offer">
-			<text class="offerinfo">公司名称:</text>
-			<text>{{ offerList.company_name }}</text>
-		</view>
-		<view class="offer">
-			<text class="offerinfo">价格:</text>
-			<text>{{ offerList.quoted_price }}</text>
-		</view>
-		<view class="offer">
-			<text class="offerinfo">留言:</text>
-			<text>{{ offerList.desc }}</text>
+		<view v-else class="errormsg">
+			<view><image src="/static/images/error.png"></image></view>
+			<view>抱歉 Sorry！~目前还没有人报价</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
@@ -53,7 +60,7 @@
 		data() {
 			return {
 				quotationId: '', //报价id和需求ID
-				needId:'',//需求id
+				needId: '', //需求id
 				offerList: {}, // 报价详情数据
 				detail: {},
 				currentSwiper: 0 // 轮播图下标
@@ -71,7 +78,7 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							needs_id: this.quotationId
+							needs_id: this.needId
 						}
 					},
 					success: (res) => {
@@ -91,13 +98,14 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							quotation_id:2
+							quotation_id: this.quotationId,
+							is_quoted: 1,
 						}
 					},
 					success: (res) => {
 						console.log(res);
 						if (res.code == 200) {
-							this.offerList = res.data;
+							this.offerList = res.data;	
 						}
 					}
 				});
@@ -105,8 +113,8 @@
 			},
 		},
 		onLoad(optinos) {
-			this.needId= optinos.needid;
-			this.quotationId = optinos.id;
+			this.needId = optinos.need_id;
+			this.quotationId = optinos.quotation_id;
 			this.initData();
 		}
 	};
@@ -224,5 +232,10 @@
 			color: #8e8e93;
 			font-size: 21.73rpx;
 		}
+	}
+	.errormsg{
+		padding:90.57rpx 0;
+		text-align:center;
+		image{width:295.28rpx;height:204.71rpx;margin-bottom:20px;}
 	}
 </style>

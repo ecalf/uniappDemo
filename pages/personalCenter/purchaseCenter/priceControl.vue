@@ -88,7 +88,7 @@
 				this.current = index;
 				// console.log(this.current,111)
 				this.quoto.is_quoted = item.is_quoted;
-				console.log(item.is_quoted,222)
+				//console.log(item.is_quoted,222)
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsPrice = [];
@@ -98,10 +98,10 @@
 
 			},
 			updateDetails(item) {
-			
+				console.log('101',item);
 				//跳转到报价详情
 				uni.navigateTo({
-					url: "/pages/personalCenter/purchaseCenter/offerDetails?id="+ item.id
+					url: "/pages/personalCenter/purchaseCenter/offerDetails?quotation_id="+ item.quotation_id+'&need_id='+item.need_id
 				})
 			},
 		},

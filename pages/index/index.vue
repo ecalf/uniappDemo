@@ -162,7 +162,7 @@
 			handleCategory(item) {
 				// 分类跳转
 				// console.log(item.text);
-				console.log(item);
+				//console.log(item);
 				uni.navigateTo({
 					url: "../product/productList?id=" + item.id + '&name=' + item.cn_name
 				})
@@ -177,6 +177,7 @@
 					}
 				}
 				this.type = target.type;
+				console.log(this.type);
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsList = [];
@@ -194,6 +195,7 @@
 				});
 			},
 			loadData() {
+				//debugger
 				let params = {
 					data: {
 						page_size: this.pageSize,
@@ -208,6 +210,7 @@
 						brand_id: ""
 					}
 				}
+				console.log(params);
 				this.request({
 					url: interfaces.getNeedsData,
 					dataType: "JSON",
@@ -220,10 +223,9 @@
 							for (let i = 0; i < lists.length; i++) { //转成数组
 								let serviceData =lists[i].service_cnname !=null?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
-								console.log('222',serviceData);
+								//console.log('222',serviceData);
 								let qualification = lists[i].qualification_icon !=null?lists[i].qualification_icon.split(','):'';
 								lists[i].qualification_icon = qualification;
-								console.log('225',qualification);
 							}
 							if (lists.length < this.pageSize) {
 								this.loadingText = "到底了";

@@ -2,7 +2,7 @@
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
 		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" @update-up="updateUp" @update-down="updateDown"
-		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText"></goodsprice>
+		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText" :entrust="true"></goodsprice>
 	</view>
 </template>
 
@@ -22,7 +22,7 @@
 					type:1,
 					status: '',
 					is_deadtime: '',
-					kinds: ''
+					kinds:1
 				},
 				pageSize: 6, //分页大小
 				pageNum: 1, //页码
@@ -66,10 +66,10 @@
 						page_size: this.pageSize,
 						page_index: this.pageNum,
 						keyword: this.quoto.keyword,
-						type: this.quoto.type,
+						type:'1,4',
 						status: this.quoto.status,
 						is_deadtime: this.quoto.is_deadtime,
-						kinds: this.quoto.kinds,
+						//kinds: 1,
 					}
 				}
 				console.log(params);
