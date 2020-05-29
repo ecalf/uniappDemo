@@ -19,7 +19,7 @@
 			return {	
 				quoto: {	
 					keyword: '',
-					type: 1,
+					type:1,
 					status: '',
 					is_deadtime: '',
 					kinds: ''
@@ -60,13 +60,14 @@
 		},
 		methods: {
 			loadData() {
+				//debugger
 				let params = {
 					data: {
 						page_size: this.pageSize,
 						page_index: this.pageNum,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
-						status: this.quoto.statu,
+						status: this.quoto.status,
 						is_deadtime: this.quoto.is_deadtime,
 						kinds: this.quoto.kinds,
 					}
@@ -78,11 +79,11 @@
 					data: params,
 					success: (res) => {
 						//console.log(res);
-						//debugger
+						
 						if (res.code == 200) {
 							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData = lists[i].service_cnname.split(',');
+								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
 							}
 							if(lists.length<this.pageSize){
@@ -108,6 +109,7 @@
 				this.loadingText = "正在加载中";
 				this.goodsPrice = [];
 				this.loadData(); //更新数据
+				
 			},
 			updateValue(item) {
 				this.needId = item.id;
@@ -132,6 +134,7 @@
 								}
 							}
 						})
+						//this.loadData(); //更新数据
 					}
 				});
 			},
@@ -156,8 +159,11 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
+								
 							}
 						})
+						
+						//this.loadData(); //更新数据
 					}
 				});
 			},
@@ -182,8 +188,10 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
+								
 							}
 						})
+						this.loadData(); //更新数据
 					}
 				});
 			},

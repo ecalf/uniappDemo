@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发布页面",
+  "usingComponents": {
+    "search-bar": "/components/uni-search/search-bar",
+    "product-category": "/components/product-category/productCategory"
+  }
+}

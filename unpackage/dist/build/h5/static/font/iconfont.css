@@ -1,0 +1,60 @@
+
+@font-face {
+  font-family: "iconfont";
+  src: url('~@/static/font/iconfont.ttf'); 
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xingxing:before {
+  content: "\e60e";
+}
+
+.icon-xingxing1:before {
+  content: "\e635";
+}
+
+.icon-back:before {
+  content: "\e600";
+}
+
+.icon-jisutuikuan:before {
+  content: "\e616";
+}
+
+.icon-Doubt-icon:before {
+  content: "\e614";
+}
+
+.icon-denglu:before {
+  content: "\e608";
+}
+
+.icon-jia:before {
+  content: "\e61e";
+}
+
+.icon-upload:before {
+  content: "\e613";
+}
+
+.icon-Wechatlogin-icon:before {
+  content: "\e611";
+}
+
+.icon-Freeregistration-icon:before {
+  content: "\e612";
+}
+
+.icon-Resources-Search:before {
+  content: "\e60f";
+}
+
+
+

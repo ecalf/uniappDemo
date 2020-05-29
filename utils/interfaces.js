@@ -1,5 +1,5 @@
 // #ifndef H5
-const baseurl = "http://192.168.1.14:8005/api.php";
+const baseurl = "http://api.scm.wanheglobal.com/api.php/";
 // #endif
 // #ifdef H5
 const baseurl = "/api";
@@ -29,7 +29,7 @@ const interfaces = {
 	getInfoData: baseurl + "/v1/needs/get-info",
 
 	//报价
-	getQuotationData: baseurl + "v1/needs/quotation",
+	getQuotationData: baseurl + "/v1/needs/quotation",
 
 	//发布
 	getPublishData: baseurl + "/v1/needs/publish",
@@ -40,7 +40,7 @@ const interfaces = {
 	getUploadData: baseurl + "/v1/upload",
 
 	//首页分类列表
-	getkindData: baseurl + "v1/category/get-product-kinds",
+	getkindData: baseurl + "/v1/category/get-product-kinds",
 
 	//注册
 	getRegisterData: baseurl + "/v1/user/register",

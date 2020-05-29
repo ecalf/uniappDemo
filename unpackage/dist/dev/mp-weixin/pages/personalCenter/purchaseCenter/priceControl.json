@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "报价管理",
+  "usingComponents": {
+    "conver-sion-price": "/components/conversionPrice",
+    "goodsprice": "/components/goodsPrice"
+  }
+}

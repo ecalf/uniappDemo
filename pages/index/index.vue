@@ -216,11 +216,14 @@
 					success: (res) => {
 						if (res.code == 200) {
 							let lists = res.data.list;
+							console.log(lists);
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData = lists[i].service_cnname.split(',');
+								let serviceData =lists[i].service_cnname !=null?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
-								let qualification = lists[i].qualification_icon.split(',');
+								console.log('222',serviceData);
+								let qualification = lists[i].qualification_icon !=null?lists[i].qualification_icon.split(','):'';
 								lists[i].qualification_icon = qualification;
+								console.log('225',qualification);
 							}
 							if (lists.length < this.pageSize) {
 								this.loadingText = "到底了";

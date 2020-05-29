@@ -1,0 +1,1 @@
+<view><page-footer vue-id="7f462340-1" currentPage="{{currentPage}}" bind:__l="__l"></page-footer></view>

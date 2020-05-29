@@ -1,0 +1,1 @@
+<view><view class="input-view"><view class="search-icon"></view><input type="text" placeholder="搜索订单" data-event-opts="{{[['input',[['__set_model',['$0','keyword','$event',[]],['quoto']]]]]}}" value="{{quoto.keyword}}" bindinput="__e"/></view><goodsprice vue-id="113c6c8a-1" goodsPrice="{{goodsPrice}}" bind:__l="__l"></goodsprice></view>

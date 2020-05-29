@@ -1,0 +1,97 @@
+
+.input-group {
+	margin: 36.23rpx 5% 90.57rpx;
+	border-radius: 9.05rpx;
+	overflow: hidden;
+}
+.checkout-login {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	font-size: 27.17rpx;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	margin: 0 auto;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	box-sizing: border-box;
+	padding: 27.17rpx 0rpx;
+}
+.checkout-one {
+	display: block;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	font-size: 16px;
+	line-height: 36px;
+	letter-spacing: 0px;
+	color: #44a78d;
+	border-bottom: 5.43rpx solid #44a78d;
+}
+
+/* .title {
+	width: 130.43rpx;
+	padding-left: 27.17rpx;
+	color: #44a78d;
+} */
+.input-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	font-size: 23.55rpx;
+	line-height: 72.46rpx;
+	border-bottom: 1.81rpx solid #FFFFFF;
+}
+.input-buttom {
+	border-bottom: 1px solid #ccc;
+	margin-left: 23.55rpx;
+}
+.action-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	color: #39B54A;
+	position: relative;
+	top: 181.15rpx;
+}
+.action-row navigator {
+	color: #44a78d;
+	padding: 0 10px;
+}
+.logo {
+	width: 271.73rpx;
+	height: 59.78rpx;
+	margin: 90.57rpx auto 36.23rpx;
+	display: block;
+}
+.cu-btn {
+	width: 80%;
+	height: 72.46rpx;
+	line-height: 72.46rpx;
+	background: #44a78d;
+	border-radius: 181.15rpx;
+	text-align: center;
+	font-size: 32.6rpx;
+	color: #fff;
+	cursor: pointer;
+}
+.input-title {
+	border: 1.81rpx solid #CCCCCC;
+	background-color: #CCCCCC;
+}
+

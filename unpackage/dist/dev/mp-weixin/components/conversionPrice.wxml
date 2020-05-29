@@ -1,0 +1,1 @@
+<view><view class="priceInfo"><block wx:for="{{conversionPrice}}" wx:for-item="item" wx:for-index="index" wx:key="id"><text data-event-opts="{{[['tap',[['gotoprice',[index,'$0'],[[['conversionPrice','id',item.id]]]]]]]}}" class="{{[Priceindex==index?'quotedPrice':'']}}" bindtap="__e">{{item.name}}</text></block></view></view>

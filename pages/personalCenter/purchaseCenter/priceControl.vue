@@ -18,15 +18,15 @@
 		data() {
 			return {
 				quoto: {
-					page_size:6,
-					page_index: 1,
 					keyword: '',
 					type:1,
 					is_quoted:1
 				},
+				pageSize: 6, //分页大小
+				pageNum: 1, //页码
+				loadingText: "正在加载....",
 				needId: '', //需求id
 				goodsPrice: [],
-				loadingText: "正在加载....",
 				conversionPrice: [{
 						id: 1,
 						name: '已报价',
@@ -41,11 +41,12 @@
 			};
 		},
 		methods: {
-			initData() {
+			loadData() { 
+				//debugger
 				let params = {
 					data: {
-						page_size: this.quoto.page_size,
-						page_index: this.quoto.page_index,
+						page_size: this.pageSize,
+						page_index: this.pageNum,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
 						is_quoted:this.quoto.is_quoted
@@ -57,6 +58,7 @@
 					dataType: 'JSON',
 					method: 'POST', //请求方式
 					data: params,
+<<<<<<< HEAD
 					success: res => {
 						if (res.code == 200) {
 							let lists = res.data.list;
@@ -65,6 +67,16 @@
 								lists[i].service_cnname = serviceData;
 							}
 							console.log(lists,255)
+=======
+					success: (res) => {
+						console.log(res.data);
+						
+						if (res.code == 200) {
+							let lists = res.data.list;	
+							if (lists.length < this.pageSize) {
+								this.loadingText = "到底了";
+							}
+>>>>>>> c487f4a69fac54cdba98d714a585f575a2abe522
 							if (lists.length > 0) {
 								lists.forEach(item => {
 									this.goodsPrice.push(item);
@@ -73,7 +85,6 @@
 								this.loadingText = "到底了";
 							}
 						}
-					
 					}
 				});
 			},
@@ -82,36 +93,36 @@
 				// console.log(this.current,111)
 				this.quoto.is_quoted = item.is_quoted;
 				 // console.log(item.is_quoted,222)
-				this.quoto.page_index =1;
+				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsPrice = [];
-				this.initData();
+				this.loadData();
 			},
 			updateValue(item) {
-				this.needId = item.id;
-				this.request({
-					url: interfaces.getSatusData,
-					dataType: 'JSON',
-					method: 'POST', //请求方式
-					data: {
-						data: {
-							need_id:this.needId,
-							status: -1,
-						}
-					},
-					success: res => {
-						uni.showModal({
-							title: '提示',
-							content: '您确定要删除此项吗？',
-							success: res => {
-								console.log(res);
-								if (res.confirm) {
-									this.goodsPrice.splice(item, 1);
-								}
-							}
-						})
-					}
-				});
+				// this.needId = item.id;
+				// this.request({
+				// 	url: interfaces.getSatusData,
+				// 	dataType: 'JSON',
+				// 	method: 'POST', //请求方式
+				// 	data: {
+				// 		data: {
+				// 			need_id:this.needId,
+				// 			status: -1,
+				// 		}
+				// 	},
+				// 	success: res => {
+				// 		uni.showModal({
+				// 			title: '提示',
+				// 			content: '您确定要删除此项吗？',
+				// 			success: res => {
+				// 				console.log(res);
+				// 				if (res.confirm) {
+				// 					this.goodsPrice.splice(item, 1);
+				// 				}
+				// 			}
+				// 		})
+				// 	}
+				// });
 			},
 			updateDetails(item) {
 				
@@ -122,13 +133,24 @@
 			},
 		},
 		onLoad() {
-			this.initData();
+			this.loadData();
 		},
 	
+		onPullDownRefresh() {
+		
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsPrice = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
 		// 上拉加载
 		onReachBottom() {
-			this.quoto.page_index ++;
-			this.initData();
+			//debugger
+		this.pageNum++;
+		this.loadData();
 		}
 	};
 </script>

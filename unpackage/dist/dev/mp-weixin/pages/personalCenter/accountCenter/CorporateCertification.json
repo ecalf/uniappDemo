@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企业认证",
+  "usingComponents": {
+    "u-upload": "/components/u-upload/u-upload",
+    "cl-icon": "/cool/ui/components/icon/icon"
+  }
+}

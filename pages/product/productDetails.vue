@@ -21,7 +21,7 @@
 				<view class="old-price" v-if="detail.type==2">￥{{detail.supplier_price}}</view>
 				<view class="good-num">库存：{{detail.num}}{{detail.unit_category_cnname}}</view>
 			</view>
-			<view class="product-title"><text class="tui-icon">推</text>{{detail.title}}</view>
+			<view class="product-title"><text class="tui-icon" v-for="(item,index) in detail.service_cnname" :key="index">{{item}}</text>{{detail.title}}</view>
 			<view class="product-text">{{detail.desc}}</view>
 		</view>
 
@@ -38,10 +38,7 @@
 				<image src="@/static/images/certificate1.png" mode=""></image>
 				<image src="@/static/images/certificate2.png" mode=""></image>
 			</view> -->
-			<view class="certi-img">认证：<image :src="detail.qualification" mode=""></image>
-				<image src="@/static/images/certificate2.png" mode=""></image>
-				<image src="@/static/images/certificate1.png" mode=""></image>
-				<image src="@/static/images/certificate2.png" mode=""></image>
+			<view class="certi-img">认证：<image v-for="(item,index) in detail.qualifications" :key="index" :src="item" mode=""></image>
 			</view>
 		</view>
 
@@ -206,9 +203,13 @@
 						this.user_type=res.data.user_type;
 						var swiperData=res.data.images !=null && res.data.images.length?res.data.images.split(','):'';
 						var detailsData=res.data.info !=null && res.data.info.length?res.data.info.split(','):'';
-						var htmlString=[];
+						var cnnameData = res.data.service_cnname != null && res.data.service_cnname.length ? res.data.service_cnname.split(',') : '';
+						var qualificationsData=res.data.qualification_icon != null && res.data.qualification_icon.length ? res.data.qualification_icon.split(',') : '';
 						this.detail=res.data;
 						this.detail.swiperList=swiperData;
+						this.detail.service_cnname=cnnameData;
+						this.detail.qualifications=qualificationsData;
+						var htmlString=[];
 						for(var i=0;i<detailsData.length;i++){//产品详情
 						htmlString[i]='<img style="width:100%;display:block;" src="'+detailsData[i]+'"></img>';
 						}

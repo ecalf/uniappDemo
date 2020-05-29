@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "注册入口",
+  "usingComponents": {
+    "register-enter": "/pages/user/components/registerEnter"
+  }
+}

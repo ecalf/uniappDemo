@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "分类",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "uni-drawer": "/components/uni-drawer/uni-drawer",
+    "banner": "/components/banner",
+    "product-list": "/components/productList",
+    "product-category": "/components/product-category/productCategory"
+  }
+}

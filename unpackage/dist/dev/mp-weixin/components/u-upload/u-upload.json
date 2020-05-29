@@ -1,0 +1,10 @@
+{
+  "componentGenerics": {
+    "scoped-slots-file": true
+  },
+  "component": true,
+  "usingComponents": {
+    "cl-icon": "/cool/ui/components/icon/icon",
+    "u-line-progress": "/components/u-line-progress/u-line-progress"
+  }
+}
