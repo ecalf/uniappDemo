@@ -2,7 +2,7 @@
 	<view>
 		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
 		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" @update-up="updateUp" @update-down="updateDown"
-		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText"></goodsprice>
+		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText" :entrust="true"></goodsprice>
 	</view>
 </template>
 
@@ -19,7 +19,7 @@
 			return {	
 				quoto: {	
 					keyword: '',
-					type:2,
+					type:'2,3',
 					status: '',
 					is_deadtime: '',
 					kinds: ''

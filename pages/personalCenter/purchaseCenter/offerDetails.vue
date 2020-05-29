@@ -47,11 +47,13 @@
 			</view>
 		</view>
 		<view v-else class="errormsg">
-			<view><image src="/static/images/error.png"></image></view>
+			<view>
+				<image src="/static/images/error.png"></image>
+			</view>
 			<view>抱歉 Sorry！~目前还没有人报价</view>
 		</view>
 	</view>
-	
+
 </template>
 
 <script>
@@ -83,7 +85,6 @@
 					},
 					success: (res) => {
 						if (res.code == 200) {
-							console.log(res, 636);
 							var swiperData = res.data.images != null ? res.data.images.split(',') : '';
 							var cnnameData = res.data.service_cnname != null ? res.data.service_cnname.split(',') : '';
 							this.detail = res.data;
@@ -98,14 +99,12 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							quotation_id: this.quotationId,
-							is_quoted: 1,
+							quotation_id: this.quotationId
 						}
 					},
 					success: (res) => {
-						console.log(res);
 						if (res.code == 200) {
-							this.offerList = res.data;	
+							this.offerList = res.data;
 						}
 					}
 				});
@@ -121,7 +120,6 @@
 </script>
 <style lang="scss">
 	@import '@/scss/common.scss';
-
 	.offer {
 		background: #fff;
 		margin-bottom: 1.81rpx;
@@ -233,9 +231,15 @@
 			font-size: 21.73rpx;
 		}
 	}
-	.errormsg{
-		padding:90.57rpx 0;
-		text-align:center;
-		image{width:295.28rpx;height:204.71rpx;margin-bottom:20px;}
+
+	.errormsg {
+		padding: 90.57rpx 0;
+		text-align: center;
+
+		image {
+			width: 295.28rpx;
+			height: 204.71rpx;
+			margin-bottom: 20px;
+		}
 	}
 </style>

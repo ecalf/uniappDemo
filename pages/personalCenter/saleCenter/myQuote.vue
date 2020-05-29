@@ -4,7 +4,7 @@
 			<view class="search-icon"></view>
 			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
 		</view> -->
-		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText"></goodsprice>
+		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText" @details-url="updateDetails"></goodsprice>
 	</view>
 </template>
 
@@ -49,7 +49,7 @@
 					success: ((res) => {
 						if (res.code == 200) {
 							let lists = res.data.list;
-							console.log(lists,212)
+							//console.log(lists,212)
 							for (let i = 0; i < lists.length; i++) { //转成数组
 								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
@@ -105,6 +105,12 @@
 						})
 					}
 				});
+			},
+			updateDetails(item) {
+				//跳转链接
+				uni.navigateTo({
+					url: "/pages/personalCenter/purchaseCenter/offerDetails?quotation_id="+ item.quotation_id+'&need_id='+item.need_id
+				})
 			},
 		},
 		onLoad(option) {

@@ -21,11 +21,11 @@
 
 					</view>
 					<view v-if="priceTime">日期：{{item.updated_at.substring(0,10)}}</view>
-					<view class="entrust" v-if="item.type==4">委托</view>
+					<view class="entrust" v-if="item.type==4 || item.type==3">委托</view>
 				</view>
 				<view class="goods-operate">
 					<view class="goodsDelete" @tap="handleDelete(item)" v-if="priceHide"><text class="deleteText">删除</text></view>
-					<!-- <view class="goodsDelete"><text class="updataText" @tap="handlemodify(item)">修改</text></view> -->
+					<view class="goodsDelete" v-if="priceHide"><text class="updataText" @tap="handlemodify(item)">修改</text></view>
 					<view class="goodsDelete borderline" v-if="current == 2" @tap="handleUp(item)"><text class="pullText">上架</text></view>
 					<view class="goodsDelete borderline" v-if="current == 1" @tap="handleDown(item)"><text class="pullText">下架</text></view>
 				</view>
