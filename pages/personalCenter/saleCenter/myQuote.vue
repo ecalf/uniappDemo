@@ -4,7 +4,7 @@
 			<view class="search-icon"></view>
 			<input type="text" placeholder="搜索订单"  v-model="quoto.keyword"/>
 		</view> -->
-		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue"></goodsprice>
+		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText"></goodsprice>
 	</view>
 </template>
 
@@ -19,13 +19,14 @@
 		data() {
 			return {
 				quoto: {
-					page_size:6,
-					page_index: 1,
 					keyword: '',
 					type:2,
 					is_quoted:1
 				},
+				pageSize: 6, //分页大小
+				pageNum: 1, //页码
 				needId: '', //需求id
+				loadingText: "正在加载....",
 				goodsPrice: [],
 			};
 		},
@@ -38,26 +39,44 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							page_size: this.quoto.page_size,
-							page_index: this.quoto.page_index,
+							page_size: this.pageSize,
+							page_index: this.pageNum,
 							keyword: this.quoto.keyword,
 							type: this.quoto.type,
 							is_quoted:this.quoto.is_quoted
 						}
 					},
 					success: ((res) => {
-						console.log(res, 1111)
-						this.goodsPrice = res.data.list;
 						if (res.code == 200) {
 							let lists = res.data.list;
+							console.log(lists,212)
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData = lists[i].service_cnname.split(',');
+								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
 							}
-							console.log(lists,362)
+							if (lists.length < this.pageSize) {
+								this.loadingText = "到底了";
+							}
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.goodsPrice.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							} 
 						}
 					})
 				});
+			},
+			gotoPrice(index,item) {//传值
+				this.current=index;
+				// console.log(this.current,111)
+				this.quoto.is_quoted = item.is_quoted;
+				 // console.log(item.is_quoted,222)
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsPrice = [];
+				this.getMyquote();
 			},
 			updateValue(item) {
 				console.log(item,235)
@@ -82,7 +101,6 @@
 									this.goodsPrice.splice(item, 1);
 								}
 								
-								
 							}
 						})
 					}
@@ -92,7 +110,12 @@
 		onLoad(option) {
 			this.getMyquote()
 		},
-		
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+		this.pageNum++;
+		this.getMyquote();
+		}
 	}
 </script>
 

@@ -1,38 +1,70 @@
 <template>
 	<view>
-	<!-- 	<view class="input-view">
-			<view class="search-icon" ></view>
-			<input type="text" placeholder="搜索订单" v-model="quoto.keyword"/>
-		</view> -->
-		<goodsprice :goodsPrice='goodsPrice'></goodsprice>
+		<converSionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></converSionPrice>
+		<goodsprice :goodsPrice="goodsPrice" @update-value="updateValue" @update-up="updateUp" @update-down="updateDown"
+		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText"></goodsprice>
 	</view>
 </template>
+
 <script>
-	import conversionPrice from '@/components/conversionPrice.vue'
+	import converSionPrice from '@/components/conversionPrice.vue'
 	import goodsprice from '@/components/goodsPrice.vue'
 	import interfaces from '@/utils/interfaces.js'
 	export default {
+		components: {
+			converSionPrice,
+			goodsprice
+		},
 		data() {
-			return {
-				quoto: {
-					page_size: 10,
-					page_index: 1,
+			return {	
+				quoto: {	
 					keyword: '',
-					type: 2,
+					type:2,
 					status: '',
 					is_deadtime: '',
 					kinds: ''
 				},
-				goodsPrice: []
+				pageSize: 6, //分页大小
+				pageNum: 1, //页码
+				loadingText: "正在加载中",
+				needId: '', //需求id
+				conversionPrice: [{
+						id: 1,
+						name: '全部',
+						status: '',
+						is_deadtime: '',
+					},
+					{
+						id: 2,
+						name: '上架',
+						status: 1,
+						is_deadtime: '',
+
+					},
+					{
+						id: 3,
+						name: '下架',
+						status: 0,
+						is_deadtime: '',
+					},
+					{
+						id: 4,
+						name: '已截止',
+						status: '',
+						is_deadtime: 1,
+					},
+				],
+				goodsPrice: [],
+				current: 0
 			};
 		},
 		methods: {
-			
-			getsupplierList() {
+			loadData() {
+				//debugger
 				let params = {
 					data: {
-						page_size: this.quoto.page_size,
-						page_index: this.quoto.page_index,
+						page_size: this.pageSize,
+						page_index: this.pageNum,
 						keyword: this.quoto.keyword,
 						type: this.quoto.type,
 						status: this.quoto.status,
@@ -40,70 +72,164 @@
 						kinds: this.quoto.kinds,
 					}
 				}
-				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data:params,
-					success: ((res) => {
-						console.log(res, 132)
-						this.goodsPrice = res.data.list;
+					data: params,
+					success: (res) => {
+						console.log(res,235);
+						
 						if (res.code == 200) {
-							let lists = res.data.list;
+							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData = lists[i].service_cnname.split(',');
+								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
 							}
+							if(lists.length<this.pageSize){
+								this.loadingText = "到底了";
+							}
+							if (lists.length > 0) {
+								lists.forEach(item => {
+									this.goodsPrice.push(item);
+								})
+							} else {
+								this.loadingText = "到底了";
+							}
 						}
-						
-					})
+					}
 				});
 			},
+			gotoPrice(index, item) { //传值
+				this.current = index;
+				this.quoto.status = item.status;
+				this.quoto.is_deadtime = item.is_deadtime;
+				this.pageNum= 1;
+				this.loadingText = "正在加载中";
+				this.goodsPrice = [];
+				this.loadData(); //更新数据
+				
+			},
+			updateValue(item) {
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id: this.needId,
+							status: -1,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要删除此项吗？',
+							success: res => {
+								console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+							}
+						})
+						//this.loadData(); //更新数据
+					}
+				});
+			},
+			updateUp(item) { //上架
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id: this.needId,
+							status: 1,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要上架吗？',
+							success: res => {
+								//console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+								
+							}
+						})
+						
+						//this.loadData(); //更新数据
+					}
+				});
+			},
+			updateDown(item) { //上架
+				this.needId = item.id;
+				this.request({
+					url: interfaces.getSatusData,
+					dataType: 'JSON',
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							need_id: this.needId,
+							status: 0,
+						}
+					},
+					success: res => {
+						uni.showModal({
+							title: '提示',
+							content: '您确定要下架吗？',
+							success: res => {
+								//console.log(res);
+								if (res.confirm) {
+									this.goodsPrice.splice(item, 1);
+								}
+								
+							}
+						})
+						this.loadData(); //更新数据
+					}
+				});
+			},
+			updateDetails(item) {
+				//跳转链接
+				uni.navigateTo({
+					url: "/pages/product/productDetails?id=" + item.id
+				})
+			},
+			updateModify(item) {
+				console.log(item);
+				uni.navigateTo({
+					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+'&cate_id='+item.cate_id
+				});
+				
+			}
 		},
-
 		onLoad() {
-			this.getsupplierList()
+			this.loadData();
 		},
-		components: {
-			goodsprice,
-
+		onPullDownRefresh() {
+		
+			setTimeout(() => {
+				this.pageNum = 1;
+				this.loadingText = "加载中...";
+				this.goodsList = [];
+				this.loadData();
+				uni.stopPullDownRefresh();
+			}, 1000)
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.loadData();
 		}
 	}
 </script>
 
 <style lang="less">
-	.input-view {
-		width: 659.42rpx;
-		height: 65.21rpx;
-		line-height: 65.21rpx;
-		background-color: rgba(142, 142, 147, 0.12);
-		border-radius: 18.11rpx;
-		margin: 18.11rpx auto 36.23rpx;
-		position: relative;
 
-		input {
-			display: block;
-			height: 65.21rpx;
-			line-height: 65.21rpx;
-			padding-left: 54.34rpx;
-			font-size: 23.55rpx;
-
-			&::-webkit-input-placeholder {
-				color: red;
-			}
-		}
-
-		.search-icon {
-			display: inline-block;
-			width: 25.36rpx;
-			height: 25.36rpx;
-			position: absolute;
-			top: 50%;
-			margin-top: -12.68rpx;
-			left: 21.73rpx;
-			background: url(~@/static/images/lgicon30.png) center center no-repeat;
-			background-size: cover;
-		}
-	}
 </style>
