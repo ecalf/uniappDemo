@@ -109,7 +109,7 @@
 			updateDetails(item) {
 				//跳转链接
 				uni.navigateTo({
-					url: "/pages/personalCenter/purchaseCenter/offerDetails?id="+ item.id+'&need_id='+item.need_id
+					url: "/pages/personalCenter/purchaseCenter/offerDetails?quotation_id="+ item.quotation_id+'&need_id='+item.need_id
 				})
 			},
 		},

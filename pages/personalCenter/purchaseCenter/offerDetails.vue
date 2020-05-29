@@ -106,7 +106,7 @@
 		},
 		onLoad(optinos) {
 			this.needId= optinos.need_id;
-			this.quotationId = optinos.id;
+			this.quotationId = optinos.quotation_id;
 			this.initData();
 		}
 	};
