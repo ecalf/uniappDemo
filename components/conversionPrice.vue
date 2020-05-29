@@ -20,6 +20,7 @@
 		methods:{
 			gotoprice(index,item){
 				this.Priceindex = index;
+				console.log(item);
 				this.$emit('gotoprice',index,item);
 			}
 		}

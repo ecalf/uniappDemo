@@ -15,13 +15,15 @@
 							{{ item.price }}
 						</view>
 						<view class="goodslist-number">
-							{{ item.number }}
-							<text>{{ item.number }}</text>
+							{{ item.num }}
+							<text>{{ item.unit_category_cnname }}</text>
 						</view>
+						
 					</view>
+					<view v-if="priceTime">日期：{{item.updated_at.substring(0,10)}}</view>
 				</view>
 				<view class="goods-operate">
-					<view class="goodsDelete" @tap="handleDelete(item)"><text class="deleteText">删除</text></view>
+					<view class="goodsDelete" @tap="handleDelete(item)" v-if="priceHide"><text class="deleteText">删除</text></view>
 					<!-- <view class="goodsDelete"><text class="updataText" @tap="handlemodify(item)">修改</text></view> -->
 					<view class="goodsDelete borderline" v-if="current == 2" @tap="handleUp(item)"><text class="pullText">上架</text></view>
 					<view class="goodsDelete borderline" v-if="current == 1" @tap="handleDown(item)"><text class="pullText">下架</text></view>
@@ -46,6 +48,14 @@ export default {
 		current: {
 			type: Number
 		},
+		priceHide: {
+			type: Boolean,
+			default:true
+		},
+		priceTime:{
+			type: Boolean,
+			default:false
+		},
 		loadStatus: {
 			type: String,
 			default: '正在加载....'
@@ -56,6 +66,7 @@ export default {
 	},
 	methods: {
 		gotoDetails(item) {
+			console.log(item);
 			this.$emit('details-url', item);
 			// console.log(item,625)
 		},

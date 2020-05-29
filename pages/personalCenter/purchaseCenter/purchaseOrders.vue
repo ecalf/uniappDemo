@@ -72,6 +72,7 @@
 						kinds: this.quoto.kinds,
 					}
 				}
+				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
@@ -102,7 +103,6 @@
 			},
 			gotoPrice(index, item) { //传值
 				this.current = index;
-				this.quoto.type = item.type;
 				this.quoto.status = item.status;
 				this.quoto.is_deadtime = item.is_deadtime;
 				this.pageNum= 1;
@@ -202,7 +202,7 @@
 				})
 			},
 			updateModify(item) {
-				console.log(item);
+				//console.log(item);
 				uni.navigateTo({
 					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+'&cate_id='+item.cate_id
 				});

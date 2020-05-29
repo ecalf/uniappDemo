@@ -1,14 +1,12 @@
 <template>
 	<view>
-		<conversionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></conversionPrice>
+		<!-- <conversionPrice :conversionPrice="conversionPrice" @gotoprice="gotoPrice"></conversionPrice> -->
 		<view class="supplier-box" v-for="(item, index) in poolList" :key="index">
 			<view class="supplier-header">
 				<image class="title-icon" :src="item.company_images"></image>
 				<view class="supplier-content">
-					<text class="supplier-name">{{ item.company_name }}</text>
-					<view class="supplier-kind">
-						<text>{{ item.business_scope_cate }}</text>
-					</view>
+					<view class="supplier-name">{{ item.company_name }}</view>
+					<view class="supplier-kind">{{ item.business_scope_cate }}</view>
 					<text class="supplier-url">{{ item.addr }}</text>
 				</view>
 			</view>
@@ -38,67 +36,17 @@ export default {
 	computed: mapState(['hasLogin', 'uerInfo']),
 	data() {
 		return {
-			user_id: '',
+			//user_id: '',
 			poolfrom: {
-				collect_type: '',
+				collect_type:1,
 				page_size: 6,
 				page_index: 1
 			},
 			poolList: [],
 			current: 0,
-			conversionPrice: [
-				{
-					id: 1,
-					name: '全部'
-				},
-				{
-					id: 2,
-					name: '我的收藏',
-					collect_type: 1
-				}
-			]
 		};
 	},
-	components: {
-		conversionPrice
-	},
 	methods: {
-		gotoPrice(index, item) {
-			//传值
-			this.current = index;
-			// console.log(this.current, 333);
-			this.poolfrom.collect_type = item.collect_type;
-			// console.log(item.collect_type);
-			// if (index == 0) {
-			// 	this.getsupplierList(); //更新数据
-			// }
-			if (index == 0) {
-				this.getsupplierList();		
-			}else{
-				this.getpoollist();
-			}
-		},
-		getsupplierList() {//全部
-			this.request({
-				url: interfaces.getPoolData,
-				dataType: 'JSON',
-				method: 'POST', //请求方式
-				data: {
-					data: {
-						collect_type: this.poolfrom.collect_type,
-						page_size: this.poolfrom.page_size,
-						page_index: this.poolfrom.page_index
-					}
-				},
-				success: res => {
-					var lists = res.data.list;
-					console.log('全部',lists);		
-					if (res.code == 200) {
-						this.poolList= res.data.list;
-					}
-				}
-			});
-		},
 		getpoollist() {//收藏
 			this.request({
 				url: interfaces.getPoolData,
@@ -111,9 +59,9 @@ export default {
 						page_index: this.poolfrom.page_index
 					}
 				},
-				success: res => {
+				success: (res) => {
 					var lists = res.data.list;
-					console.log('收藏',lists);
+					//console.log('收藏',lists);
 
 					if (res.code == 200) {
 						this.poolList= res.data.list;
@@ -130,9 +78,9 @@ export default {
 		}
 	},
 	onLoad() {
-		this.user_id = this.uerInfo.user_Id;
+		//this.user_id = this.uerInfo.user_Id;
 		// console.log(this.user_id,2222);
-		this.getsupplierList();
+		this.getpoollist();
 	},
 	onReachBottom() {
 		this.poolfrom.page_index++;
@@ -147,7 +95,7 @@ export default {
 	background-color: #ffffff;
 	border-radius: 11px;
 	box-sizing: border-box;
-	margin: 0 auto;
+	margin: 0 auto 18.11rpx;
 	padding: 36.23rpx;
 
 	.supplier-header {
@@ -156,6 +104,8 @@ export default {
 		.title-icon {
 			width: 144.92rpx;
 			height: 144.92rpx;
+			background:#E2E2E2;
+			border-radius:5px;
 		}
 
 		.supplier-content {
@@ -170,22 +120,14 @@ export default {
 		}
 
 		.supplier-kind {
-			width: 307.97rpx;
-			height: 48.91rpx;
+			padding:0 18.11rpx;
 			background-color: #d9ede8;
-			border-radius: 25.36rpx;
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
+			display: inline-block;
 			margin: 14.49rpx 0rpx;
 			font-size: 18.11rpx;
-
-			text {
-				letter-spacing: 0px;
-				color: #44a78d;
-				vertical-align: middle;
-				margin-left: 9.05rpx;
-			}
+			color: #44a78d;
+			border-radius:18.11rpx;
+			
 		}
 
 		.supplier-url {
@@ -201,10 +143,10 @@ export default {
 
 		.supplier-information {
 			margin-top: 19.92rpx;
-
+			line-height:39.85rpx;
 			.supplier-contacts {
 				font-size: 19.92rpx;
-				color: #4e5a65;
+				color: #4E5A65;
 				margin-top: 5px;
 			}
 
@@ -218,7 +160,7 @@ export default {
 			width: 163.04rpx;
 			height: 45.28rpx;
 			border-radius: 23.55rpx;
-			border: solid 1.81rpx #8e8e93;
+			border: solid 1px #44a78d;
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
@@ -230,9 +172,11 @@ export default {
 			font-size: 21.73rpx;
 			letter-spacing: 0rpx;
 			color: #4e5a65;
+			
 		}
 
 		.checkhomeText {
+			
 			font-size: 21.73rpx;
 			color: #44a78d;
 		}

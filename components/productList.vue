@@ -6,10 +6,10 @@
 					<image mode="widthFix" :src="goods.thumbnail"></image>
 				</view>
 				<view class="info">
-					<view class="name"><text class="tui-icon" v-for="(item,num) in goods.service_cnname">{{item}}</text>{{goods.title}}</view>
+					<view class="name"><text class="tui-icon" v-for="(item,num) in goods.service_cnname" :key="num">{{item}}</text>{{goods.title}}</view>
 
 					<view class="certificate">
-						<image  v-for="item in goods.qualification_icon" :src="item" mode=""></image>
+						<image  v-for="(item,num) in goods.qualification_icon" :key="num" :src="item" mode=""></image>
 					</view>
 					<view class="price">
 						<text>￥</text>
