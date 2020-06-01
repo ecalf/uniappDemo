@@ -62,7 +62,7 @@
 	 * @event {Function} on-progress 图片上传过程中的进度变化过程触发
 	 * @event {Function} on-uploaded 所有图片上传完毕触发
 	 * @event {Function} on-choose-complete 每次选择图片后触发，只是让外部可以得知每次选择后，内部的文件列表
-	 * @example <u-upload :action="action" :file-list="fileList" ></u-upload>
+	 * @example <u-upload :action="action" :file-list="fileList" ></u-upload>  
 	 */
 	import uLineProgress from '@/components/u-line-progress/u-line-progress'
 	export default {
