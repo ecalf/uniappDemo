@@ -32,6 +32,8 @@
 		onLoad(option) {
 			// this.modifyParams=JSON.parse(option.params);
 			this.needid=option.id;
+			this.cate_id=option.cate_id;
+			console.log(this.cate_id)
 			this.initData();
 		},
 		methods: {
@@ -58,9 +60,7 @@
 				this.searchVal = res.value
 			},
 			updateValue(item) {
-				//console.log(this.modifyParams.cate_id);
 				this.cate_id=item.id;
-				//console.log(item,this.modifyParams.id);
 			},
 			stepBtn() { //下一步
 				if (!this.cate_id == '') {

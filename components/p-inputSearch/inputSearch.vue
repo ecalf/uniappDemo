@@ -12,12 +12,14 @@
 		props: {
 			placeholder: String, //默认提示
 			searchKey: String, //模糊搜索的key值
+			//inputValue:String,
 			dataSource: {
 				type: Array,
 				default: function() { //数据源
 					return [];
 				}
-			}
+			},
+			//name:String,
 		},
 		data() {
 			return {

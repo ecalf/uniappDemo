@@ -81,7 +81,7 @@
 			</view>
 			<view class="uni-form-item m-form-item">
 				<view class="title">出口国</view>
-				<inputSearch class="uni-input" :dataSource="dataSource" @select="handleChange" placeholder="" />
+				<inputSearch class="uni-input" :dataSource="dataSource" @select="handleChange" :placeholder="inputValue" />
 			</view>
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>价格</view>
@@ -100,7 +100,7 @@
 				<view class="checkbox-list">
 					<checkbox-group @change="qualtChange" class="checkbox-item-box pb0">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in qualtitems" :key="item.value">
-							<checkbox :value="item.cn_name" :checked="item.checked"  color="#44a78d" style="transform:scale(0.7)" />
+							<checkbox :value="item.cn_name" :checked="item.checked" color="#44a78d" style="transform:scale(0.7)" />
 							<image :src="item.icon" mode=""></image>
 						</label>
 					</checkbox-group>
@@ -117,7 +117,7 @@
 				<view class="uni-input">
 					<radio-group @change="radioChange">
 						<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in useItems" :key="index">
-							<radio :value="item.value" :checked="item.checked" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
+							<radio :value="item.value" :checked="index === useway" color="#44a78d" style="transform:scale(0.7)" />{{item.name}}
 						</label>
 					</radio-group>
 				</view>
@@ -184,7 +184,7 @@
 					files: {}
 				},
 				publishData: {
-					needId:"",//需求id
+					needId: "", //需求id
 					type: "", //类型1 发布采购 2 发布销售 3 委托销售	
 					cate_id: '', //品类id
 					brand_id: '', //品牌id
@@ -215,30 +215,32 @@
 					},
 				],
 				dataSource: [], //出口国家
+				inputValue: '',
 				brandvalue: '', //当前选择品牌
 				selectbrand: [], //选择品牌
 				selectUnit: [], //选择单位
 				curUnit: '请选择', //当前选择单位
 				action: interfaces.getUploadData,
-				filesArr: [],
 				customBtn: false,
-				lists: [], // 组件内部的文件列表
-				Listids: [], //选择增值服务
 				isCheckAll: false,
 				current: 0, //选择委托方式
-				mainImage:[],//宝贝主图
-				swipeImage:[],//轮播图
-				productList:[],//商品详情
+				filesArr: [],
+				lists: [], // 组件内部的文件列表
+				Listids: [], //选择增值服务
+				mainImage: [], //宝贝主图
+				swipeImage: [], //轮播图
+				productList: [], //商品详情
+				useway: '',
 				useItems: [{
 						value: '1',
 						name: '民用',
-						checked:'',
+						//checked:'',
 
 					},
 					{
 						value: '2',
 						name: '医用',
-						checked:'',
+						//checked:'',
 					},
 				],
 				serviceList: [{
@@ -273,85 +275,117 @@
 			//console.log(this.modifyParams);
 			//this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
-			this.publishData.needId=option.id;
-			console.log(option.id);
-			this.getProdcutData();
+			this.publishData.needId = option.id;
 			this.initData(); //初始化数据
+			this.getProdcutData();
 			this.countryData(); //出口国
 		},
 		methods: {
 			//获取默认发布信息
-			getProdcutData(){
+			getProdcutData() {
 				this.request({
-						url: interfaces.getInfoData,
-						dataType: "JSON",
-						method: 'POST', //请求方式
-						data:{
-							data: {
-								needs_id:this.publishData.needId
-							}
-						},
-						success: (res) => {		
-							console.log(res);
-							if(res.code==200){	
-								var item=res.data;
-								this.publishData.type=item.type;
-								this.publishData.title=item.title,
-								this.publishData.desc=item.desc,
-								
-								this.publishData.otherBrand=item.other_brand,
-								this.publishData.deadtime=item.dead_time.substring(0,10),//截止时间
-							
-								this.publishData.num=item.num,
-								this.exit_country=item.exit_country,
-								this.publishData.price=item.price,
-								this.useItems[item.use_way].checked==true, //用途
-								this.publishData.service_id=item.service_id,
-								this.publishData.supplier_price=item.supplier_price,
-								this.brandvalue=item.product_brand_cnname,//品牌
-								this.curUnit=item.unit_category_cnname,//单位
-								this.exit_country = item.exit_country;//出口国
-								
-								let chekbox=item.qualification
-								let chekboxArr= chekbox !=null && chekbox.length?chekbox.split(','):''
-								for(let i=0; i<chekboxArr.length;i++){
-									//console.log(this.qualtitems)	
-									 for(let j=0;j<this.qualtitems.length;j++){
-										  console.log('34324',this.qualtitems[j].cn_name)
-										  if(this.qualtitems[j].cn_name==chekboxArr[i]){						  
-										  }
-									 }
-								}
-									 
-								let thumb = {url:item.thumbnail}
-								this.mainImage.push(thumb)//主图
-								
-								let swImages=item.images;
-								let swiperArr= swImages !=null && swImages.length?swImages.split(','):''
-								for(let i = 0;i<swiperArr.length;i++) {
-									this.swipeImage.push({url: swiperArr[i]}//轮播图
-								)}
-					
-								let infoImage=item.info;
-								let infoArr=infoImage !=null && infoImage.length?infoImage.split(','):''
-								for(let i = 0;i<infoArr.length;i++) {
-									this.productList.push({url: infoArr[i]}//轮播图
-								)}
-								
-								
-								let service=item.service_id;
-								for(let i = 0;i<this.serviceList.length;i++) {
-										console.log(this.serviceList[i].id);
-										if(service==this.serviceList[i].id){
-											
-										}
-									}
-								
-								
-							
-							}
+					url: interfaces.getInfoData,
+					dataType: "JSON",
+					method: 'POST', //请求方式
+					data: {
+						data: {
+							needs_id: this.publishData.needId
 						}
-					})			
+					},
+					success: (res) => {
+						console.log(res);
+						if (res.code == 200) {
+							var item = res.data;
+							
+							for (let i = 0; i < this.entrustList.length; i++) {
+								//console.log(this.entrustList[i].value,item.type);
+								if (item.type==this.entrustList[i].value) {
+									this.current = i;
+									break;
+								}	
+							}
+							this.publishData.type = item.type //类型
+							this.publishData.title = item.title //标题
+							this.publishData.desc = item.desc //描述
+
+							this.publishData.otherBrand = item.other_brand //其他品牌
+							this.publishData.deadtime = item.dead_time.substring(0, 10) //截止时间
+
+							this.publishData.num = item.num //数量
+							this.publishData.price = item.price //价格
+
+							this.publishData.supplier_price = item.supplier_price //供应商价格
+
+							this.brandvalue = item.product_brand_cnname, //品牌
+								this.publishData.brand_id = item.brand_id;
+
+							this.curUnit = item.unit_category_cnname, //单位
+								this.publishData.unit_cate_id = item.unit_cate_id;
+
+							//console.log(item.exit_country)
+							this.inputValue = item.exit_country,
+								this.exit_country = item.exit_country; //出口国
+
+
+							for (let i = 0; i < this.useItems.length; i++) { //用途
+								if (item.use_way == this.useItems[i].value) {
+									this.useway = i;
+								}
+								this.publishData.use_way = item.use_way
+							}
+
+							let chekbox = item.qualification //资质		
+							let chekboxArr = chekbox != null && chekbox.length ? chekbox.split(',') : ''
+
+							for (let i = 0; i < chekboxArr.length; i++) {
+								for (let j = 0; j < this.qualtitems.length; j++) {
+									if (chekboxArr[i] == this.qualtitems[j].id) {
+										const item = this.qualtitems[j];
+										this.$set(item, 'checked', true)
+									}
+								}
+							}
+							 this.publishData.qualification=chekbox;
+
+							let thumb = {
+								url: item.thumbnail
+							}
+							this.mainImage.push(thumb) //主图
+							this.publishData.thumbnail = item.thumbnail
+
+							let swImages = item.images;
+							let swiperArr = swImages != null && swImages.length ? swImages.split(',') : ''
+							for (let i = 0; i < swiperArr.length; i++) { //轮播图
+								this.swipeImage.push({
+									url: swiperArr[i]
+								})
+							}
+							this.publishData.images = swImages
+
+							let infoImage = item.info;
+							let infoArr = infoImage != null && infoImage.length ? infoImage.split(',') : ''
+							for (let i = 0; i < infoArr.length; i++) {
+								this.productList.push({
+									url: infoArr[i]
+								}) //详情图
+
+							}
+							this.publishData.info = infoImage
+
+							let service = item.service_id; //服务选择
+							let serviceArr = service != null && service.length ? service.split(',') : ''
+							console.log(serviceArr);
+							for (let i = 0; i < serviceArr.length; i++) {
+							for (let j = 0; j < this.serviceList.length; j++) {
+								if (serviceArr[i] == this.serviceList[j].id) {
+									this.Listids.push(this.serviceList[i].id);
+								}
+							}
+							}
+							this.publishData.service_id = service
+						}
+					}
+				})
 			},
 			checkUploadFiles() {
 				let finished = true;
@@ -391,9 +425,9 @@
 				//this.fileList.push({url:res.data.img_url});
 				// console.log(fieldName);
 				this.publishData[fieldName] = res.data.img_url;
-				
 
-				var imglist = ["images","info"];
+
+				var imglist = ["images", "info"];
 				if (imglist.includes(fieldName)) {
 					var listimg = [];
 					for (var i = 0; i < lists.length; i++) {
@@ -403,7 +437,7 @@
 						}
 					}
 					this.publishData[fieldName] = listimg.join(",");
-					console.log('4',this.publishData[fieldName]);
+					console.log('4', this.publishData[fieldName]);
 
 				}
 			},
@@ -441,7 +475,7 @@
 			},
 
 			initData() {
-				
+
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -449,12 +483,13 @@
 					method: 'POST', //请求方式
 					data: {
 						data: {
-							cate_id:this.publishData.cate_id
+							cate_id: this.publishData.cate_id
 						}
 					},
-					success: ((res) => {
-						this.selectbrand = res.data;
-					})
+					success: (res) => {
+						//debugger
+						this.selectbrand = res.data.length?res.data:[];
+					}
 				});
 				//获取资质种类分类列表
 				this.request({
@@ -491,6 +526,7 @@
 
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
+
 			},
 
 			handleTap(name) { //picker弹出
@@ -498,10 +534,10 @@
 			},
 			brandChange(item) { //品牌id 
 				this.publishData.brand_id = item.item.id;
-				
+
 			},
 			Unithange(item) { //单位id
-			
+
 				this.publishData.unit_cate_id = item.item.id;
 			},
 			radioChange: function(e) { //用途选择
@@ -510,6 +546,7 @@
 			qualtChange: function(e) { //资质证书
 				var items = this.qualtitems,
 					values = e.detail.value;
+				//console.log(items);
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
 					const item = items[i]
 					if (values.indexOf(item.value) >= 0) {
@@ -523,6 +560,7 @@
 			},
 			checkboxChange: function(id) { //选择增值服务
 				var ids = this.Listids.indexOf(id);
+				console.log(ids);
 				if (ids >= 0) {
 					//如果包含了该ID，则删除（单选按钮由选中变为非选中状态）
 					this.Listids.splice(ids, 1);
@@ -543,13 +581,13 @@
 				//debugger
 				let params = {
 					data: {
-						id:this.publishData.needId,
+						id: this.publishData.needId,
 						type: this.publishData.type,
 						cate_id: this.publishData.cate_id,
 						title: this.publishData.title,
 						desc: this.publishData.desc,
 						thumbnail: this.publishData.thumbnail,
-						otherBrand: this.publishData.otherBrand,
+						other_brand: this.publishData.otherBrand,
 						brand_id: this.publishData.brand_id,
 						num: this.publishData.num,
 						exit_country: this.exit_country,
@@ -564,64 +602,32 @@
 						info: this.publishData.info,
 					}
 				}
+				console.log('584', params);
 				this.request({
 					url: interfaces.getModifyData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
-					data:params,
-					success: (res) => {	
-						console.log("请求成功",res);
-						//this.categoryList = res.data;
+					data: params,
+					success: (res) => {
+						if (res.code == 200) {
+							uni.showToast({
+								title: '修改成功，请前往首页查看',
+								icon: "none"
+							})
+							setTimeout(() => {
+								uni.switchTab({
+									url: "/pages/index/index"
+								})
+							}, 1000);
+						} else {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+						}
 					}
 				})
-				// //console.log(this.publishData.type);
-				// let params = {
-				// 	data: {
-				// 		type: this.publishData.type,
-				// 		cate_id: this.publishData.cate_id,
-				// 		title: this.publishData.title,
-				// 		desc: this.publishData.desc,
-				// 		thumbnail: this.publishData.thumbnail,
-				// 		otherBrand: this.publishData.otherBrand,
-				// 		brand_id: this.publishData.brand_id,
-				// 		num: this.publishData.num,
-				// 		exit_country: this.exit_country,
-				// 		price: this.publishData.price,
-				// 		dead_time: this.publishData.deadtime,
-				// 		use_way: this.publishData.use_way,
-				// 		qualification: this.publishData.qualification,
-				// 		unit_cate_id: this.publishData.unit_cate_id,
-				// 		service_id: this.publishData.service_id,
-				// 		images: this.publishData.images,
-				// 		supplier_price: this.publishData.supplier_price,
-				// 		info: this.publishData.info,
-				// 	}
-				// }
-				// console.log('publishSubmit begin, params:', params);
-				// this.request({
-				// 	url: interfaces.getPublishData,
-				// 	dataType: "JSON",
-				// 	method: 'POST', //请求方式
-				// 	data: params,
-				// 	success: ((res) => {
-				// 		if (res.code == 200) {
-				// 			uni.showToast({
-				// 				title: '发布需求成功，请前往首页查看',
-				// 				icon: "none"
-				// 			})
-				// 			setTimeout(() => {
-				// 				uni.switchTab({
-				// 					url: "/pages/index/index"
-				// 				})
-				// 			}, 1000);
-				// 		} else {
-				// 			uni.showToast({
-				// 				title: res.message,
-				// 				icon: "none"
-				// 			});
-				// 		}
-				// 	})
-				// });
+
 			},
 
 		}
@@ -669,7 +675,7 @@
 	.upload-images {
 		display: flex;
 		text-align: center;
-		justify-content:left;
+		justify-content: left;
 
 	}
 
@@ -696,6 +702,6 @@
 	}
 
 	.imagestips {
-		text-align:left;
+		text-align: left;
 	}
 </style>

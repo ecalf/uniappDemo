@@ -376,7 +376,7 @@
 						}
 					},
 					success: ((res) => {
-						this.selectbrand = res.data;
+						this.selectbrand = res.data.length?res.data:[];
 					})
 				});
 				//获取资质种类分类列表
