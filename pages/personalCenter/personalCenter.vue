@@ -228,9 +228,9 @@
 
 		},
 		onLoad() {
-			this.usertype = this.uerInfo.user_Type,
-				console.log(this.usertype)
-		},
+			this.usertype = this.uerInfo.user_Type
+				// console.log(this.usertype)
+		}
 
 	}
 </script>

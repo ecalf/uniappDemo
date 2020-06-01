@@ -71,10 +71,12 @@ export default {
 				dataType: 'JSON',
 				method: 'POST', //请求方式
 				data: {
-					data: {}
+					data: {
+						
+					}
 				},
 				success: res => {
-					console.log(res, 555);
+					// console.log(res, 555);
 					if (res.code == 200) {
 						this.user_company = res.data.profiles.user_company;
 						this.is_identifiy = res.data.profiles.user_info.is_identifiy;
@@ -87,6 +89,7 @@ export default {
 		this.usertype = this.uerInfo.user_Type;
 		// console.log(this.usertype)
 		this.getMyccount();
+		
 	}
 };
 </script>

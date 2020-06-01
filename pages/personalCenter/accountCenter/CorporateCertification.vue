@@ -268,29 +268,29 @@ export default {
 			this[handlerName].apply(this, argsMerge);
 		},
 		onProgress(res, index, lists, fieldName) {
-			console.log('onProgress', res, index, lists, fieldName);
+			// console.log('onProgress', res, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 		},
 		onSuccess(res, index, lists, fieldName) {
 			//fieldName 服务器接收该图片的字段名
-			console.log('onSuccess', res, index, lists, fieldName);
+			// console.log('onSuccess', res, index, lists, fieldName);
 			res = JSON.parse(res);
 			this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
 			//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 			//this.fileList.push({url:res.data.img_url});
 			this.Corporateform[fieldName] = res.data.img_url;
-			console.log('this.Corporateform[fieldName]>>>', this.Corporateform[fieldName]);
+			// console.log('this.Corporateform[fieldName]>>>', this.Corporateform[fieldName]);
 		},
 		onChange(res, index, lists, fieldName) {
-			console.log('onChange ', res, index, lists, fieldName);
+			// console.log('onChange ', res, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 		},
 		onError(err, index, lists, fieldName) {
-			console.log('onError ', err, index, lists, fieldName);
+			// console.log('onError ', err, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.EEROR;
 		},
 		onRemove(index, lists, fieldName) {
-			console.log('onRemove ', index, lists, fieldName);
+			// console.log('onRemove ', index, lists, fieldName);
 			this.uploadState.files[fieldName] = undefined;
 			this.Corporateform[fieldName] = '';
 		},
@@ -345,7 +345,7 @@ export default {
 					}
 				},
 				success: res => {
-					console.log(res, 3333);
+					// console.log(res, 3333);
 					//
 					if (res.code !== 200) {
 						uni.showToast({
@@ -356,11 +356,13 @@ export default {
 					} else {
 						uni.showToast({
 							title: '您的资料已提交',
-							duration: 2000
+							duration: 1500
 						});
+						setTimeout(function(){
 						uni.switchTab({
 							url: '/pages/personalCenter/personalCenter'
 						});
+						}, 2000);
 					}
 				}
 			});

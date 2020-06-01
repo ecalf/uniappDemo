@@ -371,7 +371,7 @@ export default {
 	}
 
 	.contact-information {
-		font-size: 28.98rpx;
+		font-size: 21.73rpx;
 		color: #4e5a65;
 		.contact-man {
 			margin: 9.05rpx 0;
