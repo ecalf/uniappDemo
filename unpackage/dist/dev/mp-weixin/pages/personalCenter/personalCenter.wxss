@@ -1,4 +1,5 @@
 .header {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#44a78d), to(#b5f5e2));
   background-image: -webkit-linear-gradient(bottom, #44a78d 0%, #b5f5e2 100%);
   background-image: linear-gradient(0deg, #44a78d 0%, #b5f5e2 100%);
   padding: 36.23rpx 5% 0;
@@ -54,7 +55,8 @@
   border-radius: 5px;
   margin: 9.05rpx auto;
   padding: 21.73rpx 4%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   clear: both;
   overflow: hidden;
 }
@@ -75,7 +77,8 @@
   width: 126.81rpx;
   height: 50.72rpx;
   background-color: #17F2B9;
-  box-shadow: 0rpx 5.43rpx 10.86rpx 0rpx #11413b;
+  -webkit-box-shadow: 0rpx 5.43rpx 10.86rpx 0rpx #11413b;
+          box-shadow: 0rpx 5.43rpx 10.86rpx 0rpx #11413b;
   border-radius: 25.36rpx;
   display: -webkit-box;
   display: -webkit-flex;
@@ -100,44 +103,42 @@
   color: #05544a;
 }
 .procurement {
+  margin-top: 18.11rpx;
+}
+.procurement,
+.m-memberbox {
   width: 659.42rpx;
   background-color: #ffffff;
   border-radius: 19.92rpx;
-  margin: 9.05rpx auto;
+  padding: 32.6rpx 0 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+          justify-content: left;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
   overflow: hidden;
+  margin-bottom: 18.11rpx;
 }
 .procurement-title {
   width: 100%;
-  height: 34.42rpx;
-  font-family: Microsoft YaHei;
   font-size: 25.36rpx;
-  font-weight: normal;
-  font-stretch: normal;
-  line-height: 65.21rpx;
   letter-spacing: 0rpx;
   color: #707070;
-  margin: 27.17rpx 54.34rpx;
+  margin-bottom: 32.6rpx;
+  padding: 0 27.17rpx;
 }
 .procurement-content {
   width: 33.33%;
-  margin-top: 18.11rpx;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
   text-align: center;
+  padding-bottom: 36.23rpx;
 }
 .img {
   width: 43.47rpx;
   height: 43.47rpx;
-  margin: 0 auto;
+  margin: 0 auto 9.05rpx;
 }
 image {
   width: 100%;
@@ -145,12 +146,8 @@ image {
 }
 .text {
   font-size: 21.73rpx;
-  font-weight: normal;
-  font-stretch: normal;
-  line-height: 65.21rpx;
   letter-spacing: 0rpx;
   color: #4e5a65;
-  margin: 0 auto;
 }
 .sale {
   background-color: #ffffff;

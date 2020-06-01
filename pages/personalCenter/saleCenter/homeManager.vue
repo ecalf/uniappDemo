@@ -38,7 +38,7 @@
 						:show-upload-list="showUploadList"
 						:action="action"
 						:auto-upload="autoUpload"
-						:file-list="fileList"
+						:file-list="logoImg"
 						:show-progress="showProgress"
 						:deletable="deletable"
 						max-count="1"
@@ -63,7 +63,7 @@
 						:show-upload-list="showUploadList"
 						:action="action"
 						:auto-upload="autoUpload"
-						:file-list="fileList"
+						:file-list="companyImg"
 						:show-progress="showProgress"
 						:deletable="deletable"
 						max-count="1"
@@ -90,7 +90,7 @@
 						:show-upload-list="showUploadList"
 						:action="action"
 						:auto-upload="autoUpload"
-						:file-list="fileList"
+						:file-list="transparencyImg"
 						:show-progress="showProgress"
 						:deletable="deletable"
 						max-count="1"
@@ -115,7 +115,7 @@
 						:show-upload-list="showUploadList"
 						:action="action"
 						:auto-upload="autoUpload"
-						:file-list="fileList"
+						:file-list="transparencyImg2"
 						:show-progress="showProgress"
 						:deletable="deletable"
 						max-count="1"
@@ -140,7 +140,7 @@
 						:show-upload-list="showUploadList"
 						:action="action"
 						:auto-upload="autoUpload"
-						:file-list="fileList"
+						:file-list="transparencyImg3"
 						:show-progress="showProgress"
 						:deletable="deletable"
 						max-count="1"
@@ -169,7 +169,7 @@
 							:show-upload-list="showUploadList"
 							:action="action"
 							:auto-upload="autoUpload"
-							:file-list="fileList"
+							:file-list="qualificationsImg"
 							:show-progress="showProgress"
 							:deletable="deletable"
 							max-count="1"
@@ -194,7 +194,7 @@
 							:show-upload-list="showUploadList"
 							:action="action"
 							:auto-upload="autoUpload"
-							:file-list="fileList"
+							:file-list="qualificationsImg1"
 							:show-progress="showProgress"
 							:deletable="deletable"
 							max-count="1"
@@ -219,7 +219,7 @@
 							:show-upload-list="showUploadList"
 							:action="action"
 							:auto-upload="autoUpload"
-							:file-list="fileList"
+							:file-list="qualificationsImg2"
 							:show-progress="showProgress"
 							:deletable="deletable"
 							max-count="1"
@@ -244,7 +244,7 @@
 							:show-upload-list="showUploadList"
 							:action="action"
 							:auto-upload="autoUpload"
-							:file-list="fileList"
+							:file-list="qualificationsImg3"
 							:show-progress="showProgress"
 							:deletable="deletable"
 							max-count="1"
@@ -292,6 +292,15 @@ export default {
 			action: interfaces.getUploadData,
 			// 预置上传列表
 			fileList: [], //保存上传完毕的文件，用于组件多文件上传时，如果是多个上传组件则每个组件应独占一个fileList
+			logoImg:[],//公司logo
+			companyImg:[],//公司图片
+			transparencyImg:[],//幻灯片1
+			transparencyImg2:[],//幻灯片1
+			transparencyImg3:[],//幻灯片1
+			qualificationsImg:[],//资质1
+			qualificationsImg1:[],//资质2
+			qualificationsImg2:[],//资质3
+			qualificationsImg3:[],//资质4
 			showUploadList: true,
 			customBtn: false,
 			autoUpload: true, //选择图片后自动开始上传
@@ -323,6 +332,57 @@ export default {
 		};
 	},
 	methods: {
+		getinfoData() {
+			this.request({
+				url: interfaces.getEnterpriseData,
+				dataType: 'JSON',
+				method: 'POST', //请求方式
+				data: {
+					data: {
+						user_id: this.userid
+					}
+				},
+				success: res => {
+					console.log(res, 235);
+					if (res.code == 200) {
+						var list = res.data.profiles.user_company
+						this.ManagerForm.company_name = list.company_name
+						this.ManagerForm.addr = list.addr
+						this.ManagerForm.contact_name = list.contact_name
+						this.ManagerForm.contact_phone = list.contact_phone
+						this.ManagerForm.qq = list.qq
+						this.ManagerForm.wechat = list.wechat
+						this.ManagerForm.email = list.email
+						this.ManagerForm.company_introduce = list.company_introduce
+						
+						let logo = {url:list.company_logo}
+						this.logoImg.push(logo)//公司logo
+						this.ManagerForm.company_logo = list.company_logo
+						
+						let company = {url:list.company_images}
+						this.companyImg.push(company)//公司图片
+						this.ManagerForm.company_images = list.company_images
+						
+						let transparency=list.company_transparency;
+						let transparencyArr=transparency !=null && transparency.length?transparency.split(','):''
+						// console.log(infoArr[0]);
+						this.transparencyImg.push({url: transparencyArr[0]})//幻灯片1
+						this.transparencyImg2.push({url: transparencyArr[1]})//幻灯片2
+						this.transparencyImg3.push({url: transparencyArr[2]})//幻灯片3
+						this.ManagerForm.company_transparency = transparency
+						
+						let qualifications=list.qualifications;
+						let qualificationsArr=qualifications !=null && qualifications.length?qualifications.split(','):''
+						// console.log(infoArr[0]);
+						this.qualificationsImg.push({url: qualificationsArr[0]})//资质1
+						this.qualificationsImg1.push({url: qualificationsArr[1]})//资质2
+						this.qualificationsImg2.push({url: qualificationsArr[2]})//资质3
+						this.qualificationsImg3.push({url: qualificationsArr[3]})//资质4
+						this.ManagerForm.qualifications = qualifications
+					}
+				}
+			});
+		},
 		checkUploadFiles() {
 			let finished = true;
 			let uploadState = this.uploadState;
@@ -348,13 +408,13 @@ export default {
 			this[handlerName].apply(this, argsMerge);
 		},
 		onProgress(res, index, lists, fieldName) {
-			console.log('onProgress', res, index, lists, fieldName);
+			// console.log('onProgress', res, index, lists, fieldName);
 
 			this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 		},
 		onSuccess(res, index, lists, fieldName) {
 			//fieldName 服务器接收该图片的字段名
-			console.log('onSuccess', res, index, lists, fieldName);
+			// console.log('onSuccess', res, index, lists, fieldName);
 			res = JSON.parse(res);
 
 			this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
@@ -363,7 +423,7 @@ export default {
 			//this.fileList.push({url:res.data.img_url});
 
 			//this.ManagerForm[fieldName] = res.data.img_url;
-			console.log(fieldName, res.data.img_url);
+			// console.log(fieldName, res.data.img_url);
 			//console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
 
 			//定义一个数组
@@ -385,15 +445,15 @@ export default {
 			//console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
 		},
 		onChange(res, index, lists, fieldName) {
-			console.log('onChange ', res, index, lists, fieldName);
+			// console.log('onChange ', res, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 		},
 		onError(err, index, lists, fieldName) {
-			console.log('onError ', err, index, lists, fieldName);
+			// console.log('onError ', err, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.EEROR;
 		},
 		onRemove(index, lists, fieldName) {
-			console.log('onRemove ', index, lists, fieldName);
+			// console.log('onRemove ', index, lists, fieldName);
 			this.uploadState.files[fieldName] = undefined;
 			this.ManagerForm[fieldName] = '';
 		},
@@ -403,7 +463,7 @@ export default {
 					title: '文件未上传完毕',
 					icon: 'none'
 				});
-				console.log('文件未上传完毕', this.uploadState.files);
+				// console.log('文件未上传完毕', this.uploadState.files);
 				return false;
 			}
 
@@ -444,7 +504,7 @@ export default {
 					}
 				},
 				success: res => {
-					console.log(res, 656);
+					// console.log(res, 656);
 					if (res.code !== 200) {
 						uni.showToast({
 							title: res.message,
@@ -454,11 +514,13 @@ export default {
 					} else {
 						uni.showToast({
 							title: '提交成功',
-							duration: 2000
+							duration: 1500
 						});
-						uni.navigateTo({
+						setTimeout(function(){ 
+							uni.navigateTo({
 							url: '/pages/personalCenter/accountCenter/myAccount'
-						});
+						}); 
+						}, 2000);
 					}
 				}
 			});
@@ -475,32 +537,7 @@ export default {
 		// 	console.log('清空数据')
 		// }
 
-		getinfoData() {
-			this.request({
-				url: interfaces.getEnterpriseData,
-				dataType: 'JSON',
-				method: 'POST', //请求方式
-				data: {
-					data: {
-						user_id: this.userid
-					}
-				},
-				success: res => {
-					console.log(res, 235);
-					if (res.code == 200) {
-						var list = res.data.profiles.user_company
-						this.ManagerForm.company_name = list.company_name
-						this.ManagerForm.addr = list.addr
-						this.ManagerForm.contact_name = list.contact_name
-						this.ManagerForm.contact_phone = list.contact_phone
-						this.ManagerForm.qq = list.qq
-						this.ManagerForm.wechat = list.wechat
-						this.ManagerForm.email = list.email
-						this.ManagerForm.company_introduce = list.company_introduce
-					}
-				}
-			});
-		}
+
 	},
 	onLoad() {
 		this.userid = this.uerInfo.user_Id, 

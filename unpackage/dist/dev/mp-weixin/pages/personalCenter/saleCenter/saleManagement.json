@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "销售管理",
   "usingComponents": {
+    "conver-sion-price": "/components/conversionPrice",
     "goodsprice": "/components/goodsPrice"
   }
 }

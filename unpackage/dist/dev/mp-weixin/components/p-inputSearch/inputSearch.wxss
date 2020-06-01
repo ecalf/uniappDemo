@@ -36,7 +36,8 @@
   width: 94%;
   background: #ffffff;
   z-index: 99;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 .input-group .ul .li {
   height: 72.46rpx;

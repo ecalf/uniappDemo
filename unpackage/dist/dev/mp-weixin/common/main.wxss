@@ -165,7 +165,8 @@
   display: inline-block;
   color: #666;
   border: 1rpx solid #dcdfe6;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #fff;
   font-size: 26rpx;
   white-space: nowrap;
@@ -251,7 +252,8 @@
   color: #fff;
 }
 .cl-button--shadow {
-  box-shadow: 2rpx 4rpx 14rpx #44a78d;
+  -webkit-box-shadow: 2rpx 4rpx 14rpx #44a78d;
+          box-shadow: 2rpx 4rpx 14rpx #44a78d;
 }
 .cl-button[disabled] {
   color: #c0c4cc;
@@ -277,7 +279,8 @@
   color: #fff;
 }
 .cl-button--shadow {
-  box-shadow: 2rpx 4rpx 14rpx #67c23a;
+  -webkit-box-shadow: 2rpx 4rpx 14rpx #67c23a;
+          box-shadow: 2rpx 4rpx 14rpx #67c23a;
 }
 .cl-button[disabled] {
   color: #c0c4cc;
@@ -303,7 +306,8 @@
   color: #fff;
 }
 .cl-button--shadow {
-  box-shadow: 2rpx 4rpx 14rpx #dd524d;
+  -webkit-box-shadow: 2rpx 4rpx 14rpx #dd524d;
+          box-shadow: 2rpx 4rpx 14rpx #dd524d;
 }
 .cl-button[disabled] {
   color: #c0c4cc;
@@ -329,7 +333,8 @@
   color: #fff;
 }
 .cl-button--shadow {
-  box-shadow: 2rpx 4rpx 14rpx #e6a23c;
+  -webkit-box-shadow: 2rpx 4rpx 14rpx #e6a23c;
+          box-shadow: 2rpx 4rpx 14rpx #e6a23c;
 }
 .cl-button[disabled] {
   color: #c0c4cc;
@@ -355,7 +360,8 @@
   color: #fff;
 }
 .cl-button--shadow {
-  box-shadow: 2rpx 4rpx 14rpx #909399;
+  -webkit-box-shadow: 2rpx 4rpx 14rpx #909399;
+          box-shadow: 2rpx 4rpx 14rpx #909399;
 }
 .cl-button[disabled] {
   color: #c0c4cc;
@@ -377,7 +383,8 @@ cl-button + cl-button {
   background-color: #fff;
   position: relative;
   border-radius: 8rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-transition: border-color 0.2s;
   transition: border-color 0.2s;
   padding: 0 20rpx;
@@ -478,7 +485,8 @@ cl-button + cl-button {
   border-radius: 8rpx;
   height: 150rpx;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-color: #fff;
   font-size: 26rpx;
   padding: 4rpx 10rpx;
@@ -517,7 +525,8 @@ cl-button + cl-button {
   text-align: center;
   color: #999;
   margin-right: 14rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 6rpx;
   position: relative;
@@ -571,7 +580,8 @@ cl-button + cl-button {
   text-align: center;
   color: #999;
   margin-right: 14rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 40rpx;
   -webkit-transition: color 0.3s;
@@ -873,7 +883,8 @@ cl-button + cl-button {
   width: 100%;
 }
 .cl-tabs__bar {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   white-space: nowrap;
   text-align: center;
   background-color: #fff;
@@ -888,7 +899,8 @@ cl-button + cl-button {
   line-height: 80rpx;
   margin: 0 20rpx;
   font-size: 28rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-bottom-style: solid;
   border-bottom-width: 4rpx;
   border-bottom-color: transparent;
@@ -995,7 +1007,8 @@ cl-button + cl-button {
           align-items: center;
   width: 100%;
   padding: 0 20rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-list__container:active {
   background-color: #f7f7f7;
@@ -1082,7 +1095,8 @@ cl-button + cl-button {
 }
 .cl-col {
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-col::before {
   content: "";
@@ -1090,7 +1104,8 @@ cl-button + cl-button {
 }
 [class*="cl-col-"] {
   float: left;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-col-0 {
   display: none;
@@ -1482,7 +1497,8 @@ cl-button + cl-button {
 }
 .cl-row {
   position: relative;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   margin-bottom: 20rpx;
 }
 .cl-row::after, .cl-row::before {
@@ -1547,7 +1563,8 @@ cl-button + cl-button {
   font-size: 28rpx;
   color: #fff;
   overflow: hidden;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-avatar--circle {
   border-radius: 100%;
@@ -1637,7 +1654,8 @@ cl-button + cl-button {
           align-items: center;
   background-color: #fff;
   padding: 15rpx 20rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   margin-bottom: 20rpx;
 }
 .cl-search__input {
@@ -1678,7 +1696,8 @@ cl-button + cl-button {
   margin-left: 20rpx;
 }
 .cl-grid {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-grid::after, .cl-grid::before {
   content: '';
@@ -1689,7 +1708,8 @@ cl-button + cl-button {
 }
 .cl-grid-item {
   float: left;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: relative;
 }
 .cl-grid--border {
@@ -1774,7 +1794,8 @@ cl-button + cl-button {
   -webkit-flex: 1;
           flex: 1;
   overflow: auto;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-popup__wrapper--left .cl-popup {
   -webkit-transform: translateX(-100%);
@@ -1833,7 +1854,8 @@ cl-button + cl-button {
           flex-direction: column;
   min-width: auto;
   max-width: 80%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-radius: 10rpx;
   position: fixed;
   left: 50%;
@@ -1904,7 +1926,8 @@ cl-button + cl-button {
   -webkit-align-items: center;
           align-items: center;
   min-width: auto;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-radius: 8rpx;
   position: fixed;
   left: 50%;
@@ -2003,7 +2026,8 @@ cl-button + cl-button {
   border-radius: 100%;
   border: 4rpx solid rgba(0, 0, 0, 0.1);
   border-bottom: 4rpx solid currentColor;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-animation: loading-rotate 1s linear infinite;
           animation: loading-rotate 1s linear infinite;
 }
@@ -2124,7 +2148,8 @@ cl-button + cl-button {
   background-color: #dd524d;
 }
 .cl-border {
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .cl-card {
   margin-bottom: 20rpx;
@@ -2275,7 +2300,8 @@ cl-button + cl-button {
   width: 100%;
   position: relative;
   text-align: center;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-divider__line {
   position: absolute;
@@ -2342,7 +2368,8 @@ cl-button + cl-button {
   height: 100rpx;
   border-bottom: 1rpx solid #eee;
   background-color: #fff;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   padding: 15rpx 20rpx;
   box-sizing: border-box;
 }
@@ -2373,7 +2400,8 @@ cl-button + cl-button {
           align-items: center;
   min-height: 80rpx;
   font-size: 26rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   padding: 20rpx;
 }
 .cl-li__item:last-child {
@@ -2497,7 +2525,8 @@ cl-button + cl-button {
   min-height: 34rpx;
 }
 .cl-progress-bar {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
@@ -2579,7 +2608,8 @@ cl-button + cl-button {
   width: 100%;
   padding-right: 40rpx;
   font-size: 26rpx;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .cl-select picker {
   height: 70rpx;
@@ -2693,7 +2723,8 @@ cl-button + cl-button {
   border-width: 1rpx;
   border-style: dashed;
   border-color: #d9d9d9;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: relative;
   margin-right: 20rpx;
   margin-bottom: 20rpx;
@@ -3197,6 +3228,7 @@ uni-input {
 }
 .checkbox-item .title {
   position: relative;
+  background-image: -webkit-gradient(linear, right top, left top, from(#cee6e0), to(#48a990));
   background-image: -webkit-linear-gradient(right, #cee6e0 0%, #48a990 100%);
   background-image: linear-gradient(270deg, #cee6e0 0%, #48a990 100%);
   border-radius: 11px 11px 0px 0px;
@@ -3273,7 +3305,7 @@ page {
   line-height: 36.23rpx;
   text-align: center;
   font-size: 21.73rpx;
-  margin-right: 5px;
+  margin-right: 1px;
   vertical-align: 2px;
 }
 

@@ -128,7 +128,7 @@
 							title: '提示',
 							content: '您确定要删除此项吗？',
 							success: res => {
-								console.log(res);
+								// console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}

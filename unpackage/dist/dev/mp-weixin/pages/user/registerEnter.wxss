@@ -24,10 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.full-height.data-v-9394191c {
+.full-height.data-v-afe0736a {
   height: calc(100vh - 0px);
 }
-.register-wrap.data-v-9394191c {
+.register-wrap.data-v-afe0736a {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -42,12 +42,12 @@
           align-items: center;
   height: 100%;
 }
-.register-wrap .register-item.data-v-9394191c {
+.register-wrap .register-item.data-v-afe0736a {
   text-align: center;
   margin: 0 45.28rpx;
   font-size: 25.36rpx;
 }
-.register-wrap .register-item image.data-v-9394191c {
+.register-wrap .register-item image.data-v-afe0736a {
   width: 115.94rpx;
   height: 115.94rpx;
   margin-bottom: 5.43rpx;

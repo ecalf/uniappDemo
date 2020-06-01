@@ -281,6 +281,7 @@ uni-input {
 }
 .checkbox-item .title {
   position: relative;
+  background-image: -webkit-gradient(linear, right top, left top, from(#cee6e0), to(#48a990));
   background-image: -webkit-linear-gradient(right, #cee6e0 0%, #48a990 100%);
   background-image: linear-gradient(270deg, #cee6e0 0%, #48a990 100%);
   border-radius: 11px 11px 0px 0px;
@@ -373,8 +374,8 @@ uni-input {
   margin-bottom: 9.05rpx;
 }
 .product-list .product .info .certificate image {
-  width: 36.23rpx;
-  height: 36.23rpx;
+  width: 39.85rpx;
+  height: 39.85rpx;
   margin-right: 10.86rpx;
 }
 .product-list .product .info .price {

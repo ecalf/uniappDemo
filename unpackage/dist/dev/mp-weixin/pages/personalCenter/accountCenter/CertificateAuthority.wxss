@@ -35,7 +35,7 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  background-color: #7B7B7B;
+  background-color: #7b7b7b;
 }
 .CertificateAuthority-content {
   display: -webkit-box;
@@ -45,7 +45,7 @@
           justify-content: space-around;
   width: 659.42rpx;
   height: 253.62rpx;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 19.92rpx;
 }
 .CertificateAuthority-content image {
@@ -87,5 +87,9 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
+}
+.isCertificate {
+  padding: 54.34rpx 0;
+  text-align: center;
 }
 

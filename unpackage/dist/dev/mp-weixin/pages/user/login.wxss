@@ -15,7 +15,8 @@
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	        align-items: center;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 27.17rpx 0rpx;
 }
 .checkout-one {

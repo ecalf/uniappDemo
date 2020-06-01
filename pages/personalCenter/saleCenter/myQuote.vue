@@ -79,7 +79,7 @@
 				this.getMyquote();
 			},
 			updateValue(item) {
-				console.log(item,235)
+				// console.log(item,235)
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,

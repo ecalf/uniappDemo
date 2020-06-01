@@ -281,6 +281,7 @@ uni-input {
 }
 .checkbox-item .title {
   position: relative;
+  background-image: -webkit-gradient(linear, right top, left top, from(#cee6e0), to(#48a990));
   background-image: -webkit-linear-gradient(right, #cee6e0 0%, #48a990 100%);
   background-image: linear-gradient(270deg, #cee6e0 0%, #48a990 100%);
   border-radius: 11px 11px 0px 0px;
@@ -441,5 +442,14 @@ uni-input {
   margin-top: 18.11rpx;
   color: #8e8e93;
   font-size: 21.73rpx;
+}
+.errormsg {
+  padding: 90.57rpx 0;
+  text-align: center;
+}
+.errormsg image {
+  width: 295.28rpx;
+  height: 204.71rpx;
+  margin-bottom: 20px;
 }
 

@@ -60,7 +60,7 @@
 					method: 'POST', //请求方式
 					data:params,
 					success: (res) => {
-						console.log(62, res);
+						// console.log(62, res);
 						if (res.code == 200) {
 							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
@@ -98,7 +98,7 @@
 
 			},
 			updateDetails(item) {
-				console.log('101',item);
+				// console.log('101',item);
 				//跳转到报价详情
 				uni.navigateTo({
 					url: "/pages/personalCenter/purchaseCenter/offerDetails?quotation_id="+ item.quotation_id+'&need_id='+item.need_id

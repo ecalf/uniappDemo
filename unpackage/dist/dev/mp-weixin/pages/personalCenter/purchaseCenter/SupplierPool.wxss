@@ -1,9 +1,40 @@
+.priceInfo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  font-size: 25.36rpx;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  margin: 0 auto;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 27.17rpx 0rpx;
+}
+.priceInfo .quotedPrice {
+  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 16px;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #44a78d;
+  border-bottom: 5.43rpx solid #44a78d;
+}
+
 .supplier-box {
   width: 659.42rpx;
   background-color: #ffffff;
   border-radius: 11px;
-  box-sizing: border-box;
-  margin: 0 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 auto 18.11rpx;
   padding: 36.23rpx;
 }
 .supplier-box .supplier-header {
@@ -14,6 +45,8 @@
 .supplier-box .supplier-header .title-icon {
   width: 144.92rpx;
   height: 144.92rpx;
+  background: #E2E2E2;
+  border-radius: 5px;
 }
 .supplier-box .supplier-header .supplier-content {
   -webkit-box-flex: 1;
@@ -27,26 +60,13 @@
   line-height: 38.04rpx;
 }
 .supplier-box .supplier-header .supplier-kind {
-  width: 307.97rpx;
-  height: 48.91rpx;
+  padding: 0 18.11rpx;
   background-color: #d9ede8;
-  border-radius: 25.36rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  display: inline-block;
   margin: 14.49rpx 0rpx;
   font-size: 18.11rpx;
-}
-.supplier-box .supplier-header .supplier-kind text {
-  letter-spacing: 0px;
   color: #44a78d;
-  vertical-align: middle;
-  margin-left: 9.05rpx;
+  border-radius: 18.11rpx;
 }
 .supplier-box .supplier-header .supplier-url {
   font-size: 21.73rpx;
@@ -65,10 +85,11 @@
 }
 .supplier-box .supplier-footer .supplier-information {
   margin-top: 19.92rpx;
+  line-height: 39.85rpx;
 }
 .supplier-box .supplier-footer .supplier-information .supplier-contacts {
   font-size: 19.92rpx;
-  color: #4e5a65;
+  color: #4E5A65;
   margin-top: 5px;
 }
 .supplier-box .supplier-footer .supplier-information .supplier-phone {
@@ -79,7 +100,7 @@
   width: 163.04rpx;
   height: 45.28rpx;
   border-radius: 23.55rpx;
-  border: solid 1.81rpx #8e8e93;
+  border: solid 1px #44a78d;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -99,5 +120,9 @@
 .supplier-box .supplier-footer .checkhomeText {
   font-size: 21.73rpx;
   color: #44a78d;
+}
+.loading-text {
+  padding: 20px 0;
+  text-align: center;
 }
 

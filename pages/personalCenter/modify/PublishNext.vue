@@ -572,7 +572,7 @@
 				this.publishData.service_id = serviceId
 			},
 			successlist: function(data, index, lists) {
-				console.log(data, index, lists);
+				// console.log(data, index, lists);
 				//const formdata=new FormData();
 				//formdata.append("image",data.name);
 			},
