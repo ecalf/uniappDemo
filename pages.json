@@ -3,7 +3,8 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"navigationStyle":"custom"	
 			}
 		}, {
 			"path": "pages/category/category",
@@ -19,7 +20,9 @@
 		}, {
 			"path": "pages/personalCenter/personalCenter",
 			"style": {
-				"navigationBarTitleText": "个人中心"
+				"navigationBarTitleText": "个人中心",
+				"navigationBarBackgroundColor":"#b3f4e1",
+				"navigationBarTextStyle":"white"  //状态栏字体颜色
 			}
 		}, {
 			"path": "pages/product/productList",

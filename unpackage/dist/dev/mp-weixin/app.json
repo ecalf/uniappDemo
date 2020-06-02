@@ -76,5 +76,6 @@
   "usingComponents": {
     "page-footer": "/components/pageFooter",
     "page-status": "/components/status"
-  }
+  },
+  "sitemapLocation": "sitemap6.json"
 }

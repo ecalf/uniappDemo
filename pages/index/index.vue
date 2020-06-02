@@ -1,5 +1,7 @@
 <template>
 	<view>
+		<!-- 自定义顶部导航栏 -->
+		<pageHeader :nav="setNav"></pageHeader>
 		<view class="banner-swiper">
 			<view class="swiper-box">
 				<swiper circular="true" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
@@ -47,14 +49,18 @@
 		<!--登录入口-->
 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
+				
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
+					
 					<!-- #ifdef MP-WEIXIN-->
 					<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" withCredentials="true" lang="zh_CN"
 					 @getuserinfo="wxGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
-					 <!-- #endif -->
+					<!-- #endif -->
+					<!-- #ifndef MP-WEIXIN-->
 					<button type="primary" class="weixin_loginbtn" @tap="enterLogin"><text class="icon iconfont">&#xe608;</text>登录</button>
 					<button class="weixin_registerbtn" @tap="enterRegister"><text class="icon iconfont">&#xe612;</text>免费注册</button>
+					<!-- #endif -->
 				</view>
 			</view>
 		</uni-popup>
@@ -70,14 +76,25 @@
 	import productList from '@/components/productList.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import interfaces from '@/utils/interfaces.js'
+	import pageHeader from './pageHeader.vue'
 	export default {
 		components: {
 			productList,
 			uniPopup,
+			pageHeader
 		},
 		computed: mapState(['hasLogin', 'userinfo']),
 		data() {
 			return {
+				// 自定义导航栏对象
+				setNav:{
+					'bg':'#F8F8F8',  //背景色
+					'color':'#000000',  //字体颜色
+					'isdisPlayNavTitle':false, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，		
+					'images':'/static/images/header-ico.png',
+					// 然后有些页面不需要的东西通过条件控制进行显示与隐藏
+					'navTitle':'首页' //导航标题
+				},
 				SessionKey: '',
 				OpenId: '',
 				nickName: null,
@@ -245,6 +262,7 @@
 					}
 				});
 			},
+			
 			//第一授权获取用户信息===》按钮触发
 			wxGetUserInfo() {
 				let _this = this;
@@ -278,7 +296,7 @@
 							uni.getUserInfo({
 								provider: 'weixin',
 								success: function(infoRes) {
-									console.log(infoRes)
+									//console.log(infoRes)
 									//获取用户信息后向调用信息更新方法
 									let nickName = infoRes.userInfo.nickName; //昵称
 									let avatarUrl = infoRes.userInfo.avatarUrl; //头像
@@ -354,9 +372,9 @@
 			this.initData();
 			this.loadData();
 			// #ifdef MP-WEIXIN
-			 this.login();
-			 //#endif
-			
+			this.login();
+			//#endif
+
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {
@@ -608,10 +626,10 @@
 	/*首页登录入口*/
 	.index-login {
 		position: fixed;
-		width: 661.23rpx;
+		width:661.23rpx;
 		left: 50%;
-		top: 181.15rpx;
-		transform: translateX(-50%);
+		top:50%;
+		transform: translate(-50%,-50%);
 		background-color: #fff;
 		z-index: 999;
 		padding: 54.34rpx 36.23rpx;

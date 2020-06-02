@@ -1,8 +1,10 @@
 {
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
   "usingComponents": {
     "uni-popup": "/components/uni-popup/uni-popup",
-    "product-list": "/components/productList"
+    "product-list": "/components/productList",
+    "page-header": "/pages/index/pageHeader"
   }
 }

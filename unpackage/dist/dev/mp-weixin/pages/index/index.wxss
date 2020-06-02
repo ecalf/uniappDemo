@@ -574,9 +574,9 @@ uni-input {
   position: fixed;
   width: 661.23rpx;
   left: 50%;
-  top: 181.15rpx;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   background-color: #fff;
   z-index: 999;
   padding: 54.34rpx 36.23rpx;

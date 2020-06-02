@@ -232,6 +232,7 @@
 		background-image: linear-gradient(0deg,
 			#44a78d 0%,
 			#b5f5e2 100%);
+			
 		padding: 36.23rpx 5% 0;
 	}
 	.headerImg {
