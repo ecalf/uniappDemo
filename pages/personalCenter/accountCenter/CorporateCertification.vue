@@ -367,7 +367,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .authentication {
 	width: 576.08rpx;
 	height: 72.46rpx;

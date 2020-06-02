@@ -94,7 +94,7 @@ export default {
 	}
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .supplier-box {
 	width: 659.42rpx;
 	background-color: #ffffff;

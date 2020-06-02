@@ -565,7 +565,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.uni-search-box {
 		padding-top: 36.23rpx;
 	}

@@ -118,7 +118,7 @@
 		}
 	}
 </script>
-<style lang="less">
+<style lang="less" scoped>
 	.input-view {
 		width: 659.42rpx;
 		height: 65.21rpx;
