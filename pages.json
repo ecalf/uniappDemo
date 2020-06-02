@@ -141,7 +141,7 @@
 		}, {
 			"path": "pages/EnterpriseCenter/EnterpriseCenter",
 			"style": {
-				"navigationBarTitleText": "深圳万和股份有限公司"
+				"navigationBarTitleText": ""
 			}
 		}, {
 			"path": "pages/user/registerEnter",

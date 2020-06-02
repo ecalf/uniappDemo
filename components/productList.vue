@@ -7,7 +7,6 @@
 				</view>
 				<view class="info">
 					<view class="name"><text class="tui-icon" v-for="(item,num) in goods.service_cnname" :key="num">{{item}}</text>{{goods.title}}</view>
-
 					<view class="certificate">
 						<image  v-for="(item,num) in goods.qualification_icon" :key="num" :src="item" mode=""></image>
 					</view>

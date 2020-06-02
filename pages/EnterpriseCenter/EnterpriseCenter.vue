@@ -21,13 +21,13 @@
 		</view>
 		<!--列表推荐-->
 		<view class="recommend-nav">
-			<view class="tab-item" v-for="(target, index) in filterByList" :key="index" @tap="handleSelect(index)" :class="{ on: target.selected }">
+			<view class="tab-item" v-for="(target, index) in filterByList" :key="index" @tap="handleSelect(index,target)" :class="{ on: target.selected }">
 				<view class="cntitle">{{ target.cntitle }}</view>
 				<view class="entitle">{{ target.entitle }}</view>
 			</view>
 		</view>
 		<!--商品列表-->
-		<productList :goodsList="goodsList" />
+		<productList :goodsList="goodsList" :loadStatus="loadingText"/>
 		<!-- 公司资质 -->
 		<view class="aturalEndowments-box">
 			<text class="CompanyProfile-title">企业资质</text>
@@ -71,6 +71,14 @@ export default {
 	data() {
 		return {
 			user_id: '',
+			quoto: {
+				keyword: '',
+				type:1,
+			},
+			pageSize:6, //分页大小
+			pageNum: 1, //页码
+			loadingText: "正在加载中",
+			title:'',
 			collect_type:1,
 			user_bank: {},
 			user_company: {
@@ -84,65 +92,90 @@ export default {
 			duration: 500,
 			filterByList: [
 				{
-					cntitle: '需求中心',
-					entitle: 'Recommend',
-					selected: true
-				},
-				{
 					cntitle: '采购订单',
 					entitle: 'Purchase',
-					selected: false
+					selected: true,
+					type: "1"
 				},
 				{
 					cntitle: '销售订单',
 					entitle: 'Sale',
-					selected: false
+					selected: false,
+					type: "2"
 				},
 				{
 					cntitle: '委托订单',
 					entitle: 'Entrust',
-					selected: false
+					selected: false,
+					type: "3,4"
 				}
 			],
-			goodsList: [
-				{
-					id: 1,
-					img: '/static/images/product.png',
-					name: '这款呼吸机 卖疯了这款呼吸机 卖疯了',
-					price: '2000'
-				},
-				{
-					id: 2,
-					img: '/static/images/product.png',
-					name: '这款呼吸机 卖疯了这款呼吸机 卖疯了',
-					price: '2000'
-				},
-				{
-					id: 3,
-					img: '/static/images/product.png',
-					name: '这款呼吸机 卖疯了这款呼吸机 卖疯了',
-					price: '2000'
-				},
-				{
-					id: 4,
-					img: '',
-					name: '这款呼吸机 卖疯了这款呼吸机 卖疯了',
-					price: '2000'
-				},
-				{
-					id: 5,
-					img: '/static/images/product.png',
-					name: '这款呼吸机 卖疯了这款呼吸机 卖疯了',
-					price: '2000'
-				}
-			]
+			goodsList: []
+			
 		};
 	},
 	onLoad(options) {
 		this.user_id = options.userid;
+		// console.log(this.user_id)
 		this.getEnterprise();
+		this.getgoodsList()
 	},
 	methods: {
+		handleSelect(index, target) {
+			this.filterByList[index].selected = true;
+			// 其他的selected false
+			for (let i = 0; i < this.filterByList.length; i++) {
+				if (i != index) {
+					this.filterByList[i].selected = false;
+				}
+			}
+			this.quoto.type = target.type;
+			this.pageNum = 1;
+			this.loadingText = "加载中...";
+			this.goodsList = [];
+			this.getgoodsList();
+		},
+		getgoodsList(){
+			let params = {
+				data: {
+					page_size: this.pageSize,
+					page_index: this.pageNum,
+					keyword: this.quoto.keyword,
+					type:this.quoto.type,
+					user_id:this.user_id,
+				}
+			}
+			// console.log(params);
+			this.request({
+				url: interfaces.getMyneedData,
+				dataType: 'JSON',
+				method: 'POST', //请求方式
+				data: params,
+				success: res => {
+				if (res.code == 200) {
+					let lists = res.data.list;
+					// console.log(lists);
+					for (let i = 0; i < lists.length; i++) { //转成数组
+						let serviceData = lists[i].service_cnname != null ? lists[i].service_cnname.split(',') : '';
+						lists[i].service_cnname = serviceData;
+						//console.log('222',serviceData);
+						let qualification = lists[i].qualification_icon != null ? lists[i].qualification_icon.split(',') : '';
+						lists[i].qualification_icon = qualification;
+					}
+					if (lists.length < this.pageSize) {
+						this.loadingText = "到底了";
+					}
+					if (lists.length > 0) {
+						lists.forEach(item => {
+							this.goodsList.push(item);
+						})
+					} else {
+						this.loadingText = "到底了";
+					}
+				}
+				}
+			})
+		},
 		collect() {
 			this.flag = !this.flag;
 			//console.log(this.flag);
@@ -157,7 +190,7 @@ export default {
 					}
 				},
 				success: res => {
-					console.log(res,323)
+					// console.log(res,323)
 					uni.showToast({
 						title: '收藏成功',
 						duration: 2000
@@ -166,16 +199,7 @@ export default {
 				}
 			})
 		},
-		handleSelect(index) {
-			this.filterByList[index].selected = true;
-
-			// 其他的selected false
-			for (let i = 0; i < this.filterByList.length; i++) {
-				if (i != index) {
-					this.filterByList[i].selected = false;
-				}
-			}
-		},
+	
 		getEnterprise() {
 			this.request({
 				url: interfaces.getEnterpriseData,
@@ -190,10 +214,20 @@ export default {
 					console.log(res, 1212);
 					this.user_bank = res.data.profiles.user_bank;
 					this.user_company = res.data.profiles.user_company;
+					this.title = res.data.profiles.user_company.company_name;
 					this.user_company.transparencyData = this.user_company.company_transparency.split(',');
 					this.user_company.qualificationsData = this.user_company.qualifications.split(',');
+					uni.setNavigationBarTitle({
+					      title: this.title
+					    })
 				}
 			});
+		},
+		// 上拉加载
+		onReachBottom() {
+			//debugger
+			this.pageNum++;
+			this.getgoodsList();
 		}
 	}
 };
@@ -215,7 +249,6 @@ export default {
 		swiper {
 			width: 100%;
 			height: 452.89rpx;
-
 			swiper-item {
 				image {
 					width: 100%;
@@ -255,7 +288,7 @@ export default {
 .recommend-nav {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 18.11rpx;
+	margin: 18.11rpx 0;
 	.tab-item {
 		display: flex;
 		justify-content: space-between;

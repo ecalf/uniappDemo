@@ -34,10 +34,7 @@ function request(obj) {
 				})
 				return
 			}
-
 			success(res)
-
-
 
 		},
 		fail: function(res) {},

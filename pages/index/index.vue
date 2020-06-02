@@ -356,7 +356,7 @@
 		onLoad() {
 			this.initData();
 			this.loadData();
-			 this.login();
+			// this.login();
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {

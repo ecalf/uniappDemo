@@ -4,8 +4,7 @@ module.exports = (param) => {
 	var method = param.method;
 	var header = param.header || {};
 	var data = param.data || {};
-
-
+	
 	//token
 	const userInfo = uni.getStorageSync('Token'); //获取token
 	if (userInfo && userInfo.token) {
@@ -27,8 +26,6 @@ module.exports = (param) => {
 			title: "加载中..."
 		})
 	}
-
-
 
 	// 发起网络请求
 	uni.request({
