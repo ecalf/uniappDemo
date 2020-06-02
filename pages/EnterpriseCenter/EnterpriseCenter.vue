@@ -59,7 +59,6 @@
 		</view>
 	</view>
 </template>
-
 <script>
 import productList from '@/components/productList.vue';
 import interfaces from '@/utils/interfaces.js';
@@ -177,7 +176,6 @@ export default {
 				}
 			}
 		},
-
 		getEnterprise() {
 			this.request({
 				url: interfaces.getEnterpriseData,
@@ -200,10 +198,8 @@ export default {
 	}
 };
 </script>
-
 <style lang="scss" scoped>
 @import '@/scss/common.scss';
-
 .banner-swiper {
 	width: 100%;
 	display: flex;
@@ -216,7 +212,6 @@ export default {
 		//兼容ios，微信小程序
 		position: relative;
 		z-index: 1;
-
 		swiper {
 			width: 100%;
 			height: 452.89rpx;
@@ -230,7 +225,6 @@ export default {
 		}
 	}
 }
-
 .CompanyProfile {
 	width: 717.39rpx;
 	margin: -50rpx auto 0;
@@ -240,7 +234,6 @@ export default {
 	position: relative;
 	z-index: 2;
 	border-radius: 10px;
-
 	.CompanyProfile-content {
 		display: block;
 		font-size: 21.73rpx;
@@ -248,25 +241,21 @@ export default {
 		margin-top: 21.73rpx;
 	}
 }
-
 .CompanyProfile-title {
 	font-weight: bolder;
 	font-size: 27.17rpx;
 	color: #4e5a65;
 	margin-right: 9.05rpx;
 }
-
 .CompanyProfile-english {
 	font-size: 21.73rpx;
 	color: #4e5a65;
 }
-
 /*列表推荐导航*/
 .recommend-nav {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 18.11rpx;
-
 	.tab-item {
 		display: flex;
 		justify-content: space-between;
@@ -276,7 +265,6 @@ export default {
 		position: relative;
 		padding: 0 2%;
 		color: #4e5a65;
-
 		&.on {
 			color: $ac;
 
@@ -284,7 +272,6 @@ export default {
 				opacity: 1;
 			}
 		}
-
 		&:before {
 			content: '';
 			display: block;
@@ -294,7 +281,6 @@ export default {
 			top: 10.86rpx;
 			border-right: 1px solid #e2e2e2;
 		}
-
 		&:after {
 			content: '';
 			display: block;
@@ -308,18 +294,15 @@ export default {
 			background-size: cover;
 			opacity: 0;
 		}
-
 		.cntitle {
 			font-size: 25.36rpx;
 			font-weight: bolder;
 			width: 100%;
 		}
-
 		.entitle {
 			font-size: 21.73rpx;
 			width: 100%;
 		}
-
 		&:last-child {
 			&:before {
 				display: none;
@@ -327,17 +310,13 @@ export default {
 		}
 	}
 }
-
 .aturalEndowments-box {
 	box-sizing: border-box;
 	padding: 0 38.04rpx 0 45.28rpx;
 	margin: 36.23rpx 0;
-
 	.aturalEndowments-body {
 		display: flex;
-		// justify-content: space-around;
 		margin-top: 36.23rpx;
-
 		.aturalEndowments {
 			width: 155.79rpx;
 			height: 155.79rpx;
@@ -345,7 +324,6 @@ export default {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-
 			image {
 				width: 96.01rpx;
 				height: 137.68rpx;
@@ -353,23 +331,19 @@ export default {
 		}
 	}
 }
-
 .contact {
 	box-sizing: border-box;
 	padding: 0 38.04rpx 0 45.28rpx;
-
 	.contact-title {
 		font-size: 28.98rpx;
 		font-weight: bolder;
 		color: #44a78d;
 		margin-right: 9.05rpx;
 	}
-
 	.contact-english {
 		font-size: 21.73rpx;
 		color: #44a78d;
 	}
-
 	.contact-information {
 		font-size: 21.73rpx;
 		color: #4e5a65;

@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/goodsPrice"],{"2e5d":function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var o=function(){n.e("components/errorMsg/errorMsg").then(function(){return resolve(n("c8ff"))}.bind(null,n)).catch(n.oe)},u={components:{errorMsg:o},props:{goodsPrice:{type:Array},current:{type:Number},entrust:{type:Boolean,default:!1},priceHide:{type:Boolean,default:!0},priceTime:{type:Boolean,default:!1},loadStatus:{type:String,default:"正在加载...."}},data:function(){return{}},methods:{gotoDetails:function(t){console.log(t),this.$emit("details-url",t)},handleDelete:function(t){this.$emit("update-value",t)},handleUp:function(t){this.$emit("update-up",t)},handleDown:function(t){this.$emit("update-down",t)},handlemodify:function(t){this.$emit("update-modify",t)}},onLoad:function(){}};e.default=u},6553:function(t,e,n){"use strict";n.r(e);var o=n("c7f7"),u=n("ba03");for(var r in u)"default"!==r&&function(t){n.d(e,t,(function(){return u[t]}))}(r);n("ae19");var a,i=n("f0c5"),c=Object(i["a"])(u["default"],o["b"],o["c"],!1,null,null,null,!1,o["a"],a);e["default"]=c.exports},ae19:function(t,e,n){"use strict";var o=n("d1ec"),u=n.n(o);u.a},ba03:function(t,e,n){"use strict";n.r(e);var o=n("2e5d"),u=n.n(o);for(var r in o)"default"!==r&&function(t){n.d(e,t,(function(){return o[t]}))}(r);e["default"]=u.a},c7f7:function(t,e,n){"use strict";var o,u=function(){var t=this,e=t.$createElement,n=(t._self._c,t.__map(t.goodsPrice,(function(e,n){var o=e.updated_at.substring(0,10);return{$orig:t.__get_orig(e),g0:o}})));t.$mp.data=Object.assign({},{$root:{l0:n}})},r=[];n.d(e,"b",(function(){return u})),n.d(e,"c",(function(){return r})),n.d(e,"a",(function(){return o}))},d1ec:function(t,e,n){}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/goodsPrice-create-component',
+    {
+        'components/goodsPrice-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("6553"))
+        })
+    },
+    [['components/goodsPrice-create-component']]
+]);

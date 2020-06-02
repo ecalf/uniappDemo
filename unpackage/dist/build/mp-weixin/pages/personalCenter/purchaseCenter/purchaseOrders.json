@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "采购订单",
+  "usingComponents": {
+    "conver-sion-price": "/components/conversionPrice",
+    "goodsprice": "/components/goodsPrice"
+  }
+}

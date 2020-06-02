@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "深圳万和股份有限公司",
+  "usingComponents": {
+    "product-list": "/components/productList"
+  }
+}

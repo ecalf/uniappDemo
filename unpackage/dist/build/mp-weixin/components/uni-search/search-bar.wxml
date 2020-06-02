@@ -1,0 +1,1 @@
+<view><view class="uni-searchbar commonweb"><text class="icon iconfont"></text><input class="box-search-input" confirm-type="search" type="text" placeholder="{{placeholder}}" data-event-opts="{{[['confirm',[['confirm',['$event']]]],['input',[['__set_model',['','searchVal','$event',[]]]]]]}}" value="{{searchVal}}" bindconfirm="__e" bindinput="__e"/></view></view>

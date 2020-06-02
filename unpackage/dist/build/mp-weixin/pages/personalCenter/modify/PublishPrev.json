@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "修改发布信息",
+  "usingComponents": {
+    "search-bar": "/components/uni-search/search-bar",
+    "product-category": "/components/product-category/productCategory"
+  }
+}

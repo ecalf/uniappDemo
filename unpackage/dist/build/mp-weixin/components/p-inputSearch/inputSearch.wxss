@@ -1,0 +1,1 @@
+.input-group input{font-size:25.36rpx;height:86.95rpx;line-height:86.95rpx}.input-group .ul{position:absolute;left:3%;top:108.69rpx;width:94%;background:#fff;z-index:99;-webkit-box-shadow:0 5px 5px rgba(0,0,0,.2);box-shadow:0 5px 5px rgba(0,0,0,.2)}.input-group .ul .li{height:72.46rpx;line-height:72.46rpx;text-align:left;padding:0 18.11rpx;border-bottom:1px solid #f2f2f2}

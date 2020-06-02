@@ -45,8 +45,6 @@
 				<button class="cu-btn" form-type="submit">登录</button>
 			</view>
 		</form>
-
-
 		<view class="action-row">
 			<navigator url="/pages/user/registerEnter">注册账号</navigator>
 			<text>|</text>
@@ -54,7 +52,6 @@
 		</view>
 	</view>
 </template>
-
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces.js'
@@ -231,7 +228,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.input-group {
 		margin: 36.23rpx 5% 90.57rpx;
 		border-radius: 9.05rpx;

@@ -326,6 +326,3 @@
 	}
 </script>
 
-<style>
-
-</style>

@@ -21,7 +21,6 @@
 	</cl-form>
 	</view>
 </template>
-
 <script>
 	export default {
 		data() {
@@ -44,7 +43,6 @@
 	.uni-input-a {
 		margin-right: 90.57rpx;
 	}
-
 	.verificationCode {
 		width: 159.42rpx;
 		height: 52.53rpx;
@@ -54,7 +52,6 @@
 		justify-content: center;
 		align-items: center;
 	}
-
 	.authentication {
 		width: 576.08rpx;
 		height: 72.46rpx;

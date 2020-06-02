@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.m-flex {
+.m-flex.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -34,14 +34,14 @@
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.m-flex .item {
+.m-flex .item.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-.uni-form-item {
+.uni-form-item.data-v-d86d6690 {
   background: #fff;
   margin-bottom: 1px;
   display: -webkit-box;
@@ -54,11 +54,11 @@
           align-items: center;
   position: relative;
 }
-.uni-form-item .title {
+.uni-form-item .title.data-v-d86d6690 {
   color: #4e5a65;
   padding-right: 9.05rpx;
 }
-.uni-input {
+.uni-input.data-v-d86d6690 {
   font-size: 25.36rpx;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -66,48 +66,48 @@
   text-align: right;
   min-height: 41.66rpx;
 }
-.colorred {
+.colorred.data-v-d86d6690 {
   color: #f30e0e;
 }
-.uni-tl-input {
+.uni-tl-input.data-v-d86d6690 {
   text-align: left;
 }
-.uni-textarea {
+.uni-textarea.data-v-d86d6690 {
   line-height: 43.47rpx;
   height: 173.91rpx;
 }
-.cl-form .radio-box .cl-form-item__content {
+.cl-form .radio-box .cl-form-item__content.data-v-d86d6690 {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
           justify-content: flex-end;
 }
-.cl-form .cl-form-item {
+.cl-form .cl-form-item.data-v-d86d6690 {
   padding: 0 !important;
   min-height: none !important;
 }
-.cl-form .m-from-item {
+.cl-form .m-from-item.data-v-d86d6690 {
   background: #fff;
   margin-bottom: 1px;
   padding: 27.17rpx 18.11rpx;
 }
-.cl-form .cl-card__header {
+.cl-form .cl-card__header.data-v-d86d6690 {
   padding: 0 10px;
 }
-.cl-form .cl-card__header ._span {
+.cl-form .cl-card__header ._span.data-v-d86d6690 {
   color: #4e5a65;
   font-size: 25.36rpx;
 }
-.cl-form .cl-card__header:before {
+.cl-form .cl-card__header.data-v-d86d6690:before {
   display: none;
 }
-.cl-form .cl-input {
+.cl-form .cl-input.data-v-d86d6690 {
   border: 0;
   padding: 0;
 }
-.cl-form .cl-form-item__container {
+.cl-form .cl-form-item__container.data-v-d86d6690 {
   padding-left: 0 !important;
 }
-.brand-bg {
+.brand-bg.data-v-d86d6690 {
   background-color: #f6f6f6;
   border-radius: 3px;
   border: solid 1px #e2e2e2;
@@ -116,38 +116,38 @@
   padding: 0 18.11rpx !important;
   position: relative;
 }
-.brand-bg .cl-icon {
+.brand-bg .cl-icon.data-v-d86d6690 {
   position: absolute;
   right: 18.11rpx;
   top: 3.62rpx;
 }
-.size-text {
+.size-text.data-v-d86d6690 {
   background: #fff;
   padding: 0 0 36.23rpx 45.28rpx;
   position: relative;
   top: -36.23rpx;
 }
-.size-text text {
+.size-text text.data-v-d86d6690 {
   color: #ff2323;
 }
-.m-form-item {
+.m-form-item.data-v-d86d6690 {
   padding: 27.17rpx 36.23rpx;
 }
-.uoload-wrap {
+.uoload-wrap.data-v-d86d6690 {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.upload-item {
+.upload-item.data-v-d86d6690 {
   text-align: center;
 }
-.pb60 {
+.pb60.data-v-d86d6690 {
   padding-bottom: 108.69rpx;
 }
-.uni-list-cell {
+.uni-list-cell.data-v-d86d6690 {
   margin-left: 18.11rpx;
 }
-.checkbox-item-box {
+.checkbox-item-box.data-v-d86d6690 {
   padding: 12px 0 81.52rpx;
   display: -webkit-box;
   display: -webkit-flex;
@@ -155,13 +155,13 @@
   -webkit-justify-content: space-around;
           justify-content: space-around;
 }
-.checkbox-item-box image {
+.checkbox-item-box image.data-v-d86d6690 {
   width: 36.23rpx;
   height: 36.23rpx;
   vertical-align: middle;
 }
 /*公共按钮*/
-.common-btn {
+.common-btn.data-v-d86d6690 {
   position: fixed;
   left: 0;
   right: 0;
@@ -171,7 +171,7 @@
   z-index: 99;
   padding: 16.3rpx 0;
 }
-.common-btn button {
+.common-btn button.data-v-d86d6690 {
   width: 576.08rpx;
   height: 72.46rpx;
   line-height: 72.46rpx;
@@ -183,10 +183,10 @@
   cursor: pointer;
 }
 /*个人注册*/
-uni-input {
+uni-input.data-v-d86d6690 {
   font-size: 25.36rpx;
 }
-.m-input-fullwidth {
+.m-input-fullwidth.data-v-d86d6690 {
   display: block;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -195,7 +195,7 @@ uni-input {
   line-height: 54.34rpx;
   padding: 0 18.11rpx;
 }
-.send-code {
+.send-code.data-v-d86d6690 {
   padding: 0 18.11rpx;
   height: 54.34rpx;
   background-color: #e2e2e2;
@@ -205,7 +205,7 @@ uni-input {
   text-align: center;
   line-height: 54.34rpx;
 }
-.read-checkbox {
+.read-checkbox.data-v-d86d6690 {
   padding: 54.34rpx 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -217,29 +217,29 @@ uni-input {
   -webkit-align-items: center;
           align-items: center;
 }
-.read-checkbox navigator {
+.read-checkbox navigator.data-v-d86d6690 {
   color: #44A78D;
 }
-.uni-form-item .uni-picker {
+.uni-form-item .uni-picker.data-v-d86d6690 {
   width: 100%;
 }
-.uni-input-left {
+.uni-input-left.data-v-d86d6690 {
   text-align: left;
 }
-.qualifications {
+.qualifications.data-v-d86d6690 {
   background: #fff;
   margin-bottom: 1px;
   padding: 20px 25px;
 }
-.pb0 {
+.pb0.data-v-d86d6690 {
   padding-bottom: 0;
 }
-.inline-block {
+.inline-block.data-v-d86d6690 {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
 }
-.unit-picker {
+.unit-picker.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -248,10 +248,10 @@ uni-input {
           align-items: center;
   text-align: right;
 }
-.unit-picker .cl-icon {
+.unit-picker .cl-icon.data-v-d86d6690 {
   margin-left: 36.23rpx;
 }
-.unit-picker uni-picker {
+.unit-picker uni-picker.data-v-d86d6690 {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
@@ -259,7 +259,7 @@ uni-input {
   padding: 0 9.05rpx;
   margin-right: 18.11rpx;
 }
-.unit-picker .curunit {
+.unit-picker .curunit.data-v-d86d6690 {
   min-width: 90.57rpx;
   height: 43.47rpx;
   border: 1px solid #f2f2f2;
@@ -268,7 +268,7 @@ uni-input {
   margin-right: 18.11rpx;
   vertical-align: middle;
 }
-.checkbox-list-bottom {
+.checkbox-list-bottom.data-v-d86d6690 {
   padding: 0 45.28rpx 54.34rpx;
   display: -webkit-box;
   display: -webkit-flex;
@@ -276,10 +276,10 @@ uni-input {
   -webkit-justify-content: space-around;
           justify-content: space-around;
 }
-.checkbox-item {
+.checkbox-item.data-v-d86d6690 {
   width: 48%;
 }
-.checkbox-item .title {
+.checkbox-item .title.data-v-d86d6690 {
   position: relative;
   background-image: -webkit-gradient(linear, right top, left top, from(#cee6e0), to(#48a990));
   background-image: -webkit-linear-gradient(right, #cee6e0 0%, #48a990 100%);
@@ -288,11 +288,11 @@ uni-input {
   color: #fff;
   padding: 12.68rpx 18.11rpx;
 }
-.checkbox-item .title text {
+.checkbox-item .title text.data-v-d86d6690 {
   position: absolute;
   right: 18.11rpx;
 }
-.checkbox-item .checkboxbg {
+.checkbox-item .checkboxbg.data-v-d86d6690 {
   background: #fff;
   padding: 16.3rpx 18.11rpx;
   display: -webkit-box;
@@ -306,53 +306,53 @@ uni-input {
           align-items: center;
   border-radius: 19.92rpx;
 }
-.checkbox-item .dec-text .iconfont {
+.checkbox-item .dec-text .iconfont.data-v-d86d6690 {
   display: inline-block;
   border: 1px solid #8E8E93;
   border-radius: 50%;
   margin-left: 7.24rpx;
 }
-.checkbox-item .price {
+.checkbox-item .price.data-v-d86d6690 {
   font-size: 21.73rpx;
   color: #4E5A65;
 }
-.checkbox-item .price .cl-checkbox {
+.checkbox-item .price .cl-checkbox.data-v-d86d6690 {
   margin-right: 0;
 }
-.checkbox-item .price .cl-checkbox .cl-checkbox__input {
+.checkbox-item .price .cl-checkbox .cl-checkbox__input.data-v-d86d6690 {
   margin-right: 0;
   width: 36.23rpx;
   height: 36.23rpx;
   margin-left: 10.86rpx;
 }
-.checkbox-item .price .checkbox-icon {
+.checkbox-item .price .checkbox-icon.data-v-d86d6690 {
   display: inline-block;
   vertical-align: -7.24rpx;
   width: 36.23rpx;
   height: 36.23rpx;
 }
-.upprducttitle {
+.upprducttitle.data-v-d86d6690 {
   background: #fff;
   padding: 30.79rpx 36.23rpx 0;
 }
-.more-upload {
+.more-upload.data-v-d86d6690 {
   padding-top: 14.49rpx;
 }
 /*  修改状态栏样式 */
-.swiper-box {
+.swiper-box.data-v-d86d6690 {
   position: relative;
   width: 100%;
   height: 641.3rpx;
 }
-.swiper-box swiper {
+.swiper-box swiper.data-v-d86d6690 {
   width: 100%;
   height: 641.3rpx;
 }
-.swiper-box swiper swiper-item image {
+.swiper-box swiper swiper-item image.data-v-d86d6690 {
   width: 100%;
   height: 641.3rpx;
 }
-.swiper-box .indicator {
+.swiper-box .indicator.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -373,13 +373,13 @@ uni-input {
   background-color: rgba(0, 0, 0, 0.2);
 }
 /*产品详情*/
-.product-details-con {
+.product-details-con.data-v-d86d6690 {
   background: #fff;
   padding: 27.17rpx 45.28rpx 18.11rpx;
   border-top: solid 1px #e2e2e2;
   margin-bottom: 18.11rpx;
 }
-.product-details-con .top {
+.product-details-con .top.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -390,48 +390,48 @@ uni-input {
   -webkit-align-items: baseline;
           align-items: baseline;
 }
-.product-details-con .top view {
+.product-details-con .top view.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
 }
-.product-details-con .top .new-price {
+.product-details-con .top .new-price.data-v-d86d6690 {
   font-size: 54.34rpx;
   color: #44A78D;
 }
-.product-details-con .top .new-price text {
+.product-details-con .top .new-price text.data-v-d86d6690 {
   font-size: 36.23rpx;
   margin-top: 18.11rpx;
 }
-.product-details-con .top .old-price {
+.product-details-con .top .old-price.data-v-d86d6690 {
   color: #e2e2e2;
   font-size: 28.98rpx;
   text-decoration: line-through;
   margin-left: -18.11rpx;
 }
-.product-details-con .top .good-num {
+.product-details-con .top .good-num.data-v-d86d6690 {
   padding: 3.62rpx 14.49rpx;
   background-color: #A1D3C6;
   border-radius: 10px;
   font-size: 21.73rpx;
   color: #44a78d;
 }
-.product-details-con .product-title {
+.product-details-con .product-title.data-v-d86d6690 {
   margin-top: 18.11rpx;
   font-weight: bold;
   font-size: 28.98rpx;
 }
-.product-details-con .product-text {
+.product-details-con .product-text.data-v-d86d6690 {
   margin-top: 18.11rpx;
   color: #8e8e93;
   font-size: 21.73rpx;
 }
-.product-info-wrap {
+.product-info-wrap.data-v-d86d6690 {
   background: #fff;
   padding: 36.23rpx 45.28rpx 36.23rpx;
   margin-bottom: 18.11rpx;
 }
-.info-box {
+.info-box.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -441,7 +441,7 @@ uni-input {
   margin-bottom: 27.17rpx;
   margin-left: -18.11rpx;
 }
-.info-box .item {
+.info-box .item.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -449,7 +449,7 @@ uni-input {
   text-align: center;
   padding: 0 18.11rpx;
 }
-.info-box .item:after {
+.info-box .item.data-v-d86d6690:after {
   content: "";
   display: block;
   border-left: 1px solid #e2e2e2;
@@ -458,16 +458,16 @@ uni-input {
   top: 7.24rpx;
   right: 0;
 }
-.info-box .item:last-child:after {
+.info-box .item.data-v-d86d6690:last-child:after {
   display: none;
 }
-.certi-img image {
+.certi-img image.data-v-d86d6690 {
   width: 36.23rpx;
   height: 36.23rpx;
   margin: 0 9.05rpx;
   vertical-align: middle;
 }
-.description .title {
+.description .title.data-v-d86d6690 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -482,10 +482,10 @@ uni-input {
   color: #4e5a65;
   padding: 9.05rpx 0 18.11rpx;
 }
-.footer-wrap {
+.footer-wrap.data-v-d86d6690 {
   height: 101.44rpx;
 }
-.product-footer {
+.product-footer.data-v-d86d6690 {
   padding: 18.11rpx 0;
   background: #fff;
   position: fixed;
@@ -494,14 +494,14 @@ uni-input {
   width: 100%;
   z-index: 99;
 }
-.product-footer .footerlist {
+.product-footer .footerlist.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-around;
           justify-content: space-around;
 }
-.product-footer .m-btn {
+.product-footer .m-btn.data-v-d86d6690 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -517,15 +517,15 @@ uni-input {
   font-size: 25.36rpx;
   margin: 0 27.17rpx;
 }
-.product-footer .m-btn.contact-btn {
+.product-footer .m-btn.contact-btn.data-v-d86d6690 {
   background-color: #44a78d;
   color: #fefefe;
 }
-.product-footer .m-btn.price-btn {
+.product-footer .m-btn.price-btn.data-v-d86d6690 {
   color: #44A78D;
   background: #D8ECE7;
 }
-.company-box {
+.company-box.data-v-d86d6690 {
   padding: 21.73rpx 45.28rpx;
   background: #fff;
   display: -webkit-box;
@@ -537,27 +537,27 @@ uni-input {
   -webkit-align-items: center;
           align-items: center;
 }
-.company-info {
+.company-info.data-v-d86d6690 {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
 }
-.company-info image {
+.company-info image.data-v-d86d6690 {
   width: 54.34rpx;
   height: 54.34rpx;
   vertical-align: middle;
   border-radius: 50%;
   margin-right: 7.24rpx;
 }
-.company-info .title {
+.company-info .title.data-v-d86d6690 {
   color: #000000;
   margin-bottom: 9.05rpx;
 }
-.company-info .desc {
+.company-info .desc.data-v-d86d6690 {
   color: #8E8E93;
   font-size: 21.73rpx;
 }
-.company-link {
+.company-link.data-v-d86d6690 {
   width: 163.04rpx;
   height: 65.21rpx;
   background: rgba(68, 167, 141, 0.2);
@@ -568,7 +568,7 @@ uni-input {
   border-radius: 36.23rpx;
   margin-left: 63.4rpx;
 }
-.m-contactbg {
+.m-contactbg.data-v-d86d6690 {
   background-color: #fff;
   z-index: 999;
   padding: 54.34rpx 36.23rpx;
@@ -579,25 +579,25 @@ uni-input {
   width: 579.71rpx;
   margin: 0 auto;
 }
-.contact-item {
+.contact-item.data-v-d86d6690 {
   margin-bottom: 18.11rpx;
   font-size: 21.73rpx;
 }
-.contact-input input {
+.contact-input input.data-v-d86d6690 {
   border: 1px solid #f2f2f2;
   padding: 0 18.11rpx;
   height: 54.34rpx;
   line-height: 54.34rpx;
   font-size: 21.73rpx;
 }
-.contact-input textarea {
+.contact-input textarea.data-v-d86d6690 {
   height: 181.15rpx;
   border: 1px solid #f2f2f2;
   padding: 28.98rpx 18.11rpx;
   width: 100%;
   font-size: 21.73rpx;
 }
-.contactSubmit {
+.contactSubmit.data-v-d86d6690 {
   background: #44a78d;
   border-radius: 36.23rpx;
   text-align: center;

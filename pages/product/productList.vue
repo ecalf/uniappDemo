@@ -12,7 +12,6 @@
 		<page-footer :current="1"></page-footer>
 	</view>
 </template>
-
 <script>
 	import productList from '@/components/productList.vue'
 	import interfaces from '@/utils/interfaces.js'
@@ -89,7 +88,6 @@
 					}
 				})
 			},
-
 			handleSelect(index) {
 				this.filterIndex = index;
 				if (index === 0) {
@@ -110,7 +108,6 @@
 							break;
 					}
 				}
-
 				if (index === 2) {
 					switch (this.timeSort) {
 						case 'asc':
@@ -140,7 +137,6 @@
 
 		},
 		onPullDownRefresh() {
-
 			setTimeout(() => {
 				this.pageNum = 1;
 				this.loadingText = "加载中...";

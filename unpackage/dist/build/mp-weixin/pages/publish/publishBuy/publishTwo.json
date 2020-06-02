@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "发布页面",
+  "usingComponents": {
+    "cl-form": "/cool/ui/components/form/form",
+    "cl-form-item": "/cool/ui/components/form-item/form-item",
+    "cl-input": "/cool/ui/components/input/input",
+    "u-upload": "/components/u-upload/u-upload",
+    "cl-icon": "/cool/ui/components/icon/icon",
+    "cl-select": "/cool/ui/components/select/select",
+    "input-search": "/components/p-inputSearch/inputSearch",
+    "lb-picker": "/components/lb-picker/index"
+  }
+}

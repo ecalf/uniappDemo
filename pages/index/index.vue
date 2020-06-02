@@ -45,13 +45,15 @@
 		<productList :goodsList="goodsList" :loadStatus="loadingText" />
 
 		<!--登录入口-->
-		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
-					<!-- <button type="primary" class="weixin_loginbtn" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button> -->
-					<button type="primary" class="weixin_loginbtn" @tap="enterLogin" open-type="getUserInfo" @getuserinfo="mpGetUserInfo"><text
-						 class="icon iconfont">&#xe608;</text>登录</button>
+					<!-- #ifdef MP-WEIXIN-->
+					<button type="primary" class="weixin_loginbtn" open-type="getUserInfo" withCredentials="true" lang="zh_CN"
+					 @getuserinfo="wxGetUserInfo"><text class="icon iconfont">&#xe611;</text>微信登录</button>
+					 <!-- #endif -->
+					<button type="primary" class="weixin_loginbtn" @tap="enterLogin"><text class="icon iconfont">&#xe608;</text>登录</button>
 					<button class="weixin_registerbtn" @tap="enterRegister"><text class="icon iconfont">&#xe612;</text>免费注册</button>
 				</view>
 			</view>
@@ -76,9 +78,11 @@
 		computed: mapState(['hasLogin', 'uerInfo']),
 		data() {
 			return {
-				title: 'getUserInfo',
-				hasUserInfo: false,
-				userInfo: {},
+				SessionKey: '',
+				OpenId: '',
+				nickName: null,
+				avatarUrl: null,
+				isCanUse: uni.getStorageSync('isCanUse') || true, //默认为true
 				ishow: true,
 				currentPage: '/pages/index/index',
 				swiperList: [{
@@ -221,10 +225,10 @@
 							let lists = res.data.list;
 							console.log(lists);
 							for (let i = 0; i < lists.length; i++) { //转成数组
-								let serviceData =lists[i].service_cnname !=null?lists[i].service_cnname.split(','):'';
+								let serviceData = lists[i].service_cnname != null ? lists[i].service_cnname.split(',') : '';
 								lists[i].service_cnname = serviceData;
 								//console.log('222',serviceData);
-								let qualification = lists[i].qualification_icon !=null?lists[i].qualification_icon.split(','):'';
+								let qualification = lists[i].qualification_icon != null ? lists[i].qualification_icon.split(',') : '';
 								lists[i].qualification_icon = qualification;
 							}
 							if (lists.length < this.pageSize) {
@@ -239,6 +243,85 @@
 							}
 						}
 					}
+				});
+			},
+
+			//第一授权获取用户信息===》按钮触发
+			wxGetUserInfo() {
+				let _this = this;
+				uni.getUserInfo({
+					provider: 'weixin',
+					success: function(infoRes) {
+						console.log(infoRes);
+						let nickName = infoRes.userInfo.nickName; //昵称
+						let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+						try {
+							uni.setStorageSync('isCanUse', false); //记录是否第一次授权  false:表示不是第一次授权
+							_this.updateUserInfo();
+						} catch (e) {}
+					},
+					fail(res) {}
+				});
+			},
+
+			//登录
+			login() {
+				let _this = this;
+				uni.showLoading({
+					title: '登录中...'
+				});
+
+				// 1.wx获取登录用户code
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						let code = loginRes.code;
+						if (!_this.isCanUse) {
+							//非第一次授权获取用户信息
+							uni.getUserInfo({
+								provider: 'weixin',
+								success: function(infoRes) {
+									//获取用户信息后向调用信息更新方法
+									let nickName = infoRes.userInfo.nickName; //昵称
+									let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+									_this.updateUserInfo(); //调用更新信息方法
+								}
+							});
+						}
+
+						//2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
+						uni.request({
+							url: '服务器地址',
+							data: {
+								code: code,
+							},
+							success: (res) => {
+								//openId、或SessionKdy存储//隐藏loading
+								uni.hideLoading();
+							}
+						});
+					},
+				});
+			},
+			//向后台更新信息
+			updateUserInfo() {
+				let _this = this;
+				this.request({
+					url: 'url', //服务器端地址
+					data: {
+						appKey: this.$store.state.appKey,
+						customerId: _this.customerId,
+						nickName: _this.nickName,
+						headUrl: _this.avatarUrl
+					},
+					success: (res) => {
+						if (res.data.state == "success") {
+							uni.reLaunch({ //信息更新成功后跳转到小程序首页
+								url: '/pages/index/index'
+							});
+						}
+					}
+
 				});
 			},
 			handlePublish(item) {
@@ -273,6 +356,7 @@
 		onLoad() {
 			this.initData();
 			this.loadData();
+			 this.login();
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {

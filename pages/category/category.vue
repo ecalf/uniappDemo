@@ -46,7 +46,6 @@
 					</view>
 				</view>
 			</view>
-
 			<view class="filter-condition">
 				<view class="text" :class="[{on:filterIndex===0},{up:defalutSort===0},{down:defalutSort===1}]" @tap="handleSelect(0)">
 					<text>综合</text>
@@ -66,7 +65,6 @@
 		<page-footer :currentPage="currentPage"></page-footer>
 	</view>
 </template>
-
 <script>
 	import banner from '@/components/banner'
 	import productList from '@/components/productList'
@@ -96,7 +94,7 @@
 				reload:false,
 				info: [{
 						colorClass: 'uni-bg-red',
-						url: '/static/images/cateimg01.png',
+						url: '/static/images/cateimg01.jpg',
 						content: '内容 A'
 					},
 					{
@@ -114,7 +112,6 @@
 				firstImages: '',
 				categoryList: [],
 			}
-
 		},
 		methods: {
 			//弹窗显示
@@ -126,7 +123,6 @@
 				}
 			},
 			hide() {
-
 				this.showLeft = false
 				this.showRight = false
 			},
@@ -168,9 +164,7 @@
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data: params,
-					success: (res) => {
-						console.log(res.data);
-						
+					success: (res) => {			
 						if (res.code == 200) {
 							let lists = res.data.list;	
 							for(let i=0;i<lists.length;i++){//转数组
@@ -192,7 +186,6 @@
 						}
 					}
 				})
-
 			},
 			handleSelect(index) {
 				this.filterIndex = index;
@@ -227,7 +220,6 @@
 				this.loadData();
 				this.closeDrawer('right');
 			},
-
 		},
 		onNavigationBarButtonTap(e) {
 			this.showRight = !this.showRight
@@ -242,7 +234,6 @@
 			this.loadData();
 		},
 		onPullDownRefresh() {
-
 			setTimeout(() => {
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
@@ -261,9 +252,8 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import "../../scss/common.scss";
-
 	/*分类*/
 	.good-products {
 		background: #ffffff;
@@ -273,18 +263,14 @@
 		display: flex;
 		justify-content: space-between;
 		font-size: 21.73rpx;
-
 	}
-
 	.goodpro-left,
 	.goodpro-right {
 		display: flex;
 		justify-content: space-between;
 		width: 49%;
 		flex-wrap: wrap;
-
 	}
-
 	.pro-item {
 		display: flex;
 		justify-content: space-between;
@@ -299,35 +285,28 @@
 		&.pro-item1 {
 			background: #faf5f1;
 		}
-
 		&.pro-item2 {
 			background: #faf9f4;
 		}
-
 		&.pro-item3 {
 			background: #fdf7f9;
 		}
-
 		&.pro-item4 {
 			background: #ecf5f8;
 		}
-
 		.protitle {
 
 			margin-bottom: 7.24rpx;
 			display: block;
 		}
-
 		image {
 			width: 81.52rpx;
 			height: 70.65rpx;
 		}
 	}
-
 	.goodpro-box {
 		width: 100%;
 	}
-
 	.m-good-title {
 		font-size: 28.98rpx;
 		color: $bc;
@@ -335,9 +314,7 @@
 		width: 100%;
 		line-height: 20px;
 	}
-
 	.goodpro-right {
-
 		.column {
 			padding: 14.49rpx 19.92rpx;
 			display: flex;
@@ -346,24 +323,19 @@
 			border-radius: 19.92rpx;
 			margin-bottom: 3.62rpx;
 			align-items: flex-start;
-
 			.left,
 			.right {
 				display: flex;
 				justify-content: space-between;
 				width: 50%;
 				flex-wrap: wrap;
-
 			}
-
 			.left {
 				padding-top: 18.11rpx;
 				position: relative;
-
 				text {
 					width: 100%;
 				}
-
 				&:after {
 					content: "";
 					width: 50.72rpx;
@@ -374,7 +346,6 @@
 
 				}
 			}
-
 			.right {
 				image {
 					width: 137.68rpx;
@@ -383,7 +354,6 @@
 			}
 		}
 	}
-
 	/*条件筛选*/
 	.filter-condition {
 		background-color: #ffffff;
@@ -392,19 +362,15 @@
 		flex-wrap: wrap;
 		justify-content: space-around;
 		margin-bottom: 9.05rpx;
-
 		.text {
 			font-size: 25.36rpx;
 			display: flex;
-
 			text-align: center;
 			padding: 28.98rpx 0;
 			color: #4e5a65;
-
 			text {
 				width: 100%;
 				position: relative;
-
 				&:after {
 					content: "";
 					display: inline-block;
@@ -416,9 +382,7 @@
 					border-top: 4px solid #4e5a65;
 					margin-left: 5px;
 				}
-
 			}
-
 			&.filter {
 				text:after {
 					border: 0;
@@ -428,73 +392,51 @@
 					background-size: cover;
 				}
 			}
-
 			&.on {
 				color: $ac;
-
 				text:after {
 					border-top: 4px solid $ac;
 				}
-
 				&.filter {
 					text:after {
-
 						background-image: url(~@/static/images/fillericona.png);
 						background-size: cover;
-
 					}
 				}
-
 			}
-
 			&.up {
 				text:after {
-					transform: rotate(180deg);
-
+				transform: rotate(180deg);
 				}
-
-
 			}
-
 			&.down {
-
 				text:after {
 					transform: 0;
-
 				}
-
-
 			}
 		}
 	}
-
 	/*筛选弹窗*/
 	.uni-drawer {
 		padding-top: 79.71rpx;
-
 	}
-
 	.drawerlist {
 		border-top: 1px solid #eaeced;
 	}
-
 	.uni-list-item {
 		color: $bc;
 		position: relative;
-
 		&.on {
 			.uni-list-item__extra {
 				transform: rotate(-45deg);
 			}
 		}
 	}
-
 	.uni-list-item__content {
 		padding: 36.23rpx;
 		border-bottom: solid 1px #eaeced;
 		font-size: 25.36rpx;
 	}
-
 	.uni-list-item__subcon {
 		padding: 27.17rpx 36.23rpx 18.11rpx;
 
@@ -507,7 +449,6 @@
 			margin: 0 9.05rpx 9.05rpx;
 		}
 	}
-
 	.uni-list-item__extra {
 		position: absolute;
 		right: 39.85rpx;

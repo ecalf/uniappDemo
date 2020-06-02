@@ -41,7 +41,6 @@
 			<view class="certi-img">认证：<image v-for="(item,index) in detail.qualifications" :key="index" :src="item" mode=""></image>
 			</view>
 		</view>
-
 		<view class="company-box" v-if="user_type==3">
 			<view class="company-info">
 				<view class="title">
@@ -61,7 +60,6 @@
 				</view> -->
 			</view>
 		</view>
-
 		<!--底部菜单-->
 		<view class="footer-wrap">
 			<view class="product-footer">
@@ -116,11 +114,9 @@
 				<button class="contactSubmit" form-type="submit">提交</button>
 				</view>
 			</form>
-		</uni-popup>
-		
+		</uni-popup>	
 	</view>
 </template>
-
 <script>
 	var graceChecker = require("@/utils/graceChecker.js");
 	import interfaces from '@/utils/interfaces'
@@ -237,8 +233,7 @@
 					});
 				}else{
 					this.$refs.popup.open();
-				}
-				 
+				}				 
 			},
 			offerBtn(){
 				if(!this.hasLogin){
@@ -262,7 +257,6 @@
 			swiperChange(event) {
 				this.currentSwiper = event.detail.current;
 			},
-			
 			 companyData(){
 				 this.request({
 					url: interfaces.getEnterpriseData,
@@ -338,16 +332,14 @@
 		},
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	@import "../../scss/common.scss";
-
 	/*  修改状态栏样式 */
 	.status {
 		/* #ifdef APP-PLUS */
 		opacity: 0;
 		/* #endif */
 	}
-
 	.swiper-box {
 		position: relative;
 		width: 100%;
@@ -364,7 +356,6 @@
 				}
 			}
 		}
-
 		.indicator {
 			display: flex;
 			justify-content: center;
@@ -380,7 +371,6 @@
 			background-color: rgba(0, 0, 0, 0.2);
 		}
 	}
-
 	/*产品详情*/
 	.product-details-con {
 		background: #fff;
@@ -392,12 +382,10 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: baseline;
-
 			view {
 				display: flex;
 
 			}
-
 			.new-price {
 				font-size: 54.34rpx;
 				color: $ac;
@@ -407,52 +395,41 @@
 					margin-top: 18.11rpx;
 				}
 			}
-
 			.old-price {
 				color: #e2e2e2;
 				font-size: 28.98rpx;
 				text-decoration: line-through;
 				margin-left: -18.11rpx;
 			}
-
 			.good-num {
-
 				padding: 3.62rpx 14.49rpx;
-
 				background-color: #A1D3C6;
 				border-radius: 10px;
-
 				font-size: 21.73rpx;
 				color: #44a78d;
-
 			}
 		}
-
 		.product-title {
 			margin-top: 18.11rpx;
 			font-weight: bold;
 			font-size: 28.98rpx;
 		}
-
 		.product-text {
 			margin-top: 18.11rpx;
 			color: #8e8e93;
 			font-size: 21.73rpx;
 		}
 	}
-
 	.product-info-wrap {
 		background: #fff;
 		padding: 36.23rpx 45.28rpx 36.23rpx;
 		margin-bottom: 18.11rpx;
 	}
-
 	.info-box {
 		display: flex;
 		justify-content:left;
 		margin-bottom: 27.17rpx;
 		margin-left:-18.11rpx;
-
 		.item {
 			display: flex;
 			position: relative;
@@ -475,7 +452,6 @@
 			}
 		}
 	}
-
 	.certi-img {
 		image {
 			width: 36.23rpx;
@@ -484,7 +460,6 @@
 			vertical-align: middle;
 		}
 	}
-
 	.description {
 		.title {
 			width: 100%;
@@ -497,26 +472,21 @@
 		}
 
 	}
-
-	.footer-wrap {
+.footer-wrap {
 		height: 101.44rpx;
 	}
-
 	.product-footer {
 		padding: 18.11rpx 0;
 		background: #fff;
-
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		width: 100%;
 		z-index: 99;
-
 		.footerlist {
 			display: flex;
 			justify-content: space-around;
 		}
-
 		.m-btn {
 			display: flex;
 			justify-content: center;
@@ -528,19 +498,16 @@
 			line-height: 61.59rpx;
 			font-size: 25.36rpx;
 			margin: 0 27.17rpx;
-
 			&.contact-btn {
 				background-color: #44a78d;
 				color: #fefefe;
 			}
-
 			&.price-btn {
 				color: $ac;
 				background: #D8ECE7;
 			}
 		}
 	}
-	
 	.company-box{
 		padding:21.73rpx 45.28rpx;
 		background:#fff;
@@ -554,12 +521,10 @@
 		.desc{color:#8E8E93;font-size:21.73rpx;}
 	}
 	.company-link{width:163.04rpx;height:65.21rpx;background:rgba(68,167,141,.2);border:1px solid #44A78D;text-align: center;line-height:65.21rpx;color:$ac;border-radius:36.23rpx;margin-left:63.4rpx;}
-	
 	.m-contactbg{background-color: #fff;z-index: 999;padding: 54.34rpx 36.23rpx;border-radius: 19.92rpx;text-align:left;font-size:28.98rpx;line-height:54.34rpx;width:579.71rpx;margin:0 auto;}
 	.contact-item{margin-bottom:18.11rpx;font-size:21.73rpx;}
 	.contact-input input{border:1px solid #f2f2f2;padding:0 18.11rpx;height:54.34rpx;line-height:54.34rpx;font-size:21.73rpx;}
 	.contact-input textarea{height:181.15rpx;border:1px solid #f2f2f2;padding:28.98rpx 18.11rpx;width:100%;font-size:21.73rpx;}
 	.contactSubmit{background: #44a78d;border-radius:36.23rpx; text-align: center; font-size:28.98rpx; color: #fff;
 cursor: pointer;height:58.34rpx;line-height:58.34rpx;}
-	
 </style>

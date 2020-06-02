@@ -52,7 +52,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import "../../scss/common.scss";
 	.publish-popup {
 		position: absolute;
@@ -73,7 +73,6 @@
 				color:$bc;
 			}
 		}
-
 	}
 	.before-login{
 		padding:271.73rpx 0 0;

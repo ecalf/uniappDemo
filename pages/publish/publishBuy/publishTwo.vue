@@ -1,8 +1,6 @@
 <template>
 	<view class="pb60">
-
 		<cl-form ref="form" :model.sync="publishData">
-
 			<view class="uni-form-item m-form-item" v-if="publishData.type==3 || publishData.type==4 || publishData.type==5">
 				<radio-group @change="typeChange">
 					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in entrustList" :key="index">
@@ -51,11 +49,8 @@
 					</view>
 					<lb-picker v-model="brandvalue" ref="picker1" :props="brandProps" :list="selectbrand" @change="brandChange">
 					</lb-picker>
-
 				</view>
-
 			</view>
-
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
@@ -65,7 +60,6 @@
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>数量</view>
 				<view class="uni-input uni-input-left m-flex">
-
 					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
 						<view @tap="handleTap('Unitpicker')">
@@ -74,7 +68,6 @@
 							</view><text>(单位)</text>
 						</view>
 						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange"></lb-picker>
-
 					</view>
 				</view>
 			</view>
@@ -134,7 +127,6 @@
 				</u-upload>
 			</view>
 			<view class="size-text">单张大小<text>5M</text>以内</view>
-
 			<view class="checkbox-list checkbox-list-bottom">
 				<view class="checkbox-item" v-for="(item,index) in serviceList" :class="{'isChecked':Listids.indexOf(item.id)>=0}"
 				 :key="index" @tap="checkboxChange(item.id)">
@@ -150,17 +142,13 @@
 						</view>
 					</view>
 				</view>
-
 			</view>
 			<view class="common-btn">
 				<button @tap="publishSubmit">立即发布</button>
 			</view>
 		</cl-form>
-
-
 	</view>
 </template>
-
 <script>
 	import inputSearch from '@/components/p-inputSearch/inputSearch'
 	import combox from '@/components/uni-combox/uni-combox'
@@ -263,25 +251,19 @@
 					value: 'cn_name', //显示值
 					unitid: 'id'
 				}
-
 			}
-
 		},
-
-		onLoad(option) {
-			
+		onLoad(option) {			
 			this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
 			this.initData(); //初始化数据
 			this.countryData(); //出口国
 		},
 		methods: {
-
 			checkUploadFiles() {
 				let finished = true;
 				let uploadState = this.uploadState;
 				let files = this.uploadState.files;
-
 				for (let fieldName in files) {
 					if (files[fieldName] == uploadState.UNFINISHED || files[fieldName] == uploadState.EEROR) {
 						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
@@ -289,7 +271,6 @@
 						break;
 					}
 				}
-
 				return finished;
 			},
 			uploadHandler(args, handlerName, fieldName) {
@@ -298,25 +279,16 @@
 					argsMerge.push(args[i]);
 				}
 				argsMerge.push(fieldName);
-
 				this[handlerName].apply(this, argsMerge);
 			},
 			onProgress(res, index, lists, fieldName) {
-				// console.log('onProgress',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 			},
 			onSuccess(res, index, lists, fieldName) { //fieldName 服务器接收该图片的字段名
-				//console.log('onSuccess22',lists,fieldName);
 				res = JSON.parse(res);
-
 				this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
-
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
-				//this.fileList.push({url:res.data.img_url});
-				// console.log(fieldName);
 				this.publishData[fieldName] = res.data.img_url;
-				
-
 				var imglist = ["images","info"];
 				if (imglist.includes(fieldName)) {
 					var listimg = [];
@@ -328,21 +300,16 @@
 					}
 					this.publishData[fieldName] = listimg.join(",");
 					console.log('4',this.publishData[fieldName]);
-
 				}
 			},
 			onChange(res, index, lists, fieldName) {
-				// console.log('onChange ',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 			},
 			onError(err, index, lists, fieldName) {
-				// console.log('onError ',err,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index, lists, fieldName) {
 				console.log('onRemove ',index,lists,fieldName,22222);
-				// this.uploadState.files[fieldName] = undefined;
-				// this.publishData[fieldName] = '';
 				var imglist = ["images", "info"];
 				if (imglist.includes(fieldName)) {
 					this.publishData[fieldName].splice(index, 1)
@@ -351,19 +318,16 @@
 					this.publishData[fieldName] = '';
 				}
 			},
-
 			typeChange: function(evt) { //获取type
 				for (let i = 0; i < this.entrustList.length; i++) {
 					if (this.entrustList[i].value === evt.target.value) {
 						this.current = i;
 						break;
 					}
-
 				}
 				this.publishData.type = evt.target.value; //获取type
 				console.log(this.publishData.type);
 			},
-
 			initData() {
 				//品牌种类
 				this.request({
@@ -399,7 +363,6 @@
 					})
 				});
 			},
-
 			//出口国
 			countryData() {
 				this.request({
@@ -411,11 +374,9 @@
 					})
 				});
 			},
-
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
 			},
-
 			handleTap(name) { //picker弹出
 				this.$refs[name].show()
 			},
@@ -454,13 +415,7 @@
 				var serviceId = this.Listids.join(',');
 				this.publishData.service_id = serviceId
 			},
-			successlist: function(data, index, lists) {
-				//console.log(data, index, lists);
-				//const formdata=new FormData();
-				//formdata.append("image",data.name);
-			},
 			publishSubmit() {
-				//console.log(this.publishData.type);
 				let params = {
 					data: {
 						type: this.publishData.type,
@@ -483,7 +438,6 @@
 						info: this.publishData.info,
 					}
 				}
-				//console.log('publishSubmit begin, params:', params);
 				this.request({
 					url: interfaces.getPublishData,
 					dataType: "JSON",
@@ -509,22 +463,16 @@
 					})
 				});
 			},
-
 		}
 	}
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 	.uni-search-box {
 		padding-top: 36.23rpx;
 	}
-
 	.publish-categroy {
 		margin-top: 36.23rpx;
-
 	}
-
-
 	.next-btn {
 		position: fixed;
 		left: 0;
@@ -534,9 +482,7 @@
 		bottom: 0;
 		z-index: 99;
 		padding: 16.3rpx 72.46rpx;
-
 		button {
-
 			width: 576.08rpx;
 			height: 72.46rpx;
 			line-height: 72.46rpx;
@@ -549,28 +495,21 @@
 
 		}
 	}
-
 	/*发布页面*/
-
 	.upload-images {
 		display: flex;
 		text-align: center;
 		justify-content:left;
-
 	}
-
 	.m-cl-box {
 		display: block;
 		padding: 7.24rpx 18.11rpx;
 	}
-
 	.m-cl-pt15 {
 		padding: 0 27.17rpx 0 45.28rpx;
 	}
-
 	.brand-bg {
 		margin-bottom: 0 !important;
-
 		.cl-card__container {
 			background-color: #f6f6f6;
 			border-radius: 3px;
@@ -580,7 +519,6 @@
 			padding: 0 18.11rpx !important;
 		}
 	}
-
 	.imagestips {
 		text-align:left;
 	}
