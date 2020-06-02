@@ -28,7 +28,7 @@
   border-bottom: 5.43rpx solid #44a78d;
 }
 
-.input-view {
+.input-view.data-v-6e95a9fc {
   width: 659.42rpx;
   height: 65.21rpx;
   line-height: 65.21rpx;
@@ -37,17 +37,17 @@
   margin: 18.11rpx auto 36.23rpx;
   position: relative;
 }
-.input-view input {
+.input-view input.data-v-6e95a9fc {
   display: block;
   height: 65.21rpx;
   line-height: 65.21rpx;
   padding-left: 54.34rpx;
   font-size: 23.55rpx;
 }
-.input-view input::-webkit-input-placeholder {
+.input-view input.data-v-6e95a9fc::-webkit-input-placeholder {
   color: red;
 }
-.input-view .search-icon {
+.input-view .search-icon.data-v-6e95a9fc {
   display: inline-block;
   width: 25.36rpx;
   height: 25.36rpx;

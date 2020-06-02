@@ -28,7 +28,7 @@
   border-bottom: 5.43rpx solid #44a78d;
 }
 
-.supplier-box {
+.supplier-box.data-v-28124b4c {
   width: 659.42rpx;
   background-color: #ffffff;
   border-radius: 11px;
@@ -37,29 +37,29 @@
   margin: 0 auto 18.11rpx;
   padding: 36.23rpx;
 }
-.supplier-box .supplier-header {
+.supplier-box .supplier-header.data-v-28124b4c {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
 }
-.supplier-box .supplier-header .title-icon {
+.supplier-box .supplier-header .title-icon.data-v-28124b4c {
   width: 144.92rpx;
   height: 144.92rpx;
   background: #E2E2E2;
   border-radius: 5px;
 }
-.supplier-box .supplier-header .supplier-content {
+.supplier-box .supplier-header .supplier-content.data-v-28124b4c {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
   padding-left: 18.11rpx;
 }
-.supplier-box .supplier-header .supplier-name {
+.supplier-box .supplier-header .supplier-name.data-v-28124b4c {
   font-size: 28.98rpx;
   font-weight: bold;
   line-height: 38.04rpx;
 }
-.supplier-box .supplier-header .supplier-kind {
+.supplier-box .supplier-header .supplier-kind.data-v-28124b4c {
   padding: 0 18.11rpx;
   background-color: #d9ede8;
   display: inline-block;
@@ -68,11 +68,11 @@
   color: #44a78d;
   border-radius: 18.11rpx;
 }
-.supplier-box .supplier-header .supplier-url {
+.supplier-box .supplier-header .supplier-url.data-v-28124b4c {
   font-size: 21.73rpx;
   color: #4e5a65;
 }
-.supplier-box .supplier-footer {
+.supplier-box .supplier-footer.data-v-28124b4c {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -83,20 +83,20 @@
   -webkit-align-items: flex-end;
           align-items: flex-end;
 }
-.supplier-box .supplier-footer .supplier-information {
+.supplier-box .supplier-footer .supplier-information.data-v-28124b4c {
   margin-top: 19.92rpx;
   line-height: 39.85rpx;
 }
-.supplier-box .supplier-footer .supplier-information .supplier-contacts {
+.supplier-box .supplier-footer .supplier-information .supplier-contacts.data-v-28124b4c {
   font-size: 19.92rpx;
   color: #4E5A65;
   margin-top: 5px;
 }
-.supplier-box .supplier-footer .supplier-information .supplier-phone {
+.supplier-box .supplier-footer .supplier-information .supplier-phone.data-v-28124b4c {
   font-size: 19.92rpx;
   color: #4e5a65;
 }
-.supplier-box .supplier-footer .supplierDelete {
+.supplier-box .supplier-footer .supplierDelete.data-v-28124b4c {
   width: 163.04rpx;
   height: 45.28rpx;
   border-radius: 23.55rpx;
@@ -112,16 +112,16 @@
   margin-top: 38.04rpx;
   margin-right: -18.11rpx;
 }
-.supplier-box .supplier-footer .deleteText {
+.supplier-box .supplier-footer .deleteText.data-v-28124b4c {
   font-size: 21.73rpx;
   letter-spacing: 0rpx;
   color: #4e5a65;
 }
-.supplier-box .supplier-footer .checkhomeText {
+.supplier-box .supplier-footer .checkhomeText.data-v-28124b4c {
   font-size: 21.73rpx;
   color: #44a78d;
 }
-.loading-text {
+.loading-text.data-v-28124b4c {
   padding: 20px 0;
   text-align: center;
 }

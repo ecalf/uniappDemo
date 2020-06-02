@@ -251,7 +251,7 @@
 				uni.getUserInfo({
 					provider: 'weixin',
 					success: function(infoRes) {
-						//console.log(infoRes);
+						console.log(infoRes);
 						let nickName = infoRes.userInfo.nickName; //昵称
 						let avatarUrl = infoRes.userInfo.avatarUrl; //头像
 						try {
@@ -278,6 +278,7 @@
 							uni.getUserInfo({
 								provider: 'weixin',
 								success: function(infoRes) {
+									console.log(infoRes)
 									//获取用户信息后向调用信息更新方法
 									let nickName = infoRes.userInfo.nickName; //昵称
 									let avatarUrl = infoRes.userInfo.avatarUrl; //头像
@@ -355,6 +356,7 @@
 			// #ifdef MP-WEIXIN
 			 this.login();
 			 //#endif
+			
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {

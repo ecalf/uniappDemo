@@ -152,7 +152,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-textarea {
+textarea.data-v-d00246c0 {
   width: 100%;
   height: 217.39rpx;
   background-color: #ffffff;
@@ -163,7 +163,7 @@ textarea {
   margin-bottom: 18.11rpx;
   padding-left: 39.85rpx;
 }
-.upload-aa {
+.upload-aa.data-v-d00246c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -175,10 +175,10 @@ textarea {
   margin: 18.11rpx 0;
   font-size: 21.73rpx;
 }
-.upload-dd {
+.upload-dd.data-v-d00246c0 {
   background-color: #ffffff;
 }
-.upload-cc {
+.upload-cc.data-v-d00246c0 {
   padding: 36.23rpx 0 0 47.1rpx;
   font-size: 25.36rpx;
 }

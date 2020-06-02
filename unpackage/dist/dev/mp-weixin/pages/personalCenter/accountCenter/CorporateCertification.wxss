@@ -152,7 +152,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.authentication {
+.authentication.data-v-3dbfa232 {
   width: 576.08rpx;
   height: 72.46rpx;
   background-color: #44a78d;
@@ -170,11 +170,11 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.authentication .authentication-txt {
+.authentication .authentication-txt.data-v-3dbfa232 {
   font-size: 32.6rpx;
   color: #fefefe;
 }
-.uni-cc {
+.uni-cc.data-v-3dbfa232 {
   margin-bottom: 18.11rpx;
 }
 
