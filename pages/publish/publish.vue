@@ -24,7 +24,7 @@
 		mapMutations
 	} from 'vuex';
 	export default {
-		computed: mapState(['hasLogin', 'uerInfo']),
+		computed: mapState(['hasLogin', 'userinfo']),
 		data() {
 			return {
 				currentPage:'/pages/publish/publish',

@@ -45,7 +45,7 @@
 		<productList :goodsList="goodsList" :loadStatus="loadingText" />
 
 		<!--登录入口-->
-		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow">
+		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<view class="index-login">
 				<image class="logoimg" src="@/static/images/logo.png" mode=""></image>
 				<view class="loginenter">
@@ -75,7 +75,7 @@
 			productList,
 			uniPopup,
 		},
-		computed: mapState(['hasLogin', 'uerInfo']),
+		computed: mapState(['hasLogin', 'userinfo']),
 		data() {
 			return {
 				SessionKey: '',
@@ -245,14 +245,13 @@
 					}
 				});
 			},
-
 			//第一授权获取用户信息===》按钮触发
 			wxGetUserInfo() {
 				let _this = this;
 				uni.getUserInfo({
 					provider: 'weixin',
 					success: function(infoRes) {
-						console.log(infoRes);
+						//console.log(infoRes);
 						let nickName = infoRes.userInfo.nickName; //昵称
 						let avatarUrl = infoRes.userInfo.avatarUrl; //头像
 						try {
@@ -263,14 +262,12 @@
 					fail(res) {}
 				});
 			},
-
 			//登录
 			login() {
 				let _this = this;
 				uni.showLoading({
 					title: '登录中...'
 				});
-
 				// 1.wx获取登录用户code
 				uni.login({
 					provider: 'weixin',
@@ -288,7 +285,6 @@
 								}
 							});
 						}
-
 						//2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
 						uni.request({
 							url: '服务器地址',
@@ -356,7 +352,9 @@
 		onLoad() {
 			this.initData();
 			this.loadData();
+			// #ifdef MP-WEIXIN
 			 this.login();
+			 //#endif
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {

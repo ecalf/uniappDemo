@@ -8,17 +8,14 @@
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">邮箱</view>
-				<!-- <input class="uni-input" text name="nickname" value="11059845575@qq.com" /> -->
 				<view class="uni-input">{{ user_company.email }}</view>
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">微信</view>
-				<!-- <input class="uni-input" text name="nickname" value="18525464251" /> -->
 				<view class="uni-input">{{ user_company.wechat }}</view>
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title">QQ</view>
-				<!-- <input class="uni-input" number name="nickname" value="1058745578" /> -->
 				<view class="uni-input">{{ user_company.qq }}</view>
 			</view>
 			<view class="uni-form-item uni-column">
@@ -34,17 +31,14 @@
 				<view><text class="CompanyInformation">公司信息</text></view>
 				<view class="uni-form-item uni-column">
 					<view class="title">公司名称</view>
-					<!-- <input class="uni-input" text name="nickname" value="深圳市虾米科技信息服务有限公司" /> -->
 					<view class="uni-input">{{ user_company.company_name }}</view>
 				</view>
 				<view class="uni-form-item uni-column">
 					<view class="title">公司类型</view>
-					<!-- <input class="uni-input" text name="nickname" value="互联网公司" /> -->
 					<view class="uni-input">{{ user_company.business_scope_cate }}</view>
 				</view>
 				<view class="uni-form-item uni-column unni-color">
 					<view class="title">所属行业</view>
-					<!-- <input class="uni-input" text name="nickname" value="IT行业" /> -->
 					<view class="uni-input">{{ user_company.industry }}</view>
 				</view>
 			</view>
@@ -53,9 +47,12 @@
 </template>
 <script>
 import interfaces from '@/utils/interfaces.js';
-import { mapState, mapMutations } from 'vuex';
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 export default {
-	computed: mapState(['hasLogin', 'uerInfo']),
+	computed: mapState(['hasLogin','userInfo']),
 	data() {
 		return {
 			usertype: '',
@@ -69,21 +66,18 @@ export default {
 				url: interfaces.getSupplierData,
 				dataType: 'JSON',
 				method: 'POST', //请求方式
-				data: {
-					data: {
-					}
-				},
 				success: res => {
 					if (res.code == 200) {
+						//console.log('75',res);
 						this.user_company = res.data.profiles.user_company;
 						this.is_identifiy = res.data.profiles.user_info.is_identifiy;
+						this.usertype =res.data.profiles.user_info.type
 					}
 				}
 			});
-		}
+		},
 	},
 	onLoad() {
-		this.usertype = this.uerInfo.user_Type;
 		this.getMyccount();
 	}
 };

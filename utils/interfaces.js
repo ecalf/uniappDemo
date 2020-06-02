@@ -2,7 +2,7 @@
 const baseurl = "http://192.168.1.14:8005/api.php/";
 // #endif
 // #ifdef H5
-const baseurl = "/api";
+const baseurl = "https://wapi.wanheglobal.com/api.php";
 // #endif
 const interfaces = {
 	// 获取首页数据

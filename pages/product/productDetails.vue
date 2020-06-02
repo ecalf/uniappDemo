@@ -131,7 +131,7 @@
 			uniPopup,
 			productHeader
 		},
-		computed: mapState(['hasLogin', 'uerInfo']),
+		computed: mapState(['hasLogin', 'userInfo']),
 		data() {
 			return {
 				currentSwiper: 0, // 轮播图下标	
@@ -177,7 +177,7 @@
 		},
 		onLoad(option) {
 			this.needId=option.id;
-			this.userid=this.uerInfo.userId;
+			this.userid=this.userInfo.userId;
 			this.loadData(); //初始化数据	
 		},
 		methods: {

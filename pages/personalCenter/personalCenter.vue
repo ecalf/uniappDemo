@@ -5,9 +5,9 @@
 			<view class="headerImg"><img src="~@/static/images/header-ico.png" /></view>
 			<view class="member-right">
 				<view v-if="hasLogin">
-					<view class="header-title"><text>{{uerInfo.companyName}}</text></view>
+					<view class="header-title"><text>{{userInfo.companyName}}</text></view>
 					<view class="headerImg2"><img src="~@/static/images/vipicon.png"></view>
-					<view class="usersname"><text>{{uerInfo.userName}}</text></view>
+					<view class="usersname"><text>{{userInfo.userName}}</text></view>
 				</view>
 				<view v-if="!hasLogin">
 					<navigator url="/pages/user/login">您未登录，请登录</navigator>
@@ -83,10 +83,10 @@
 		mapMutations
 	} from 'vuex';
 	export default {
-		computed: mapState(['hasLogin', 'uerInfo']),
+		computed: mapState(['hasLogin','userInfo']),
 		data() {
 			return {
-				usertype: '',
+				usertype: '',//登录type
 				saleId: '',
 				show: false,
 				currentPage: "/pages/personalCenter/personalCenter",
@@ -222,7 +222,8 @@
 			}
 		},
 		onLoad() {
-			this.usertype = this.uerInfo.user_Type
+			this.usertype = this.userInfo.user_type  //登录type
+			console.log(this.userInfo);
 		}
 	}
 </script>

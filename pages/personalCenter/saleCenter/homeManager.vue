@@ -276,7 +276,7 @@ import interfaces from '@/utils/interfaces.js';
 import uUpload from '@/components/u-upload/u-upload';
 import { mapState, mapMutations } from 'vuex';
 export default {
-	computed: mapState(['hasLogin', 'uerInfo']),
+	computed: mapState(['hasLogin', 'userinfo']),
 	comments: {
 		uUpload
 	},
@@ -540,7 +540,7 @@ export default {
 
 	},
 	onLoad() {
-		this.userid = this.uerInfo.user_Id, 
+		this.userid = this.userinfo.user_Id, 
 		console.log(this.userid);
 		this.getinfoData();
 	}

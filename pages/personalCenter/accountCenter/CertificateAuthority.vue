@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="CertificateAuthority-body" v-if="uerInfo.isIdentifiy == 0">
+		<view class="CertificateAuthority-body" v-if="userInfo.isIdentifiy==0">
 			<view class="CertificateAuthority-content">
 				<view class="icon-left" @click="gotoPersonalAuthentication()">
 					<image src="@/static/images/lgicon33.png"></image>
@@ -17,9 +17,9 @@
 	</view>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 export default {
-	computed: mapState(['hasLogin', 'uerInfo']),
+	computed: mapState(['hasLogin','userInfo']),
 	methods: {
 		gotoPersonalAuthentication() {
 			uni.navigateTo({
@@ -33,7 +33,7 @@ export default {
 		}
 	},
 	onLoad() {
-
+	//console.log(this.userInfo.isIdentifiy)
 	}
 };
 </script>

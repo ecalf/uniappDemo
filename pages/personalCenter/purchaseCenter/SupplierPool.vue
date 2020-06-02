@@ -33,7 +33,7 @@ import conversionPrice from '@/components/conversionPrice.vue';
 import interfaces from '@/utils/interfaces.js';
 import { mapState, mapMutations } from 'vuex';
 export default {
-	computed: mapState(['hasLogin', 'uerInfo']),
+	computed: mapState(['hasLogin', 'userinfo']),
 	data() {
 		return {
 			//user_id: '',
@@ -84,7 +84,7 @@ export default {
 		}
 	},
 	onLoad() {
-		//this.user_id = this.uerInfo.user_Id;
+		//this.user_id = this.userinfo.user_Id;
 		// console.log(this.user_id,2222);
 		this.getpoollist();
 	},
