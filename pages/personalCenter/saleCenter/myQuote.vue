@@ -7,7 +7,6 @@
 		<goodsprice :goodsPrice='goodsPrice'  @update-value="updateValue" :loadStatus="loadingText" @details-url="updateDetails"></goodsprice>
 	</view>
 </template>
-
 <script>
 	import conversionPrice from '../../../components/conversionPrice.vue'
 	import goodsprice from '../../../components/goodsPrice.vue'
@@ -49,7 +48,6 @@
 					success: ((res) => {
 						if (res.code == 200) {
 							let lists = res.data.list;
-							//console.log(lists,212)
 							for (let i = 0; i < lists.length; i++) { //转成数组
 								let serviceData =lists[i].service_cnname !=null && lists[i].service_cnname.length?lists[i].service_cnname.split(','):'';
 								lists[i].service_cnname = serviceData;
@@ -70,16 +68,13 @@
 			},
 			gotoPrice(index,item) {//传值
 				this.current=index;
-				// console.log(this.current,111)
 				this.quoto.is_quoted = item.is_quoted;
-				 // console.log(item.is_quoted,222)
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsPrice = [];
 				this.getMyquote();
 			},
 			updateValue(item) {
-				// console.log(item,235)
 				this.needId = item.id;
 				this.request({
 					url: interfaces.getSatusData,
@@ -96,7 +91,6 @@
 							title: '提示',
 							content: '您确定要删除此项吗？',
 							success: res => {
-								console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -124,7 +118,6 @@
 		}
 	}
 </script>
-
 <style lang="less">
 	.input-view {
 		width: 659.42rpx;
@@ -134,19 +127,16 @@
 		border-radius: 18.11rpx;
 		margin: 18.11rpx auto 36.23rpx;
 		position: relative;
-
 		input {
 			display: block;
 			height: 65.21rpx;
 			line-height: 65.21rpx;
 			padding-left: 54.34rpx;
 			font-size: 23.55rpx;
-
 			&::-webkit-input-placeholder {
 				color: red;
 			}
 		}
-
 		.search-icon {
 			display: inline-block;
 			width: 25.36rpx;

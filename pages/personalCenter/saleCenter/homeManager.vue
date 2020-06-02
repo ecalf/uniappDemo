@@ -514,13 +514,13 @@ export default {
 					} else {
 						uni.showToast({
 							title: '提交成功',
-							duration: 1500
+							duration: 2000
 						});
 						setTimeout(function(){ 
 							uni.navigateTo({
 							url: '/pages/personalCenter/accountCenter/myAccount'
 						}); 
-						}, 2000);
+						}, 3000);
 					}
 				}
 			});

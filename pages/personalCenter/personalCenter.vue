@@ -36,7 +36,6 @@
 					<view class="text">{{item.text}}</view>
 				</view>
 			</view>
-
 			<!-- 销售模块 -->
 			<view class="sale m-memberbox">
 				<view class="procurement-title">我要销售</view>
@@ -68,8 +67,6 @@
 				</view>
 			</view>
 		</view>
-
-
 		<view class="btn-row" v-if="hasLogin">
 			<button class="cu-btn" @tap="bindLogin">退出登录</button>
 		</view>
@@ -77,9 +74,7 @@
 		<!-- 		<uni-popup :defaultPopup="ishow" :defaultTrans="ishow" v-if="!hasLogin">
 			<register-enter></register-enter>
 		</uni-popup> -->
-
 		<page-footer :currentPage="currentPage"></page-footer>
-
 	</view>
 </template>
 <script>
@@ -225,16 +220,12 @@
 					})
 				}
 			}
-
 		},
 		onLoad() {
 			this.usertype = this.uerInfo.user_Type
-				// console.log(this.usertype)
 		}
-
 	}
 </script>
-
 <style lang="less">
 	.header {
 		background-image: linear-gradient(0deg,
@@ -242,47 +233,37 @@
 			#b5f5e2 100%);
 		padding: 36.23rpx 5% 0;
 	}
-
 	.headerImg {
 		display: inline-block;
 		vertical-align: middle;
-
 		image {
 			width: 144.92rpx;
 			height: 144.92rpx;
 		}
-
 	}
-
 	.member-right {
 		display: inline-block;
 		vertical-align: middle;
 		margin-left: 18.11rpx;
 	}
-
 	.headerImg2 {
 		display: inline-block;
 		vertical-align: top;
 		width: 56.15rpx;
 		height: 28.07rpx;
 		margin-left: 9.05rpx;
-
 	}
-
 	.header-title {
 		font-size: 25.36rpx;
 		line-height: 47.1rpx;
 		color: #ffffff;
 		display: inline-block;
 		vertical-align: top;
-
 	}
-
 	.usersname {
 		color: #fff;
 		font-size: 25.36rpx;
 	}
-
 	.arrow {
 		display: inline-block;
 		width: 16.3rpx;
@@ -290,13 +271,11 @@
 		position: absolute;
 		right: 54.34rpx;
 		top: 108.69rpx;
-
 		img {
 			width: 100%;
 			height: 100%;
 		}
 	}
-
 	.header-vip {
 		width: 659.42rpx;
 		height: 108.69rpx;
@@ -309,23 +288,19 @@
 		clear: both;
 		overflow: hidden;
 	}
-
 	.vip-ico {
 		width: 103.26rpx;
 		height: 43.47rpx;
-
 		image {
 			width: 103.26rpx;
 			height: 43.47rpx;
 		}
 	}
-
 	.vip-title {
 		color: #17f2b9;
 		opacity: 0.9;
 		font-size: 21.73rpx;
 	}
-
 	.vip-box {
 		width: 126.81rpx;
 		height: 50.72rpx;
@@ -340,9 +315,7 @@
 		color: #05544a;
 		font-size: 21.73rpx;
 		margin-top: 9.05rpx;
-
 	}
-
 	.vip-join {
 		font-size: 21.73rpx;
 		font-weight: bold;
@@ -362,7 +335,6 @@
 		overflow: hidden;
 		margin-bottom:18.11rpx;
 	}
-
 	.procurement-title {
 		width:100%;
 		font-size:25.36rpx;
@@ -371,30 +343,25 @@
 		margin-bottom:32.6rpx;
 		padding:0 27.17rpx;
 	}
-
 	.procurement-content {
 		width: 33.33%;
 		text-align: center;
 		padding-bottom:36.23rpx;
 	}
-
 	.img {
 		width: 43.47rpx;
 		height: 43.47rpx;
 		margin: 0 auto 9.05rpx;
 	}
-
 	image {
 		width: 100%;
 		height: 100%;
 	}
-
 	.text {
 		font-size:21.73rpx;
 		letter-spacing: 0rpx;
 		color: #4e5a65;
 	}
-
 	.sale {
 		background-color: #ffffff;
 		border-radius: 19.92rpx;
@@ -403,7 +370,6 @@
 		justify-content: left;
 		flex-wrap: wrap;
 	}
-
 	.sale-title {
 		width: 100%;
 		height: 34.42rpx;
@@ -416,14 +382,12 @@
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
 	}
-
 	.sale-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
 	}
-
 	.account {
 		background-color: #ffffff;
 		border-radius: 19.92rpx;
@@ -432,7 +396,6 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
-
 	.account-title {
 		width: 100%;
 		height: 34.42rpx;
@@ -445,14 +408,12 @@
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
 	}
-
 	.account-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
 	}
-
 	.service {
 		background-color: #ffffff;
 		border-radius: 19.92rpx;
@@ -461,7 +422,6 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
-
 	.service-title {
 		width: 100%;
 		height: 34.42rpx;
@@ -474,14 +434,12 @@
 		color: #707070;
 		margin: 27.17rpx 54.34rpx;
 	}
-
 	.service-content {
 		width: 33.33%;
 		margin-top: 18.11rpx;
 		justify-content: space-between;
 		text-align: center;
 	}
-
 	.cu-btn {
 		width: 80%;
 		height: 72.46rpx;
@@ -495,7 +453,6 @@
 		margin-bottom: 54.34rpx;
 		margin-top: 36.23rpx;
 	}
-
 	navigator {
 		color: #FFFFFF;
 		font-size: 32.6rpx;

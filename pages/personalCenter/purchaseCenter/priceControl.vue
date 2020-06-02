@@ -5,12 +5,10 @@
 		 :priceHide="false" :priceTime="true"></goodsprice>
 	</view>
 </template>
-
 <script>
 	import converSionPrice from '@/components/conversionPrice.vue';
 	import goodsprice from '../../../components/goodsPrice.vue';
 	import interfaces from '@/utils/interfaces.js';
-
 	export default {
 		components: {
 			converSionPrice,
@@ -53,14 +51,12 @@
 						kinds:'',
 					}
 				}
-				//debugger
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
 					method: 'POST', //请求方式
 					data:params,
 					success: (res) => {
-						// console.log(62, res);
 						if (res.code == 200) {
 							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
@@ -86,28 +82,22 @@
 			},
 			gotoPrice(index, item) { //传值
 				this.current = index;
-				// console.log(this.current,111)
 				this.quoto.is_quoted = item.is_quoted;
-				//console.log(item.is_quoted,222)
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
 				this.goodsPrice = [];
 				this.loadData();
 			},
 			updateValue(item) {
-
 			},
 			updateDetails(item) {
-				// console.log('101',item);
 				//跳转到报价详情
 				uni.navigateTo({
 					url: "/pages/personalCenter/purchaseCenter/offerDetails?quotation_id="+ item.quotation_id+'&need_id='+item.need_id
 				})
 			},
 		},
-		
 		onPullDownRefresh() {
-
 			setTimeout(() => {
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
@@ -124,5 +114,4 @@
 		}
 	};
 </script>
-
 <style lang="less"></style>

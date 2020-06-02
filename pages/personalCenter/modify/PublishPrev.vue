@@ -5,10 +5,8 @@
 		<view class="common-btn">
 			<button @tap="stepBtn()">下一步</button>
 		</view>
-
 	</view>
 </template>
-
 <script>
 	import searchBar from '@/components/uni-search/search-bar'
 	import productCategory from '@/components/product-category/productCategory'
@@ -39,8 +37,6 @@
 		methods: {
 			initData() {
 				//修改当前的发布信息
-				//debugger
-				
 				this.request({
 					url: interfaces.getCategroyData,
 					dataType: "JSON",
@@ -52,7 +48,6 @@
 					},
 					success: (res) => {
 						this.categoryList = res.data;
-	
 					}
 				})
 			},
@@ -75,7 +70,6 @@
 					});
 				}
 			},
-
 		}
 	}
 </script>
@@ -84,8 +78,6 @@
 	.uni-search-box {
 		padding-top: 36.23rpx;
 	}
-
-
 	.next-btn {
 		position: fixed;
 		left: 0;
@@ -95,9 +87,7 @@
 		bottom: 0;
 		z-index: 99;
 		padding: 16.3rpx 0;
-
 		button {
-
 			width: 576.08rpx;
 			height: 72.46rpx;
 			line-height: 72.46rpx;
@@ -107,32 +97,25 @@
 			font-size: 32.6rpx;
 			color: #fff;
 			cursor: pointer;
-
 		}
 	}
-
 	/*发布页面*/
 	.pb60 {
 		padding-bottom: 108.69rpx;
 	}
-
 	.upload-images {
 		display: block;
 		text-align: center;
 	}
-
 	.m-cl-box {
 		display: block;
 		padding: 18.11rpx 45.28rpx;
 	}
-
 	.m-cl-pt15 {
 		padding: 0 27.17rpx 0 45.28rpx;
 	}
-
 	.brand-bg {
 		margin-bottom: 0 !important;
-
 		.cl-card__container {
 			background-color: #f6f6f6;
 			border-radius: 3px;
@@ -142,7 +125,6 @@
 			padding: 0 18.11rpx !important;
 		}
 	}
-
 	.category-cur {
 		padding: 27.17rpx 32.6rpx;
 		background: #fff;

@@ -1,8 +1,6 @@
 <template>
 	<view class="pb60">
-
 		<cl-form ref="form" :model.sync="publishData">
-
 			<view class="uni-form-item m-form-item" v-if="publishData.type==3 ||publishData.type==4">
 				<radio-group @change="typeChange">
 					<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in entrustList" :key="index">
@@ -27,7 +25,6 @@
 					 testref="image1" @on-progress="uploadHandler(arguments,'onProgress','thumbnail')" @on-success="uploadHandler(arguments,'onSuccess','thumbnail')"
 					 @on-error="uploadHandler(arguments,'onError','thumbnail')" @on-change="uploadHandler(arguments,'onChange','thumbnail')"
 					 @on-remove="uploadHandler(arguments,'onRemove','thumbnail')"></u-upload>
-
 					<view class="imagestips"><text class="colorred">*</text>宝贝主图</view>
 				</view>
 				<view class="upload-item">
@@ -51,11 +48,8 @@
 					</view>
 					<lb-picker v-model="brandvalue" ref="picker1" :props="brandProps" :list="selectbrand" @change="brandChange">
 					</lb-picker>
-
 				</view>
-
 			</view>
-
 			<view class="uni-form-item m-form-item">
 				<view class="title">其他品牌</view>
 				<cl-form-item label="" class="uni-input">
@@ -65,7 +59,6 @@
 			<view class="uni-form-item m-form-item">
 				<view class="title"><text class="colorred">*</text>数量</view>
 				<view class="uni-input uni-input-left m-flex">
-
 					<cl-input class="inline-block" placeholder="请输入数量" v-model="publishData.num"></cl-input>
 					<view class="unit-picker">
 						<view @tap="handleTap('Unitpicker')">
@@ -75,7 +68,6 @@
 						</view>
 						<lb-picker v-model="curUnit" ref="Unitpicker" :props="UnitProps" :list="selectUnit" @change="Unithange">
 						</lb-picker>
-
 					</view>
 				</view>
 			</view>
@@ -151,14 +143,11 @@
 						</view>
 					</view>
 				</view>
-
 			</view>
 			<view class="common-btn">
 				<button @tap="publishSubmit">立即发布</button>
 			</view>
 		</cl-form>
-
-
 	</view>
 </template>
 
@@ -235,7 +224,6 @@
 						value: '1',
 						name: '民用',
 						//checked:'',
-
 					},
 					{
 						value: '2',
@@ -247,7 +235,6 @@
 						id: '1',
 						name: '置顶',
 						price: '30',
-
 					},
 					{
 						id: '2',
@@ -266,13 +253,9 @@
 					value: 'cn_name', //显示值
 					unitid: 'id'
 				}
-
 			}
-
 		},
-
 		onLoad(option) {
-			//console.log(this.modifyParams);
 			//this.publishData.type = option.type;
 			this.publishData.cate_id = option.cate_id;
 			this.publishData.needId = option.id;
@@ -293,12 +276,9 @@
 						}
 					},
 					success: (res) => {
-						console.log(res);
 						if (res.code == 200) {
 							var item = res.data;
-							
 							for (let i = 0; i < this.entrustList.length; i++) {
-								//console.log(this.entrustList[i].value,item.type);
 								if (item.type==this.entrustList[i].value) {
 									this.current = i;
 									break;
@@ -307,36 +287,25 @@
 							this.publishData.type = item.type //类型
 							this.publishData.title = item.title //标题
 							this.publishData.desc = item.desc //描述
-
 							this.publishData.otherBrand = item.other_brand //其他品牌
 							this.publishData.deadtime = item.dead_time.substring(0, 10) //截止时间
-
 							this.publishData.num = item.num //数量
 							this.publishData.price = item.price //价格
-
 							this.publishData.supplier_price = item.supplier_price //供应商价格
-
 							this.brandvalue = item.product_brand_cnname, //品牌
-								this.publishData.brand_id = item.brand_id;
-
+							this.publishData.brand_id = item.brand_id;
 							this.curUnit = item.unit_category_cnname, //单位
-								this.publishData.unit_cate_id = item.unit_cate_id;
-
-							//console.log(item.exit_country)
+							this.publishData.unit_cate_id = item.unit_cate_id;
 							this.inputValue = item.exit_country,
-								this.exit_country = item.exit_country; //出口国
-
-
+							this.exit_country = item.exit_country; //出口国
 							for (let i = 0; i < this.useItems.length; i++) { //用途
 								if (item.use_way == this.useItems[i].value) {
 									this.useway = i;
 								}
 								this.publishData.use_way = item.use_way
 							}
-
 							let chekbox = item.qualification //资质		
 							let chekboxArr = chekbox != null && chekbox.length ? chekbox.split(',') : ''
-
 							for (let i = 0; i < chekboxArr.length; i++) {
 								for (let j = 0; j < this.qualtitems.length; j++) {
 									if (chekboxArr[i] == this.qualtitems[j].id) {
@@ -346,13 +315,11 @@
 								}
 							}
 							 this.publishData.qualification=chekbox;
-
 							let thumb = {
 								url: item.thumbnail
 							}
 							this.mainImage.push(thumb) //主图
 							this.publishData.thumbnail = item.thumbnail
-
 							let swImages = item.images;
 							let swiperArr = swImages != null && swImages.length ? swImages.split(',') : ''
 							for (let i = 0; i < swiperArr.length; i++) { //轮播图
@@ -361,7 +328,6 @@
 								})
 							}
 							this.publishData.images = swImages
-
 							let infoImage = item.info;
 							let infoArr = infoImage != null && infoImage.length ? infoImage.split(',') : ''
 							for (let i = 0; i < infoArr.length; i++) {
@@ -371,10 +337,8 @@
 
 							}
 							this.publishData.info = infoImage
-
 							let service = item.service_id; //服务选择
 							let serviceArr = service != null && service.length ? service.split(',') : ''
-							console.log(serviceArr);
 							for (let i = 0; i < serviceArr.length; i++) {
 							for (let j = 0; j < this.serviceList.length; j++) {
 								if (serviceArr[i] == this.serviceList[j].id) {
@@ -391,7 +355,6 @@
 				let finished = true;
 				let uploadState = this.uploadState;
 				let files = this.uploadState.files;
-
 				for (let fieldName in files) {
 					if (files[fieldName] == uploadState.UNFINISHED || files[fieldName] == uploadState.EEROR) {
 						//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
@@ -399,7 +362,6 @@
 						break;
 					}
 				}
-
 				return finished;
 			},
 			uploadHandler(args, handlerName, fieldName) {
@@ -408,25 +370,17 @@
 					argsMerge.push(args[i]);
 				}
 				argsMerge.push(fieldName);
-
 				this[handlerName].apply(this, argsMerge);
 			},
 			onProgress(res, index, lists, fieldName) {
-				// console.log('onProgress',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 			},
 			onSuccess(res, index, lists, fieldName) { //fieldName 服务器接收该图片的字段名
-				//console.log('onSuccess22',lists,fieldName);
 				res = JSON.parse(res);
-
 				this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
-
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 				//this.fileList.push({url:res.data.img_url});
-				// console.log(fieldName);
 				this.publishData[fieldName] = res.data.img_url;
-
-
 				var imglist = ["images", "info"];
 				if (imglist.includes(fieldName)) {
 					var listimg = [];
@@ -437,20 +391,15 @@
 						}
 					}
 					this.publishData[fieldName] = listimg.join(",");
-					console.log('4', this.publishData[fieldName]);
-
 				}
 			},
 			onChange(res, index, lists, fieldName) {
-				// console.log('onChange ',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 			},
 			onError(err, index, lists, fieldName) {
-				// console.log('onError ',err,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index, lists, fieldName) {
-				// console.log('onRemove ',index,lists,fieldName);
 				// this.uploadState.files[fieldName] = undefined;
 				// this.publishData[fieldName] = '';
 				var imglist = ["images", "info"];
@@ -468,14 +417,10 @@
 						this.current = i;
 						break;
 					}
-
 				}
 				this.publishData.type = evt.target.value; //获取type
-				console.log(this.publishData.type);
 			},
-
 			initData() {
-
 				//品牌种类
 				this.request({
 					url: interfaces.getBrandData,
@@ -507,11 +452,9 @@
 					method: 'POST', //请求方式
 					success: ((res) => {
 						this.selectUnit = res.data;
-						//console.log(this.selectUnit);
 					})
 				});
 			},
-
 			//出口国
 			countryData() {
 				this.request({
@@ -523,18 +466,15 @@
 					})
 				});
 			},
-
 			handleChange(data) { //获取出口国
 				this.exit_country = data;
 
 			},
-
 			handleTap(name) { //picker弹出
 				this.$refs[name].show()
 			},
 			brandChange(item) { //品牌id 
 				this.publishData.brand_id = item.item.id;
-
 			},
 			Unithange(item) { //单位id
 
@@ -546,7 +486,6 @@
 			qualtChange: function(e) { //资质证书
 				var items = this.qualtitems,
 					values = e.detail.value;
-				//console.log(items);
 				for (var i = 0, lenI = items.length; i < lenI; ++i) {
 					const item = items[i]
 					if (values.indexOf(item.value) >= 0) {
@@ -560,7 +499,6 @@
 			},
 			checkboxChange: function(id) { //选择增值服务
 				var ids = this.Listids.indexOf(id);
-				console.log(ids);
 				if (ids >= 0) {
 					//如果包含了该ID，则删除（单选按钮由选中变为非选中状态）
 					this.Listids.splice(ids, 1);
@@ -572,13 +510,9 @@
 				this.publishData.service_id = serviceId
 			},
 			successlist: function(data, index, lists) {
-				// console.log(data, index, lists);
-				//const formdata=new FormData();
-				//formdata.append("image",data.name);
 			},
 			publishSubmit() {
 				//修改当前的发布信息
-				//debugger
 				let params = {
 					data: {
 						id: this.publishData.needId,
@@ -627,24 +561,18 @@
 						}
 					}
 				})
-
 			},
-
 		}
 	}
 </script>
-
 <style lang="scss">
 	.uni-search-box {
 		padding-top: 36.23rpx;
 	}
-
 	.publish-categroy {
 		margin-top: 36.23rpx;
 
 	}
-
-
 	.next-btn {
 		position: fixed;
 		left: 0;
@@ -654,9 +582,7 @@
 		bottom: 0;
 		z-index: 99;
 		padding: 16.3rpx 72.46rpx;
-
 		button {
-
 			width: 576.08rpx;
 			height: 72.46rpx;
 			line-height: 72.46rpx;
@@ -666,31 +592,24 @@
 			font-size: 32.6rpx;
 			color: #fff;
 			cursor: pointer;
-
 		}
 	}
-
 	/*发布页面*/
-
 	.upload-images {
 		display: flex;
 		text-align: center;
 		justify-content: left;
-
 	}
 
 	.m-cl-box {
 		display: block;
 		padding: 7.24rpx 18.11rpx;
 	}
-
 	.m-cl-pt15 {
 		padding: 0 27.17rpx 0 45.28rpx;
 	}
-
 	.brand-bg {
 		margin-bottom: 0 !important;
-
 		.cl-card__container {
 			background-color: #f6f6f6;
 			border-radius: 3px;
@@ -700,7 +619,6 @@
 			padding: 0 18.11rpx !important;
 		}
 	}
-
 	.imagestips {
 		text-align: left;
 	}

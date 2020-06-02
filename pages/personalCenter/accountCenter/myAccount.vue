@@ -51,7 +51,6 @@
 		</cl-form>
 	</view>
 </template>
-
 <script>
 import interfaces from '@/utils/interfaces.js';
 import { mapState, mapMutations } from 'vuex';
@@ -72,11 +71,9 @@ export default {
 				method: 'POST', //请求方式
 				data: {
 					data: {
-						
 					}
 				},
 				success: res => {
-					// console.log(res, 555);
 					if (res.code == 200) {
 						this.user_company = res.data.profiles.user_company;
 						this.is_identifiy = res.data.profiles.user_info.is_identifiy;
@@ -87,13 +84,10 @@ export default {
 	},
 	onLoad() {
 		this.usertype = this.uerInfo.user_Type;
-		// console.log(this.usertype)
 		this.getMyccount();
-		
 	}
 };
 </script>
-
 <style lang="scss">
 .guide {
 	width: 12.68rpx;
@@ -104,9 +98,7 @@ export default {
 	transform: rotate(45deg);
 	margin-top: -3.47rpx;
 	margin-left: 19.92rpx;
-
 }
-
 .CompanyInformation {
 	font-size: 28.98rpx;
 	font-weight: bold;
@@ -114,7 +106,6 @@ export default {
 	padding: 63.4rpx 0 18.11rpx 36.23rpx;
 	display: block;
 }
-
 .unni-color .uni-input-placeholder {
 	color: #e2e2e2;
 }

@@ -242,7 +242,6 @@ export default {
 				}
 			}
 			this.Corporateform.company_form = evt.target.value; //获取经营模式
-			// console.log(this.this.Corporateform.company_form,6554)
 		},
 		checkUploadFiles() {
 			let finished = true;
@@ -255,7 +254,6 @@ export default {
 					break;
 				}
 			}
-
 			return finished;
 		},
 		uploadHandler(args, handlerName, fieldName) {
@@ -264,33 +262,25 @@ export default {
 				argsMerge.push(args[i]);
 			}
 			argsMerge.push(fieldName);
-
 			this[handlerName].apply(this, argsMerge);
 		},
 		onProgress(res, index, lists, fieldName) {
-			// console.log('onProgress', res, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 		},
 		onSuccess(res, index, lists, fieldName) {
 			//fieldName 服务器接收该图片的字段名
-			// console.log('onSuccess', res, index, lists, fieldName);
 			res = JSON.parse(res);
 			this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
 			//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
-			//this.fileList.push({url:res.data.img_url});
 			this.Corporateform[fieldName] = res.data.img_url;
-			// console.log('this.Corporateform[fieldName]>>>', this.Corporateform[fieldName]);
 		},
 		onChange(res, index, lists, fieldName) {
-			// console.log('onChange ', res, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 		},
 		onError(err, index, lists, fieldName) {
-			// console.log('onError ', err, index, lists, fieldName);
 			this.uploadState.files[fieldName] = this.uploadState.EEROR;
 		},
 		onRemove(index, lists, fieldName) {
-			// console.log('onRemove ', index, lists, fieldName);
 			this.uploadState.files[fieldName] = undefined;
 			this.Corporateform[fieldName] = '';
 		},
@@ -377,7 +367,6 @@ export default {
 	}
 };
 </script>
-
 <style lang="scss">
 .authentication {
 	width: 576.08rpx;
@@ -390,13 +379,11 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	.authentication-txt {
 		font-size: 32.6rpx;
 		color: #fefefe;
 	}
 }
-
 .uni-cc {
 	margin-bottom: 18.11rpx;
 }

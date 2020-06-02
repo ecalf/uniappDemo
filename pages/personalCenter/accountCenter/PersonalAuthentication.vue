@@ -131,10 +131,10 @@
 					identify_card_photo_front: '', //手持身份证正面照片
 					identify_card_photo_back: '', //手持身份证反面照片
 				}
-
 			}
 		},
 		methods: {
+			
 			checkUploadFiles(){
 				let finished = true;
 				let uploadState = this.uploadState;
@@ -147,7 +147,6 @@
 						break;
 					}
 				}
-				
 				return finished;
 			},
 			uploadHandler(args,handlerName,fieldName){
@@ -160,44 +159,34 @@
 				this[handlerName].apply(this,argsMerge);
 			},
 			onProgress(res,index,lists,fieldName){
-				// console.log('onProgress',res,index,lists,fieldName);
 				this.uploadState.files[fieldName]=this.uploadState.UNFINISHED;
 			},
 			onSuccess(res,index,lists,fieldName){//fieldName 服务器接收该图片的字段名
-				// console.log('onSuccess',res,index,lists,fieldName);
 				res =  JSON.parse(res);
 				this.uploadState.files[fieldName]=this.uploadState.SUCCESS;
 				//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 				//this.fileList.push({url:res.data.img_url});
-				
 				this.personalForm[fieldName] = res.data.img_url;
 				// console.log('this.personalForm[fieldName]>>>',this.personalForm[fieldName]);
 			},
 			onChange(res,index,lists,fieldName){
-				// console.log('onChange ',res,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.COMPLETE;
 			},
 			onError(err,index,lists,fieldName){
-				// console.log('onError ',err,index,lists,fieldName);
 				this.uploadState.files[fieldName] = this.uploadState.EEROR;
 			},
 			onRemove(index,lists,fieldName){
-				// console.log('onRemove ',index,lists,fieldName);
 				this.uploadState.files[fieldName] = undefined;
 				this.personalForm[fieldName] = '';
-			
 			},
-			
 			confirm() {
 				if(!this.checkUploadFiles()){
 					uni.showToast({
 						title: '文件未上传完毕',
 						icon: "none"
 					});
-					// console.log('文件未上传完毕',this.uploadState.files);
 					return false;
 				}
-				
 				this.request({
 					url: interfaces.getPersonData,
 					dataType: "JSON",
@@ -231,7 +220,6 @@
 								});
 							}, 2000);
 						}
-						
 					})
 				})
 			}
@@ -239,7 +227,6 @@
 		}
 	}
 </script>
-
 <style lang="scss">
 	.authentication {
 		width: 576.08rpx;
@@ -252,7 +239,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		.authentication-txt {
 			font-size: 32.6rpx;
 			color: #fefefe;

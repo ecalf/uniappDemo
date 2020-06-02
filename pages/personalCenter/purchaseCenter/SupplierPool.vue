@@ -28,7 +28,6 @@
 		<view v-if="goodsPrice.length" class="loading-text">{{ loadingText }}</view>
 	</view>
 </template>
-
 <script>
 import conversionPrice from '@/components/conversionPrice.vue';
 import interfaces from '@/utils/interfaces.js';
@@ -80,7 +79,6 @@ export default {
 		},
 		// 上拉加载
 		onReachBottom() {
-			//debugger
 		this.pageNum++;
 		this.getpoollist();
 		}
@@ -96,7 +94,6 @@ export default {
 	}
 };
 </script>
-
 <style lang="less">
 .supplier-box {
 	width: 659.42rpx;
@@ -105,28 +102,23 @@ export default {
 	box-sizing: border-box;
 	margin: 0 auto 18.11rpx;
 	padding: 36.23rpx;
-
 	.supplier-header {
 		display: flex;
-
 		.title-icon {
 			width: 144.92rpx;
 			height: 144.92rpx;
 			background:#E2E2E2;
 			border-radius:5px;
 		}
-
 		.supplier-content {
 			flex: 1;
 			padding-left: 18.11rpx;
 		}
-
 		.supplier-name {
 			font-size: 28.98rpx;
 			font-weight: bold;
 			line-height: 38.04rpx;
 		}
-
 		.supplier-kind {
 			padding:0 18.11rpx;
 			background-color: #d9ede8;
@@ -135,20 +127,16 @@ export default {
 			font-size: 18.11rpx;
 			color: #44a78d;
 			border-radius:18.11rpx;
-			
 		}
-
 		.supplier-url {
 			font-size: 21.73rpx;
 			color: #4e5a65;
 		}
 	}
-
 	.supplier-footer {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-end;
-
 		.supplier-information {
 			margin-top: 19.92rpx;
 			line-height:39.85rpx;
@@ -157,13 +145,11 @@ export default {
 				color: #4E5A65;
 				margin-top: 5px;
 			}
-
 			.supplier-phone {
 				font-size: 19.92rpx;
 				color: #4e5a65;
 			}
 		}
-
 		.supplierDelete {
 			width: 163.04rpx;
 			height: 45.28rpx;
@@ -175,16 +161,13 @@ export default {
 			margin-top: 38.04rpx;
 			margin-right: -18.11rpx;
 		}
-
 		.deleteText {
 			font-size: 21.73rpx;
 			letter-spacing: 0rpx;
 			color: #4e5a65;
 			
 		}
-
 		.checkhomeText {
-			
 			font-size: 21.73rpx;
 			color: #44a78d;
 		}

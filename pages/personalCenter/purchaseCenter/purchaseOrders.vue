@@ -5,7 +5,6 @@
 		 @details-url="updateDetails" @update-modify="updateModify" :current="current" :loadStatus="loadingText" :entrust="true"></goodsprice>
 	</view>
 </template>
-
 <script>
 	import converSionPrice from '@/components/conversionPrice.vue'
 	import goodsprice from '@/components/goodsPrice.vue'
@@ -79,8 +78,6 @@
 					method: 'POST', //请求方式
 					data: params,
 					success: (res) => {
-						//console.log(res);
-						
 						if (res.code == 200) {
 							var lists=res.data.list;
 							for (let i = 0; i < lists.length; i++) { //转成数组
@@ -109,7 +106,6 @@
 				this.loadingText = "正在加载中";
 				this.goodsPrice = [];
 				this.loadData(); //更新数据
-				
 			},
 			updateValue(item) {
 				this.needId = item.id;
@@ -159,10 +155,8 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
-								
 							}
 						})
-						
 						//this.loadData(); //更新数据
 					}
 				});
@@ -188,7 +182,6 @@
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
-								
 							}
 						})
 						this.loadData(); //更新数据
@@ -206,14 +199,12 @@
 				uni.navigateTo({
 					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+'&cate_id='+item.cate_id
 				});
-				
 			}
 		},
 		onLoad() {
 			this.loadData();
 		},
 		onPullDownRefresh() {
-		
 			setTimeout(() => {
 				this.pageNum = 1;
 				this.loadingText = "加载中...";
@@ -230,7 +221,5 @@
 		}
 	}
 </script>
-
 <style lang="less">
-
 </style>
