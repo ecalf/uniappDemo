@@ -82,7 +82,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .guide {
 	width: 12.68rpx;
 	height: 12.68rpx;

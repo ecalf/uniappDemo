@@ -227,7 +227,7 @@
 		}
 	}
 </script>
-<style lang="less">
+<style lang="less" scoped>
 	.header {
 		background-image: linear-gradient(0deg,
 			#44a78d 0%,

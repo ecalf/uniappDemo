@@ -31,7 +31,6 @@
 			// this.modifyParams=JSON.parse(option.params);
 			this.needid=option.id;
 			this.cate_id=option.cate_id;
-			console.log(this.cate_id)
 			this.initData();
 		},
 		methods: {
@@ -62,7 +61,6 @@
 					uni.navigateTo({
 						url: '/pages/personalCenter/modify/PublishNext?id='+this.needid+'&cate_id='+this.cate_id
 					});
-					//console.log(this.modifyParams);
 				} else {
 					uni.showToast({
 						title: '请选择品类',
@@ -74,7 +72,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.uni-search-box {
 		padding-top: 36.23rpx;
 	}

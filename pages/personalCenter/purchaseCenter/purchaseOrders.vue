@@ -71,7 +71,6 @@
 						//kinds: 1,
 					}
 				}
-				console.log(params);
 				this.request({
 					url: interfaces.getMyneedData,
 					dataType: "JSON",
@@ -124,7 +123,6 @@
 							title: '提示',
 							content: '您确定要删除此项吗？',
 							success: res => {
-								// console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -151,7 +149,6 @@
 							title: '提示',
 							content: '您确定要上架吗？',
 							success: res => {
-								//console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -178,7 +175,6 @@
 							title: '提示',
 							content: '您确定要下架吗？',
 							success: res => {
-								//console.log(res);
 								if (res.confirm) {
 									this.goodsPrice.splice(item, 1);
 								}
@@ -195,7 +191,6 @@
 				})
 			},
 			updateModify(item) {
-				//console.log(item);
 				uni.navigateTo({
 					url: "/pages/personalCenter/modify/PublishPrev?id=" + item.id+'&cate_id='+item.cate_id
 				});
@@ -221,5 +216,5 @@
 		}
 	}
 </script>
-<style lang="less">
+<style lang="less" scoped>
 </style>

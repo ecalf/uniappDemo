@@ -269,7 +269,6 @@
 		</form>
 	</view>
 </template>
-
 <script>
 // var graceChecker = require("../../../utils/graceChecker.js");
 import interfaces from '@/utils/interfaces.js';
@@ -343,7 +342,6 @@ export default {
 					}
 				},
 				success: res => {
-					console.log(res, 235);
 					if (res.code == 200) {
 						var list = res.data.profiles.user_company
 						this.ManagerForm.company_name = list.company_name
@@ -365,15 +363,12 @@ export default {
 						
 						let transparency=list.company_transparency;
 						let transparencyArr=transparency !=null && transparency.length?transparency.split(','):''
-						// console.log(infoArr[0]);
 						this.transparencyImg.push({url: transparencyArr[0]})//幻灯片1
 						this.transparencyImg2.push({url: transparencyArr[1]})//幻灯片2
 						this.transparencyImg3.push({url: transparencyArr[2]})//幻灯片3
 						this.ManagerForm.company_transparency = transparency
-						
 						let qualifications=list.qualifications;
 						let qualificationsArr=qualifications !=null && qualifications.length?qualifications.split(','):''
-						// console.log(infoArr[0]);
 						this.qualificationsImg.push({url: qualificationsArr[0]})//资质1
 						this.qualificationsImg1.push({url: qualificationsArr[1]})//资质2
 						this.qualificationsImg2.push({url: qualificationsArr[2]})//资质3
@@ -387,7 +382,6 @@ export default {
 			let finished = true;
 			let uploadState = this.uploadState;
 			let files = this.uploadState.files;
-
 			for (let fieldName in files) {
 				if (files[fieldName] == uploadState.UNFINISHED || files[fieldName] == uploadState.EEROR) {
 					//存在未上传成功或未上传完毕的图片，策略后继可以按需求修改
@@ -395,7 +389,6 @@ export default {
 					break;
 				}
 			}
-
 			return finished;
 		},
 		uploadHandler(args, handlerName, fieldName) {
@@ -404,28 +397,20 @@ export default {
 				argsMerge.push(args[i]);
 			}
 			argsMerge.push(fieldName);
-
 			this[handlerName].apply(this, argsMerge);
 		},
 		onProgress(res, index, lists, fieldName) {
-			// console.log('onProgress', res, index, lists, fieldName);
-
 			this.uploadState.files[fieldName] = this.uploadState.UNFINISHED;
 		},
 		onSuccess(res, index, lists, fieldName) {
 			//fieldName 服务器接收该图片的字段名
-			// console.log('onSuccess', res, index, lists, fieldName);
 			res = JSON.parse(res);
-
 			this.uploadState.files[fieldName] = this.uploadState.SUCCESS;
-
 			//保存已上传完的文件，用于单个上传组件多图上传时，不同的上传组件应使用不同的数组保存
 			//this.fileList.push({url:res.data.img_url});
-
 			//this.ManagerForm[fieldName] = res.data.img_url;
 			// console.log(fieldName, res.data.img_url);
 			//console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
-
 			//定义一个数组
 			//var  imglist=[];
 			// this.imglist[fieldName]=[];
@@ -438,11 +423,6 @@ export default {
 				this.imglist[fieldName].push(res.data.img_url);
 			}
 			this.ManagerForm[fieldName] = this.imglist[fieldName].join(',');
-			//console.log(this.ManagerForm[fieldName]);
-			// console.log(res.data.img_url);
-			//console.log(this.imglist[fieldName]);
-			//console.log(this.uploadState.files[fieldName]);
-			//console.log('this.ManagerForm[fieldName]>>>',this.ManagerForm[fieldName]);
 		},
 		onChange(res, index, lists, fieldName) {
 			// console.log('onChange ', res, index, lists, fieldName);
@@ -463,10 +443,8 @@ export default {
 					title: '文件未上传完毕',
 					icon: 'none'
 				});
-				// console.log('文件未上传完毕', this.uploadState.files);
 				return false;
 			}
-
 			// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value), 666)
 			//定义表单规则
 			// var rule = [{
@@ -504,7 +482,6 @@ export default {
 					}
 				},
 				success: res => {
-					// console.log(res, 656);
 					if (res.code !== 200) {
 						uni.showToast({
 							title: res.message,
@@ -536,8 +513,6 @@ export default {
 		// formReset: function(e) {
 		// 	console.log('清空数据')
 		// }
-
-
 	},
 	onLoad() {
 		this.userid = this.userinfo.user_Id, 
@@ -546,8 +521,7 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 textarea {
 	width: 100%;
 	height: 217.39rpx;
@@ -566,7 +540,6 @@ textarea {
 	margin: 18.11rpx 0;
 	font-size: 21.73rpx;
 }
-
 .upload-dd {
 	background-color: #ffffff;
 }

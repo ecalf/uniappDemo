@@ -37,7 +37,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .CertificateAuthority-body {
 	height: calc(100vh - var(--window-top));
 	display: flex;

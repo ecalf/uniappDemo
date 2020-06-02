@@ -115,7 +115,7 @@
 		}
 	};
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	@import '@/scss/common.scss';
 	.offer {
 		background: #fff;
