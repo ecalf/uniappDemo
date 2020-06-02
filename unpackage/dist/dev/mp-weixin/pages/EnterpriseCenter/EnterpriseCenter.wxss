@@ -396,7 +396,7 @@ uni-input.data-v-e4e10c8c {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
-  margin-bottom: 18.11rpx;
+  margin: 18.11rpx 0;
 }
 .recommend-nav .tab-item.data-v-e4e10c8c {
   display: -webkit-box;

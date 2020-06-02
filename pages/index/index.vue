@@ -374,7 +374,6 @@
 			// #ifdef MP-WEIXIN
 			this.login();
 			//#endif
-
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {

@@ -5,6 +5,8 @@ module.exports = (param) => {
 	var header = param.header || {};
 	var data = param.data || {};
 	
+
+
 	function base64_encode(str) {//小程序不支持bota函数，将btoa函数更换为base64_encode函数
 	  var c1, c2, c3;
 	  var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -35,6 +37,7 @@ module.exports = (param) => {
 	  return string
 	}
 
+
 	//token
 	const userInfo = uni.getStorageSync('userInfo'); //获取token
 	
@@ -57,8 +60,6 @@ module.exports = (param) => {
 			title: "加载中..."
 		})
 	}
-
-
 
 	// 发起网络请求
 	uni.request({
