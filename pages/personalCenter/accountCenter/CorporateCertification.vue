@@ -345,7 +345,7 @@ export default {
 						return;
 					} else {
 						uni.showToast({
-							title: '您的资料已提交',
+							title: '认证成功',
 							duration: 1500
 						});
 						setTimeout(function(){

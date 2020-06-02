@@ -6,11 +6,11 @@
 
 		onLaunch: function() {
 			uni.getStorage({
-				key: 'uerInfo',
+				key: 'userInfo',
 				success: (res) => {
-					this.login(res.data);	
+					this.login(res.data);
 					uni.getStorage({
-						key: 'uerInfo',
+						key: 'userInfo',
 						success: (res) => {
 							if (res.code === 200) {
 								this.login(res.data);
@@ -27,8 +27,8 @@
 		onShow: function() {
 			uni.hideTabBar();
 		},
-		onLoad(){
-			document.domain=location.host.split('.').slice(-2).join('.')
+		onLoad() {
+			document.domain = location.host.split('.').slice(-2).join('.')
 		}
 	}
 </script>

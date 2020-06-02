@@ -71,7 +71,7 @@
         // "router" : {
         //     "base" : "/h5/"
         // },
-        // "domain" : "http://api.scm.wanheglobal.com"
+        // "domain" : "https://wapi.wanheglobal.com/"
     }
 }
 

@@ -215,9 +215,9 @@
 							    duration: 1500
 							});
 							setTimeout(function(){
-								uni.navigateTo({
-								    url: "/pages/personalCenter/accountCenter/CertificateAuthority"
-								});
+							uni.switchTab({
+								url: '/pages/personalCenter/personalCenter'
+							});
 							}, 2000);
 						}
 					})

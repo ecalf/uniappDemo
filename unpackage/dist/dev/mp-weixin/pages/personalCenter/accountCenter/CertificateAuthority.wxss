@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.CertificateAuthority-body {
+.CertificateAuthority-body.data-v-1c084e04 {
   height: calc(100vh - 0px);
   display: -webkit-box;
   display: -webkit-flex;
@@ -37,7 +37,7 @@
           align-items: center;
   background-color: #7b7b7b;
 }
-.CertificateAuthority-content {
+.CertificateAuthority-content.data-v-1c084e04 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -48,11 +48,11 @@
   background-color: #ffffff;
   border-radius: 19.92rpx;
 }
-.CertificateAuthority-content image {
+.CertificateAuthority-content image.data-v-1c084e04 {
   width: 110.5rpx;
   height: 114.13rpx;
 }
-.CertificateAuthority-content .icon-left {
+.CertificateAuthority-content .icon-left.data-v-1c084e04 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -67,13 +67,13 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.CertificateAuthority-content .icon-boder {
+.CertificateAuthority-content .icon-boder.data-v-1c084e04 {
   width: 0rpx;
   height: 108.69rpx;
   border: solid 1px #e2e2e2;
   margin-top: 72.46rpx;
 }
-.CertificateAuthority-content .icon-right {
+.CertificateAuthority-content .icon-right.data-v-1c084e04 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -88,7 +88,7 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.isCertificate {
+.isCertificate.data-v-1c084e04 {
   padding: 54.34rpx 0;
   text-align: center;
 }

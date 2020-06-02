@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.guide {
+.guide.data-v-fac3bf42 {
   width: 12.68rpx;
   height: 12.68rpx;
   border-width: 1.81rpx 1.81rpx 0 0;
@@ -35,14 +35,14 @@
   margin-top: -3.47rpx;
   margin-left: 19.92rpx;
 }
-.CompanyInformation {
+.CompanyInformation.data-v-fac3bf42 {
   font-size: 28.98rpx;
   font-weight: bold;
   color: #479e84;
   padding: 63.4rpx 0 18.11rpx 36.23rpx;
   display: block;
 }
-.unni-color .uni-input-placeholder {
+.unni-color .uni-input-placeholder.data-v-fac3bf42 {
   color: #e2e2e2;
 }
 

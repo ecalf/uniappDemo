@@ -177,39 +177,43 @@
 						},
 						success: (res) => {
 							console.log(res);
-							if (res.code !== 200) {
+							if(res.code==200){
+								this.login(res.data);
+								// uni.navigateBack();
+								 uni.switchTab({
+								 	url: "/pages/personalCenter/personalCenter"
+								 })
+							}else{
 								uni.showToast({
 									title: res.message,
 									icon: "none"
 								});
 								return;
-							} else {
-								 this.login(res.data);
-								let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
-
-								let userInfo = {
-									userId: res.data.client.uid,
-									token: clientToken,
-									userName: res.data.client.user_name
-								}
-								uni.setStorage({
-									key:'Token',
-									data: userInfo,
-									success: (res) => {
-										uni.getStorage({
-											key:'Token',
-											success: (res) => {
-											//console.log(res.data);
-											}
-										})
-									}
-								});
-								
-								uni.switchTab({
-									url: "/pages/personalCenter/personalCenter"
-								})
-				
 							}
+							
+								// let clientToken = 'DATA ' + btoa(res.data.client.uid + ':' + res.data.client.user_name + ':' + res.data.token);	
+
+								// let userInfo = {
+								// 	userId: res.data.client.uid,
+								// 	token: clientToken,
+								// 	userName: res.data.client.user_name
+								// }
+								// uni.setStorage({
+								// 	key:'Token',
+								// 	data: userInfo,
+								// 	success: (res) => {
+								// 		uni.getStorage({
+								// 			key:'Token',
+								// 			success: (res) => {
+								// 			//console.log(res.data);
+								// 			}
+								// 		})
+								// 	}
+								// });
+								
+								
+				
+							
 						},
 						fail: (e) => {
 							uni.showModal({
